@@ -1,0 +1,394 @@
+name: Deploy to Firebase
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: |
+          echo "CI validation step: workflow runner is available"
+
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install site dependencies
+        working-directory: site
+        run: |
+          if [ -f site/package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Build site
+        working-directory: site
+        run: npm run build
+
+      - name: Authenticate with Google (Workload Identity)
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          workload_identity_provider: "projects/618864609917/locations/global/workloadIdentityPools/github-pool/providers/github-provider-bbasketballer75"
+          service_account: "theporadas-deployer@the-poradas-2025-813c7.iam.gserviceaccount.com"
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/cloud-platform
+          # Use provider's default audience (do not request an explicit audience here) for attribute-based validation
+
+      - name: "Debug: print auth and ADC"
+        run: |
+          echo "=== gcloud version ==="
+          gcloud --version || true
+          echo "=== gcloud auth list ==="
+          gcloud auth list --filter=status:ACTIVE --format="table(account,status)" || true
+          echo "=== Application Default Credentials (ADC) env ==="
+          env | grep -i GOOGLE || true
+          echo "=== Attempting to print ADC access token ==="
+          if gcloud auth application-default print-access-token; then
+            echo "ADC access token retrieved"
+          else
+            echo "Failed to retrieve ADC access token"
+          fi
+
+      - name: Set up gcloud SDK
+        run: |
+          set -euo pipefail
+          echo "Installing prerequisites..."
+          sudo apt-get update -y
+          sudo apt-get install -y ca-certificates gnupg curl unzip
+
+          echo "Installing Google Cloud SDK (non-interactive installer)..."
+          # Disable interactive prompts for the installer
+          export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+          # Download and run the official installer non-interactively
+          curl -sSL https://sdk.cloud.google.com | bash -s -- --disable-prompts
+
+          # Ensure the newly-installed SDK is available to subsequent steps
+          echo "$HOME/google-cloud-sdk/bin" >> $GITHUB_PATH
+          export PATH="$HOME/google-cloud-sdk/bin:$PATH"
+
+          echo "gcloud version (after installer)"
+          gcloud --version || true
+
+          # Try to install alpha/beta components to get the latest functions capabilities
+          if command -v gcloud >/dev/null 2>&1; then
+            echo "Installing alpha and beta components (if available)"
+            gcloud components install alpha beta --quiet || true
+            echo "Updating components (best-effort)"
+            gcloud components update --quiet || true
+          fi
+
+      - name: Verify gcloud functions '--image' support
+        run: |
+          set -euo pipefail
+          mkdir -p .ci
+          SUPPORT_FILE=".ci/gcloud-image-supported"
+          COMMAND_FILE=".ci/gcloud-image-command"
+          : > "$COMMAND_FILE"
+
+          echo "Checking which gcloud functions deploy variant exposes the --image flag..."
+
+          if gcloud functions deploy --help 2>&1 | grep -q -- '--image'; then
+            echo "gcloud functions deploy" > "$COMMAND_FILE"
+            echo "Detected support via 'gcloud functions deploy'."
+          elif gcloud beta functions deploy --help 2>&1 | grep -q -- '--image'; then
+            echo "gcloud beta functions deploy" > "$COMMAND_FILE"
+            echo "Detected support via 'gcloud beta functions deploy'."
+          elif gcloud alpha functions deploy --help 2>&1 | grep -q -- '--image'; then
+            echo "gcloud alpha functions deploy" > "$COMMAND_FILE"
+            echo "Detected support via 'gcloud alpha functions deploy'."
+          else
+            echo "No gcloud functions deploy variant advertises --image on this runner."
+          fi
+
+          if [ -s "$COMMAND_FILE" ]; then
+            echo "true" > "$SUPPORT_FILE"
+          else
+            echo "false" > "$SUPPORT_FILE"
+            echo "REST API fallback will be used for image-based deploys."
+          fi
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools@latest
+
+      - name: "Preflight: check service-account act-as permission"
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          DEPLOYER_SA="theporadas-deployer@the-poradas-2025-813c7.iam.gserviceaccount.com"
+          RUNTIME_SA="${FIREBASE_PROJECT_ID}@appspot.gserviceaccount.com"
+
+          echo "Checking project-level binding for roles/iam.serviceAccountUser..."
+          if gcloud projects get-iam-policy "$FIREBASE_PROJECT_ID" --flatten="bindings[]" \
+              --filter="bindings.role=roles/iam.serviceAccountUser AND bindings.members:$DEPLOYER_SA" \
+              --format="value(bindings.role)" | grep -q .; then
+            echo "Project-level Service Account User binding found."
+            exit 0
+          fi
+
+          echo "Checking service-account-level IAM..."
+          if gcloud iam.service-accounts get-iam-policy "$RUNTIME_SA" --project="$FIREBASE_PROJECT_ID" --format=json | grep -q "$DEPLOYER_SA"; then
+            echo "Service-account-level Service Account User binding found."
+            exit 0
+          fi
+
+          echo "ERROR: the deployer service account ($DEPLOYER_SA) does not have roles/iam.serviceAccountUser on the runtime service account ($RUNTIME_SA)."
+          echo "Please grant Service Account User (roles/iam.serviceAccountUser) to $DEPLOYER_SA on $RUNTIME_SA or project $FIREBASE_PROJECT_ID."
+          exit 1
+
+      - name: Deploy Hosting only
+        if: github.ref == 'refs/heads/main'
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          echo "Deploying hosting to Firebase project: $FIREBASE_PROJECT_ID"
+          FIREBASE_TOKEN=$(gcloud auth application-default print-access-token)
+          firebase deploy --only hosting --project "$FIREBASE_PROJECT_ID" --token "$FIREBASE_TOKEN"
+
+      - name: Build & push Gen2 function images (Cloud Build)
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          # Artifact registry repo used by Firebase functions builds
+          REPO="us-central1-docker.pkg.dev/${FIREBASE_PROJECT_ID}/gcf-artifacts"
+          mkdir -p .ci
+          echo "Discovering function Dockerfiles under 'functions/' and submitting Cloud Build jobs"
+          for dir in functions/*; do
+            if [ -d "$dir" ] && [ -f "$dir/Dockerfile" ]; then
+              name=$(basename "$dir")
+              # Create a sanitized image name: lowercase + replace non-alphanum with hyphens
+              sanitized=$(echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9-]/-/g')
+              short_tag=${GITHUB_SHA::7}
+              image="$REPO/$sanitized:$short_tag"
+              echo "Building $name -> $image"
+
+              # Submit the build asynchronously to avoid client-side log streaming (which may fail in some environments).
+              build_id=$(gcloud builds submit "$dir" --tag "$image" --project "$FIREBASE_PROJECT_ID" --async --format='value(id)')
+              echo "Build submitted: $build_id. Polling for completion..."
+
+              # Poll the build status until it's finished
+              while true; do
+                status=$(gcloud builds describe "$build_id" --project "$FIREBASE_PROJECT_ID" --format='value(status)') || status="UNKNOWN"
+                echo "Build $build_id status: $status"
+                case "$status" in
+                  SUCCESS)
+                    echo "Build $build_id succeeded"
+                    break
+                    ;;
+                  WORKING|QUEUED|UNKNOWN)
+                    sleep 3
+                    ;;
+                  FAILURE|CANCELLED|EXPIRED)
+                    echo "Build $build_id failed with status: $status"
+                    echo "Cloud Build details:"
+                    gcloud builds describe "$build_id" --project "$FIREBASE_PROJECT_ID" --format='yaml(steps,logsBucket)'
+                    exit 1
+                    ;;
+                  *)
+                    sleep 3
+                    ;;
+                esac
+              done
+
+              # Save the original function name and the image reference for deployment only after successful build
+              echo "$name $image" >> .ci/function-image-mapping.txt
+            fi
+          done
+
+      - name: Deploy Gen2 functions from pushed images
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          if [ ! -f .ci/function-image-mapping.txt ]; then
+            echo "No Gen2 function images were built; nothing to deploy."
+            exit 0
+          fi
+
+          echo "Deploying built Gen2 functions as Cloud Functions (Gen2)"
+          REGION="us-central1"
+          PARENT="projects/${FIREBASE_PROJECT_ID}/locations/${REGION}"
+          TOKEN=$(gcloud auth application-default print-access-token)
+          SUPPORTED_FILE='.ci/gcloud-image-supported'
+
+          while read -r name image; do
+            echo "Deploying function $name with image $image"
+
+            TRIGGER_FILE=""
+            if [ -f "functions/${name}/trigger.flags" ]; then
+              TRIGGER_FILE="functions/${name}/trigger.flags"
+            elif [ -f "functions/${name}/trigger.json" ]; then
+              TRIGGER_FILE="functions/${name}/trigger.json"
+            fi
+
+            if [ -f "$SUPPORTED_FILE" ] && grep -q "true" "$SUPPORTED_FILE"; then
+              echo "Using gcloud to deploy $name (runner supports --image)"
+
+              GCLOUD_COMMAND_FILE=".ci/gcloud-image-command"
+              if [ ! -s "$GCLOUD_COMMAND_FILE" ]; then
+                echo "Support marker present but command file missing; defaulting to 'gcloud functions deploy'."
+                echo "gcloud functions deploy" > "$GCLOUD_COMMAND_FILE"
+              fi
+
+              read -r -a GCLOUD_CMD < "$GCLOUD_COMMAND_FILE"
+
+              if [ -n "$TRIGGER_FILE" ]; then
+                deploy_flags=$(cat "$TRIGGER_FILE" | tr -d '\n')
+                "${GCLOUD_CMD[@]}" "$name" --gen2 --region=$REGION --image="$image" $deploy_flags --project "$FIREBASE_PROJECT_ID" --quiet
+              else
+                "${GCLOUD_CMD[@]}" "$name" --gen2 --region=$REGION --image="$image" --trigger-http --project "$FIREBASE_PROJECT_ID" --quiet
+              fi
+
+            else
+              echo "Runner lacks gcloud --image support; falling back to Functions REST API for $name"
+
+              # Determine the full function resource name
+              FN_RESOURCE="projects/${FIREBASE_PROJECT_ID}/locations/${REGION}/functions/${name}"
+              FN_URL="https://cloudfunctions.googleapis.com/v2/${FN_RESOURCE}"
+
+              # First, confirm that the function already exists (REST fallback only supports updates)
+              GET_BODY="$(mktemp)"
+              PATCH_BODY_FILE="$(mktemp)"
+              PATCH_RESPONSE_FILE="$(mktemp)"
+
+              HTTP_STATUS_GET=$(curl -s -o "$GET_BODY" -w "%{http_code}" -X GET "$FN_URL" \
+                -H "Authorization: Bearer ${TOKEN}" \
+                -H "Content-Type: application/json" || true)
+
+              if [ "$HTTP_STATUS_GET" = "404" ]; then
+                echo "Function $name does not exist yet. REST fallback only updates existing Gen2 functions."
+                echo "Please create the function from an environment where gcloud functions deploy supports --image, then re-run this pipeline."
+                cat "$GET_BODY" || true
+                exit 1
+              elif [ "$HTTP_STATUS_GET" != "200" ]; then
+                echo "Unexpected status $HTTP_STATUS_GET while checking for $name."
+                cat "$GET_BODY" || true
+                echo "Cannot safely proceed with REST fallback; aborting deploy."
+                exit 1
+              fi
+
+              # Try to PATCH the function (since it exists) to update serviceConfig with the image
+              printf '{"serviceConfig":{"imageUri":"%s","environmentVariables":{},"allTrafficOnLatestRevision":true},"environment":"GEN_2"}' "$image" > "$PATCH_BODY_FILE"
+
+              echo "Attempting to PATCH existing function resource: $FN_RESOURCE"
+              HTTP_STATUS=$(curl -s -o "$PATCH_RESPONSE_FILE" -w "%{http_code}" -X PATCH "${FN_URL}?updateMask=serviceConfig,environment" \
+                -H "Authorization: Bearer ${TOKEN}" \
+                -H "Content-Type: application/json" \
+                -d @"$PATCH_BODY_FILE" || true)
+
+              if [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "201" ]; then
+                echo "PATCH accepted (status $HTTP_STATUS). Operation response:"
+                cat "$PATCH_RESPONSE_FILE" || true
+                echo "Function $name patched successfully (operation completes asynchronously)."
+              else
+                echo "PATCH returned status ${HTTP_STATUS}. Response:"
+                cat "$PATCH_RESPONSE_FILE" || true
+                echo "REST fallback failed for function $name. Aborting deploy to let diagnostics bubble up."
+                exit 1
+              fi
+            fi
+
+          done < .ci/function-image-mapping.txt
+
+      - name: Verify deployed functions
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          echo "Deployed function list (Gen2)"
+          gcloud functions list --gen2 --region=us-central1 --project "$FIREBASE_PROJECT_ID" || true
+
+      - name: "Smoke tests: ping endpoint and thumbnail generation"
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          echo "Running smoke tests for deployed functions..."
+
+          # Test ping HTTP function
+          echo "Resolving ping URL..."
+          PING_URL=$(gcloud functions describe ping --gen2 --region=us-central1 --project="$FIREBASE_PROJECT_ID" --format='value(serviceConfig.uri)')
+          echo "Ping URL: $PING_URL"
+          if [ -z "$PING_URL" ]; then
+            echo "ERROR: ping URL is empty"
+            exit 1
+          fi
+
+          echo "Testing ping endpoint..."
+          TMP_BODY=/tmp/ping_body.txt
+          if ! curl -sS -o "$TMP_BODY" -w "%{http_code}" "$PING_URL/" | grep -q "200"; then
+            echo "Ping HTTP status not 200; response body:"; cat "$TMP_BODY" || true
+            exit 1
+          fi
+          if [ "$(cat $TMP_BODY || true)" != "ok" ]; then
+            echo "Ping response body mismatch:"; cat "$TMP_BODY" || true
+            exit 1
+          fi
+          echo "Ping test passed."
+
+          # Test generateThumbnail via uploading a tiny PNG to the storage bucket and polling for thumbnail creation
+          BUCKET="${FIREBASE_PROJECT_ID}.firebasestorage.app"
+          UPLOAD_BASENAME="smoke-test-$(date +%s)-image"
+          UPLOAD_NAME="${UPLOAD_BASENAME}.png"
+          UPLOAD_OBJECT_PATH="uploads/${UPLOAD_NAME}"
+          THUMB_NAME="${UPLOAD_BASENAME}-320.jpg"
+          echo "Using bucket: $BUCKET"
+
+          echo "Creating a tiny PNG and uploading to gs://$BUCKET/$UPLOAD_OBJECT_PATH"
+          echo 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg==' | base64 --decode > /tmp/test-image.png
+          gcloud storage cp /tmp/test-image.png "gs://$BUCKET/$UPLOAD_OBJECT_PATH" --project="$FIREBASE_PROJECT_ID"
+
+          echo "Polling for thumbnail: thumbnails/$THUMB_NAME"
+          FOUND=0
+          for i in $(seq 1 12); do
+            if gcloud storage objects list --bucket="$BUCKET" --prefix="thumbnails/" --project="$FIREBASE_PROJECT_ID" --format="value(name)" | grep -q "$THUMB_NAME"; then
+              FOUND=1
+              break
+            fi
+            echo "Thumbnail not yet present, waiting... ($i/12)"
+            sleep 5
+          done
+
+          if [ "$FOUND" -ne 1 ]; then
+            echo "Thumbnail not found after wait. Listing thumbnails prefix for diagnostics:"
+            gcloud storage objects list --bucket="$BUCKET" --prefix="thumbnails/" --project="$FIREBASE_PROJECT_ID" --format="value(name)" || true
+            exit 1
+          fi
+          echo "Thumbnail creation detected: thumbnails/$THUMB_NAME"
+
+          # Verify a gallery Firestore document was created for the thumbnail
+          echo "Verifying Firestore gallery document for thumbnail..."
+          TOKEN=$(gcloud auth application-default print-access-token)
+          QUERY_BODY=$(printf '{"structuredQuery":{"from":[{"collectionId":"gallery"}],"where":{"fieldFilter":{"field":{"fieldPath":"thumbnailPath"},"op":"EQUAL","value":{"stringValue":"thumbnails/%s"}}},"limit":1}}' "$THUMB_NAME")
+          FIRESTORE_RESP=$(curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" "https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents:runQuery" -d "$QUERY_BODY")
+          if echo "$FIRESTORE_RESP" | grep -q '"document"'; then
+            echo "Firestore gallery document found for thumbnail."
+          else
+            echo "Firestore gallery document not found. Response:"
+            echo "$FIRESTORE_RESP"
+            exit 1
+          fi
+
+          # Cleanup uploaded objects
+          echo "Cleaning up smoke test objects..."
+          gcloud storage objects delete "gs://$BUCKET/$UPLOAD_OBJECT_PATH" --project="$FIREBASE_PROJECT_ID" || true
+          gcloud storage objects delete "gs://$BUCKET/thumbnails/$THUMB_NAME" --project="$FIREBASE_PROJECT_ID" || true
+          echo "Smoke tests completed successfully."

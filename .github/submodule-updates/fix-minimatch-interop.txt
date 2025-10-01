@@ -1,0 +1,7 @@
+This change records the submodule pointer update for the servers repository.
+
+Reason: The servers repository contains a fix for minimatch interop and test failures (branch: fix/minimatch-interop, commit: 94246644). See servers PR #1: https://github.com/bbasketballer75/servers/pull/1
+
+This file is intentionally minimal — its presence ensures a committed change can be used to create a top-level branch and PR that triggers the repository CI to validate integration with the patched servers commit.
+
+Timestamp: 2025-09-28

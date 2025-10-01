@@ -1,0 +1,94 @@
+import Head from 'next/head';
+import { useEffect, useRef, useState } from 'react';
+
+import { fetchViewerPins, addViewerPin } from '../lib/firebaseClient';
+
+export default function MapPage() {
+  const mapRef = useRef(null);
+  const [L, setL] = useState(null);
+  const [pins, setPins] = useState([]);
+  const mapContainerRef = useRef(null);
+
+  useEffect(() => {
+    // Dynamically import Leaflet on client to avoid SSR issues
+    import('leaflet').then((leaflet) => {
+      setL(leaflet);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!L || !mapContainerRef.current) return;
+
+    const map = L.map(mapContainerRef.current).setView([0, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors',
+    }).addTo(map);
+    mapRef.current = map;
+
+    return () => map.remove();
+  }, [L]);
+
+  useEffect(() => {
+    fetchViewerPins()
+      .then(setPins)
+      .catch(() => setPins([]));
+  }, []);
+
+  useEffect(() => {
+    if (!L || !mapRef.current) return;
+    // Clear existing markers
+    mapRef.current.eachLayer((layer) => {
+      if (layer && layer.options && layer.options.pane === 'markerPane') {
+        try {
+          mapRef.current.removeLayer(layer);
+        } catch {
+          // Ignore layer removal errors
+        }
+      }
+    });
+
+    // Add markers
+    pins.forEach((pin) => {
+      const marker = L.marker([pin.lat, pin.lng]);
+      marker.addTo(mapRef.current).bindPopup(pin.message || 'Guest location');
+    });
+  }, [pins, L]);
+
+  async function handleAddPin() {
+    if (!navigator.geolocation) {
+      alert('Geolocation not supported');
+      return;
+    }
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        await addViewerPin({ lat, lng });
+        const updated = await fetchViewerPins();
+        setPins(updated);
+        alert('Thanks — your location was added (opt-in).');
+      },
+      (err) => {
+        alert('Could not get location: ' + err.message);
+      },
+    );
+  }
+
+  return (
+    <>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity=""
+          crossOrigin=""
+        />
+      </Head>
+      <main>
+        <h1>Viewer Map (opt-in)</h1>
+        <div style={{ height: '60vh', width: '100%' }} ref={mapContainerRef} />
+        <button onClick={handleAddPin}>Share my location (opt-in)</button>
+      </main>
+    </>
+  );
+}

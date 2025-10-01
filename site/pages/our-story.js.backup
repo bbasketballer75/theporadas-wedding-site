@@ -1,0 +1,8 @@
+export default function OurStory() {
+  return (
+    <main style={{ fontFamily: "'Lora', serif", padding: 32 }}>
+      <h1>Our story</h1>
+      <p>This page has been restored from backup. Replace or extend with photos, schedule, RSVP forms, and more.</p>
+    </main>
+  )
+}

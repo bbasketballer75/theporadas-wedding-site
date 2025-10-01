@@ -1,0 +1,1 @@
+--trigger-event=google.cloud.storage.object.v1.finalized --trigger-resource=projects/_/buckets/${FIREBASE_PROJECT_ID}.firebasestorage.app

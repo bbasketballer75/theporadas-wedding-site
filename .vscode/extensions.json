@@ -1,0 +1,66 @@
+{
+  "recommendations": [
+    // === CORE DEVELOPMENT ===
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next",
+
+    // === REACT & NEXT.JS ===
+    "dsznajder.es7-react-js-snippets",
+    "burkeholland.simple-react-snippets",
+    "bradlc.vscode-tailwindcss",
+    "csstools.postcss",
+
+    // === FIREBASE & DATABASE ===
+    "toba.vsfire",
+    "dbcode.dbcode",
+
+    // === GIT & VERSION CONTROL ===
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "github.vscode-pull-request-github",
+
+    // === AI & MCP ===
+    "github.copilot",
+    "github.copilot-chat",
+    "block.vscode-mcp-extension",
+    "nickeolofsson.remember-mcp-vscode",
+    "4regab.tasksync-chat",
+
+    // === CODE QUALITY ===
+    "usernamehw.errorlens",
+    "streetsidesoftware.code-spell-checker",
+    "yoavbls.pretty-ts-errors",
+    "wix.vscode-import-cost",
+
+    // === PRODUCTIVITY ===
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.npm-intellisense",
+    "steoates.autoimport",
+    "aaron-bond.better-comments",
+
+    // === TESTING & DEBUGGING ===
+    "wallabyjs.console-ninja",
+    "orta.vscode-jest",
+    "firsttris.vscode-jest-runner",
+    "ms-playwright.playwright",
+
+    // === ACCESSIBILITY & PERFORMANCE ===
+    "deque-systems.vscode-axe-linter",
+    "million.million-lint",
+
+    // === NEXT.JS TOOLS ===
+    "pulkitgangwar.nextjs-snippets",
+    "imgildev.vscode-nextjs-generator",
+
+    // === MEDIA & PREVIEW ===
+    "docsmsft.docs-images",
+    "gingerturtle.html-preview-pro",
+
+    // === VISUAL ===
+    "pkief.material-icon-theme",
+    "naumovs.color-highlight",
+    "kisstkondoros.vscode-gutter-preview"
+  ]
+}

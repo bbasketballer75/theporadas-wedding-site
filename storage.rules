@@ -1,0 +1,26 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow public read/write to gallery uploads (photos and videos from wedding)
+    // Guests can upload directly without authentication
+    match /gallery/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.resource.size < 50 * 1024 * 1024  // 50MB max file size
+                 && (request.resource.contentType.matches('image/.*') 
+                 || request.resource.contentType.matches('video/.*'));
+    }
+    
+    // Allow public read access to generated thumbnails
+    // Only Firebase Functions can write thumbnails
+    match /thumbnails/{allPaths=**} {
+      allow read: if true;
+      allow write: if false; // Only Functions can write thumbnails
+    }
+    
+    // Default deny all other paths
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

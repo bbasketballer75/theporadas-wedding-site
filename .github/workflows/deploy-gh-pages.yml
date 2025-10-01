@@ -1,0 +1,13 @@
+name: Deploy site to GitHub Pages (deprecated)
+
+on:
+    workflow_dispatch: {}
+
+jobs:
+    notice:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Notice
+              run: |
+                  echo "This GitHub Pages deploy workflow is deprecated. Hosting is now handled by the Firebase deploy workflow (deploy-firebase.yml)."
+                  echo "If you still need Pages deploys, update this file to re-enable push triggers and ensure site/package-lock.json exists or change npm ci to npm install when lockfile is missing."

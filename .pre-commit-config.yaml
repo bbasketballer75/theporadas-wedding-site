@@ -1,0 +1,12 @@
+repos:
+  - repo: local
+    hooks:
+      - id: gitleaks-detect
+        name: Gitleaks detect
+        entry: tools/run_gitleaks.ps1
+        language: system
+        files: ''
+        stages: [commit]
+
+# Note: This sample uses the local script `tools/run_gitleaks.ps1`. Maintainers should adapt to their environment
+# (Windows users may use PowerShell, Linux/Mac users the native gitleaks binary).

@@ -1,0 +1,9 @@
+dist/
+node_modules/
+logs/
+coverage/
+site/.next/
+site/out/
+functions/node_modules/
+_worktree_*/
+tmp/
