@@ -49,5 +49,8 @@
     "firebase",
     "gallery",
     "pwa"
-  ]
+  ],
+  "dependencies": {
+    "googleapis": "^161.0.0"
+  }
 }

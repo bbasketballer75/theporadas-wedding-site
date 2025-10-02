@@ -1,1 +1,5 @@
 .vercel
+
+# Environment variables (contains secrets - DO NOT COMMIT!)
+.env.local
+.env*.local

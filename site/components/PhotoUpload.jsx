@@ -1,5 +1,9 @@
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useState } from 'react';
+import { db } from '../lib/firebase';
+import { compressImage } from '../lib/imageCompression';
+import { supabase } from '../lib/supabase';
+import { compressVideo } from '../lib/videoCompression';
 
 import Button from './Button';
 
@@ -8,12 +12,14 @@ import Button from './Button';
  * Allows guests to upload photos/videos to shared wedding album
  * Core feature for post-wedding website (2025 requirement)
  *
+ * NOW USES SUPABASE (FREE - no billing required!)
+ *
  * Supports:
  * - Image uploads (JPEG, PNG, WebP, HEIC)
  * - Video uploads (MP4, MOV, AVI)
  * - Progress tracking
  * - Error handling
- * - File size validation (max 100MB)
+ * - File size validation (max 50MB - Supabase free tier)
  */
 export default function PhotoUpload({ onUploadComplete, onUploadError }) {
   const [file, setFile] = useState(null);
@@ -21,15 +27,15 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
 
-  const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
+  const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB (Supabase free tier limit)
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     if (!selectedFile) return;
 
-    // Validate file size
+    // Validate file size (50MB for Supabase free tier)
     if (selectedFile.size > MAX_FILE_SIZE) {
-      setError('File too large. Maximum size is 100MB.');
+      setError('File too large. Maximum size is 50MB.');
       return;
     }
 
@@ -58,60 +64,116 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
 
     setUploading(true);
     setError(null);
+    setProgress(10);
 
     try {
-      const storage = getStorage();
-      const timestamp = Date.now();
-      const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-      const storagePath = `uploads/${timestamp}-${sanitizedName}`;
-      const storageRef = ref(storage, storagePath);
+      let uploadFile = file;
 
-      const uploadTask = uploadBytesResumable(storageRef, file, {
-        contentType: file.type,
-        customMetadata: {
-          uploadedAt: new Date().toISOString(),
-          originalName: file.name,
-        },
+      // OPTIMIZE IMAGE BEFORE UPLOAD
+      if (file.type.startsWith('image/')) {
+        setProgress(15);
+        console.log('[PhotoUpload] Compressing image...');
+        uploadFile = await compressImage(file);
+        setProgress(25);
+      }
+      // OPTIMIZE VIDEO BEFORE UPLOAD
+      else if (file.type.startsWith('video/')) {
+        console.log('[PhotoUpload] Compressing video...');
+        uploadFile = await compressVideo(file, (videoProgress) => {
+          // Map video compression progress (0-100) to upload progress (10-25)
+          setProgress(10 + videoProgress * 0.15);
+        });
+        setProgress(25);
+      } else {
+        setProgress(25);
+      }
+
+      // Generate unique filename
+      const timestamp = Date.now();
+      const fileExt = uploadFile.name.split('.').pop();
+      const fileName = `${timestamp}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `uploads/${fileName}`;
+
+      setProgress(30);
+
+      // Upload to Supabase Storage
+      const { data, error: uploadError } = await supabase.storage
+        .from('wedding-photos')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false,
+          contentType: file.type,
+        });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      setProgress(70);
+
+      // Get public URL
+      const { data: publicUrlData } = supabase.storage
+        .from('wedding-photos')
+        .getPublicUrl(filePath);
+
+      setProgress(80);
+
+      // SAVE METADATA TO FIRESTORE
+      // This triggers Firebase Function for video processing
+      const isVideo = file.type.startsWith('video/');
+      const uploadMetadata = {
+        url: publicUrlData.publicUrl,
+        name: file.name,
+        type: uploadFile.type,
+        size: uploadFile.size,
+        originalSize: file.size,
+        path: filePath,
+        compressed: file.type.startsWith('image/') || isVideo,
+        compressionSavings: file.type.startsWith('image/')
+          ? `${(((file.size - uploadFile.size) / file.size) * 100).toFixed(1)}%`
+          : isVideo && uploadFile.size !== file.size
+            ? `${(((file.size - uploadFile.size) / file.size) * 100).toFixed(1)}%`
+            : null,
+        timestamp: serverTimestamp(),
+        uploadStatus: isVideo ? 'pending' : 'completed', // Videos trigger YouTube upload
+      };
+
+      // If video, add placeholder fields for YouTube processing
+      if (isVideo) {
+        uploadMetadata.youtubeId = null;
+        uploadMetadata.youtubeUrl = null;
+        uploadMetadata.processingStartedAt = null;
+        uploadMetadata.processedAt = null;
+      }
+
+      console.log('[PhotoUpload] Saving metadata to Firestore...');
+      const docRef = await addDoc(collection(db, 'wedding-photos'), uploadMetadata);
+      console.log('[PhotoUpload] Firestore document created:', docRef.id);
+
+      if (isVideo) {
+        console.log(
+          '[PhotoUpload] Video will be automatically uploaded to YouTube by Firebase Function'
+        );
+      }
+
+      setProgress(100);
+
+      // Callback with upload details (include Firestore doc ID)
+      onUploadComplete?.({
+        ...uploadMetadata,
+        firestoreId: docRef.id,
       });
 
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const prog = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          setProgress(prog);
-        },
-        (uploadError) => {
-          console.error('Upload error:', uploadError);
-          setError(uploadError.message || 'Upload failed. Please try again.');
-          setUploading(false);
-          onUploadError?.(uploadError);
-        },
-        async () => {
-          try {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            onUploadComplete?.({
-              url: downloadURL,
-              name: file.name,
-              type: file.type,
-              size: file.size,
-              path: storagePath,
-            });
-
-            // Reset state
-            setFile(null);
-            setProgress(0);
-            setUploading(false);
-          } catch (getUrlError) {
-            console.error('Failed to get download URL:', getUrlError);
-            setError('Failed to get download URL');
-            setUploading(false);
-          }
-        }
-      );
-    } catch (err) {
-      console.error('Upload initialization error:', err);
-      setError(err.message || 'Failed to start upload');
+      // Reset state
+      setFile(null);
+      setProgress(0);
       setUploading(false);
+    } catch (err) {
+      console.error('Upload error:', err);
+      setError(err.message || 'Upload failed. Please try again.');
+      setUploading(false);
+      setProgress(0);
+      onUploadError?.(err);
     }
   };
 
@@ -151,7 +213,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
             <p className="mb-2 text-sm text-gray-600">
               <span className="font-semibold">Click to upload</span> or drag and drop
             </p>
-            <p className="text-xs text-gray-500">Images or videos (Max 100MB)</p>
+            <p className="text-xs text-gray-500">Images or videos (Max 50MB - Supabase Free)</p>
           </div>
           <input
             id="file-upload"

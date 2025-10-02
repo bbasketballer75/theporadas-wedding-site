@@ -1,5 +1,7 @@
+import { AnimatePresence } from 'framer-motion';
 import { Lora, Playfair_Display } from 'next/font/google';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import '../styles/globals.css';
 
@@ -19,6 +21,8 @@ const lora = Lora({
 });
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
+
   return (
     <>
       <Head>
@@ -26,7 +30,9 @@ export default function App({ Component, pageProps }) {
         <meta name="description" content="Celebrate the Poradas family wedding!" />
       </Head>
       <div className={`${playfair.variable} ${lora.variable}`}>
-        <Component {...pageProps} />
+        <AnimatePresence mode="wait" initial={false}>
+          <Component {...pageProps} key={router.asPath} />
+        </AnimatePresence>
       </div>
     </>
   );

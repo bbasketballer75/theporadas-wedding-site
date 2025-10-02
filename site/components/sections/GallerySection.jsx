@@ -1,0 +1,158 @@
+import { useState } from 'react';
+import GalleryDisplay from '../GalleryDisplay';
+import SectionTransition from '../SectionTransition';
+import VideoPlayer from '../VideoPlayer';
+
+export default function GallerySection() {
+  const [filter, setFilter] = useState('all');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedMedia, setSelectedMedia] = useState(null);
+
+  const filters = [
+    { id: 'all', label: 'All', icon: '📸' },
+    { id: 'photos', label: 'Photos', icon: '🖼️' },
+    { id: 'videos', label: 'Videos', icon: '🎥' },
+  ];
+
+  const handleMediaClick = (media) => {
+    setSelectedMedia(media);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    setSelectedMedia(null);
+  };
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  return (
+    <section id="gallery" className="w-full py-20 bg-gradient-to-br from-mint/20 to-sage/10">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <SectionTransition>
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-5xl md:text-6xl font-display text-sage mb-4">Wedding Gallery</h2>
+            <p className="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
+              Relive the magic of our special day through these beautiful photos and videos shared
+              by our guests.
+            </p>
+          </div>
+        </SectionTransition>
+
+        {/* Wedding Video Section */}
+        <SectionTransition>
+          <div className="mb-16">
+            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+              <div className="flex items-center justify-center mb-6">
+                <h3 className="text-4xl font-display text-sage text-center">🎬 Our Wedding Film</h3>
+              </div>
+              <p className="text-center text-gray-600 mb-6 max-w-2xl mx-auto">
+                Watch the highlight reel of our unforgettable day
+              </p>
+              <VideoPlayer videoId="dQw4w9WgXcQ" title="Austin & Jordyn Wedding Film" />
+            </div>
+          </div>
+        </SectionTransition>
+
+        {/* Filter Tabs */}
+        <SectionTransition>
+          <div className="flex justify-center mb-8">
+            <div className="bg-white rounded-2xl shadow-xl p-2 inline-flex flex-wrap gap-2">
+              {filters.map((f) => (
+                <button
+                  key={f.id}
+                  onClick={() => setFilter(f.id)}
+                  className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
+                    filter === f.id
+                      ? 'bg-gradient-sage-blush text-white shadow-lg'
+                      : 'text-gray-600 hover:text-sage hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="mr-2">{f.icon}</span>
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </SectionTransition>
+
+        {/* Gallery Component */}
+        <SectionTransition>
+          <GalleryDisplay filter={filter} onMediaClick={handleMediaClick} />
+        </SectionTransition>
+
+        {/* Upload CTA */}
+        <SectionTransition>
+          <div className="mt-16 bg-gradient-sage-blush rounded-3xl p-12 text-center shadow-2xl">
+            <h3 className="text-3xl font-display text-white mb-4">
+              Have photos or videos to share?
+            </h3>
+            <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+              Help us build our wedding album by uploading your favorite moments from our special
+              day!
+            </p>
+            <button
+              onClick={() => scrollToSection('upload')}
+              className="inline-block bg-white text-sage px-8 py-4 rounded-full font-semibold text-lg hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+            >
+              📤 Upload Your Photos
+            </button>
+          </div>
+        </SectionTransition>
+      </div>
+
+      {/* Lightbox Modal */}
+      {lightboxOpen && selectedMedia && (
+        <div
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 animate-fade-in"
+          onClick={closeLightbox}
+        >
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors z-10"
+            aria-label="Close lightbox"
+          >
+            &times;
+          </button>
+
+          <div className="max-w-6xl max-h-[90vh] relative" onClick={(e) => e.stopPropagation()}>
+            {selectedMedia.contentType?.startsWith('video') ? (
+              <video
+                src={selectedMedia.originalPath}
+                controls
+                autoPlay
+                className="max-w-full max-h-[90vh] rounded-lg"
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={selectedMedia.originalPath}
+                alt="Full size"
+                className="max-w-full max-h-[90vh] rounded-lg object-contain"
+              />
+            )}
+
+            {/* Media Info */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+              <p className="text-white text-sm">
+                {selectedMedia.createdAt?.toLocaleDateString('en-US', {
+                  month: 'long',
+                  day: 'numeric',
+                  year: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
