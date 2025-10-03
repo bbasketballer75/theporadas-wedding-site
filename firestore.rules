@@ -20,6 +20,29 @@ service cloud.firestore {
       allow update, delete: if false; // Uploads are permanent
     }
     
+    // Wedding photos collection - stores uploaded media metadata (GUEST UPLOADS)
+    match /wedding-photos/{docId} {
+      allow read: if true;
+      allow create: if 
+        // Validate required fields exist
+        request.resource.data.keys().hasAll(['url', 'name', 'type', 'path']) &&
+        // Validate data types
+        request.resource.data.url is string &&
+        request.resource.data.name is string &&
+        request.resource.data.type is string &&
+        request.resource.data.path is string &&
+        // Validate path format (Supabase uploads/)
+        request.resource.data.path.matches('uploads/.*') &&
+        // Validate size if provided
+        (!request.resource.data.keys().hasAny(['size']) || request.resource.data.size is number);
+      allow update: if 
+        // Allow updating video processing fields
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['youtubeId', 'youtubeUrl', 'processingStartedAt', 'processedAt', 'uploadStatus']) ||
+        // Allow updating moderation fields (for admin dashboard)
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['moderationStatus', 'flaggedAt', 'approvedAt']);
+      allow delete: if true; // Allow deletion for moderation (spam removal)
+    }
+    
     // Viewer pins on map - guest location markers
     // Enhanced with coordinate validation (2025 best practices)
     match /viewerPins/{pinId} {

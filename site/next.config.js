@@ -18,7 +18,18 @@ const nextConfig = {
   // Removed 'output: export' to enable API routes for Canva integration
   // Note: For Firebase hosting, we'll use 'next export' in build script
   images: {
-    unoptimized: true,
+    unoptimized: false, // Enable optimization for better performance
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.supabase.co', // Allow Supabase CDN images
+        port: '',
+        pathname: '/storage/**',
+      },
+    ],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    formats: ['image/webp', 'image/avif'],
   },
   // Silence the workspace root warning
   outputFileTracingRoot: require('path').join(__dirname, '../'),

@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from 'firebase/app';
-import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 /**
  * Firebase configuration
@@ -13,6 +13,7 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || 'your-project-id.appspot.com',
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || 'your-sender-id',
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || 'your-app-id',
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || 'your-measurement-id',
 };
 
 /**
@@ -30,13 +31,15 @@ const db = getFirestore(app);
 /**
  * Connect to Firebase Emulators in development
  * Emulators must be running: firebase emulators:start
+ * DISABLED: Using production Firestore for photo uploads
  */
-if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  // Only connect to emulators once
-  if (!db._settingsFrozen) {
-    connectFirestoreEmulator(db, '127.0.0.1', 8002);
-    console.log('🔧 Connected to Firestore Emulator');
-  }
-}
+// if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+//   // Only connect to emulators once
+//   if (!db._settingsFrozen) {
+//     connectFirestoreEmulator(db, '127.0.0.1', 8002);
+//     console.log('🔧 Connected to Firestore Emulator');
+//   }
+// }
+console.log('🔥 Using Production Firestore');
 
 export { app, db };

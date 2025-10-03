@@ -29,7 +29,9 @@ export default function Navigation() {
         });
       },
       {
-        rootMargin: '-50% 0px -50% 0px', // Trigger when section is in middle of viewport
+        // Balanced configuration - works for most sections
+        rootMargin: '-15% 0px -15% 0px',
+        threshold: 0.1,
       }
     );
 
@@ -47,8 +49,15 @@ export default function Navigation() {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
+      // Use block: 'start' to position section at top of viewport (matches test expectations)
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setIsOpen(false); // Close mobile menu after clicking
+
+      // Manually trigger active state after scroll animation completes
+      // Use setTimeout to wait for smooth scroll (typically 500-1000ms)
+      setTimeout(() => {
+        setActiveSection(id);
+      }, 1000);
     }
   };
 

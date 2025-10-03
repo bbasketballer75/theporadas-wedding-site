@@ -2,6 +2,41 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Start Dev Server (Turbopack)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", "cd site; npm run dev"],
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "Start Dev Server (Keep-Alive)",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/start-dev-server.ps1",
+        "-KeepAlive"
+      ],
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
       "label": "Start MCP Servers",
       "type": "shell",
       "command": "pwsh",

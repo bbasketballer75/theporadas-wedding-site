@@ -67,14 +67,32 @@ test.describe('Navigation Click Behavior', () => {
   });
 
   test('should activate clicked section in nav', async ({ page }) => {
+    // Click Gallery button (using JavaScript since Playwright click may not work on all elements)
     await page.evaluate(() => {
       const buttons = Array.from(document.querySelectorAll('nav button'));
       const galleryButton = buttons.find((btn) => btn.textContent.includes('Gallery'));
       if (galleryButton) galleryButton.click();
     });
+
+    // Wait for smooth scroll to complete AND IntersectionObserver to fire
+    await page.waitForTimeout(2500);
+
+    // Wait for Gallery section to be in viewport (which triggers IntersectionObserver)
+    const gallerySection = page.locator('#gallery');
+    await gallerySection.waitFor({ state: 'visible', timeout: 5000 });
+
+    // Wait longer for smooth scroll animation + IntersectionObserver callback
     await page.waitForTimeout(1500);
 
+    // Now check that the Gallery button has the active class
     const galleryLink = page.locator('nav button:has-text("Gallery")').first();
+
+    // Log current state for debugging
+    const hasActiveClass = await galleryLink.evaluate((el) =>
+      el.className.includes('font-semibold')
+    );
+    console.log(`Gallery button has font-semibold: ${hasActiveClass}`);
+
     await expect(galleryLink).toHaveClass(/font-semibold/);
     console.log('✓ Clicked nav link becomes active');
   });

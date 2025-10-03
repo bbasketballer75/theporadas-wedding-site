@@ -97,12 +97,20 @@ export default function GallerySection() {
               Help us build our wedding album by uploading your favorite moments from our special
               day!
             </p>
-            <button
-              onClick={() => scrollToSection('upload')}
-              className="inline-block bg-white text-sage px-8 py-4 rounded-full font-semibold text-lg hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-            >
-              📤 Upload Your Photos
-            </button>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <button
+                onClick={() => scrollToSection('upload')}
+                className="inline-block bg-white text-sage px-8 py-4 rounded-full font-semibold text-lg hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+              >
+                📤 Upload Your Photos
+              </button>
+              <button
+                onClick={() => scrollToSection('timeline')}
+                className="inline-block bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-sage hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+              >
+                ⏰ View Timeline
+              </button>
+            </div>
           </div>
         </SectionTransition>
       </div>

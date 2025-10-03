@@ -2,6 +2,8 @@ import { AnimatePresence } from 'framer-motion';
 import { Lora, Playfair_Display } from 'next/font/google';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { initAnalytics } from '../lib/analytics';
 
 import '../styles/globals.css';
 
@@ -22,6 +24,11 @@ const lora = Lora({
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
+
+  // Initialize Firebase Analytics on mount (client-side only)
+  useEffect(() => {
+    initAnalytics();
+  }, []);
 
   return (
     <>

@@ -13,11 +13,12 @@ test.describe('Scroll-Spy Navigation', () => {
   });
 
   test('should update active section on scroll', async ({ page }) => {
-    // Scroll to Our Story section
+    // Scroll to Our Story section (use instant scroll to avoid timing issues)
     await page.evaluate(() => {
-      document.getElementById('our-story').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('our-story').scrollIntoView({ behavior: 'auto', block: 'center' });
     });
 
+    // Wait for IntersectionObserver to trigger (longer wait for chromium)
     await page.waitForTimeout(1000);
 
     const ourStoryLink = page.locator('nav button:has-text("Our Story")');
@@ -40,10 +41,11 @@ test.describe('Scroll-Spy Navigation', () => {
 
     for (const section of sections) {
       await page.evaluate((id) => {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById(id).scrollIntoView({ behavior: 'auto', block: 'center' });
       }, section.id);
 
-      await page.waitForTimeout(800);
+      // Wait for IntersectionObserver (longer for chromium)
+      await page.waitForTimeout(600);
 
       const navLink = page.locator(`nav button:has-text("${section.label}")`);
       await expect(navLink).toHaveClass(/font-semibold/);
@@ -54,10 +56,10 @@ test.describe('Scroll-Spy Navigation', () => {
 
   test('should show underline on active section', async ({ page }) => {
     await page.evaluate(() => {
-      document.getElementById('timeline').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('timeline').scrollIntoView({ behavior: 'auto', block: 'center' });
     });
 
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(500);
 
     const timelineLink = page.locator('nav button:has-text("Timeline")');
     const underline = timelineLink.locator('span');

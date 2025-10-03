@@ -72,52 +72,47 @@ test.describe('Interactive Features', () => {
   });
 
   test('should test scroll buttons in sections', async ({ page }) => {
-    // Test "View Gallery" or similar button in Hero section
+    // Test scroll buttons that navigate between sections
     // First, make sure we're at the top
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.waitForTimeout(500);
 
-    // Look for any button that might scroll (Gallery, Timeline, etc.)
-    const viewButtons = page.locator('button:has-text("View")');
-    const exploreButtons = page.locator('button:has-text("Explore")');
-    const seeButtons = page.locator('button:has-text("See")');
+    // Scroll to Gallery section which has a "View Timeline" button
+    await page.evaluate(() => {
+      const gallerySection = document.getElementById('gallery');
+      if (gallerySection) {
+        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+    await page.waitForTimeout(1500);
 
-    const viewCount = await viewButtons.count();
-    const exploreCount = await exploreButtons.count();
-    const seeCount = await seeButtons.count();
+    // Look for the "View Timeline" button in Gallery section
+    const viewTimelineButton = page.locator('button:has-text("View Timeline")');
+    const buttonCount = await viewTimelineButton.count();
 
-    const buttonCount = viewCount + exploreCount + seeCount;
+    console.log(`Found ${buttonCount} "View Timeline" buttons`);
 
     if (buttonCount > 0) {
-      // First scroll to a section that has scroll buttons (e.g., Gallery)
-      await page.evaluate(() => {
-        const gallerySection = document.getElementById('gallery');
-        if (gallerySection) {
-          gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-      await page.waitForTimeout(1500);
-
-      // Record initial scroll position
+      // Record initial scroll position (at Gallery)
       const initialScrollY = await page.evaluate(() => window.scrollY);
+      console.log(`Initial scroll position: ${initialScrollY}px`);
 
-      // Click the first available scroll button
-      if (viewCount > 0) {
-        await viewButtons.first().click({ force: true });
-      } else if (exploreCount > 0) {
-        await exploreButtons.first().click({ force: true });
-      } else {
-        await seeButtons.first().click({ force: true });
-      }
-      await page.waitForTimeout(1500);
+      // Click the "View Timeline" button
+      const buttonText = await viewTimelineButton.first().textContent();
+      console.log(`Clicking button with text: "${buttonText}"`);
+      await viewTimelineButton.first().click({ force: true });
+      await page.waitForTimeout(2000); // Wait for smooth scroll to complete
 
-      // Verify scroll position changed (either scrolled down or up from gallery)
+      // Verify scroll position changed (should scroll UP to Timeline section)
       const finalScrollY = await page.evaluate(() => window.scrollY);
+      console.log(`Final scroll position: ${finalScrollY}px`);
+      console.log(`Scroll delta: ${Math.abs(finalScrollY - initialScrollY)}px`);
+
       expect(Math.abs(finalScrollY - initialScrollY)).toBeGreaterThan(50);
       console.log('✓ Section scroll buttons work');
     } else {
       // If no scroll buttons found, test passed trivially
-      console.log('✓ No scroll buttons found (test passed)');
+      console.log('✓ No "View Timeline" button found in Gallery (test passed)');
     }
   });
 });

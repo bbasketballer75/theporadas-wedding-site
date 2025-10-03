@@ -1,9 +1,11 @@
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { logGuestNameCollection, logPhotoUpload } from '../lib/analytics';
 import { db } from '../lib/firebase';
 import { compressImage } from '../lib/imageCompression';
 import { supabase } from '../lib/supabase';
 import { compressVideo } from '../lib/videoCompression';
+import { processVideoThumbnail } from '../lib/videoThumbnail';
 
 import Button from './Button';
 
@@ -20,12 +22,25 @@ import Button from './Button';
  * - Progress tracking
  * - Error handling
  * - File size validation (max 50MB - Supabase free tier)
+ * - Guest name attribution (stored in localStorage)
  */
 export default function PhotoUpload({ onUploadComplete, onUploadError }) {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
+  const [guestName, setGuestName] = useState('');
+  const [showNamePrompt, setShowNamePrompt] = useState(false);
+
+  // Load saved guest name from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedName = localStorage.getItem('guestName');
+      if (savedName) {
+        setGuestName(savedName);
+      }
+    }
+  }, []);
 
   const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB (Supabase free tier limit)
 
@@ -62,12 +77,26 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
   const handleUpload = async () => {
     if (!file || uploading) return;
 
+    // Prompt for guest name if not saved
+    if (!guestName.trim()) {
+      setShowNamePrompt(true);
+      logGuestNameCollection(false); // Track that name prompt was shown
+      return;
+    }
+
+    // Save guest name to localStorage for future uploads
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('guestName', guestName.trim());
+      logGuestNameCollection(true); // Track that name was provided
+    }
+
     setUploading(true);
     setError(null);
     setProgress(10);
 
     try {
       let uploadFile = file;
+      let videoThumbnail = null;
 
       // OPTIMIZE IMAGE BEFORE UPLOAD
       if (file.type.startsWith('image/')) {
@@ -76,12 +105,25 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
         uploadFile = await compressImage(file);
         setProgress(25);
       }
-      // OPTIMIZE VIDEO BEFORE UPLOAD
+      // OPTIMIZE VIDEO BEFORE UPLOAD + GENERATE THUMBNAIL
       else if (file.type.startsWith('video/')) {
+        console.log('[PhotoUpload] Processing video...');
+
+        // Generate thumbnail first (quick operation)
+        try {
+          setProgress(12);
+          videoThumbnail = await processVideoThumbnail(file, supabase);
+          console.log('[PhotoUpload] Video thumbnail created:', videoThumbnail.url);
+        } catch (thumbErr) {
+          console.error('[PhotoUpload] Thumbnail generation failed:', thumbErr);
+          // Continue without thumbnail - not critical
+        }
+
+        setProgress(15);
         console.log('[PhotoUpload] Compressing video...');
         uploadFile = await compressVideo(file, (videoProgress) => {
-          // Map video compression progress (0-100) to upload progress (10-25)
-          setProgress(10 + videoProgress * 0.15);
+          // Map video compression progress (0-100) to upload progress (15-25)
+          setProgress(15 + videoProgress * 0.1);
         });
         setProgress(25);
       } else {
@@ -136,6 +178,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
             : null,
         timestamp: serverTimestamp(),
         uploadStatus: isVideo ? 'pending' : 'completed', // Videos trigger YouTube upload
+        uploadedBy: guestName.trim(), // Guest attribution
       };
 
       // If video, add placeholder fields for YouTube processing
@@ -144,11 +187,25 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
         uploadMetadata.youtubeUrl = null;
         uploadMetadata.processingStartedAt = null;
         uploadMetadata.processedAt = null;
+
+        // Add thumbnail metadata if generated
+        if (videoThumbnail) {
+          uploadMetadata.thumbnailUrl = videoThumbnail.url;
+          uploadMetadata.thumbnailPath = videoThumbnail.path;
+          uploadMetadata.thumbnailSize = videoThumbnail.size;
+        }
       }
 
       console.log('[PhotoUpload] Saving metadata to Firestore...');
       const docRef = await addDoc(collection(db, 'wedding-photos'), uploadMetadata);
       console.log('[PhotoUpload] Firestore document created:', docRef.id);
+
+      // Track upload in analytics
+      const fileType = isVideo ? 'video' : 'image';
+      const compressionPercentage = uploadMetadata.compressionSavings
+        ? parseFloat(uploadMetadata.compressionSavings)
+        : 0;
+      logPhotoUpload(fileType, file.size, compressionPercentage, guestName.trim());
 
       if (isVideo) {
         console.log(
@@ -189,6 +246,83 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
       <p className="font-body text-gray-600 mb-6">
         Help us relive the special day by uploading your favorite moments!
       </p>
+
+      {/* Guest Name Prompt Modal */}
+      {showNamePrompt && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 animate-fadeIn">
+            <h4 className="font-display text-2xl text-sage mb-4">What's your name?</h4>
+            <p className="font-body text-gray-600 mb-6">
+              We'd love to know who shared this wonderful memory!
+            </p>
+            <input
+              type="text"
+              value={guestName}
+              onChange={(e) => setGuestName(e.target.value)}
+              placeholder="Enter your name..."
+              autoFocus
+              className="w-full px-4 py-3 border-2 border-sage/30 rounded-xl focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20 transition-all duration-300 font-body mb-6"
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && guestName.trim()) {
+                  setShowNamePrompt(false);
+                  handleUpload();
+                }
+              }}
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowNamePrompt(false)}
+                className="flex-1 px-6 py-3 border-2 border-sage/30 text-sage rounded-xl font-body font-medium hover:bg-sage/10 transition-all duration-300"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  if (guestName.trim()) {
+                    setShowNamePrompt(false);
+                    handleUpload();
+                  }
+                }}
+                disabled={!guestName.trim()}
+                className="flex-1 px-6 py-3 bg-gradient-to-r from-sage to-sage/90 text-white rounded-xl font-body font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Guest Name Display (if saved) */}
+      {guestName && !showNamePrompt && (
+        <div className="mb-4 flex items-center justify-between p-3 bg-mint/20 rounded-xl">
+          <div className="flex items-center gap-2">
+            <svg
+              className="w-5 h-5 text-sage"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
+            <span className="font-body text-sage font-medium">Uploading as: {guestName}</span>
+          </div>
+          <button
+            onClick={() => {
+              setGuestName('');
+              localStorage.removeItem('guestName');
+            }}
+            className="text-sm text-blush hover:text-sage transition-colors font-body"
+          >
+            Change
+          </button>
+        </div>
+      )}
 
       {/* File Input */}
       <div className="mb-6">

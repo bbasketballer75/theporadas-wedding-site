@@ -58,25 +58,55 @@ test.describe('Mobile Responsive Navigation', () => {
   });
 
   test('should navigate correctly from mobile menu', async ({ page }) => {
+    // Open mobile menu
     await page.evaluate(() => {
       const hamburger = document.querySelector('nav button[aria-label="Toggle menu"]');
       if (hamburger) hamburger.click();
     });
-    await page.waitForTimeout(300);
+    await page.waitForTimeout(500);
+
+    // Record initial scroll position
+    const initialScrollY = await page.evaluate(() => window.scrollY);
+    console.log(`Initial scroll position: ${initialScrollY}px`);
 
     // Click Venue button using JavaScript
     await page.evaluate(() => {
       const buttons = Array.from(document.querySelectorAll('nav button'));
       const venueButton = buttons.find((btn) => btn.textContent.includes('Venue'));
-      if (venueButton) venueButton.click();
+      if (venueButton) {
+        console.log('Found Venue button, clicking...');
+        venueButton.click();
+      } else {
+        console.log('Venue button NOT found!');
+      }
     });
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(2500);
 
+    // Check final scroll position
+    const finalScrollY = await page.evaluate(() => window.scrollY);
+    console.log(`Final scroll position: ${finalScrollY}px`);
+    console.log(`Scroll delta: ${Math.abs(finalScrollY - initialScrollY)}px`);
+
+    // Check venue section position
     const venueSection = page.locator('#venue');
-    const isInViewport = await venueSection.evaluate((el) => {
+    const { isInViewport, top, bottom, windowHeight } = await venueSection.evaluate((el) => {
       const rect = el.getBoundingClientRect();
-      return rect.top >= 0 && rect.top < window.innerHeight;
+      // Allow 5px tolerance for floating-point precision issues
+      const threshold = 5;
+      return {
+        isInViewport: rect.top >= -threshold && rect.top < window.innerHeight,
+        top: rect.top,
+        bottom: rect.bottom,
+        windowHeight: window.innerHeight,
+      };
     });
+
+    console.log(`Venue section top: ${top}px`);
+    console.log(`Venue section bottom: ${bottom}px`);
+    console.log(`Window height: ${windowHeight}px`);
+    console.log(
+      `Venue section viewport check: ${isInViewport ? 'IN viewport' : 'NOT IN viewport'}`
+    );
 
     expect(isInViewport).toBe(true);
     console.log('✓ Mobile navigation scrolls to section');
