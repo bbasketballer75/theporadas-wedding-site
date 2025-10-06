@@ -278,3 +278,7 @@ tasksync/
 # !LICENSE
 # !package.json
 # !tsconfig.json
+
+# MCP Service Account Keys
+.secrets/
+*.service-account.json

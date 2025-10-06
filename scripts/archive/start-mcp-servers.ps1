@@ -45,7 +45,7 @@ if (-not $NoPostgres) {
     if (Test-Path $envPath) {
         $pgUrl = (Get-Content $envPath | Where-Object { $_ -match '^PG_URL=' } | ForEach-Object { ($_ -split '=', 2)[1].Trim() })
         if ($pgUrl) {
-            Start-Server -Command "pwsh" -Arguments @("-Command", "npx -y @modelcontextprotocol/server-postgres $pgUrl") -DisplayName "MCP Postgres"
+            Start-Server -Command "npx" -Arguments @("-y", "@modelcontextprotocol/server-postgres", $pgUrl) -DisplayName "MCP Postgres"
         }
         else {
             Write-Warning "PG_URL not found in .env; skipping MCP Postgres server."
