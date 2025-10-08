@@ -128,7 +128,7 @@ export default function Gallery() {
                   className="max-w-full max-h-[90vh] rounded-lg"
                 />
               ) : (
-                // eslint-disable-next-line @next/next/no-img-element
+                // eslint-disable-next-line next/no-img-element
                 <img
                   src={selectedMedia.originalPath}
                   alt="Full size"

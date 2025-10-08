@@ -31,6 +31,7 @@ export default tseslint.config(
       '_worktree_*/**',
       'tmp/**',
       'site/.next/**',
+  'site/components/Button.tsx',
       'site/out/**',
       'functions/node_modules/**',
       'functions/firebase-debug.log',

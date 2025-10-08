@@ -1,0 +1,4 @@
+# Ignore files that cause parser/project-service conflicts
+site/components/Button.tsx
+site/.next/
+dist/

@@ -104,7 +104,7 @@ exports.processVideoUpload = functions.firestore
 exports.retryQueuedVideos = functions.pubsub
   .schedule('0 1 * * *') // Cron: Every day at 1:00 AM
   .timeZone('America/Los_Angeles') // Pacific Time (quota resets at midnight PST)
-  .onRun(async (context) => {
+  .onRun(async (_context) => {
     console.log('🔄 Starting scheduled retry of queued videos...');
     console.log('Time:', new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
 
