@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
+import nextPlugin from 'eslint-plugin-next';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -31,7 +32,7 @@ export default tseslint.config(
       '_worktree_*/**',
       'tmp/**',
       'site/.next/**',
-  'site/components/Button.tsx',
+      'site/components/Button.tsx',
       'site/out/**',
       'functions/node_modules/**',
       'functions/firebase-debug.log',
@@ -184,6 +185,9 @@ export default tseslint.config(
   },
   {
     files: ['site/**/*.{js,jsx,ts,tsx}'],
+    plugins: {
+      next: nextPlugin,
+    },
     rules: {
       // some projects use <img> intentionally; disable the Next.js "no-img-element" rule for now
       '@next/next/no-img-element': 'off',

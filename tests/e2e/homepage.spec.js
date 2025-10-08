@@ -14,7 +14,7 @@ test.describe('Homepage', () => {
 
     // Verify optimized fonts are applied (CSS variables from next/font)
     const bodyElement = await page.locator('body').first();
-  const _classList = await bodyElement.getAttribute('class');
+    const _classList = await bodyElement.getAttribute('class');
 
     // next/font sets CSS variables on a wrapper div
     await expect(page.locator('div[class*="__variable"]')).toBeVisible();
