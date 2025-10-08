@@ -22,7 +22,7 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --check \"{site,functions}/**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-unknown",
     "format:fix": "prettier --write \"{site,functions}/**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-unknown",
-    "test": "cd site && npm run test",
+  "test": "cd site && npm run test:e2e",
     "deploy": "firebase deploy",
     "deploy:hosting": "firebase deploy --only hosting",
     "deploy:functions": "firebase deploy --only functions"

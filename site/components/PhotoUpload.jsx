@@ -140,7 +140,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
       setProgress(30);
 
       // Upload to Supabase Storage
-      const { data, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('wedding-photos')
         .upload(filePath, file, {
           cacheControl: '3600',

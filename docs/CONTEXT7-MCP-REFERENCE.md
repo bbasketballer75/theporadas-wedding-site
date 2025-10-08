@@ -5,7 +5,8 @@ This file collects the important Context7 MCP configuration snippets and usage n
 Library ID: /upstash/context7
 
 Quick usage notes
-- Remote MCP: add an HTTP remote server entry pointing to https://mcp.context7.com/mcp. Add Authorization header if you have an API key.
+
+- Remote MCP: add an HTTP remote server entry pointing to <https://mcp.context7.com/mcp>. Add Authorization header if you have an API key.
 - Local MCP: run the Context7 MCP server locally via npx (or bun/bunx) and configure the client to use the command.
 - Restart VS Code after editing %APPDATA%\Code - Insiders\User\mcp.json to pick up changes.
 
@@ -46,10 +47,12 @@ Example: VS Code / Cline mcp.json local `stdio` entry
 ```
 
 Notes & recommendations
+
 - Prefer remote HTTP server with an API key for production usage to avoid local runtime installs.
 - For local dev on Windows, use the `npx` stdio command; ensure Node/Bun is available.
 - Respect rate limits and API key secrecy. Store keys in environment variables or the OS keychain; avoid committing them to source control.
 - Restart VS Code after any `%APPDATA%/Code - Insiders/User/mcp.json` edits to apply changes.
 
 Sources:
+
 - Upstash Context7 README (selected code snippets)

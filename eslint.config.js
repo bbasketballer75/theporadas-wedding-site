@@ -182,6 +182,20 @@ export default tseslint.config(
     },
   },
   {
+    files: ['site/**/*.{js,jsx,ts,tsx}'],
+    rules: {
+      // some projects use <img> intentionally; disable the Next.js "no-img-element" rule for now
+      '@next/next/no-img-element': 'off',
+    },
+  },
+  {
+    files: ['scripts/**/*.js', 'site/scripts/**/*.js'],
+    rules: {
+      // Allow require() style imports in utility scripts to avoid large refactors during cleanup
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
     files: ['eslint.config.js'],
     rules: {
       '@typescript-eslint/await-thenable': 'off',

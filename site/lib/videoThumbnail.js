@@ -117,7 +117,7 @@ export async function uploadVideoThumbnail(thumbnailBlob, videoFilename, supabas
   const thumbnailPath = `thumbnails/${thumbnailFilename}`;
 
   // Upload to Supabase
-  const { data, error } = await supabase.storage
+  const { error } = await supabase.storage
     .from('wedding-photos')
     .upload(thumbnailPath, thumbnailBlob, {
       cacheControl: '3600',
