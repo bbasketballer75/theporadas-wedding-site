@@ -1,7 +1,6 @@
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
-import nextPlugin from 'eslint-plugin-next';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -185,9 +184,7 @@ export default tseslint.config(
   },
   {
     files: ['site/**/*.{js,jsx,ts,tsx}'],
-    plugins: {
-      next: nextPlugin,
-    },
+    // Intentionally not registering the Next.js plugin at root to avoid module resolution issues
     rules: {
       // some projects use <img> intentionally; disable the Next.js "no-img-element" rule for now
       '@next/next/no-img-element': 'off',
