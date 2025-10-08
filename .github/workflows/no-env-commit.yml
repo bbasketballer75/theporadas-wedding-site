@@ -1,0 +1,27 @@
+name: Prevent .env in PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-env:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for .env in repository
+        run: |
+          if git ls-files | grep -q '^\.env$'; then
+            echo ".env is present in repository - failing CI to prevent secret commit" >&2
+            exit 1
+          fi
+
+      - name: Check PR changed files for .env
+        run: |
+          git fetch --depth=1 origin ${{ github.event.pull_request.base.ref }}
+          CHANGED=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD)
+          echo "Changed files:\n$CHANGED"
+          if echo "$CHANGED" | grep -q '^\.env$'; then
+            echo ".env was changed in this PR - failing CI to prevent secret commit" >&2
+            exit 1
+          fi

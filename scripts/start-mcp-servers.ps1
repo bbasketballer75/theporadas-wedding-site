@@ -84,8 +84,9 @@ if ($env:SENTRY_ACCESS_TOKEN -or $env:SENTRY_AUTH_TOKEN -or $env:SENTRY_API) {
     if ($token) {
         # If user didn't specify add-scopes, request common write scopes by default for local development
         if (-not $SentryAddScopes) {
-            $SentryAddScopes = 'event:write,project:write'
-            Write-Host "No explicit Sentry add-scopes provided; defaulting to: $SentryAddScopes" -ForegroundColor Yellow
+            # Default to recommended Sentry scopes for stdio transport to enable management tools during local development
+            $SentryAddScopes = 'org:read,project:read,project:write,team:read,team:write,event:write,project:releases'
+            Write-Host "No explicit Sentry add-scopes provided; defaulting to recommended scopes: $SentryAddScopes" -ForegroundColor Yellow
         }
         # Build sentry args safely
         $sentryArgs = @()
