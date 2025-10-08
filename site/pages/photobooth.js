@@ -213,7 +213,7 @@ export default function PhotoBoothPage() {
 
                   {/* Captured Photo */}
                   {capturedPhoto && (
-                    // eslint-disable-next-line next/no-img-element
+                    // eslint-disable-next-line
                     <img
                       src={capturedPhoto}
                       alt="Captured"
