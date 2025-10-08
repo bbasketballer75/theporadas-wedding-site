@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
-
 // Import all section components
 import AlbumSection from '../components/sections/AlbumSection';
 import GallerySection from '../components/sections/GallerySection';
