@@ -139,7 +139,6 @@ export default function GallerySection() {
                 className="max-w-full max-h-[90vh] rounded-lg"
               />
             ) : (
-              // eslint-disable-next-line
               <img
                 src={selectedMedia.originalPath}
                 alt="Full size"
