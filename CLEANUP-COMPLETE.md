@@ -67,15 +67,8 @@ d:\wedding-website\theporadas_wedding_site\
 - ✅ Testing: Playwright + Puppeteer
 - ✅ Database: PostgreSQL + Firebase
 - ✅ Code Management: GitHub
-- ⚠️ **Missing:** Production error monitoring
 
-**Recommendation: Add Sentry MCP**
-
-- **Purpose:** Production error tracking and monitoring
-- **Setup:** Easy (free tier available at sentry.io)
-- **Benefit:** Real-time alerts, performance monitoring, session replay
-- **Priority:** High (essential for production)
-- **Details:** See `docs/mcp/MCP-SERVER-RECOMMENDATIONS-2025-10-05.md`
+**Production monitoring:** Currently not enabled in this repo. If you need production error monitoring, consider a managed service and add instrumentation and auth tokens outside of source control.
 
 ## 🔄 Next Steps
 

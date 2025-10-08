@@ -11,9 +11,7 @@ export default function Footer() {
           {/* Brand/Info */}
           <div>
             <h3 className="font-display text-3xl font-bold mb-4">Austin & Jordyn</h3>
-            <p className="font-body text-white/90">
-              Celebrating love, family, and new beginnings.
-            </p>
+            <p className="font-body text-white/90">Celebrating love, family, and new beginnings.</p>
           </div>
 
           {/* Quick Links */}
@@ -21,17 +19,26 @@ export default function Footer() {
             <h4 className="font-display text-xl font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="font-body text-white/90 hover:text-white transition-colors">
+                <Link
+                  href="/"
+                  className="font-body text-white/90 hover:text-white transition-colors"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/our-story" className="font-body text-white/90 hover:text-white transition-colors">
+                <Link
+                  href="/our-story"
+                  className="font-body text-white/90 hover:text-white transition-colors"
+                >
                   Our Story
                 </Link>
               </li>
               <li>
-                <Link href="/map" className="font-body text-white/90 hover:text-white transition-colors">
+                <Link
+                  href="/map"
+                  className="font-body text-white/90 hover:text-white transition-colors"
+                >
                   Viewer Map
                 </Link>
               </li>
@@ -61,9 +68,7 @@ export default function Footer() {
           <p className="font-body text-white/70">
             © {currentYear} Austin & Jordyn Poradas. All rights reserved.
           </p>
-          <p className="font-body text-white/60 text-sm mt-2">
-            Made with 💕 for our special day
-          </p>
+          <p className="font-body text-white/60 text-sm mt-2">Made with 💕 for our special day</p>
         </div>
       </div>
     </footer>

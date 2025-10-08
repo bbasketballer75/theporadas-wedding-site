@@ -1,7 +1,7 @@
 /**
  * Firebase Cloud Functions Gen 2
  * Thumbnail Generation for Uploaded Photos/Videos
- * 
+ *
  * Gen 2 Benefits:
  * - Longer timeout (60min vs 9min)
  * - Larger instances (16GB RAM vs 8GB)
@@ -40,7 +40,7 @@ setGlobalOptions({
 /**
  * Generate thumbnail when image is uploaded to Firebase Storage
  * Triggered automatically on any file upload
- * 
+ *
  * Gen 2 onObjectFinalized replaces Gen 1 storage.object().onFinalize()
  */
 exports.generateThumbnail = onObjectFinalized(async (event) => {

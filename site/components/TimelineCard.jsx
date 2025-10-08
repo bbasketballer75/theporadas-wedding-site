@@ -6,7 +6,7 @@ export default function TimelineCard({ title, date, bgColor = 'mint' }) {
     sage: 'border-sage',
     blush: 'border-blush',
   };
-  
+
   return (
     <div
       className={`

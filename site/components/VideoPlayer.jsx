@@ -2,16 +2,12 @@
  * VideoPlayer Component
  * YouTube video embed with privacy-enhanced mode and custom styling
  * 2025 Best Practice: Use youtube-nocookie.com for better privacy
- * 
+ *
  * @param {string} videoId - YouTube video ID
  * @param {string} title - Video title for accessibility
  * @param {string} className - Additional CSS classes
  */
-export default function VideoPlayer({ 
-  videoId, 
-  title = 'Wedding Video',
-  className = ''
-}) {
+export default function VideoPlayer({ videoId, title = 'Wedding Video', className = '' }) {
   if (!videoId) {
     return (
       <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-gradient-to-br from-mint via-cream to-blush/30 flex items-center justify-center">
@@ -24,7 +20,9 @@ export default function VideoPlayer({
   }
 
   return (
-    <div className={`relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl shadow-blush/20 ${className}`}>
+    <div
+      className={`relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl shadow-blush/20 ${className}`}
+    >
       <iframe
         src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&color=white`}
         title={title}

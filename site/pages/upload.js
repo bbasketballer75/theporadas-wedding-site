@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import { useState } from 'react';
+
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
-import PhotoUpload from '../components/PhotoUpload';
 import PageTransition from '../components/PageTransition';
+import PhotoUpload from '../components/PhotoUpload';
 
 export default function UploadPage() {
   const [uploadSuccess, setUploadSuccess] = useState(false);

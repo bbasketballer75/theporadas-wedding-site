@@ -2,6 +2,7 @@ import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
+
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 import PageTransition from '../components/PageTransition';

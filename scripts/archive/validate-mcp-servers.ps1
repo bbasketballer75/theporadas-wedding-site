@@ -6,7 +6,19 @@ $global:passCount = 0
 $global:failCount = 0
 
 $scriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
-$repoRoot = [System.IO.Path]::GetFullPath((Join-Path $scriptRoot '..'))
+$repoRoot = $null
+try {
+    $gitRoot = git rev-parse --show-toplevel 2>$null
+    if ($LASTEXITCODE -eq 0 -and $gitRoot) {
+        $repoRoot = $gitRoot.Trim()
+    }
+}
+catch {
+    $repoRoot = $null
+}
+if (-not $repoRoot) {
+    $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $scriptRoot '..\..'))
+}
 
 function Test-Server {
     param(

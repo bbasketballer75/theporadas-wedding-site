@@ -3,6 +3,7 @@ import { Lora, Playfair_Display } from 'next/font/google';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+
 import { initAnalytics } from '../lib/analytics';
 
 import '../styles/globals.css';

@@ -9,8 +9,9 @@
  * - Works with useTransition
  */
 
-import type { ActionResponse, Pin } from '../types';
 import { addViewerPin, fetchViewerPins } from './firebaseClient';
+
+import type { ActionResponse, Pin } from '../types';
 
 /**
  * Add Pin Action

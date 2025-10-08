@@ -1,6 +1,7 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+
 import { logGalleryDownload } from '../lib/analytics';
 import { downloadAllPhotos, estimateZipSize } from '../lib/downloadPhotos';
 import { db } from '../lib/firebase';

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import SectionTransition from '../SectionTransition';
 
 export default function VenueSection() {

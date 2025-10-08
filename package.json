@@ -13,19 +13,16 @@
   },
   "type": "module",
   "files": [],
-  "workspaces": [
-    "site"
-  ],
   "scripts": {
-    "start": "npm run dev --workspace=site",
-    "start:prod": "npm run build --workspace=site && npm start --workspace=site",
-    "dev": "npm run dev --workspace=site",
-    "build": "npm run build --workspace=site",
+    "start": "cd site && npm run dev",
+    "start:prod": "cd site && npm run build && npm start",
+    "dev": "cd site && npm run dev",
+    "build": "cd site && npm run build",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --check \"{site,functions}/**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-unknown",
     "format:fix": "prettier --write \"{site,functions}/**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-unknown",
-    "test": "npm run test --workspace=site",
+    "test": "cd site && npm run test",
     "deploy": "firebase deploy",
     "deploy:hosting": "firebase deploy --only hosting",
     "deploy:functions": "firebase deploy --only functions"

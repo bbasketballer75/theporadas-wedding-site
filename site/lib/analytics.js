@@ -13,6 +13,7 @@
 
 // Initialize Firebase Analytics
 import { logEvent as firebaseLogEvent, getAnalytics } from 'firebase/analytics';
+
 import { app } from './firebase';
 
 let analytics = null;

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 import PageTransition from '../components/PageTransition';

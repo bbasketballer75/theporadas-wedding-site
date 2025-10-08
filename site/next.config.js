@@ -1,4 +1,5 @@
 /** Next.js config with modern PWA support */
+
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   register: true,
@@ -15,6 +16,12 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 
 const nextConfig = {
   reactStrictMode: true,
+
+  // Experimental features
+  experimental: {
+    // instrumentationHook removed — Sentry integration has been disabled/removed.
+  },
+
   // Removed 'output: export' to enable API routes for Canva integration
   // Note: For Firebase hosting, we'll use 'next export' in build script
   images: {
@@ -31,6 +38,7 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ['image/webp', 'image/avif'],
   },
+
   // Silence the workspace root warning
   outputFileTracingRoot: require('path').join(__dirname, '../'),
 
@@ -46,4 +54,5 @@ const nextConfig = {
   },
 };
 
+// Export config with PWA wrapper
 module.exports = withPWA(nextConfig);

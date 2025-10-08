@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
+
 import Footer from '../components/Footer';
 import GalleryDisplay from '../components/GalleryDisplay';
 import Navigation from '../components/Navigation';
-import VideoPlayer from '../components/VideoPlayer';
 import PageTransition from '../components/PageTransition';
+import VideoPlayer from '../components/VideoPlayer';
 
 export default function Gallery() {
   const [filter, setFilter] = useState('all');

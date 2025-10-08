@@ -1,5 +1,7 @@
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+
+import Button from './Button';
 import { logGuestNameCollection, logPhotoUpload } from '../lib/analytics';
 import { db } from '../lib/firebase';
 import { compressImage } from '../lib/imageCompression';
@@ -7,7 +9,6 @@ import { supabase } from '../lib/supabase';
 import { compressVideo } from '../lib/videoCompression';
 import { processVideoThumbnail } from '../lib/videoThumbnail';
 
-import Button from './Button';
 
 /**
  * PhotoUpload Component
