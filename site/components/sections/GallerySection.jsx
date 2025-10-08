@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+              
 import GalleryDisplay from '../GalleryDisplay';
 import SectionTransition from '../SectionTransition';
 import VideoPlayer from '../VideoPlayer';
