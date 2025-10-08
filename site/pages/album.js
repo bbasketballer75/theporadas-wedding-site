@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
-  import PageTransition from '../components/PageTransition';
+import PageTransition from '../components/PageTransition';
 
-  import { fetchCanvaTemplates, generateAlbumLayout, isCanvaAvailable } from '../utils/canvaService';
+import { fetchCanvaTemplates, generateAlbumLayout, isCanvaAvailable } from '../utils/canvaService';
 
 export default function AlbumGeneratorPage() {
   const [selectedPhotos, setSelectedPhotos] = useState([]);
