@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react';
 
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
-import PageTransition from '../components/PageTransition';
-
-import { fetchCanvaTemplates, generateAlbumLayout, isCanvaAvailable } from '../utils/canvaService';
+  import PageTransition from '../components/PageTransition';
+  import { fetchCanvaTemplates, generateAlbumLayout, isCanvaAvailable } from '../utils/canvaService';
 
 export default function AlbumGeneratorPage() {
   const [selectedPhotos, setSelectedPhotos] = useState([]);
@@ -191,7 +190,7 @@ export default function AlbumGeneratorPage() {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                   {generatedAlbum.pages.map((page) => (
                     <div key={page.pageNumber} className="relative">
-                      {/* eslint-disable-next-line */}
+                      
                       <img
                         src={page.imageUrl}
                         alt={`Album page ${page.pageNumber}`}
@@ -269,7 +268,7 @@ export default function AlbumGeneratorPage() {
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {selectedPhotos.map((photo) => (
                           <div key={photo.id} className="relative group">
-                            {/* eslint-disable-next-line */}
+                            
                             <img
                               src={photo.dataUrl}
                               alt={photo.name}
