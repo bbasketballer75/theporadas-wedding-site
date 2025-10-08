@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { templateId, photos, captions, theme } = req.body;
+  const { templateId, photos, captions: _captions, theme: _theme } = req.body;
 
   if (!templateId || !photos || !Array.isArray(photos)) {
     return res.status(400).json({ error: 'Missing or invalid photos array' });

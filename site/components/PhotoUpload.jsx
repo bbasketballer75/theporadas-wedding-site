@@ -9,7 +9,6 @@ import { supabase } from '../lib/supabase';
 import { compressVideo } from '../lib/videoCompression';
 import { processVideoThumbnail } from '../lib/videoThumbnail';
 
-
 /**
  * PhotoUpload Component
  * Allows guests to upload photos/videos to shared wedding album

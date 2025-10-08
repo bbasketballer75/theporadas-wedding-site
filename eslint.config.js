@@ -132,7 +132,7 @@ export default tseslint.config(
         ],
         '@typescript-eslint/await-thenable': 'off',
       },
-    },
+    }
   ),
   {
     files: ['**/__tests__/**/*.{ts,tsx,js,jsx,cjs,mjs}', '**/*.test.{ts,tsx,js,jsx,cjs,mjs}'],
@@ -186,10 +186,17 @@ export default tseslint.config(
     rules: {
       // some projects use <img> intentionally; disable the Next.js "no-img-element" rule for now
       '@next/next/no-img-element': 'off',
+      'next/no-img-element': 'off',
     },
   },
   {
-    files: ['scripts/**/*.js', 'site/scripts/**/*.js'],
+    files: [
+      'scripts/**/*.js',
+      'site/scripts/**/*.js',
+      'site/tests/**/*.js',
+      'site/playwright.config.js',
+      'firebase/**',
+    ],
     rules: {
       // Allow require() style imports in utility scripts to avoid large refactors during cleanup
       '@typescript-eslint/no-require-imports': 'off',
@@ -201,5 +208,5 @@ export default tseslint.config(
       '@typescript-eslint/await-thenable': 'off',
     },
   },
-  eslintConfigPrettier,
+  eslintConfigPrettier
 );

@@ -9,8 +9,8 @@
     "start": "next dev --turbopack",
     "start:prod": "next start",
     "dev:safe": "node --max-old-space-size=4096 ./node_modules/.bin/next dev --turbopack",
-  "lint": "eslint .",
-  "test:e2e": "playwright test",
+    "lint": "eslint .",
+    "test:e2e": "playwright test",
     "audit": "lhci autorun --upload.target=temporary-public-storage"
   },
   "dependencies": {

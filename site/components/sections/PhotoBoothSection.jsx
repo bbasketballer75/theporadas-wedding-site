@@ -1,7 +1,7 @@
 import SectionTransition from '../SectionTransition';
 
 export default function PhotoBoothSection() {
-  const scrollToSection = (id) => {
+  const _scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });

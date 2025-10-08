@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { type, width, height, theme } = req.body;
+  const { type, width, height, theme: _theme } = req.body;
 
   if (!type || !width || !height) {
     return res.status(400).json({ error: 'Missing required fields' });

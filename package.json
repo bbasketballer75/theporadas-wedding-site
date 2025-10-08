@@ -22,7 +22,7 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --check \"{site,functions}/**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-unknown",
     "format:fix": "prettier --write \"{site,functions}/**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-unknown",
-  "test": "cd site && npm run test:e2e",
+    "test": "cd site && npm run test:e2e",
     "deploy": "firebase deploy",
     "deploy:hosting": "firebase deploy --only hosting",
     "deploy:functions": "firebase deploy --only functions"
@@ -36,6 +36,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-next": "^0.0.0",
     "globals": "^16.4.0",
     "prettier": "^3.3.3",
     "typescript-eslint": "^8.11.0"

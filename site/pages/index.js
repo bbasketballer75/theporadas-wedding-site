@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
-
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 
