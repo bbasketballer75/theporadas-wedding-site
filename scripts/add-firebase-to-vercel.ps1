@@ -59,8 +59,8 @@ foreach ($line in $firebaseVars) {
         $value = $value -replace '^["'']|["'']$', ''
         
         $parsedVars += @{
-            Key = $key
-            Value = $value
+            Key     = $key
+            Value   = $value
             Display = $value.Substring(0, [Math]::Min(20, $value.Length)) + "..."
         }
         
@@ -123,11 +123,13 @@ foreach ($var in $parsedVars) {
         if ($LASTEXITCODE -eq 0) {
             Write-Host "  ✅ Success" -ForegroundColor Green
             $successCount++
-        } else {
+        }
+        else {
             Write-Host "  ⚠️  Warning: $output" -ForegroundColor Yellow
             $failCount++
         }
-    } catch {
+    }
+    catch {
         Write-Host "  ❌ Error: $_" -ForegroundColor Red
         $failCount++
     }

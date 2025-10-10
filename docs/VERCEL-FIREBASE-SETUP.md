@@ -1,7 +1,7 @@
 # 🔥 Vercel Firebase Environment Variables Setup
 
 **Project:** theporadas-wedding-site  
-**Firebase Project:** wedding-site-final  
+**Firebase Project:** the-poradas-2025-813c7  
 **Date:** October 10, 2025
 
 ---
@@ -11,9 +11,13 @@
 Based on the values you provided, here's what we have:
 
 ```env
-NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyDdcDZ1z48lnhzZacUtwTnIQspqA5XcfGQ
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=wedding-site-final.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=wedding-site-final
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyAwucHFFCyrbJfRBxyl7Ofq-Awu2gN29wg
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=the-poradas-2025-813c7.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=the-poradas-2025-813c7
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=the-poradas-2025-813c7.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=1059875220445
+NEXT_PUBLIC_FIREBASE_APP_ID=1:1059875220445:web:459a645ef2a245728be434
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-MT9RJG0YS0
 ```
 
 ---
@@ -28,7 +32,7 @@ You need to get these 3 additional values:
 
 ### Where to Find Them
 
-1. Go to: <https://console.firebase.google.com/project/wedding-site-final/settings/general>
+1. Go to: <https://console.firebase.google.com/project/the-poradas-2025-813c7/settings/general>
 2. Scroll to **"Your apps"** section
 3. Click on your Web app (or create one if none exists)
 4. Click **"Config"** or **"SDK setup and configuration"**
@@ -36,12 +40,13 @@ You need to get these 3 additional values:
 
 ```javascript
 const firebaseConfig = {
-  apiKey: "AIzaSyDdcDZ1z48lnhzZacUtwTnIQspqA5XcfGQ",
-  authDomain: "wedding-site-final.firebaseapp.com",
-  projectId: "wedding-site-final",
-  storageBucket: "wedding-site-final.appspot.com",  // ← COPY THIS
-  messagingSenderId: "123456789012",  // ← COPY THIS
-  appId: "1:123456789012:web:abcdef123456"  // ← COPY THIS
+  apiKey: "AIzaSyAwucHFFCyrbJfRBxyl7Ofq-Awu2gN29wg",
+  authDomain: "the-poradas-2025-813c7.firebaseapp.com",
+  projectId: "the-poradas-2025-813c7",
+  storageBucket: "the-poradas-2025-813c7.firebasestorage.app",
+  messagingSenderId: "1059875220445",
+  appId: "1:1059875220445:web:459a645ef2a245728be434",
+  measurementId: "G-MT9RJG0YS0"
 };
 ```
 
@@ -66,12 +71,13 @@ const firebaseConfig = {
 
    | Variable Name | Value |
    |---------------|-------|
-   | `NEXT_PUBLIC_FIREBASE_API_KEY` | `AIzaSyDdcDZ1z48lnhzZacUtwTnIQspqA5XcfGQ` |
-   | `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` | `wedding-site-final.firebaseapp.com` |
-   | `NEXT_PUBLIC_FIREBASE_PROJECT_ID` | `wedding-site-final` |
-   | `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` | *(get from console)* |
-   | `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | *(get from console)* |
-   | `NEXT_PUBLIC_FIREBASE_APP_ID` | *(get from console)* |
+   | `NEXT_PUBLIC_FIREBASE_API_KEY` | `AIzaSyAwucHFFCyrbJfRBxyl7Ofq-Awu2gN29wg` |
+   | `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` | `the-poradas-2025-813c7.firebaseapp.com` |
+   | `NEXT_PUBLIC_FIREBASE_PROJECT_ID` | `the-poradas-2025-813c7` |
+   | `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` | `the-poradas-2025-813c7.firebasestorage.app` |
+   | `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | `1059875220445` |
+   | `NEXT_PUBLIC_FIREBASE_APP_ID` | `1:1059875220445:web:459a645ef2a245728be434` |
+   | `NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID` | `G-MT9RJG0YS0` |
 
    **For each variable:**
    - Click **"Add New"** button

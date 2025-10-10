@@ -69,12 +69,13 @@ In the **"Your apps"** section, you'll see your web app listed.
 
 ```javascript
 const firebaseConfig = {
-  apiKey: "AIza...",                          // ✅ You already have this
-  authDomain: "wedding-site-final.firebaseapp.com",  // ✅ You already have this
-  projectId: "wedding-site-final",            // ✅ You already have this
-  storageBucket: "wedding-site-final.appspot.com",   // ❌ COPY THIS
-  messagingSenderId: "123456789012",          // ❌ COPY THIS
-  appId: "1:123456789012:web:abc123def456"    // ❌ COPY THIS
+  apiKey: "AIzaSyAwucHFFCyrbJfRBxyl7Ofq-Awu2gN29wg",
+  authDomain: "the-poradas-2025-813c7.firebaseapp.com",
+  projectId: "the-poradas-2025-813c7",
+  storageBucket: "the-poradas-2025-813c7.firebasestorage.app",
+  messagingSenderId: "1059875220445",
+  appId: "1:1059875220445:web:459a645ef2a245728be434",
+  measurementId: "G-MT9RJG0YS0"
 };
 ```
 
