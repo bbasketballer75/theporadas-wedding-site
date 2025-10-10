@@ -2,7 +2,7 @@
  * Loading Skeleton Component
  * Displays animated placeholder content while data is loading
  * Improves perceived performance and provides visual feedback
- * 
+ *
  * @param {Object} props - Loading skeleton configuration
  * @param {string} props.variant - Type of skeleton ("text", "image", "section", "gallery")
  * @param {number} props.count - Number of skeleton items to render (default: 1)

@@ -1,0 +1,32 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Open Graph social sharing image template -->
+  <!-- Background gradient: sage to blush -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9ca986;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d8a7b1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="60" fill="#f5f1e6" opacity="0.2"/>
+  <circle cx="1100" cy="530" r="80" fill="#f5f1e6" opacity="0.2"/>
+  
+  <!-- Main content -->
+  <text x="600" y="220" font-family="Georgia, serif" font-size="72" font-weight="bold" fill="#f5f1e6" text-anchor="middle">Austin &amp; Jordyn</text>
+  
+  <!-- Decorative line -->
+  <line x1="400" y1="280" x2="800" y2="280" stroke="#f5f1e6" stroke-width="2"/>
+  
+  <!-- Wedding date -->
+  <text x="600" y="360" font-family="Georgia, serif" font-size="48" fill="#f5f1e6" text-anchor="middle">May 10, 2025</text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="440" font-family="Georgia, serif" font-size="32" fill="#f5f1e6" text-anchor="middle" opacity="0.9">Celebrating Our Wedding</text>
+  
+  <!-- Website -->
+  <text x="600" y="520" font-family="Arial, sans-serif" font-size="24" fill="#f5f1e6" text-anchor="middle" opacity="0.8">theporadas.com</text>
+</svg>

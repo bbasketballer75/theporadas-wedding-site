@@ -1,7 +1,7 @@
 /**
  * Web Vitals Reporting Utility
  * Tracks Core Web Vitals (CWV) and sends to analytics
- * 
+ *
  * Core Web Vitals (2025 targets):
  * - LCP (Largest Contentful Paint): < 2.5s
  * - FID (First Input Delay): < 100ms
@@ -9,7 +9,7 @@
  * - FCP (First Contentful Paint): < 1.8s
  * - TTFB (Time to First Byte): < 0.8s
  * - INP (Interaction to Next Paint): < 200ms
- * 
+ *
  * Usage in _app.js:
  * import { reportWebVitals } from '../lib/reportWebVitals';
  * export function reportWebVitals(metric) {

@@ -68,9 +68,7 @@ export default function Home() {
   useEffect(() => {
     // Prefetch Firebase config (if not already loaded)
     if (typeof window !== 'undefined' && !window.firebase) {
-      import('../lib/firebase').catch((err) =>
-        console.warn('Failed to prefetch Firebase:', err)
-      );
+      import('../lib/firebase').catch((err) => console.warn('Failed to prefetch Firebase:', err));
     }
   }, []);
 
@@ -96,8 +94,20 @@ export default function Home() {
         <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
 
         {/* Preload critical CSS (if using external stylesheets) */}
-        <link rel="preload" href="/fonts/playfair-display.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/lora.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link
+          rel="preload"
+          href="/fonts/playfair-display.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/lora.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
       </Head>
 
       <ErrorBoundary>

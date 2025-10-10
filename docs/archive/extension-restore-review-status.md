@@ -1,0 +1,4 @@
+- [x] Step 1: Categorize extensions from backup
+- [x] Step 2: Select useful extensions for project and agent
+- [x] Step 3: Update restore list file to recommended set
+- [x] Step 4: Summarize recommendations and pending installs

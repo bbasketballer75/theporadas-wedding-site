@@ -4,7 +4,7 @@ import { Component } from 'react';
  * Error Boundary Component
  * Catches JavaScript errors anywhere in the component tree and displays a fallback UI
  * Prevents the entire app from crashing due to a single component error
- * 
+ *
  * Usage: Wrap any component that might error
  * <ErrorBoundary fallback={<CustomFallback />}>
  *   <YourComponent />

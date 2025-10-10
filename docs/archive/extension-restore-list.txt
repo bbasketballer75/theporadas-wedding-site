@@ -1,0 +1,17 @@
+acomagu.vscode-as-mcp-server
+block.vscode-mcp-extension
+bradlc.vscode-tailwindcss
+davidanson.vscode-markdownlint
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+github.copilot
+github.copilot-chat
+mikestead.dotenv
+ms-playwright.playwright
+ms-vscode.js-debug
+ms-vscode.js-debug-companion
+ms-vscode.powershell
+nickeolofsson.remember-mcp-vscode
+orta.vscode-jest
+streetsidesoftware.code-spell-checker
+vscode-icons-team.vscode-icons

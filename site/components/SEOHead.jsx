@@ -3,7 +3,7 @@ import Head from 'next/head';
 /**
  * SEO Head Component - Comprehensive meta tags for social sharing and search engines
  * Implements Open Graph, Twitter Cards, and structured data (JSON-LD)
- * 
+ *
  * @param {Object} props - SEO configuration
  * @param {string} props.title - Page title (default: "Austin & Jordyn - May 10, 2025")
  * @param {string} props.description - Page description for search engines
