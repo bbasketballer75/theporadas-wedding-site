@@ -1,8 +1,17 @@
+import dynamic from 'next/dynamic';
 import { useState } from 'react';
-              
-import GalleryDisplay from '../GalleryDisplay';
+
 import SectionTransition from '../SectionTransition';
 import VideoPlayer from '../VideoPlayer';
+
+const GalleryDisplay = dynamic(() => import('../GalleryDisplay'), {
+  ssr: false,
+  loading: () => (
+    <div className="bg-white rounded-3xl shadow-2xl p-12 text-center text-gray-600">
+      Loading gallery…
+    </div>
+  ),
+});
 
 export default function GallerySection() {
   const [filter, setFilter] = useState('all');

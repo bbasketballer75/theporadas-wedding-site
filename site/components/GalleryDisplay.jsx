@@ -1,6 +1,6 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { logGalleryDownload } from '../lib/analytics';
 import { downloadAllPhotos, estimateZipSize } from '../lib/downloadPhotos';
@@ -30,8 +30,6 @@ export default function GalleryDisplay() {
   const loadMoreRef = useRef(null);
 
   useEffect(() => {
-    console.log('[GalleryDisplay] Setting up real-time listener...');
-
     // Query Firestore for wedding photos/videos, sorted by newest first
     // Note: We query ALL items but only display first N (controlled by itemsToShow state)
     const q = query(collection(db, 'wedding-photos'), orderBy('timestamp', 'desc'));
@@ -40,8 +38,6 @@ export default function GalleryDisplay() {
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
-        console.log('[GalleryDisplay] Received update:', snapshot.size, 'items');
-
         const items = [];
         snapshot.forEach((doc) => {
           items.push({
@@ -51,7 +47,6 @@ export default function GalleryDisplay() {
         });
 
         setMedia(items);
-        setHasMore(items.length > itemsToShow);
         setLoading(false);
       },
       (err) => {
@@ -63,10 +58,13 @@ export default function GalleryDisplay() {
 
     // Cleanup listener on unmount
     return () => {
-      console.log('[GalleryDisplay] Cleaning up listener');
       unsubscribe();
     };
-  }, [itemsToShow]);
+  }, []);
+
+  useEffect(() => {
+    setHasMore(media.length > itemsToShow);
+  }, [media.length, itemsToShow]);
 
   // IntersectionObserver for infinite scroll
   useEffect(() => {
@@ -75,7 +73,6 @@ export default function GalleryDisplay() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore) {
-          console.log('[GalleryDisplay] Loading more items...');
           setItemsToShow((prev) => {
             const newCount = prev + 20;
             setHasMore(media.length > newCount);
@@ -121,7 +118,7 @@ export default function GalleryDisplay() {
     }
   };
 
-  const zipInfo = estimateZipSize(media);
+  const zipInfo = useMemo(() => estimateZipSize(media), [media]);
 
   if (loading) {
     return (

@@ -26,6 +26,12 @@ if (!getApps().length) {
 
 const db = getFirestore();
 
+// Simple in-memory cache for viewer pins (client-only)
+let cachedPins = [];
+let lastPinsFetch = 0;
+let inflightPinsPromise = null;
+const PINS_CACHE_TTL_MS = 60_000;
+
 // Enable offline persistence (2025 Firebase best practice)
 // Allows multi-tab support and offline-first functionality
 if (typeof window !== 'undefined') {
@@ -59,6 +65,11 @@ export async function addViewerPin({ lat, lng, message }) {
       createdAt: new Date().toISOString(),
     });
 
+    // Invalidate local cache so next fetch refreshes immediately
+    cachedPins = [];
+    lastPinsFetch = 0;
+    inflightPinsPromise = null;
+
     return { success: true, id: docRef.id };
   } catch (error) {
     console.error('Error adding viewer pin:', error);
@@ -68,11 +79,39 @@ export async function addViewerPin({ lat, lng, message }) {
 
 export async function fetchViewerPins() {
   try {
+    // Serve from cache when within TTL to reduce repeated reads during navigation
+    if (typeof window !== 'undefined') {
+      const withinTtl = Date.now() - lastPinsFetch < PINS_CACHE_TTL_MS;
+      if (withinTtl && cachedPins.length > 0) {
+        return cachedPins;
+      }
+
+      if (inflightPinsPromise) {
+        return inflightPinsPromise;
+      }
+    }
+
     const q = query(collection(db, 'viewerPins'), orderBy('createdAt', 'desc'));
-    const snap = await getDocs(q);
-    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    const fetchPromise = getDocs(q).then((snap) =>
+      snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+    );
+
+    if (typeof window !== 'undefined') {
+      inflightPinsPromise = fetchPromise;
+    }
+
+    const pins = await fetchPromise;
+
+    if (typeof window !== 'undefined') {
+      cachedPins = pins;
+      lastPinsFetch = Date.now();
+      inflightPinsPromise = null;
+    }
+
+    return pins;
   } catch (error) {
     console.error('Error fetching viewer pins:', error);
+    inflightPinsPromise = null;
     return [];
   }
 }
