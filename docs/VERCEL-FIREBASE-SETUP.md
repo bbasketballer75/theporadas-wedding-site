@@ -26,9 +26,9 @@ You need to get these 3 additional values:
 2. **Messaging Sender ID** (a number like: `123456789012`)
 3. **App ID** (format: `1:123456789012:web:abcdef123456`)
 
-### Where to Find Them:
+### Where to Find Them
 
-1. Go to: https://console.firebase.google.com/project/wedding-site-final/settings/general
+1. Go to: <https://console.firebase.google.com/project/wedding-site-final/settings/general>
 2. Scroll to **"Your apps"** section
 3. Click on your Web app (or create one if none exists)
 4. Click **"Config"** or **"SDK setup and configuration"**
@@ -52,7 +52,7 @@ const firebaseConfig = {
 ### Step 1: Add Environment Variables to Vercel
 
 1. **Go to Vercel Dashboard:**  
-   https://vercel.com/dashboard
+   <https://vercel.com/dashboard>
 
 2. **Select your project:**  
    Find and click: **theporadas-wedding-site**
@@ -86,16 +86,19 @@ const firebaseConfig = {
 After adding all variables:
 
 **Option A: Redeploy from Vercel Dashboard**
+
 1. Go to **Deployments** tab
 2. Find the latest deployment
 3. Click **"..."** menu → **"Redeploy"**
 4. Confirm redeploy
 
 **Option B: Git Push (Automatic)**
+
 ```bash
 git commit --allow-empty -m "chore: trigger redeploy with new env vars"
 git push origin main
 ```
+
 Vercel will auto-deploy if GitHub integration is active.
 
 ### Step 3: Verify Deployment
@@ -113,6 +116,7 @@ Vercel will auto-deploy if GitHub integration is active.
 ### Firebase errors in browser console?
 
 **Check:**
+
 - All 6 environment variables are set in Vercel
 - Variable names are EXACT (case-sensitive)
 - Values have no extra spaces or quotes
@@ -121,6 +125,7 @@ Vercel will auto-deploy if GitHub integration is active.
 ### Storage/Upload not working?
 
 **Verify:**
+
 - `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` is correct
 - Firebase Storage is enabled in Firebase Console
 - Storage rules allow uploads
@@ -128,6 +133,7 @@ Vercel will auto-deploy if GitHub integration is active.
 ### Authentication not working?
 
 **Verify:**
+
 - `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN` matches Firebase Console
 - Authentication is enabled in Firebase Console
 - Auth methods are configured (Email/Password, Google, etc.)
@@ -159,6 +165,7 @@ Before deploying, confirm:
 ## 🎯 After Setup Complete
 
 Your wedding website will have:
+
 - ✅ Firebase Authentication
 - ✅ Firestore Database (guest book, comments)
 - ✅ Cloud Storage (photo/video uploads)

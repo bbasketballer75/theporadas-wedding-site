@@ -1,12 +1,8 @@
 name: TypeScript
 
+# Disabled: No src/packages structure in this wedding website project
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-  release:
-    types: [published]
+  workflow_dispatch:
 
 jobs:
   detect-packages:
@@ -111,7 +107,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         working-directory: src/${{ matrix.package }}

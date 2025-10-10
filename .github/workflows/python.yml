@@ -1,12 +1,8 @@
 name: Python
 
+# Disabled: No Python packages in this wedding website project
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-  release:
-    types: [published]
+  workflow_dispatch:
 
 jobs:
   detect-packages:
@@ -39,7 +35,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: "src/${{ matrix.package }}/.python-version"
+          python-version-file: 'src/${{ matrix.package }}/.python-version'
 
       - name: Install dependencies
         working-directory: src/${{ matrix.package }}
@@ -76,7 +72,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: "src/${{ matrix.package }}/.python-version"
+          python-version-file: 'src/${{ matrix.package }}/.python-version'
 
       - name: Install dependencies
         working-directory: src/${{ matrix.package }}

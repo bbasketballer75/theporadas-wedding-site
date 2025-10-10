@@ -1,9 +1,9 @@
 name: Deploy to Firebase
 
+# Disabled: Firebase Functions removed (free tier limitation)
+# Using Vercel for hosting + Firebase for database/storage only
 on:
-  push:
-    branches: [main]
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -27,7 +27,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Install site dependencies
         working-directory: site
@@ -46,13 +46,13 @@ jobs:
         id: auth
         uses: google-github-actions/auth@v1
         with:
-          workload_identity_provider: "projects/618864609917/locations/global/workloadIdentityPools/github-pool/providers/github-provider-bbasketballer75"
-          service_account: "theporadas-deployer@the-poradas-2025-813c7.iam.gserviceaccount.com"
+          workload_identity_provider: 'projects/618864609917/locations/global/workloadIdentityPools/github-pool/providers/github-provider-bbasketballer75'
+          service_account: 'theporadas-deployer@the-poradas-2025-813c7.iam.gserviceaccount.com'
           token_format: access_token
           access_token_scopes: https://www.googleapis.com/auth/cloud-platform
           # Use provider's default audience (do not request an explicit audience here) for attribute-based validation
 
-      - name: "Debug: print auth and ADC"
+      - name: 'Debug: print auth and ADC'
         run: |
           echo "=== gcloud version ==="
           gcloud --version || true
@@ -128,7 +128,7 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools@latest
 
-      - name: "Preflight: check service-account act-as permission"
+      - name: 'Preflight: check service-account act-as permission'
         env:
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
         run: |
@@ -316,7 +316,7 @@ jobs:
           echo "Deployed function list (Gen2)"
           gcloud functions list --gen2 --region=us-central1 --project "$FIREBASE_PROJECT_ID" || true
 
-      - name: "Smoke tests: ping endpoint and thumbnail generation"
+      - name: 'Smoke tests: ping endpoint and thumbnail generation'
         env:
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
         run: |

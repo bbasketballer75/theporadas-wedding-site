@@ -20,9 +20,6 @@
       }
     ]
   },
-  "functions": {
-    "source": "functions"
-  },
   "storage": {
     "rules": "storage.rules"
   },
@@ -30,9 +27,6 @@
     "rules": "firestore.rules"
   },
   "emulators": {
-    "functions": {
-      "port": 5001
-    },
     "firestore": {
       "port": 8002
     },
