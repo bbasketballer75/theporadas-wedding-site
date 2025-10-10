@@ -257,10 +257,9 @@ mcp-config.json
 MCP-QUICKREF.md
 
 # ============================================================================
-# DOCUMENTATION - TOO EXTENSIVE FOR CLEAN REPO
+# DOCUMENTATION
 # ============================================================================
-# Keep only essential README.md, remove detailed documentation
-docs/
+# All docs should be committed - they're essential for project knowledge
 agents.md
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
