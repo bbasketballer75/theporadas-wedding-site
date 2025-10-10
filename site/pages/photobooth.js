@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 import Footer from '../components/Footer';
@@ -213,11 +214,13 @@ export default function PhotoBoothPage() {
 
                   {/* Captured Photo */}
                   {capturedPhoto && (
-                    
-                    <img
+                    <Image
                       src={capturedPhoto}
                       alt="Captured"
-                      className="w-full h-full object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 60vw, 90vw"
+                      unoptimized
                     />
                   )}
 

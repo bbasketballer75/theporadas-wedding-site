@@ -1,6 +1,8 @@
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactHooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -192,9 +194,29 @@ export default tseslint.config(
   },
   {
     files: ['site/**/*.{js,jsx,ts,tsx}'],
-    // Intentionally not registering the Next.js plugin at root to avoid module resolution issues
+    plugins: {
+      'react-hooks': reactHooks,
+      'jsx-a11y': jsxA11y,
+    },
     rules: {
-      // some projects use <img> intentionally; disable the Next.js "no-img-element" rule for now
+      // React Hooks rules
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
+      // Accessibility rules (WCAG 2.1 AA compliance)
+      'jsx-a11y/alt-text': 'error',
+      'jsx-a11y/aria-props': 'error',
+      'jsx-a11y/aria-proptypes': 'error',
+      'jsx-a11y/aria-role': 'error',
+      'jsx-a11y/aria-unsupported-elements': 'error',
+      'jsx-a11y/heading-has-content': 'error',
+      'jsx-a11y/html-has-lang': 'error',
+      'jsx-a11y/img-redundant-alt': 'warn',
+      'jsx-a11y/label-has-associated-control': 'warn',
+      'jsx-a11y/no-aria-hidden-on-focusable': 'error',
+      'jsx-a11y/role-has-required-aria-props': 'error',
+
+      // Next.js image rules (keep disabled for intentional <img> usage)
       '@next/next/no-img-element': 'off',
       'next/no-img-element': 'off',
     },

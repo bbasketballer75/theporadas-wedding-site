@@ -1,0 +1,10 @@
+#!/bin/sh
+echo "Running pre-push verification: verify-next-config + audit-webpack-injection"
+export NEXT_TURBOPACK=1
+cd site || exit 1
+echo "Verifying exported next config..."
+npm run verify:next-config || { echo "verify-next-config failed"; exit 1; }
+echo "Running webpack injection audit..."
+node ./scripts/audit-webpack-injection.js || { echo "audit-webpack-injection reported potential issues"; exit 1; }
+echo "pre-push checks passed"
+exit 0

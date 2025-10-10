@@ -47,9 +47,8 @@ Identify:
 9. **Firebase**: Firestore operations, Storage management, Auth, Functions deployment
 10. **Puppeteer**: Browser automation, E2E testing, screenshots
 11. **Playwright**: Fast browser automation via accessibility tree
-12. **Console Ninja**: Runtime logging, live debugging context
-13. **Image Tools**: Image processing, compression, format conversion
-14. **Canva**: Design creation, template generation, PDF export
+12. **Image Tools**: Image processing, compression, format conversion
+13. **Canva**: Design creation, template generation, PDF export
 
 **Tool Selection Matrix:**
 

@@ -16,7 +16,7 @@ $extensionsToRemove = @(
     "firsttris.vscode-jest-runner",             # Using Playwright, not Jest
     "ms-vscode.cpptools",                       # Not using C++
     "ms-dotnettools.vscode-dotnet-runtime",     # Not using .NET
-    "wallabyjs.quokka-vscode",                  # Console Ninja is better
+    "wallabyjs.quokka-vscode",                  # Inline logging extensions removed
     "rangav.vscode-thunder-client",             # Not needed for this project
     "codezombiech.gitignore",                   # One-time use, not needed
     "afractal.node-essentials",                 # Redundant with npm-intellisense

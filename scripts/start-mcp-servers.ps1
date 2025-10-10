@@ -36,6 +36,31 @@ else {
     Write-Warning "Ensure script missing: $ensureScript. You can run scripts/ensure-context7-mcp.ps1 manually to configure context7 MCP." 
 }
 
+# Check Firebase auth status and warn if not configured
+$ensureFirebase = Join-Path $workspace 'scripts\ensure-firebase-login.ps1'
+if (Test-Path $ensureFirebase) {
+    Write-Host "Checking Firebase CLI auth status..." -ForegroundColor Cyan
+    & $ensureFirebase
+}
+else {
+    Write-Warning "Firebase ensure script missing: $ensureFirebase. Create scripts/ensure-firebase-login.ps1 to verify Firebase auth."
+}
+
+# Validate optional tokens (GitHub/Brave/Firebase) used by MCP helper tools
+$tokenTester = Join-Path $workspace 'scripts\test-mcp-auth.ps1'
+if (Test-Path $tokenTester) {
+    Write-Host "Running token validation checks (non-destructive)..." -ForegroundColor Cyan
+    & $tokenTester
+}
+else {
+    Write-Host "Token tester script not found. Skipping token validation." -ForegroundColor Gray
+}
+
+$throttleHelper = Join-Path $workspace 'scripts\check-brave-throttle.ps1'
+if (Test-Path $throttleHelper) {
+    Write-Host "Reminder: use check-brave-throttle.ps1 to space Brave API calls (>=1s)." -ForegroundColor Gray
+}
+
 # Filesystem server (required for workspace access)
 Start-Server -Command "npx" -Arguments @("-y", "@modelcontextprotocol/server-filesystem", $workspace) -DisplayName "MCP Filesystem"
 

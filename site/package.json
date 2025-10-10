@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
-    "export": "next build && next export",
+    "dev:turbo": "next dev --turbopack",
+    "build": "node --require ./scripts/node-readlink-patch.cjs ./node_modules/next/dist/bin/next build",
+    "export": "npm run build && node --require ./scripts/node-readlink-patch.cjs ./node_modules/next/dist/bin/next export",
     "start": "next dev --turbopack",
     "start:prod": "next start",
     "dev:safe": "node --max-old-space-size=4096 ./node_modules/.bin/next dev --turbopack",
     "lint": "eslint .",
     "test:e2e": "playwright test",
+    "verify:next-config": "node ./scripts/verify-next-config.js",
     "audit": "lhci autorun --upload.target=temporary-public-storage"
   },
   "dependencies": {

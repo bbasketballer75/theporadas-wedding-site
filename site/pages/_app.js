@@ -1,8 +1,8 @@
 import { AnimatePresence } from 'framer-motion';
 import { Lora, Playfair_Display } from 'next/font/google';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import Router from 'next/router';
+import { useEffect, useState } from 'react';
 
 import { initAnalytics } from '../lib/analytics';
 
@@ -24,11 +24,31 @@ const lora = Lora({
 });
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
+  const [routeKey, setRouteKey] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.location.pathname + window.location.search + window.location.hash;
+    }
+    return Component?.name || 'app';
+  });
 
   // Initialize Firebase Analytics on mount (client-side only)
   useEffect(() => {
     initAnalytics();
+  }, []);
+
+  useEffect(() => {
+    const updateRouteKey = () => {
+      setRouteKey(window.location.pathname + window.location.search + window.location.hash);
+    };
+
+    updateRouteKey();
+    Router.events.on('routeChangeComplete', updateRouteKey);
+    Router.events.on('hashChangeComplete', updateRouteKey);
+
+    return () => {
+      Router.events.off('routeChangeComplete', updateRouteKey);
+      Router.events.off('hashChangeComplete', updateRouteKey);
+    };
   }, []);
 
   return (
@@ -39,7 +59,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <div className={`${playfair.variable} ${lora.variable}`}>
         <AnimatePresence mode="wait" initial={false}>
-          <Component {...pageProps} key={router.asPath} />
+          <Component {...pageProps} key={routeKey} />
         </AnimatePresence>
       </div>
     </>

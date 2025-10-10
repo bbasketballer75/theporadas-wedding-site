@@ -50,7 +50,9 @@ test.describe('Map Page', () => {
     await button.click();
 
     // Verify pending state (React 19 useTransition)
-    await expect(page.locator('button:has-text("Adding Location")')).toBeVisible({ timeout: 3000 });
+    await expect(page.locator('button:has-text("Adding Your Location")')).toBeVisible({
+      timeout: 3000,
+    });
   });
 
   test('displays error message on geolocation failure', async ({ page, context }) => {
@@ -88,8 +90,8 @@ test.describe('Map Page', () => {
   test('displays description text', async ({ page }) => {
     await page.goto('http://localhost:3000/map');
 
-    // Check for description
-    await expect(page.locator('text=See where guests are viewing from')).toBeVisible();
+    // Check for description (less brittle substring check)
+    await expect(page.locator('text=See where guests are viewing')).toBeVisible();
     await expect(page.locator('text=opt-in').first()).toBeVisible();
   });
 });

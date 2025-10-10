@@ -5,7 +5,11 @@ import Button from './Button';
 import { logGuestNameCollection, logPhotoUpload } from '../lib/analytics';
 import { db } from '../lib/firebase';
 import { compressImage } from '../lib/imageCompression';
-import { supabase } from '../lib/supabase';
+import {
+  getSupabaseClient,
+  isSupabaseConfigured,
+  missingSupabaseConfigMessage,
+} from '../lib/supabase';
 import { compressVideo } from '../lib/videoCompression';
 import { processVideoThumbnail } from '../lib/videoThumbnail';
 
@@ -31,6 +35,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
   const [error, setError] = useState(null);
   const [guestName, setGuestName] = useState('');
   const [showNamePrompt, setShowNamePrompt] = useState(false);
+  const uploadsEnabled = isSupabaseConfigured;
 
   // Load saved guest name from localStorage on mount
   useEffect(() => {
@@ -40,7 +45,11 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
         setGuestName(savedName);
       }
     }
-  }, []);
+
+    if (!uploadsEnabled) {
+      setError(missingSupabaseConfigMessage);
+    }
+  }, [uploadsEnabled, missingSupabaseConfigMessage]);
 
   const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB (Supabase free tier limit)
 
@@ -77,6 +86,15 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
   const handleUpload = async () => {
     if (!file || uploading) return;
 
+    if (!uploadsEnabled) {
+      const configError = new Error(missingSupabaseConfigMessage);
+      setError(missingSupabaseConfigMessage);
+      onUploadError?.(configError);
+      return;
+    }
+
+    const supabaseClient = getSupabaseClient();
+
     // Prompt for guest name if not saved
     if (!guestName.trim()) {
       setShowNamePrompt(true);
@@ -112,7 +130,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
         // Generate thumbnail first (quick operation)
         try {
           setProgress(12);
-          videoThumbnail = await processVideoThumbnail(file, supabase);
+          videoThumbnail = await processVideoThumbnail(file, supabaseClient);
           console.log('[PhotoUpload] Video thumbnail created:', videoThumbnail.url);
         } catch (thumbErr) {
           console.error('[PhotoUpload] Thumbnail generation failed:', thumbErr);
@@ -139,12 +157,12 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
       setProgress(30);
 
       // Upload to Supabase Storage
-      const { error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabaseClient.storage
         .from('wedding-photos')
-        .upload(filePath, file, {
+        .upload(filePath, uploadFile, {
           cacheControl: '3600',
           upsert: false,
-          contentType: file.type,
+          contentType: uploadFile.type,
         });
 
       if (uploadError) {
@@ -154,7 +172,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
       setProgress(70);
 
       // Get public URL
-      const { data: publicUrlData } = supabase.storage
+      const { data: publicUrlData } = supabaseClient.storage
         .from('wedding-photos')
         .getPublicUrl(filePath);
 
@@ -246,6 +264,12 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
       <p className="font-body text-gray-600 mb-6">
         Help us relive the special day by uploading your favorite moments!
       </p>
+
+      {!uploadsEnabled && (
+        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 text-amber-900 rounded-xl font-body text-sm">
+          {missingSupabaseConfigMessage}
+        </div>
+      )}
 
       {/* Guest Name Prompt Modal */}
       {showNamePrompt && (
@@ -354,7 +378,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
             type="file"
             accept="image/*,video/*"
             onChange={handleFileChange}
-            disabled={uploading}
+            disabled={uploading || !uploadsEnabled}
             className="hidden"
           />
         </label>
@@ -411,7 +435,11 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
       )}
 
       {/* Upload Button */}
-      <Button onClick={handleUpload} disabled={!file || uploading} variant="sage">
+      <Button
+        onClick={handleUpload}
+        disabled={!uploadsEnabled || !file || uploading}
+        variant="sage"
+      >
         {uploading ? `Uploading... ${progress}%` : 'Upload to Gallery'}
       </Button>
 

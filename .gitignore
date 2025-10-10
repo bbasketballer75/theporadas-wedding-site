@@ -26,6 +26,16 @@ serviceAccountKey.json
 out/
 .vercel/
 
+# PWA generated artifacts
+site/public/sw.js
+site/public/workbox-*.js
+site/public/swe-worker-*.js
+
+# MCP process logs
+site/.mcp-process-map.json
+site/.webpack-injection-report.json
+.activate-locations.json
+
 # General build outputs
 build/
 dist/
@@ -282,3 +292,4 @@ tasksync/
 # MCP Service Account Keys
 .secrets/
 *.service-account.json
+node_modules

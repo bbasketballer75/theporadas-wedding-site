@@ -1,10 +1,11 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
-  import PageTransition from '../components/PageTransition';
-  import { fetchCanvaTemplates, generateAlbumLayout, isCanvaAvailable } from '../utils/canvaService';
+import PageTransition from '../components/PageTransition';
+import { fetchCanvaTemplates, generateAlbumLayout, isCanvaAvailable } from '../utils/canvaService';
 
 export default function AlbumGeneratorPage() {
   const [selectedPhotos, setSelectedPhotos] = useState([]);
@@ -189,12 +190,15 @@ export default function AlbumGeneratorPage() {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                   {generatedAlbum.pages.map((page) => (
-                    <div key={page.pageNumber} className="relative">
-                      
-                      <img
+                    <div key={page.pageNumber} className="relative aspect-[3/4]">
+                      <Image
                         src={page.imageUrl}
                         alt={`Album page ${page.pageNumber}`}
-                        className="w-full h-auto rounded-xl shadow-lg"
+                        width={960}
+                        height={1280}
+                        className="h-full w-full rounded-xl object-cover shadow-lg"
+                        sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 30vw, (min-width: 768px) 40vw, 80vw"
+                        unoptimized
                       />
                       <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                         Page {page.pageNumber}
@@ -268,12 +272,16 @@ export default function AlbumGeneratorPage() {
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {selectedPhotos.map((photo) => (
                           <div key={photo.id} className="relative group">
-                            
-                            <img
-                              src={photo.dataUrl}
-                              alt={photo.name}
-                              className="w-full h-32 object-cover rounded-lg"
-                            />
+                            <div className="relative h-32 w-full overflow-hidden rounded-lg">
+                              <Image
+                                src={photo.dataUrl}
+                                alt={photo.name}
+                                fill
+                                className="object-cover"
+                                sizes="(min-width: 1024px) 200px, (min-width: 768px) 33vw, 50vw"
+                                unoptimized
+                              />
+                            </div>
                             <button
                               onClick={() => removePhoto(photo.id)}
                               className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"

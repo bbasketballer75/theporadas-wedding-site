@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -128,11 +129,14 @@ export default function Gallery() {
                   className="max-w-full max-h-[90vh] rounded-lg"
                 />
               ) : (
-                
-                <img
+                <Image
                   src={selectedMedia.originalPath}
                   alt="Full size"
-                  className="max-w-full max-h-[90vh] rounded-lg object-contain"
+                  width={1920}
+                  height={1080}
+                  className="max-h-[90vh] w-full rounded-lg object-contain"
+                  sizes="(min-width: 1280px) 70vw, 90vw"
+                  unoptimized
                 />
               )}
 
