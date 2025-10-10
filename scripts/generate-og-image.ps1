@@ -19,7 +19,8 @@ try {
         $imageMagickInstalled = $true
         Write-Host "✓ ImageMagick detected" -ForegroundColor Green
     }
-} catch {
+}
+catch {
     Write-Host "✗ ImageMagick not found" -ForegroundColor Yellow
 }
 
@@ -36,12 +37,14 @@ if ($imageMagickInstalled) {
         Write-Host "✓ Open Graph image generated successfully!" -ForegroundColor Green
         Write-Host "  Location: $outputJpg" -ForegroundColor Gray
         Write-Host "  Size: $([math]::Round($fileSize, 2)) KB" -ForegroundColor Gray
-    } else {
+    }
+    else {
         Write-Host ""
         Write-Host "✗ Failed to generate image" -ForegroundColor Red
     }
     
-} else {
+}
+else {
     Write-Host ""
     Write-Host "MANUAL STEPS REQUIRED:" -ForegroundColor Yellow
     Write-Host ""

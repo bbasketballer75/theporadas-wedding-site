@@ -22,7 +22,8 @@ try {
         $imageMagickInstalled = $true
         Write-Host "✓ ImageMagick detected" -ForegroundColor Green
     }
-} catch {
+}
+catch {
     Write-Host "✗ ImageMagick not found" -ForegroundColor Yellow
 }
 
@@ -45,7 +46,8 @@ if ($imageMagickInstalled -and -not $UseOnline) {
     Write-Host ""
     Write-Host "✓ Favicons generated successfully!" -ForegroundColor Green
     
-} else {
+}
+else {
     Write-Host ""
     Write-Host "MANUAL STEPS REQUIRED:" -ForegroundColor Yellow
     Write-Host ""
