@@ -4,7 +4,9 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
 
+import ErrorBoundary from '../components/ErrorBoundary';
 import { initAnalytics } from '../lib/analytics';
+import { reportWebVitals as reportWebVitalsUtil } from '../lib/reportWebVitals';
 
 import '../styles/globals.css';
 
@@ -52,16 +54,22 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <>
+    <ErrorBoundary>
       <Head>
         <title>Poradas Wedding</title>
         <meta name="description" content="Celebrate the Poradas family wedding!" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </Head>
       <div className={`${playfair.variable} ${lora.variable}`}>
         <AnimatePresence mode="wait" initial={false}>
           <Component {...pageProps} key={routeKey} />
         </AnimatePresence>
       </div>
-    </>
+    </ErrorBoundary>
   );
+}
+
+// Export Web Vitals reporting for Next.js
+export function reportWebVitals(metric) {
+  reportWebVitalsUtil(metric);
 }
