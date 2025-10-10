@@ -292,3 +292,4 @@ tasksync/
 .secrets/
 *.service-account.json
 node_modules
+.vercel

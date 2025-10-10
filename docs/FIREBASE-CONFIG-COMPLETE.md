@@ -1,4 +1,4 @@
-# ✅ Firebase Configuration Complete!
+# ✅ Firebase Configuration Complete
 
 **Date:** October 10, 2025  
 **Project:** the-poradas-2025-813c7  
@@ -63,6 +63,7 @@ NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-MT9RJG0YS0
 ```
 
 **What it does:**
+
 - ✅ Reads all 7 values from `site/.env.production`
 - ✅ Adds each to Vercel (Production + Preview + Development)
 - ✅ Validates and shows success/error for each
@@ -89,7 +90,7 @@ vercel env add NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID production preview developmen
 
 ### Option C: Manual via Vercel Dashboard (5 minutes)
 
-1. Go to: https://vercel.com/dashboard
+1. Go to: <https://vercel.com/dashboard>
 2. Select your project
 3. Click **Settings** → **Environment Variables**
 4. For each of the 7 variables:
@@ -113,7 +114,7 @@ You should see all 7 variables listed for all 3 environments.
 
 ---
 
-## 🚀 Final Step: Deploy to Production!
+## 🚀 Final Step: Deploy to Production
 
 Once variables are added:
 

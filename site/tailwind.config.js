@@ -18,6 +18,15 @@ module.exports = {
         'gradient-sage-blush': 'linear-gradient(135deg, #7ca982 0%, #d8a7b1 100%)',
         'gradient-blush-sage': 'linear-gradient(135deg, #d8a7b1 0%, #7ca982 100%)',
       },
+      animation: {
+        pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '.5' },
+        },
+      },
     },
   },
   plugins: [],
