@@ -1,10 +1,20 @@
 /** Next.js config with modern PWA support */
 
+// Detect Turbopack via environment flags commonly used by Next.js and tooling.
+const isTurbopack =
+  process.env.TURBOPACK === '1' ||
+  process.env.NEXT_TURBOPACK === '1' ||
+  process.env.TURBOPACK === 'true' ||
+  process.env.NEXT_TURBOPACK === 'true';
+
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
+  // Ensure PWA plugin is explicitly disabled during development and when Turbopack is active
+  disable:
+    process.env.NODE_ENV === 'development' ||
+    (typeof isTurbopack !== 'undefined' && isTurbopack === true),
   cacheOnFrontEndNav: true,
   aggressiveFrontEndNavCaching: true,
   reloadOnOnline: true,
@@ -16,6 +26,37 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 
 const nextConfig = {
   reactStrictMode: true,
+
+  // Security headers for production
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+    ];
+  },
 
   // Experimental features
   experimental: {
@@ -43,7 +84,21 @@ const nextConfig = {
   outputFileTracingRoot: require('path').join(__dirname, '../'),
 
   // Webpack config for FFmpeg.wasm
-  webpack: (config) => {
+  // NOTE: Turbopack (Next's new dev server) will warn if a `webpack` field is present.
+  // To avoid the "Webpack is configured while Turbopack is not" developer warning
+  // we only add the webpack override to the exported config when Turbopack is NOT enabled.
+  // If Turbopack is enabled in the environment, we omit the property entirely so Next
+  // does not surface the developer warning.
+  //
+};
+
+// Only inject a webpack override when Turbopack is not enabled
+if (!isTurbopack) {
+  nextConfig.webpack = (config) => {
+    // Disable Webpack's pack file cache on Windows network paths to prevent
+    // repeated "Unable to snapshot resolve dependencies" warnings during builds.
+    config.cache = false;
+
     // FFmpeg.wasm support
     config.resolve.alias = {
       ...config.resolve.alias,
@@ -51,8 +106,15 @@ const nextConfig = {
     };
 
     return config;
-  },
-};
+  };
+}
 
 // Export config with PWA wrapper
-module.exports = withPWA(nextConfig);
+const finalConfig = withPWA(nextConfig);
+
+// If Turbopack is active, remove any webpack property that may have been injected by plugins
+if (isTurbopack && finalConfig && Object.prototype.hasOwnProperty.call(finalConfig, 'webpack')) {
+  delete finalConfig.webpack;
+}
+
+module.exports = finalConfig;

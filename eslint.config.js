@@ -45,6 +45,8 @@ export default tseslint.config(
       '.eslintrc.cjs',
       '.prettierrc.cjs',
       '**/*.d.ts',
+      'playwright-report/**',
+      'test-results/**',
     ],
   },
   js.configs.recommended,
