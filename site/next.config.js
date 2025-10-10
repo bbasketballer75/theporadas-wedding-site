@@ -80,9 +80,6 @@ const nextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
 
-  // Silence the workspace root warning
-  outputFileTracingRoot: require('path').join(__dirname, '../'),
-
   // Webpack config for FFmpeg.wasm
   // NOTE: Turbopack (Next's new dev server) will warn if a `webpack` field is present.
   // To avoid the "Webpack is configured while Turbopack is not" developer warning
