@@ -33,11 +33,11 @@ export default function SEOHead({
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     location: {
       '@type': 'Place',
-      name: 'Wedding Venue', // Update with actual venue name
+      name: 'The Lodge at Indian Lake',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: 'City', // Update with actual city
-        addressRegion: 'State', // Update with actual state
+        addressLocality: 'Central City',
+        addressRegion: 'PA',
         addressCountry: 'US',
       },
     },
