@@ -49,7 +49,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
     if (!uploadsEnabled) {
       setError(missingSupabaseConfigMessage);
     }
-  }, [uploadsEnabled, missingSupabaseConfigMessage]);
+  }, [uploadsEnabled]);
 
   const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB (Supabase free tier limit)
 
@@ -354,6 +354,7 @@ export default function PhotoUpload({ onUploadComplete, onUploadError }) {
           htmlFor="file-upload"
           className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-sage/30 rounded-2xl cursor-pointer hover:border-sage/60 hover:bg-mint/20 transition-all duration-300"
         >
+          <span className="sr-only">Choose file to upload</span>
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             <svg
               className="w-12 h-12 mb-4 text-sage"

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 // Navigation component with scroll-spy and smooth scrolling
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  const navLinks = [
+  const navLinks = useMemo(() => [
     { href: '#hero', label: 'Home', id: 'hero' },
     { href: '#our-story', label: 'Our Story', id: 'our-story' },
     { href: '#timeline', label: 'Timeline', id: 'timeline' },
@@ -16,7 +16,7 @@ export default function Navigation() {
     { href: '#album', label: 'Album', id: 'album' },
     { href: '#upload', label: 'Upload', id: 'upload' },
     { href: '#map', label: 'Map', id: 'map' },
-  ];
+  ], []);
 
   // Scroll-spy: Track which section is currently in view
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function Navigation() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [navLinks]);
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);

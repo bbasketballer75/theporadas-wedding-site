@@ -234,6 +234,7 @@ export default function AlbumGeneratorPage() {
                   {/* Upload Button */}
                   <div className="mb-6">
                     <label className="block">
+                      <span className="sr-only">Choose photos to upload</span>
                       <input
                         type="file"
                         multiple
