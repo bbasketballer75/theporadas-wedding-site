@@ -48,11 +48,6 @@
     animation: shimmer 2s infinite;
   }
 
-  /* Loading skeleton base styles */
-  .skeleton {
-    @apply animate-pulse bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 rounded;
-  }
-
   /* Smooth scroll with offset for fixed header */
   html {
     scroll-padding-top: 80px;
