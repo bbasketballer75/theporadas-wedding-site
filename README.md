@@ -13,6 +13,7 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 ## ✨ Features
 
 ### 🎨 **Single-Page Scroll Architecture** ✅ NEW
+
 - **11 sections** in one seamless scroll experience
 - Smooth scroll-spy navigation with active indicators
 - Responsive design for desktop and mobile
@@ -20,6 +21,7 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 - Hero, Our Story, Gallery, Photo Booth, Guest Book, Album, Timeline, Upload, Venue, Map, Footer
 
 ### 🎨 **Canva Integration** ⏳ PHASE 1 COMPLETE
+
 - **7 API routes** for design automation (stubs ready for Phase 2 authentication)
 - **Photo Booth overlays** - Apply wedding-themed Canva templates to captured photos
 - **Guest Book cards** - Generate decorative cards for each guest message
@@ -27,6 +29,7 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 - See `CANVA-INTEGRATION-ROADMAP.md` for complete integration plan
 
 ### 📸 **Photo Gallery**
+
 - Beautiful grid layout with lazy loading
 - Interactive Leaflet map showing photo locations
 - Click photos to see location on map
@@ -34,6 +37,7 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 - Responsive design for all devices
 
 ### 🎉 **Photo Booth** ✅ NEW
+
 - Virtual photo booth with camera access
 - 6 CSS filters (B&W, Vintage, Vibrant, Romantic, Wedding Glow)
 - Canva overlay templates (Phase 2+)
@@ -41,6 +45,7 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 - Flash effect on capture
 
 ### � **Guest Book** ✅ NEW
+
 - Real-time message submission with Firebase Firestore
 - Decorative Canva card generation for each message (Phase 2+)
 - Name, relationship, and message fields
@@ -48,6 +53,7 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 - Beautiful gradient backgrounds for each message
 
 ### �📅 **Event Timeline** ✅ NEW
+
 - Chronological display of wedding events
 - 11 default events from ceremony to sendoff
 - Firebase Firestore integration for dynamic events
@@ -55,29 +61,34 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 - Smooth scroll animations
 
 ### 🏛️ **Venue Details** ✅ NEW
+
 - Ceremony/Reception tabs with venue information
 - Google Maps embeds for each location
 - Venue features and travel tips
 - Quick action links to photos and timeline
 
 ### 📤 **Photo Upload** ✅ NEW
+
 - Guest photo/video upload page
 - PhotoUpload component integration
 - Success notifications and upload instructions
 - Contact email for support
 
 ### 🗺️ **Interactive Venue Map**
+
 - Leaflet-powered interactive maps
 - Venue location and directions
 - Mobile-friendly navigation
 
 ### 📱 **Progressive Web App (PWA)**
+
 - Install on mobile devices
 - Offline support with service workers
 - App-like experience
 - Workbox for caching strategies
 
 ### 🔐 **Firebase Integration**
+
 - Cloud Firestore database (guest book messages, timeline events)
 - Firebase Storage for photos and Canva exports
 - Cloud Functions for backend processing
@@ -88,6 +99,7 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 ## 🚀 Tech Stack
 
 ### **Frontend**
+
 - **Framework:** Next.js 15.5.4 (Pages Router)
 - **UI Library:** React 19.1.1
 - **Styling:** Tailwind CSS 4.1
@@ -95,12 +107,14 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 - **Language:** TypeScript (strict mode)
 
 ### **Backend**
+
 - **Database:** Firebase Firestore
 - **Storage:** Firebase Cloud Storage
 - **Functions:** Firebase Cloud Functions (Node.js)
 - **Hosting:** Firebase Hosting
 
 ### **Development Tools**
+
 - **Testing:** Playwright (44/44 tests passing - 100% ✅)
   - Complete E2E test coverage with 6 test suites
   - Desktop Chrome + iPhone 12 browser profiles
@@ -115,23 +129,27 @@ A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Sha
 ## 📦 Installation
 
 ### Prerequisites
+
 - **Node.js:** 18+ (recommended: 20+)
 - **npm:** 9+
 - **Firebase CLI:** Latest
 - **Git:** Latest
 
 ### 1️⃣ Clone Repository
+
 ```bash
 git clone https://github.com/bbasketballer75/theporadas_wedding_site.git
 cd theporadas_wedding_site
 ```
 
 ### 2️⃣ Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3️⃣ Environment Variables
+
 Create `.env.local` in the `site/` directory:
 
 ```env
@@ -149,6 +167,7 @@ NEXT_PUBLIC_GA_TRACKING_ID=your_ga_id
 ```
 
 ### 4️⃣ Firebase Setup
+
 ```bash
 # Login to Firebase
 firebase login
@@ -164,15 +183,17 @@ firebase init
 ## 💻 Development
 
 ### Start Development Server
+
 ```bash
 npm start
 # or
 npm run dev
 ```
 
-Server runs at: **http://localhost:3000**
+Server runs at: **<http://localhost:3000>**
 
 ### Project Structure
+
 ```
 theporadas_wedding_site/
 ├── site/                    # Next.js application
@@ -213,16 +234,19 @@ theporadas_wedding_site/
 ## 🧪 Testing
 
 ### Run Tests
+
 ```bash
 npm test
 ```
 
 ### Test Coverage
+
 - **Total Tests:** 90
 - **Passing:** 84
 - **Success Rate:** 93%
 
 ### Test Suites
+
 - Gallery component tests
 - Map integration tests
 - Timeline functionality tests
@@ -234,6 +258,7 @@ npm test
 ## 🚢 Deployment
 
 ### Deploy to Firebase
+
 ```bash
 # Build and deploy everything
 npm run deploy
@@ -244,6 +269,7 @@ npm run deploy:functions  # Cloud Functions only
 ```
 
 ### Production Checklist
+
 - [ ] Update environment variables in Firebase Console
 - [ ] Configure custom domain (if applicable)
 - [ ] Set up Firebase security rules
@@ -257,18 +283,23 @@ npm run deploy:functions  # Cloud Functions only
 ## 🔒 Security
 
 ### Firestore Rules
+
 Security rules in `firestore.rules` control database access:
+
 - Read access: Public for gallery photos
 - Write access: Authenticated users only
 - Admin access: Specific user UIDs
 
 ### Storage Rules
+
 Security rules in `storage.rules` control file uploads:
+
 - Upload: Authenticated users
 - File size limits: 10MB per file
 - Allowed types: Images only
 
 ### Environment Variables
+
 **Never commit `.env` files!** These contain sensitive API keys.
 
 ---
@@ -276,7 +307,9 @@ Security rules in `storage.rules` control file uploads:
 ## 🎨 Customization
 
 ### Modify Colors
+
 Edit `site/tailwind.config.js`:
+
 ```javascript
 theme: {
   extend: {
@@ -289,7 +322,9 @@ theme: {
 ```
 
 ### Add Pages
+
 Create new file in `site/pages/`:
+
 ```javascript
 // site/pages/rsvp.js
 export default function RSVP() {
@@ -298,6 +333,7 @@ export default function RSVP() {
 ```
 
 ### Update Firebase Config
+
 Edit `firebase.json` for deployment settings.
 
 ---
@@ -305,13 +341,16 @@ Edit `firebase.json` for deployment settings.
 ## 📱 Progressive Web App
 
 ### Features
+
 - ✅ Installable on mobile devices
 - ✅ Offline support with service worker
 - ✅ App icon and splash screen
 - ✅ Optimized performance
 
 ### Configuration
+
 PWA settings in `site/next.config.js`:
+
 ```javascript
 withPWA({
   dest: 'public',
@@ -326,6 +365,7 @@ withPWA({
 ### Current Status (October 2, 2025)
 
 **Phase 1: Single-Page Scroll Architecture** ✅ COMPLETE
+
 - 11 sections implemented with smooth scroll navigation
 - Scroll-spy navigation with active indicators
 - Beautiful fade-in animations
@@ -333,11 +373,13 @@ withPWA({
 - See `SINGLE-PAGE-REFACTOR-COMPLETE.md` for details
 
 **Phase 2: Automated Testing** ✅ COMPLETE
+
 - 6 Playwright E2E test suites created
 - 44/44 tests passing (100% pass rate ✅)
 - Comprehensive test documentation in `TESTING-COMPLETE-2025-10-02.md`
 
 **Phase 3: Canva Integration** ⏳ PHASE 1 COMPLETE
+
 - ✅ Phase 1: API stubs implemented (7 routes, 10,084 lines)
 - ⏳ Phase 2: Authentication setup (IN PROGRESS)
 - 🔜 Phase 3: Template creation & full implementation
@@ -377,16 +419,19 @@ withPWA({
 ### Known Issues & Technical Debt
 
 **Canva Integration**:
+
 - All 7 API routes return placeholder data
 - Awaiting authentication setup before real implementation
 - Templates need to be created in Canva
 
 **Firebase Functions**:
+
 - Gen 1 + Gen 2 mixed (need Gen 1 → Gen 2 migration)
 
 ### Documentation
 
 **Key Documents**:
+
 - `CANVA-INTEGRATION-ROADMAP.md` - Complete Canva integration plan (4 phases)
 - `SINGLE-PAGE-REFACTOR-COMPLETE.md` - Single-page architecture documentation
 - `TESTING-COMPLETE-2025-10-02.md` - Automated testing summary
@@ -394,6 +439,7 @@ withPWA({
 - `docs/prompt-enhancement-quick-reference.md` - Tool selection matrix
 
 **Status Reports**:
+
 - Testing: 38/44 passing (86.4%)
 - ESLint: 0 errors
 - TypeScript: 0 errors
@@ -439,6 +485,7 @@ See [LICENSE](LICENSE) file for details.
 ## 🙏 Acknowledgments
 
 Built with ❤️ using:
+
 - [Next.js](https://nextjs.org/) - React framework
 - [Firebase](https://firebase.google.com/) - Backend platform
 - [Tailwind CSS](https://tailwindcss.com/) - Styling

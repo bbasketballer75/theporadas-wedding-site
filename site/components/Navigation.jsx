@@ -5,18 +5,21 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  const navLinks = useMemo(() => [
-    { href: '#hero', label: 'Home', id: 'hero' },
-    { href: '#our-story', label: 'Our Story', id: 'our-story' },
-    { href: '#timeline', label: 'Timeline', id: 'timeline' },
-    { href: '#gallery', label: 'Gallery', id: 'gallery' },
-    { href: '#venue', label: 'Venue', id: 'venue' },
-    { href: '#photobooth', label: 'Photo Booth', id: 'photobooth' },
-    { href: '#guestbook', label: 'Guest Book', id: 'guestbook' },
-    { href: '#album', label: 'Album', id: 'album' },
-    { href: '#upload', label: 'Upload', id: 'upload' },
-    { href: '#map', label: 'Map', id: 'map' },
-  ], []);
+  const navLinks = useMemo(
+    () => [
+      { href: '#hero', label: 'Home', id: 'hero' },
+      { href: '#our-story', label: 'Our Story', id: 'our-story' },
+      { href: '#timeline', label: 'Timeline', id: 'timeline' },
+      { href: '#gallery', label: 'Gallery', id: 'gallery' },
+      { href: '#venue', label: 'Venue', id: 'venue' },
+      { href: '#photobooth', label: 'Photo Booth', id: 'photobooth' },
+      { href: '#guestbook', label: 'Guest Book', id: 'guestbook' },
+      { href: '#album', label: 'Album', id: 'album' },
+      { href: '#upload', label: 'Upload', id: 'upload' },
+      { href: '#map', label: 'Map', id: 'map' },
+    ],
+    []
+  );
 
   // Scroll-spy: Track which section is currently in view
   useEffect(() => {

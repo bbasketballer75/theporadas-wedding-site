@@ -1,7 +1,5 @@
 ---
-applyTo: '**'
 description: Automatically enhances user prompts for clarity before processing
-priority: 1
 ---
 
 # Prompt Enhancement Mode
@@ -215,7 +213,7 @@ REMEMBER: "Single-page scroll architecture implemented for theporadas_site on 20
 Key decisions: (1) Hybrid approach with teaser sections linking to full pages for complex
 features (Photo Booth, Guest Book, Album, Upload, Map), (2) IntersectionObserver for
 scroll-spy with rootMargin -50%, (3) SectionTransition replaces PageTransition with
-scroll-triggered animations, (4) All 10 sections use anchor links (#hero, #our-story, etc.),
+scroll-triggered animations, (4) All 10 sections use anchor links (hero, our-story, etc.),
 (5) Navigation.jsx implements active section highlighting with bold + underline.
 Files: 11 new sections (1,089 lines), index.js refactored (70 lines), Navigation.jsx
 refactored (115 lines). Zero lint errors, successful compilation."
