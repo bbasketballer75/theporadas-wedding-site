@@ -26,11 +26,13 @@ Your GitHub Actions panel showed continuous failures across multiple workflows:
 **File:** `.github/workflows/python.yml`
 
 **Problem:**
+
 - Workflow searched for Python packages in non-existent `/src` directory
 - No Python packages in wedding website project
 - Failing on every push/PR
 
 **Fix:**
+
 ```yaml
 name: Python
 
@@ -48,11 +50,13 @@ on:
 **File:** `.github/workflows/typescript.yml`
 
 **Problem:**
+
 - Workflow searched for TypeScript packages in non-existent `/src` directory
 - Project uses `/site` directory, not `/src/packages` structure
 - Failing on every push/PR
 
 **Fix:**
+
 ```yaml
 name: TypeScript
 
@@ -70,12 +74,14 @@ on:
 **File:** `.github/workflows/deploy-firebase.yml`
 
 **Problem:**
+
 - Workflow tried to deploy Cloud Functions to Firebase
 - Cloud Functions require Firebase Blaze (paid) plan
 - You're using free Spark plan
 - Functions directory removed (not needed)
 
 **Fix:**
+
 ```yaml
 name: Deploy to Firebase
 
@@ -94,10 +100,12 @@ on:
 **File:** `.github/workflows/deploy-site.yml`
 
 **Problem:**
+
 - Incorrect path: `working-directory: site` but checking for `site/package-lock.json`
 - Should be checking for `package-lock.json` (already in site directory)
 
 **Before:**
+
 ```yaml
 - name: Install dependencies
   working-directory: site
@@ -110,6 +118,7 @@ on:
 ```
 
 **After:**
+
 ```yaml
 - name: Install dependencies
   working-directory: site
@@ -128,6 +137,7 @@ on:
 ### 5. Removed Firebase Functions
 
 **Files Modified:**
+
 - Deleted `/functions` directory entirely (6,628 lines removed!)
 - Updated `firebase.json` (removed functions section)
 - Removed functions emulator configuration
@@ -142,6 +152,7 @@ on:
 **firebase.json Changes:**
 
 **Before:**
+
 ```json
 {
   "functions": {
@@ -156,6 +167,7 @@ on:
 ```
 
 **After:**
+
 ```json
 {
   "emulators": {
@@ -230,7 +242,7 @@ After pushing these changes:
 To verify workflows are passing:
 
 1. Check GitHub Actions panel (should see green ✅)
-2. Visit: https://github.com/bbasketballer75/theporadas-wedding-site/actions
+2. Visit: <https://github.com/bbasketballer75/theporadas-wedding-site/actions>
 3. Recent runs should show:
    - ✅ Playwright E2E passing
    - ✅ deploy-site.yml passing (or not running if no push)
