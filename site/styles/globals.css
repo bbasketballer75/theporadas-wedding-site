@@ -53,11 +53,6 @@
     scroll-padding-top: 80px;
   }
 
-  /* Focus visible for accessibility */
-  *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-sage ring-2 ring-sage/50;
-  }
-
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     *,
