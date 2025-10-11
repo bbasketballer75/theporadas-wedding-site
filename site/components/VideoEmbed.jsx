@@ -13,14 +13,16 @@ export default function VideoEmbed({ url, title = 'Wedding Video', autoplay = fa
     if (!url) return null;
 
     // YouTube patterns
-    const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const youtubeRegex =
+      /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
     const youtubeMatch = url.match(youtubeRegex);
     if (youtubeMatch) {
       return `https://www.youtube.com/embed/${youtubeMatch[1]}${autoplay ? '?autoplay=1' : ''}`;
     }
 
     // Vimeo patterns
-    const vimeoRegex = /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
+    const vimeoRegex =
+      /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
     const vimeoMatch = url.match(vimeoRegex);
     if (vimeoMatch) {
       return `https://player.vimeo.com/video/${vimeoMatch[3]}${autoplay ? '?autoplay=1' : ''}`;
@@ -174,9 +176,7 @@ export function VideoGallery({ videos = [] }) {
         {videos.map((video, index) => (
           <div key={index} className="video-item">
             <VideoEmbed url={video.url} title={video.title || `Video ${index + 1}`} />
-            {video.description && (
-              <p className="video-description">{video.description}</p>
-            )}
+            {video.description && <p className="video-description">{video.description}</p>}
           </div>
         ))}
       </div>
@@ -239,12 +239,14 @@ export function getVideoId(url) {
   if (!url) return null;
 
   // YouTube
-  const youtubeRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+  const youtubeRegex =
+    /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
   const youtubeMatch = url.match(youtubeRegex);
   if (youtubeMatch) return { platform: 'youtube', id: youtubeMatch[1] };
 
   // Vimeo
-  const vimeoRegex = /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
+  const vimeoRegex =
+    /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|)(\d+)(?:$|\/|\?)/;
   const vimeoMatch = url.match(vimeoRegex);
   if (vimeoMatch) return { platform: 'vimeo', id: vimeoMatch[3] };
 

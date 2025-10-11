@@ -20,7 +20,7 @@ export interface Pin {
 export interface GalleryItem {
   id: string;
   originalPath: string;
-  thumbnailPath: string;
+  thumbnailPath?: string; // Optional: not all items have thumbnails
   contentType: string;
   createdAt: Date;
   uploadedBy?: string;
@@ -116,4 +116,108 @@ export interface ScrollRevealProps {
 export interface TimelineCardProps {
   event: TimelineEvent;
   index: number;
+}
+
+/**
+ * Photo/Media item from Firestore 'wedding-photos' collection (Extended)
+ */
+export interface Photo extends GalleryItem {
+  url: string;
+  name: string;
+  type: string; // MIME type: 'image/jpeg', 'video/mp4', etc.
+  size: number; // File size in bytes
+  originalSize?: number; // Original file size before compression
+  path: string; // Supabase storage path
+  compressed?: boolean;
+  compressionSavings?: string; // Percentage saved: "45.2%"
+  timestamp: FirebaseTimestamp;
+  uploadStatus?: 'pending' | 'processing' | 'completed' | 'queued' | 'failed';
+  uploadError?: string;
+  
+  // Video-specific fields
+  youtubeId?: string | null;
+  youtubeUrl?: string | null;
+  processingStartedAt?: FirebaseTimestamp | null;
+  processedAt?: FirebaseTimestamp | null;
+  thumbnailUrl?: string;
+  thumbnailPath?: string;
+  thumbnailSize?: number;
+}
+
+/**
+ * Comment on a photo from Firestore 'photoComments/{photoId}/comments' collection
+ */
+export interface Comment {
+  id: string;
+  photoId: string;
+  guestName: string;
+  comment: string;
+  timestamp: FirebaseTimestamp;
+}
+
+/**
+ * Upload progress tracking for UploadProgress component
+ */
+export interface Upload {
+  file: File;
+  progress: number; // 0-100
+  status: 'uploading' | 'complete' | 'error';
+  error?: string;
+}
+
+/**
+ * Favorite photo stored in localStorage
+ */
+export interface Favorite {
+  photoId: string;
+  addedAt: string; // ISO date string
+  photoUrl?: string;
+  photoName?: string;
+}
+
+/**
+ * Video chapter marker for VideoChapters component
+ */
+export interface Chapter {
+  id: string;
+  title: string;
+  time: number; // Seconds from start
+  icon?: string; // Emoji icon
+}
+
+/**
+ * Gallery search/filter criteria from GallerySearch component
+ */
+export interface GalleryFilter {
+  searchTerm: string;
+  selectedDate?: string; // ISO date string or empty
+  selectedCategory: 'all' | 'photos' | 'videos';
+  sortBy: 'date' | 'name';
+}
+
+/**
+ * Firebase Timestamp type (from Firestore)
+ */
+export interface FirebaseTimestamp {
+  toDate(): Date;
+  toMillis(): number;
+  seconds: number;
+  nanoseconds: number;
+}
+
+/**
+ * Social share platform for SocialShare component
+ */
+export type SharePlatform = 'facebook' | 'twitter' | 'whatsapp' | 'linkedin' | 'email' | 'copy';
+
+/**
+ * Web Vitals metric for performance monitoring
+ */
+export interface WebVital {
+  id: string;
+  name: 'FCP' | 'LCP' | 'CLS' | 'FID' | 'TTFB' | 'INP';
+  value: number;
+  rating: 'good' | 'needs-improvement' | 'poor';
+  delta: number;
+  navigationType: 'navigate' | 'reload' | 'back-forward' | 'back-forward-cache';
 }

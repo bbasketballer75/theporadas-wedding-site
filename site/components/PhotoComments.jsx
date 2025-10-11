@@ -4,7 +4,14 @@
  */
 
 import { useState, useEffect } from 'react';
-import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
 export default function PhotoComments({ photoId }) {
@@ -41,7 +48,7 @@ export default function PhotoComments({ photoId }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!newComment.trim() || !userName.trim()) {
       setError('Please enter your name and comment');
       return;
@@ -70,29 +77,27 @@ export default function PhotoComments({ photoId }) {
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) return 'Just now';
-    
+
     const date = timestamp.toDate();
     const now = new Date();
     const diffMs = now - date;
     const diffMins = Math.floor(diffMs / 60000);
-    
+
     if (diffMins < 1) return 'Just now';
     if (diffMins < 60) return `${diffMins}m ago`;
-    
+
     const diffHours = Math.floor(diffMins / 60);
     if (diffHours < 24) return `${diffHours}h ago`;
-    
+
     const diffDays = Math.floor(diffHours / 24);
     if (diffDays < 7) return `${diffDays}d ago`;
-    
+
     return date.toLocaleDateString();
   };
 
   return (
     <div className="photo-comments">
-      <h3 className="comments-title">
-        Comments ({comments.length})
-      </h3>
+      <h3 className="comments-title">Comments ({comments.length})</h3>
 
       <form onSubmit={handleSubmit} className="comment-form">
         <input
@@ -112,32 +117,22 @@ export default function PhotoComments({ photoId }) {
           required
         />
         {error && <div className="error-message">{error}</div>}
-        <button 
-          type="submit" 
-          disabled={isSubmitting}
-          className="submit-button"
-        >
+        <button type="submit" disabled={isSubmitting} className="submit-button">
           {isSubmitting ? 'Posting...' : 'Post Comment'}
         </button>
       </form>
 
       <div className="comments-list">
         {comments.length === 0 ? (
-          <div className="no-comments">
-            Be the first to comment on this photo!
-          </div>
+          <div className="no-comments">Be the first to comment on this photo!</div>
         ) : (
           comments.map((comment) => (
             <div key={comment.id} className="comment">
               <div className="comment-header">
-                <div className="user-avatar">
-                  {comment.userName.charAt(0).toUpperCase()}
-                </div>
+                <div className="user-avatar">{comment.userName.charAt(0).toUpperCase()}</div>
                 <div className="comment-meta">
                   <div className="user-name">{comment.userName}</div>
-                  <div className="comment-time">
-                    {formatTimestamp(comment.createdAt)}
-                  </div>
+                  <div className="comment-time">{formatTimestamp(comment.createdAt)}</div>
                 </div>
               </div>
               <div className="comment-text">{comment.text}</div>

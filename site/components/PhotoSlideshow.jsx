@@ -79,7 +79,12 @@ export default function PhotoSlideshow({ photos = [], startIndex = 0, onClose })
       <div className="slideshow-controls">
         <button onClick={prevPhoto} className="control-button" aria-label="Previous photo">
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </button>
 
@@ -99,7 +104,12 @@ export default function PhotoSlideshow({ photos = [], startIndex = 0, onClose })
             </svg>
           ) : (
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7-7 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7-7 7"
+              />
             </svg>
           )}
         </button>

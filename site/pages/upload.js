@@ -5,13 +5,45 @@ import Footer from '../components/Footer';
 import Navigation from '../components/Navigation';
 import PageTransition from '../components/PageTransition';
 import PhotoUpload from '../components/PhotoUpload';
+import UploadProgress from '../components/UploadProgress';
 
 export default function UploadPage() {
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [uploads, setUploads] = useState([]);
 
-  const handleUploadComplete = () => {
+  const handleUploadComplete = (uploadData) => {
     setUploadSuccess(true);
     setTimeout(() => setUploadSuccess(false), 5000);
+    
+    // Remove completed upload from progress list
+    setUploads(prev => prev.filter(u => u.file.name !== uploadData.name));
+  };
+
+  const handleUploadStart = (file) => {
+    // Add new upload to progress tracking
+    setUploads(prev => [...prev, {
+      file,
+      progress: 0,
+      status: 'uploading'
+    }]);
+  };
+
+  const handleUploadProgress = (fileName, progress) => {
+    setUploads(prev => prev.map(u => 
+      u.file.name === fileName 
+        ? { ...u, progress, status: progress === 100 ? 'complete' : 'uploading' }
+        : u
+    ));
+  };
+
+  const handleUploadError = (error) => {
+    console.error('Upload error:', error);
+    // Mark upload as error
+    setUploads(prev => prev.map(u => 
+      u.status === 'uploading' 
+        ? { ...u, status: 'error' }
+        : u
+    ));
   };
 
   return (
@@ -57,8 +89,16 @@ export default function UploadPage() {
 
           {/* Upload Component */}
           <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-fade-in">
-            <PhotoUpload onUploadComplete={handleUploadComplete} />
+            <PhotoUpload 
+              onUploadComplete={handleUploadComplete}
+              onUploadError={handleUploadError}
+            />
           </div>
+
+          {/* Upload Progress Toast */}
+          {uploads.length > 0 && (
+            <UploadProgress uploads={uploads} />
+          )}
 
           {/* Instructions */}
           <div className="mt-12 grid md:grid-cols-3 gap-6">

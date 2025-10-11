@@ -98,11 +98,7 @@ export default function SocialShare({ url, title, description, imageUrl }) {
           </button>
         )}
 
-        <button
-          onClick={copyToClipboard}
-          className="share-button copy"
-          aria-label="Copy link"
-        >
+        <button onClick={copyToClipboard} className="share-button copy" aria-label="Copy link">
           {copied ? (
             <>
               <svg viewBox="0 0 24 24" fill="currentColor">

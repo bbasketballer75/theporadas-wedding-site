@@ -1,15 +1,11 @@
-# robots.txt for The Poradas Wedding Site
-# Allow all search engines to index the site
-
+# *
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api
 
-# Sitemap location
-Sitemap: https://theporadas.com/sitemap.xml
+# Host
+Host: https://wedding-website-15zx5z06n-austins-projects-bb7c50ab.vercel.app
 
-# Crawl delay (be nice to server)
-Crawl-delay: 1
-
-# Disallow admin/API routes (if any)
-Disallow: /api/
-Disallow: /admin/
+# Sitemaps
+Sitemap: https://wedding-website-15zx5z06n-austins-projects-bb7c50ab.vercel.app/sitemap.xml

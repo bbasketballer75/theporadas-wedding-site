@@ -1,66 +1,28 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import Image from 'next/image';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { logGalleryDownload } from '../lib/analytics';
 import { downloadAllPhotos, estimateZipSize } from '../lib/downloadPhotos';
-import { db } from '../lib/firebase';
 
 /**
  * GalleryDisplay Component
- * Displays wedding photos and videos from Firestore
+ * Displays wedding photos and videos
  *
  * Features:
- * - Real-time updates (new uploads appear automatically)
  * - Infinite scroll (loads 20 items at a time)
  * - Photos: Display from Supabase URLs
  * - Videos: Display from YouTube embeds (after processing)
  * - Status indicators: Show processing/queued/failed states
  * - Responsive grid layout
  * - Download all photos as ZIP
+ * - Click handler for lightbox/slideshow
  */
-export default function GalleryDisplay() {
-  const [media, setMedia] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export default function GalleryDisplay({ media = [], onMediaClick }) {
   const [itemsToShow, setItemsToShow] = useState(20);
   const [hasMore, setHasMore] = useState(true);
   const [downloading, setDownloading] = useState(false);
   const [downloadProgress, setDownloadProgress] = useState(0);
   const loadMoreRef = useRef(null);
-
-  useEffect(() => {
-    // Query Firestore for wedding photos/videos, sorted by newest first
-    // Note: We query ALL items but only display first N (controlled by itemsToShow state)
-    const q = query(collection(db, 'wedding-photos'), orderBy('timestamp', 'desc'));
-
-    // Real-time listener
-    const unsubscribe = onSnapshot(
-      q,
-      (snapshot) => {
-        const items = [];
-        snapshot.forEach((doc) => {
-          items.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-        });
-
-        setMedia(items);
-        setLoading(false);
-      },
-      (err) => {
-        console.error('[GalleryDisplay] Error fetching media:', err);
-        setError(err.message);
-        setLoading(false);
-      }
-    );
-
-    // Cleanup listener on unmount
-    return () => {
-      unsubscribe();
-    };
-  }, []);
 
   useEffect(() => {
     setHasMore(media.length > itemsToShow);
@@ -119,24 +81,6 @@ export default function GalleryDisplay() {
   };
 
   const zipInfo = useMemo(() => estimateZipSize(media), [media]);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center p-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sage-600"></div>
-        <p className="ml-4 text-gray-600">Loading gallery...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6 m-4">
-        <h3 className="text-red-800 font-semibold mb-2">Error Loading Gallery</h3>
-        <p className="text-red-600">{error}</p>
-      </div>
-    );
-  }
 
   if (media.length === 0) {
     return (
@@ -206,7 +150,7 @@ export default function GalleryDisplay() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {media.slice(0, itemsToShow).map((item) => (
-          <MediaItem key={item.id} item={item} />
+          <MediaItem key={item.id} item={item} onClick={() => onMediaClick?.(item)} />
         ))}
       </div>
 
@@ -232,12 +176,22 @@ export default function GalleryDisplay() {
  * MediaItem Component
  * Renders a single photo or video
  */
-function MediaItem({ item }) {
+function MediaItem({ item, onClick }) {
   const isVideo = item.type && item.type.startsWith('video/');
   const isImage = item.type && item.type.startsWith('image/');
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <div 
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyPress={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          onClick();
+        }
+      }}
+    >
       {/* Media Display */}
       {isImage && (
         <div className="aspect-square relative bg-gray-100">

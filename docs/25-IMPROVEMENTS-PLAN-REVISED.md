@@ -11,12 +11,14 @@
 ## 🎯 POST-WEDDING SITE FOCUS
 
 **What This Site IS:**
+
 - Photo/video sharing platform for wedding memories
 - Guest upload and memory sharing
 - Digital guestbook for post-wedding messages
 - Gallery for browsing all wedding content
 
 **What This Site IS NOT:**
+
 - Event planning or RSVP system (wedding already happened)
 - Pre-wedding countdown or invitation site
 - Event management platform

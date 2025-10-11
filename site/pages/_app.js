@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 
 import ErrorBoundary from '../components/ErrorBoundary';
+import StructuredData from '../components/StructuredData';
 import { initAnalytics } from '../lib/analytics';
 import { reportWebVitals as reportWebVitalsUtil } from '../lib/reportWebVitals';
 // Validate environment variables at startup
@@ -62,11 +63,13 @@ export default function App({ Component, pageProps }) {
         <title>Poradas Wedding</title>
         <meta name="description" content="Celebrate the Poradas family wedding!" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <StructuredData />
       </Head>
       <div className={`${playfair.variable} ${lora.variable}`}>
         <AnimatePresence mode="wait" initial={false}>
           <Component {...pageProps} key={routeKey} />
         </AnimatePresence>
+        <Analytics />
       </div>
     </ErrorBoundary>
   );

@@ -40,7 +40,9 @@ export default function ProgressiveImage({
         }
 
         .image {
-          transition: opacity 0.5s ease-in-out, filter 0.5s ease-in-out;
+          transition:
+            opacity 0.5s ease-in-out,
+            filter 0.5s ease-in-out;
           opacity: 0;
           filter: blur(10px);
         }
@@ -100,12 +102,7 @@ export function ProgressiveFirebaseImage({ src, alt, ...props }) {
   return (
     <div className="progressive-firebase-image">
       {isLoading && <div className="image-placeholder" />}
-      <img
-        src={imageSrc}
-        alt={alt}
-        className={`image ${!isLoading ? 'loaded' : ''}`}
-        {...props}
-      />
+      <img src={imageSrc} alt={alt} className={`image ${!isLoading ? 'loaded' : ''}`} {...props} />
 
       <style jsx>{`
         .progressive-firebase-image {
@@ -143,7 +140,9 @@ export function ProgressiveFirebaseImage({ src, alt, ...props }) {
           object-fit: cover;
           opacity: 0;
           filter: blur(10px);
-          transition: opacity 0.5s ease-in-out, filter 0.5s ease-in-out;
+          transition:
+            opacity 0.5s ease-in-out,
+            filter 0.5s ease-in-out;
         }
 
         .image.loaded {
@@ -184,7 +183,9 @@ export function ProgressiveGalleryGrid({ photos = [] }) {
           border-radius: 0.5rem;
           overflow: hidden;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
         }
 
         .gallery-item:hover {

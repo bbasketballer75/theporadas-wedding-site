@@ -20,38 +20,38 @@
 // });
 
 export const dynamicImportExamples = {
-  videoPlayer: {
-    component: 'VideoPlayer',
-    import: "const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), { ssr: false });",
-    reason: 'Heavy media player with controls',
-  },
-  imageGallery: {
-    component: 'ImageGallery',
-    import: "const ImageGallery = dynamic(() => import('@/components/ImageGallery'));",
-    reason: 'Large component with image processing',
-  },
-  photoUpload: {
-    component: 'PhotoUpload',
-    import: "const PhotoUpload = dynamic(() => import('@/components/PhotoUpload'), { ssr: false });",
-    reason: 'File upload requires browser APIs',
-  },
-  downloadAllPhotos: {
-    component: 'DownloadAllPhotos',
-    import:
-      "const DownloadAllPhotos = dynamic(() => import('@/components/DownloadAllPhotos'), { ssr: false });",
-    reason: 'JSZip library is large (70KB+)',
-  },
-  photoSlideshow: {
-    component: 'PhotoSlideshow',
-    import:
-      "const PhotoSlideshow = dynamic(() => import('@/components/PhotoSlideshow'), { ssr: false });",
-    reason: 'Fullscreen overlay not needed immediately',
-  },
-  videoChapters: {
-    component: 'VideoChapters',
-    import: "const VideoChapters = dynamic(() => import('@/components/VideoChapters'));",
-    reason: 'Interactive video controls can be lazy loaded',
-  },
+    videoPlayer: {
+        component: 'VideoPlayer',
+        import: "const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), { ssr: false });",
+        reason: 'Heavy media player with controls',
+    },
+    imageGallery: {
+        component: 'ImageGallery',
+        import: "const ImageGallery = dynamic(() => import('@/components/ImageGallery'));",
+        reason: 'Large component with image processing',
+    },
+    photoUpload: {
+        component: 'PhotoUpload',
+        import: "const PhotoUpload = dynamic(() => import('@/components/PhotoUpload'), { ssr: false });",
+        reason: 'File upload requires browser APIs',
+    },
+    downloadAllPhotos: {
+        component: 'DownloadAllPhotos',
+        import:
+            "const DownloadAllPhotos = dynamic(() => import('@/components/DownloadAllPhotos'), { ssr: false });",
+        reason: 'JSZip library is large (70KB+)',
+    },
+    photoSlideshow: {
+        component: 'PhotoSlideshow',
+        import:
+            "const PhotoSlideshow = dynamic(() => import('@/components/PhotoSlideshow'), { ssr: false });",
+        reason: 'Fullscreen overlay not needed immediately',
+    },
+    videoChapters: {
+        component: 'VideoChapters',
+        import: "const VideoChapters = dynamic(() => import('@/components/VideoChapters'));",
+        reason: 'Interactive video controls can be lazy loaded',
+    },
 };
 
 // Loading skeleton styles

@@ -7,6 +7,7 @@ This guide shows how to integrate all 25 improvement components into your weddin
 ## Quick Integration Checklist
 
 ### Phase 1: Quick Wins ✅ COMPLETE
+
 - [x] #23 Vercel Analytics - Already integrated in `_app.js`
 - [x] #8 Bundle Analyzer - Run `npm run build:analyze`
 - [x] #25 Sitemap - Auto-generates on build via `postbuild` script
@@ -14,9 +15,11 @@ This guide shows how to integrate all 25 improvement components into your weddin
 - [x] #11 React Compiler - Enabled in `next.config.js`
 
 ### Phase 2: Media Features ✅ COMPLETE
+
 All components created, ready for page integration:
 
 #### 1. Download All Photos
+
 ```jsx
 import DownloadAllPhotos from '@/components/DownloadAllPhotos';
 
@@ -24,6 +27,7 @@ import DownloadAllPhotos from '@/components/DownloadAllPhotos';
 ```
 
 #### 2. Gallery Search/Filter
+
 ```jsx
 import GallerySearch from '@/components/GallerySearch';
 
@@ -36,6 +40,7 @@ const [filteredPhotos, setFilteredPhotos] = useState(allPhotos);
 ```
 
 #### 3. Photo Slideshow
+
 ```jsx
 import PhotoSlideshow from '@/components/PhotoSlideshow';
 
@@ -52,6 +57,7 @@ const [startIndex, setStartIndex] = useState(0);
 ```
 
 #### 4. Video Chapters
+
 ```jsx
 import VideoChapters from '@/components/VideoChapters';
 
@@ -68,6 +74,7 @@ const chapters = [
 ### Phase 3: Performance ✅ COMPLETE
 
 #### 5. Dynamic Imports
+
 ```jsx
 // In pages/gallery.js
 import dynamic from 'next/dynamic';
@@ -82,6 +89,7 @@ const DownloadAllPhotos = dynamic(() => import('@/components/DownloadAllPhotos')
 ```
 
 #### 6. Progressive Image Loading
+
 ```jsx
 import { ProgressiveFirebaseImage } from '@/components/ProgressiveImage';
 
@@ -94,6 +102,7 @@ import { ProgressiveFirebaseImage } from '@/components/ProgressiveImage';
 ### Phase 4: Engagement ✅ COMPLETE
 
 #### 7. Social Sharing
+
 ```jsx
 import SocialShare from '@/components/SocialShare';
 
@@ -106,6 +115,7 @@ import SocialShare from '@/components/SocialShare';
 ```
 
 #### 8. Photo Comments
+
 ```jsx
 import PhotoComments from '@/components/PhotoComments';
 
@@ -113,6 +123,7 @@ import PhotoComments from '@/components/PhotoComments';
 ```
 
 #### 9. Favorite Photos
+
 ```jsx
 import FavoritePhotos, { FavoriteButton } from '@/components/FavoritePhotos';
 
@@ -124,6 +135,7 @@ import FavoritePhotos, { FavoriteButton } from '@/components/FavoritePhotos';
 ```
 
 #### 10. Upload Progress
+
 ```jsx
 import UploadProgress, { useUploadProgress } from '@/components/UploadProgress';
 
@@ -150,6 +162,7 @@ uploadTask.on('state_changed',
 ### Phase 5: Quality (Remaining)
 
 #### 11. Video Embedding ✅ COMPLETE
+
 ```jsx
 import VideoEmbed, { VideoGallery } from '@/components/VideoEmbed';
 
@@ -169,6 +182,7 @@ import VideoEmbed, { VideoGallery } from '@/components/VideoEmbed';
 ## Page Integration Examples
 
 ### Gallery Page (`pages/gallery.js`)
+
 ```jsx
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
@@ -235,6 +249,7 @@ export default function GalleryPage({ photos }) {
 ```
 
 ### Video Page (`pages/video.js`)
+
 ```jsx
 import VideoChapters from '@/components/VideoChapters';
 import VideoEmbed, { VideoGallery } from '@/components/VideoEmbed';
@@ -275,6 +290,7 @@ export default function VideoPage() {
 ```
 
 ### Upload Page (`pages/upload.js`)
+
 ```jsx
 import { useState } from 'react';
 import UploadProgress, { useUploadProgress } from '@/components/UploadProgress';
@@ -321,13 +337,17 @@ export default function UploadPage() {
 ## Next Steps (Remaining Improvements)
 
 ### 1. Font Loading Optimization (#12)
+
 Already using `next/font` in `_app.js`. Further optimization:
+
 - Add `preload` to critical fonts
 - Subset fonts to only needed characters
 - Add font-display: swap (already set)
 
 ### 2. CDN Optimization (#13)
+
 Configure in `next.config.js`:
+
 ```js
 images: {
   deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -343,7 +363,9 @@ images: {
 ```
 
 ### 3. Photo Metadata (#7)
+
 Add EXIF data extraction using `exif-js` or `exifr`:
+
 ```js
 import exifr from 'exifr';
 
@@ -352,7 +374,9 @@ const metadata = await exifr.parse(file);
 ```
 
 ### 4. Guest Photo Wall (#18)
+
 Use Masonry layout with `react-masonry-css`:
+
 ```jsx
 import Masonry from 'react-masonry-css';
 
@@ -366,19 +390,24 @@ import Masonry from 'react-masonry-css';
 ```
 
 ### 5. Husky Pre-commit (#20)
+
 ```bash
 npm install --save-dev husky lint-staged
 npx husky init
 ```
 
 ### 6. TypeScript Interfaces (#21)
+
 Add to existing components or create `types/index.ts`
 
 ### 7. VS Code Snippets (#22)
+
 Create `.vscode/snippets.code-snippets`
 
 ### 8. Structured Data (#24)
+
 Add to `_app.js` or page-level:
+
 ```jsx
 <script type="application/ld+json">
 {JSON.stringify({
@@ -414,6 +443,7 @@ curl https://theporadas.com/sitemap.xml
 ## Firestore Rules for Comments
 
 Add to `firestore.rules`:
+
 ```
 match /photos/{photoId}/comments/{commentId} {
   allow read: if true;
@@ -425,6 +455,7 @@ match /photos/{photoId}/comments/{commentId} {
 ## Environment Variables Reminder
 
 All 7 Firebase variables already configured in Vercel:
+
 - `NEXT_PUBLIC_FIREBASE_API_KEY`
 - `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
 - `NEXT_PUBLIC_FIREBASE_PROJECT_ID`

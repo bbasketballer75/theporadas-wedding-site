@@ -30,15 +30,13 @@ export default function FavoritePhotos({ photos = [] }) {
 
   const toggleFavorite = (photoId) => {
     setFavorites((prev) =>
-      prev.includes(photoId)
-        ? prev.filter((id) => id !== photoId)
-        : [...prev, photoId]
+      prev.includes(photoId) ? prev.filter((id) => id !== photoId) : [...prev, photoId]
     );
   };
 
   const exportFavorites = () => {
     const favoritePhotos = photos.filter((photo) => favorites.includes(photo.id));
-    
+
     if (favoritePhotos.length === 0) {
       alert('No favorite photos to export');
       return;
@@ -46,7 +44,10 @@ export default function FavoritePhotos({ photos = [] }) {
 
     // Create text file with photo URLs
     const text = favoritePhotos
-      .map((photo, index) => `${index + 1}. ${photo.name || 'Untitled'}\n${photo.url || photo.originalPath}`)
+      .map(
+        (photo, index) =>
+          `${index + 1}. ${photo.name || 'Untitled'}\n${photo.url || photo.originalPath}`
+      )
       .join('\n\n');
 
     const blob = new Blob([text], { type: 'text/plain' });
@@ -103,9 +104,15 @@ export default function FavoritePhotos({ photos = [] }) {
             <button
               onClick={() => toggleFavorite(photo.id)}
               className={`favorite-button ${favorites.includes(photo.id) ? 'favorited' : ''}`}
-              aria-label={favorites.includes(photo.id) ? 'Remove from favorites' : 'Add to favorites'}
+              aria-label={
+                favorites.includes(photo.id) ? 'Remove from favorites' : 'Add to favorites'
+              }
             >
-              <svg viewBox="0 0 24 24" fill={favorites.includes(photo.id) ? 'currentColor' : 'none'} stroke="currentColor">
+              <svg
+                viewBox="0 0 24 24"
+                fill={favorites.includes(photo.id) ? 'currentColor' : 'none'}
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -313,7 +320,7 @@ export function FavoriteButton({ photoId, className = '' }) {
   const toggleFavorite = () => {
     const saved = localStorage.getItem(FAVORITES_KEY);
     let favorites = [];
-    
+
     if (saved) {
       try {
         favorites = JSON.parse(saved);

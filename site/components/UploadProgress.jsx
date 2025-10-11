@@ -124,9 +124,7 @@ function UploadItem({ upload }) {
         </div>
       )}
 
-      {status === 'error' && upload.error && (
-        <div className="error-message">{upload.error}</div>
-      )}
+      {status === 'error' && upload.error && <div className="error-message">{upload.error}</div>}
 
       <style jsx>{`
         .upload-item {
@@ -293,7 +291,9 @@ export function useUploadProgress() {
   };
 
   const setSuccess = (id) => {
-    setUploads((prev) => prev.map((upload) => (upload.id === id ? { ...upload, status: 'success' } : upload)));
+    setUploads((prev) =>
+      prev.map((upload) => (upload.id === id ? { ...upload, status: 'success' } : upload))
+    );
 
     // Auto-remove after 3 seconds
     setTimeout(() => {

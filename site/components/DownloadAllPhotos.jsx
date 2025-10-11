@@ -29,13 +29,13 @@ export default function DownloadAllPhotos({ photos = [] }) {
         const photo = photos[i];
         const response = await fetch(photo.url || photo.originalPath);
         const blob = await response.blob();
-        
+
         // Generate filename
         const extension = blob.type.split('/')[1] || 'jpg';
         const filename = photo.name || `photo-${i + 1}.${extension}`;
-        
+
         folder.file(filename, blob);
-        
+
         // Update progress
         setProgress(Math.round(((i + 1) / photos.length) * 100));
       }
