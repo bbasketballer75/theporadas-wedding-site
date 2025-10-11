@@ -18,6 +18,7 @@
 - **Deployment ID:** 6MqMRhfe87FrSeE5g8kcW5R4MBsj
 
 ### Inspect Deployment
+
 <https://vercel.com/austins-projects-bb7c50ab/wedding-website/6MqMRhfe87FrSeE5g8kcW5R4MBsj>
 
 ---
@@ -129,7 +130,7 @@ Open browser console (F12) and check:
 
 ## 📊 Deployment Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────┐
 │         Vercel Edge Network (FREE)          │
 │  • Global CDN                               │
@@ -290,7 +291,8 @@ Your wedding website is now:
 
 ---
 
-**🎉 YOUR WEDDING WEBSITE IS READY FOR GUESTS! 🎉**
+## 🎉 YOUR WEDDING WEBSITE IS READY FOR GUESTS
 
 Share your production URL:
-**<https://wedding-website-15zx5z06n-austins-projects-bb7c50ab.vercel.app>**
+
+<https://wedding-website-15zx5z06n-austins-projects-bb7c50ab.vercel.app>
