@@ -3,10 +3,13 @@ import { Lora, Playfair_Display } from 'next/font/google';
 import Head from 'next/head';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 import ErrorBoundary from '../components/ErrorBoundary';
 import { initAnalytics } from '../lib/analytics';
 import { reportWebVitals as reportWebVitalsUtil } from '../lib/reportWebVitals';
+// Validate environment variables at startup
+import '../lib/env';
 
 import '../styles/globals.css';
 

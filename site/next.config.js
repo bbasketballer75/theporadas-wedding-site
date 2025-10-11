@@ -27,6 +27,11 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 const nextConfig = {
   reactStrictMode: true,
 
+  // Enable React Compiler (Next.js 15 experimental feature)
+  experimental: {
+    reactCompiler: true,
+  },
+
   // Security headers for production
   async headers() {
     return [
