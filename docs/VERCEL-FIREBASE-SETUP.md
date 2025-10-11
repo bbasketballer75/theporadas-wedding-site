@@ -91,14 +91,14 @@ const firebaseConfig = {
 
 After adding all variables:
 
-**Option A: Redeploy from Vercel Dashboard**
+#### Option A: Redeploy from Vercel Dashboard
 
 1. Go to **Deployments** tab
 2. Find the latest deployment
 3. Click **"..."** menu → **"Redeploy"**
 4. Confirm redeploy
 
-**Option B: Git Push (Automatic)**
+#### Option B: Git Push (Automatic)
 
 ```bash
 git commit --allow-empty -m "chore: trigger redeploy with new env vars"
