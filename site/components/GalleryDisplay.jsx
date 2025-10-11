@@ -181,8 +181,8 @@ function MediaItem({ item, onClick }) {
   const isImage = item.type && item.type.startsWith('image/');
 
   return (
-    <div 
-      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+    <div
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
       onClick={onClick}
       role="button"
       tabIndex={0}

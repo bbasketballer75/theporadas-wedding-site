@@ -14,16 +14,14 @@
       "      $0",
       "    </div>",
       "  );",
-      "}"
+      "}",
     ],
-    "description": "React functional component with props"
+    "description": "React functional component with props",
   },
   "useState Hook": {
     "prefix": "ust",
-    "body": [
-      "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initialValue});"
-    ],
-    "description": "useState hook with camelCase setter"
+    "body": ["const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initialValue});"],
+    "description": "useState hook with camelCase setter",
   },
   "useEffect Hook": {
     "prefix": "uef",
@@ -34,9 +32,9 @@
       "  return () => {",
       "    ${2:// Cleanup}",
       "  };",
-      "}, [${3:dependencies}]);"
+      "}, [${3:dependencies}]);",
     ],
-    "description": "useEffect hook with cleanup"
+    "description": "useEffect hook with cleanup",
   },
   "Firestore Query": {
     "prefix": "fsquery",
@@ -65,9 +63,9 @@
       "  }",
       ");",
       "",
-      "return () => unsubscribe();"
+      "return () => unsubscribe();",
     ],
-    "description": "Firestore real-time query with onSnapshot"
+    "description": "Firestore real-time query with onSnapshot",
   },
   "Firestore Add Document": {
     "prefix": "fsadd",
@@ -77,9 +75,9 @@
       "  timestamp: serverTimestamp(),",
       "});",
       "",
-      "console.log('Document created:', docRef.id);"
+      "console.log('Document created:', docRef.id);",
     ],
-    "description": "Add document to Firestore collection"
+    "description": "Add document to Firestore collection",
   },
   "Next.js Image": {
     "prefix": "nimg",
@@ -93,25 +91,23 @@
       "  sizes=\"${6:(max-width: 768px) 100vw, 50vw}\"",
       "  quality={${7:85}}",
       "  loading=\"${8|lazy,eager|}\"",
-      "/>"
+      "/>",
     ],
-    "description": "Next.js optimized Image component"
+    "description": "Next.js optimized Image component",
   },
   "Next.js Link": {
     "prefix": "nlink",
     "body": [
       "<Link href=\"${1:/path}\" className=\"${2:className}\">",
       "  ${3:Link text}",
-      "</Link>"
+      "</Link>",
     ],
-    "description": "Next.js Link component"
+    "description": "Next.js Link component",
   },
   "Console Log": {
     "prefix": "clg",
-    "body": [
-      "console.log('[${1:Component}] ${2:message}:', ${3:variable});"
-    ],
-    "description": "Console log with context"
+    "body": ["console.log('[${1:Component}] ${2:message}:', ${3:variable});"],
+    "description": "Console log with context",
   },
   "Try-Catch Block": {
     "prefix": "tryc",
@@ -121,9 +117,9 @@
       "} catch (error) {",
       "  console.error('[${2:Context}] Error:', error);",
       "  ${3:// Error handling}",
-      "}"
+      "}",
     ],
-    "description": "Try-catch block with logging"
+    "description": "Try-catch block with logging",
   },
   "Async Function": {
     "prefix": "afn",
@@ -135,9 +131,9 @@
       "    console.error('[${1}] Error:', error);",
       "    throw error;",
       "  }",
-      "};"
+      "};",
     ],
-    "description": "Async arrow function with error handling"
+    "description": "Async arrow function with error handling",
   },
   "JSDoc Type Comment": {
     "prefix": "jsd",
@@ -145,18 +141,18 @@
       "/**",
       " * @typedef {Object} ${1:TypeName}",
       " * @property {${2:string}} ${3:propertyName} - ${4:Description}",
-      " */"
+      " */",
     ],
-    "description": "JSDoc type definition"
+    "description": "JSDoc type definition",
   },
   "Tailwind Container": {
     "prefix": "twc",
     "body": [
       "<div className=\"container mx-auto px-4 py-${1:8} max-w-${2|7xl,6xl,5xl,4xl,3xl,2xl,xl,lg|}\">",
       "  $0",
-      "</div>"
+      "</div>",
     ],
-    "description": "Tailwind responsive container"
+    "description": "Tailwind responsive container",
   },
   "Loading Spinner": {
     "prefix": "spin",
@@ -164,9 +160,9 @@
       "<div className=\"flex items-center justify-center p-${1:8}\">",
       "  <div className=\"animate-spin rounded-full h-${2:12} w-${2:12} border-b-2 border-${3:sage}\"></div>",
       "  <p className=\"ml-4 text-gray-600\">${4:Loading...}</p>",
-      "</div>"
+      "</div>",
     ],
-    "description": "Loading spinner component"
+    "description": "Loading spinner component",
   },
   "Error Message": {
     "prefix": "errmsg",
@@ -174,8 +170,8 @@
       "<div className=\"bg-red-50 border border-red-200 rounded-lg p-${1:6}\">",
       "  <h3 className=\"text-red-800 font-semibold mb-2\">${2:Error Title}</h3>",
       "  <p className=\"text-red-600\">{${3:error.message}}</p>",
-      "</div>"
+      "</div>",
     ],
-    "description": "Error message display"
-  }
+    "description": "Error message display",
+  },
 }

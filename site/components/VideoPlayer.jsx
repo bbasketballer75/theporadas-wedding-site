@@ -12,7 +12,12 @@ import VideoChapters from './VideoChapters';
  * @param {string} className - Additional CSS classes
  * @param {boolean} showChapters - Whether to show chapter navigation (default: true)
  */
-export default function VideoPlayer({ videoId, title = 'Wedding Video', className = '', showChapters = true }) {
+export default function VideoPlayer({
+  videoId,
+  title = 'Wedding Video',
+  className = '',
+  showChapters = true,
+}) {
   const videoRef = useRef(null);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -51,11 +56,7 @@ export default function VideoPlayer({ videoId, title = 'Wedding Video', classNam
       </div>
 
       {showChapters && (
-        <VideoChapters 
-          videoRef={videoRef} 
-          currentTime={currentTime}
-          onSeek={handleSeek}
-        />
+        <VideoChapters videoRef={videoRef} currentTime={currentTime} onSeek={handleSeek} />
       )}
     </div>
   );

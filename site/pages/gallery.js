@@ -25,7 +25,7 @@ export default function Gallery() {
   const [filteredMedia, setFilteredMedia] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   // UI state
   const [filter, setFilter] = useState('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -102,194 +102,174 @@ export default function Gallery() {
         <meta name="description" content="View all the beautiful moments from our special day" />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-cream via-mint to-blush/20">
+      <div className="min-h-screen bg-white">
         <Navigation />
 
-        <main className="container mx-auto px-4 py-12 max-w-7xl">
-          {/* Header */}
-          <div className="text-center mb-12 animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-display text-sage mb-4">Wedding Gallery</h1>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
-              Relive the magic of our special day through these beautiful photos and videos shared
-              by our guests.
-            </p>
+        <main className="container mx-auto px-4 py-8 max-w-7xl">
+          {/* Compact Header */}
+          <div className="text-center mb-6">
+            <h1 className="text-4xl font-display text-sage mb-2">Our Wedding Gallery</h1>
+            <p className="text-gray-600">May 10, 2025 • Beautiful moments from our special day</p>
           </div>
 
-          {/* Wedding Video Section */}
-          <div className="mb-16 animate-fade-in">
-            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-              <div className="flex items-center justify-center mb-6">
-                <h2 className="text-4xl font-display text-sage text-center">🎬 Our Wedding Film</h2>
-              </div>
-              <p className="text-center text-gray-600 mb-6 max-w-2xl mx-auto">
-                Watch the highlight reel of our unforgettable day
-              </p>
-              <VideoPlayer videoId="dQw4w9WgXcQ" title="Austin & Jordyn Wedding Film" />
+          {/* Compact Controls Bar */}
+          <div className="mb-6 flex flex-col md:flex-row items-center justify-between gap-4 bg-gray-50 rounded-xl p-4">
+            {/* Search and Filters */}
+            <div className="flex-1 w-full md:w-auto">
+              <GallerySearch photos={allMedia} onFilteredPhotos={handleFilteredPhotos} />
             </div>
-          </div>
 
-          {/* Gallery Search & Download Section */}
-          <div className="mb-8 space-y-6">
-            <GallerySearch photos={allMedia} onFilteredPhotos={handleFilteredPhotos} />
-            
-            {photos.length > 0 && (
-              <div className="flex justify-center gap-4">
-                <DownloadAllPhotos 
-                  photos={photos.map(p => ({ url: p.url, originalPath: p.url, name: p.name }))} 
+            {/* Action Buttons */}
+            <div className="flex gap-3 flex-shrink-0">
+              <button
+                onClick={() => openSlideshow(0)}
+                className="px-4 py-2 bg-sage text-white rounded-lg hover:bg-sage/90 transition-colors text-sm font-medium flex items-center gap-2"
+                disabled={photos.length === 0}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                </svg>
+                Slideshow
+              </button>
+              {photos.length > 0 && (
+                <DownloadAllPhotos
+                  photos={photos.map(p => ({ url: p.url, originalPath: p.url, name: p.name }))}
                 />
-                <button
-                  onClick={() => openSlideshow(0)}
-                  className="px-6 py-3 bg-gradient-to-r from-blush to-blush/90 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  Start Slideshow
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Filter Tabs */}
-          <div className="flex justify-center mb-8 animate-fade-in">
-            <div className="bg-white rounded-2xl shadow-xl p-2 inline-flex flex-wrap gap-2">
-              {filters.map((f) => (
-                <button
-                  key={f.id}
-                  onClick={() => setFilter(f.id)}
-                  className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                    filter === f.id
-                      ? 'bg-gradient-sage-blush text-white shadow-lg'
-                      : 'text-gray-600 hover:text-sage hover:bg-gray-50'
-                  }`}
-                >
-                  <span className="mr-2">{f.icon}</span>
-                  {f.label}
-                </button>
-              ))}
+              )}
             </div>
           </div>
 
-          {/* Gallery Component */}
+          {/* Gallery Component - HERO */}
           {loading ? (
-            <div className="flex items-center justify-center p-12">
+            <div className="flex items-center justify-center p-20">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sage"></div>
-              <p className="ml-4 text-gray-600">Loading gallery...</p>
+              <p className="ml-4 text-gray-600">Loading your memories...</p>
             </div>
           ) : error ? (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-              <h3 className="text-red-800 font-semibold mb-2">Error Loading Gallery</h3>
-              <p className="text-red-600">{error}</p>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-2xl mx-auto">
+              <h3 className="text-red-800 font-semibold mb-2">Unable to load gallery</h3>
+              <p className="text-red-600 text-sm">{error}</p>
+            </div>
+          ) : filteredMedia.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-gray-500 text-lg">No photos match your search.</p>
             </div>
           ) : (
-            <div className="animate-fade-in" style={{ animationDelay: '200ms' }}>
-              <GalleryDisplay 
-                media={filteredMedia} 
-                onMediaClick={handleMediaClick} 
-              />
-            </div>
+            <GalleryDisplay
+              media={filteredMedia}
+              onMediaClick={handleMediaClick}
+            />
           )}
 
-          {/* Upload CTA */}
-          <div className="mt-16 bg-gradient-sage-blush rounded-3xl p-12 text-center shadow-2xl animate-fade-in">
-            <h2 className="text-3xl font-display text-white mb-4">
-              Have photos or videos to share?
-            </h2>
-            <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-              Help us build our wedding album by uploading your favorite moments from our special
-              day!
+          {/* Optional: Wedding Video (Collapsed) */}
+          <details className="mt-12 bg-gray-50 rounded-xl p-6">
+            <summary className="text-xl font-display text-sage cursor-pointer hover:text-sage/80 transition-colors flex items-center gap-2">
+              🎬 Watch Our Wedding Film
+              <span className="text-sm text-gray-500 font-normal">(Click to expand)</span>
+            </summary>
+            <div className="mt-6">
+              <VideoPlayer videoId="dQw4w9WgXcQ" title="Austin & Jordyn Wedding Film" showChapters={false} />
+            </div>
+          </details>
+
+          {/* Compact Upload CTA */}
+          <div className="mt-12 bg-sage/5 border border-sage/20 rounded-xl p-8 text-center">
+            <h2 className="text-2xl font-display text-sage mb-3">Share Your Photos</h2>
+            <p className="text-gray-600 mb-6 max-w-xl mx-auto">
+              Have photos from our wedding? We&apos;d love to see them!
             </p>
             <Link
               href="/upload"
-              className="inline-block bg-white text-sage px-8 py-4 rounded-full font-semibold text-lg hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="inline-block bg-sage text-white px-6 py-3 rounded-lg font-medium hover:bg-sage/90 transition-colors"
             >
-              📤 Upload Your Photos
+              Upload Photos
             </Link>
           </div>
         </main>
 
-        {/* Lightbox Modal */}
+        {/* Lightbox Modal - Simplified */}
         {lightboxOpen && selectedMedia && (
           <div
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4 animate-fade-in"
+            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center animate-fade-in"
             onClick={closeLightbox}
           >
+            {/* Close Button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors z-10"
-              aria-label="Close lightbox"
+              className="absolute top-4 right-4 text-white/80 hover:text-white text-3xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-all z-50"
+              aria-label="Close"
             >
-              &times;
+              ×
             </button>
 
-            <div className="max-w-6xl max-h-[90vh] w-full relative flex flex-col" onClick={(e) => e.stopPropagation()}>
-              {/* Media Display */}
-              {selectedMedia.contentType?.startsWith('video') ? (
-                <video
-                  src={selectedMedia.originalPath}
-                  controls
-                  autoPlay
-                  className="max-w-full max-h-[60vh] rounded-lg mb-4"
-                />
-              ) : (
-                <ProgressiveImage
-                  src={selectedMedia.originalPath || selectedMedia.url}
-                  alt={selectedMedia.name || 'Wedding photo'}
-                  className="max-h-[60vh] w-full rounded-lg object-contain mb-4"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCXABmA/9k="
-                />
-              )}
-
-              {/* Media Info Panel */}
-              <div className="bg-gradient-to-t from-black/90 to-black/60 p-6 rounded-b-lg max-h-[30vh] overflow-y-auto">
-                {/* Social Share */}
-                <div className="mb-4">
-                  <SocialShare 
-                    url={typeof window !== 'undefined' ? window.location.href : ''}
-                    title={`${selectedMedia.name} - Austin & Jordyn Wedding`}
-                    description="Check out this beautiful moment from our wedding!"
-                    imageUrl={selectedMedia.url || selectedMedia.originalPath}
-                  />
-                </div>
-
-                {/* Favorite Button */}
-                <div className="mb-4">
-                  <FavoritePhotos photoId={selectedMedia.id} />
-                </div>
-
-                {/* Metadata */}
-                <div className="text-white text-sm mb-4">
-                  {selectedMedia.uploadedBy && (
-                    <p className="mb-2">
-                      <span className="text-gray-400">Shared by:</span> {selectedMedia.uploadedBy}
-                    </p>
-                  )}
-                  {selectedMedia.createdAt && (
-                    <p className="mb-2">
-                      <span className="text-gray-400">Uploaded:</span>{' '}
-                      {selectedMedia.createdAt.toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
-                    </p>
+            <div className="w-full h-full flex items-center justify-center p-4" onClick={(e) => e.stopPropagation()}>
+              <div className="max-w-7xl w-full h-full flex flex-col md:flex-row gap-4">
+                {/* Main Photo/Video - Takes up most space */}
+                <div className="flex-1 flex items-center justify-center">
+                  {selectedMedia.contentType?.startsWith('video') ? (
+                    <video
+                      src={selectedMedia.originalPath}
+                      controls
+                      autoPlay
+                      className="max-w-full max-h-full rounded-lg"
+                    />
+                  ) : (
+                    <ProgressiveImage
+                      src={selectedMedia.originalPath || selectedMedia.url}
+                      alt={selectedMedia.name || 'Wedding photo'}
+                      className="max-w-full max-h-full object-contain rounded-lg"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCXABmA/9k="
+                    />
                   )}
                 </div>
 
-                {/* EXIF Metadata (for photos) */}
-                {selectedMedia.type && selectedMedia.type.startsWith('image/') && (
-                  <div className="mb-4">
-                    <PhotoMetadata imageUrl={selectedMedia.url || selectedMedia.originalPath} />
+                {/* Side Panel - Compact Info */}
+                <div className="md:w-80 bg-white rounded-lg p-4 overflow-y-auto max-h-[90vh]">
+                  {/* Quick Actions */}
+                  <div className="flex items-center justify-between mb-4 pb-4 border-b">
+                    <FavoritePhotos photoId={selectedMedia.id} />
+                    <SocialShare
+                      url={typeof window !== 'undefined' ? window.location.href : ''}
+                      title={selectedMedia.name}
+                      compact={true}
+                    />
                   </div>
-                )}
 
-                {/* Photo Comments */}
-                {selectedMedia.id && (
-                  <PhotoComments photoId={selectedMedia.id} />
-                )}
+                  {/* Basic Info */}
+                  <div className="mb-4 text-sm text-gray-600">
+                    {selectedMedia.uploadedBy && (
+                      <p className="mb-1">
+                        <strong>By:</strong> {selectedMedia.uploadedBy}
+                      </p>
+                    )}
+                    {selectedMedia.createdAt && (
+                      <p>
+                        <strong>Date:</strong>{' '}
+                        {new Date(selectedMedia.createdAt.seconds * 1000).toLocaleDateString()}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Collapsible Metadata */}
+                  {selectedMedia.type && selectedMedia.type.startsWith('image/') && (
+                    <details className="mb-4">
+                      <summary className="text-sm font-medium text-sage cursor-pointer hover:text-sage/80 mb-2">
+                        📷 Photo Details
+                      </summary>
+                      <div className="pl-2">
+                        <PhotoMetadata imageUrl={selectedMedia.url || selectedMedia.originalPath} />
+                      </div>
+                    </details>
+                  )}
+
+                  {/* Comments */}
+                  {selectedMedia.id && (
+                    <div className="border-t pt-4">
+                      <h3 className="text-sm font-medium text-gray-900 mb-3">💬 Comments</h3>
+                      <PhotoComments photoId={selectedMedia.id} />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ import { db } from '../lib/firebase';
 /**
  * GuestPhotoWall Component
  * Displays guest-uploaded photos in a masonry grid layout
- * 
+ *
  * Features:
  * - Responsive masonry layout (1-4 columns)
  * - Real-time updates from Firestore
@@ -76,13 +76,21 @@ export default function GuestPhotoWall() {
     return (
       <div className="text-center p-12 bg-white/50 backdrop-blur rounded-3xl">
         <div className="w-20 h-20 bg-mint/30 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-10 h-10 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          <svg
+            className="w-10 h-10 text-sage"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
           </svg>
         </div>
-        <p className="text-gray-600 text-lg">
-          No guest photos yet. Be the first to share! 📸
-        </p>
+        <p className="text-gray-600 text-lg">No guest photos yet. Be the first to share! 📸</p>
       </div>
     );
   }
@@ -95,12 +103,12 @@ export default function GuestPhotoWall() {
           margin-left: -1rem;
           width: auto;
         }
-        
+
         .guest-photo-wall :global(.masonry-grid-column) {
           padding-left: 1rem;
           background-clip: padding-box;
         }
-        
+
         .guest-photo-wall :global(.masonry-grid-column > div) {
           margin-bottom: 1rem;
         }
@@ -142,22 +150,25 @@ function PhotoCard({ photo }) {
             setImageHeight(result.naturalHeight);
           }}
         />
-        
+
         {/* Hover Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
           <div className="p-4 w-full">
             {photo.uploadedBy && (
               <p className="text-white font-semibold flex items-center gap-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
                 </svg>
                 {photo.uploadedBy}
               </p>
             )}
             {photo.timestamp && (
-              <p className="text-white/80 text-xs mt-1">
-                {formatTimestamp(photo.timestamp)}
-              </p>
+              <p className="text-white/80 text-xs mt-1">{formatTimestamp(photo.timestamp)}</p>
             )}
           </div>
         </div>

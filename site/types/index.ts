@@ -133,7 +133,7 @@ export interface Photo extends GalleryItem {
   timestamp: FirebaseTimestamp;
   uploadStatus?: 'pending' | 'processing' | 'completed' | 'queued' | 'failed';
   uploadError?: string;
-  
+
   // Video-specific fields
   youtubeId?: string | null;
   youtubeUrl?: string | null;

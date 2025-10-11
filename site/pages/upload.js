@@ -14,7 +14,7 @@ export default function UploadPage() {
   const handleUploadComplete = (uploadData) => {
     setUploadSuccess(true);
     setTimeout(() => setUploadSuccess(false), 5000);
-    
+
     // Remove completed upload from progress list
     setUploads(prev => prev.filter(u => u.file.name !== uploadData.name));
   };
@@ -29,8 +29,8 @@ export default function UploadPage() {
   };
 
   const handleUploadProgress = (fileName, progress) => {
-    setUploads(prev => prev.map(u => 
-      u.file.name === fileName 
+    setUploads(prev => prev.map(u =>
+      u.file.name === fileName
         ? { ...u, progress, status: progress === 100 ? 'complete' : 'uploading' }
         : u
     ));
@@ -39,8 +39,8 @@ export default function UploadPage() {
   const handleUploadError = (error) => {
     console.error('Upload error:', error);
     // Mark upload as error
-    setUploads(prev => prev.map(u => 
-      u.status === 'uploading' 
+    setUploads(prev => prev.map(u =>
+      u.status === 'uploading'
         ? { ...u, status: 'error' }
         : u
     ));
@@ -89,7 +89,7 @@ export default function UploadPage() {
 
           {/* Upload Component */}
           <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 animate-fade-in">
-            <PhotoUpload 
+            <PhotoUpload
               onUploadComplete={handleUploadComplete}
               onUploadError={handleUploadError}
             />
