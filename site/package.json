@@ -16,7 +16,13 @@
     "verify:next-config": "node ./scripts/verify-next-config.js",
     "audit": "lhci autorun --upload.target=temporary-public-storage",
     "postbuild": "next-sitemap",
-    "prepare": "husky"
+    "prepare": "husky",
+    "gh:status": "powershell -File ../scripts/gh-workflow-status.ps1",
+    "gh:logs": "powershell -File ../scripts/gh-workflow-logs.ps1",
+    "gh:diagnose": "powershell -File ../scripts/diagnose-ci-failures.ps1",
+    "deploy:preview": "powershell -File ../scripts/vercel-deploy-preview.ps1",
+    "deploy:prod": "powershell -File ../scripts/vercel-deploy-prod.ps1",
+    "deploy:inspect": "powershell -File ../scripts/vercel-inspect.ps1"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
