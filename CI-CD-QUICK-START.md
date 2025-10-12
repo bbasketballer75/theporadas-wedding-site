@@ -26,7 +26,7 @@ npm run gh:diagnose      # 8-point diagnostic check
 
 ### Step 1: Enable GitHub Actions (2 minutes)
 
-1. **Go here:** https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions
+1. **Go here:** <https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions>
 2. **Select:** "Allow all actions and reusable workflows"
 3. **Select:** "Read and write permissions" + "Allow GitHub Actions to create and approve pull requests"
 4. **Click:** Save
@@ -35,7 +35,7 @@ npm run gh:diagnose      # 8-point diagnostic check
 
 ### Step 2: Get Vercel Token (3 minutes)
 
-1. **Go here:** https://vercel.com/account/tokens
+1. **Go here:** <https://vercel.com/account/tokens>
 2. **Click:** Create Token
 3. **Name:** GitHub Actions CI/CD
 4. **Scope:** Full Account
@@ -43,6 +43,28 @@ npm run gh:diagnose      # 8-point diagnostic check
 6. **COPY THE TOKEN** ← You won't see it again!
 
 ### Step 3: Configure Secrets (5 minutes)
+
+**⚠️ IMPORTANT:** Step 1 (Enable Actions) MUST be completed first, or you'll get 404 errors!
+
+**Option A: Automated Script (Easiest)**
+
+```powershell
+cd f:\wedding-website
+
+# Run automated setup (prompts for Vercel token)
+.\scripts\setup-github-secrets.ps1
+
+# Or pass token directly
+.\scripts\setup-github-secrets.ps1 -VercelToken "your_token_here"
+```
+
+The script will:
+- ✅ Check if Actions is enabled (fails with helpful message if not)
+- ✅ Load all values from `.vercel/project.json` and `site/.env.production`
+- ✅ Set all 9 secrets automatically
+- ✅ Verify secrets were set correctly
+
+**Option B: Manual Commands**
 
 ```powershell
 cd f:\wedding-website
@@ -67,6 +89,7 @@ gh secret list
 ```
 
 **Expected output:**
+
 ```
 NEXT_PUBLIC_FIREBASE_API_KEY          Updated ...
 NEXT_PUBLIC_FIREBASE_APP_ID           Updated ...
@@ -128,9 +151,10 @@ npm run gh:status
 **Problem:** Pushed to main but no workflow run
 
 **Check:**
+
 1. Actions enabled? (Step 1)
 2. Secrets configured? (Step 3)  
-3. Visit: https://github.com/bbasketballer75/theporadas-wedding-site/actions
+3. Visit: <https://github.com/bbasketballer75/theporadas-wedding-site/actions>
 
 ### Need help?
 
@@ -141,17 +165,20 @@ npm run gh:diagnose  # Run full diagnostics
 ## 💡 What Happens After Setup
 
 ### Automatic Deployments
+
 - **Push to main** → Production deployment (automatic)
 - **Open PR** → Preview deployment + comment with URL (automatic)
 - **Failed workflow** → Easy log access via `npm run gh:logs`
 
 ### One-Command Local Deploys
+
 ```powershell
 npm run deploy:preview  # Preview in 30 seconds
 npm run deploy:prod     # Production with safety checks
 ```
 
 ### Time Savings
+
 - **Before:** 5-10 minutes per deployment
 - **After:** 30-60 seconds per deployment
 - **Savings:** 83-90% reduction ⚡
@@ -159,6 +186,7 @@ npm run deploy:prod     # Production with safety checks
 ## 🎯 Expected Results
 
 After manual setup (10-15 minutes):
+
 - ✅ Automated deployments on every push/PR
 - ✅ One-command local deployments  
 - ✅ Easy workflow management
