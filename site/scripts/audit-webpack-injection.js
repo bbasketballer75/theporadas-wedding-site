@@ -19,6 +19,7 @@ const toleratedPackages = new Set([
   '@supabase/supabase-js',
   'google-auth-library',
   'eslint',
+  '@next/bundle-analyzer', // Used for build analysis, doesn't inject webpack at runtime
 ]);
 
 const dependencySections = [
