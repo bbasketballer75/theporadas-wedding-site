@@ -5,6 +5,7 @@
 **CRITICAL SUCCESS:** Fixed the networkidle timeout issue blocking 26/28 tests!
 
 ### Results
+
 - **Before:** 2/28 critical tests passing (7%)
 - **After:** 20/28 critical tests passing (71.4%)
 - **Improvement:** +18 tests unblocked (+640% improvement)
@@ -13,12 +14,15 @@
 ## Root Cause Analysis
 
 ### The Blocker
+
 Tests were timing out after 60 seconds at:
+
 ```javascript
 await page.waitForLoadState('networkidle');
 ```
 
 ### Why It Failed
+
 1. **Supabase DNS failures:** `ENOTFOUND shegniwzcjkqfsrgvajs.supabase.co`
 2. **Firestore WebSocket listeners:** Keep connections open indefinitely
 3. **Modern web apps never reach 'networkidle':** Ongoing background requests
@@ -26,12 +30,15 @@ await page.waitForLoadState('networkidle');
 ## Solution Implemented
 
 ### Official Playwright Guidance (from Context7)
+
 Per `/microsoft/playwright` documentation:
+
 - ❌ `'networkidle'` - Problematic with WebSockets/polling
 - ✅ `'domcontentloaded'` - Recommended for modern apps
 - ✅ `'load'` - Default for `page.goto()`
 
 ### The Fix
+
 ```javascript
 // BEFORE (TIMES OUT):
 await page.waitForLoadState('networkidle');
@@ -41,6 +48,7 @@ await page.waitForLoadState('domcontentloaded');
 ```
 
 ### Files Modified
+
 - Replaced ALL 80+ instances of `'networkidle'` with `'domcontentloaded'`
 - Files affected:
   - `site/tests/e2e/critical/*.spec.js` (5 files)
@@ -51,6 +59,7 @@ await page.waitForLoadState('domcontentloaded');
 ## Research Process
 
 ### MCP Server Usage (Context7)
+
 1. **Resolved library IDs:**
    - Next.js: `/vercel/next.js` (Trust Score: 10, 3232 snippets)
    - Playwright: `/microsoft/playwright` (Trust Score: 9.9, 2103 snippets)
@@ -63,6 +72,7 @@ await page.waitForLoadState('domcontentloaded');
    - Result: 40+ code examples with official guidance
 
 ### Key Findings from Playwright Docs
+
 1. **`page.goto()` auto-waits for 'load' event** - explicit waitForLoadState often unnecessary
 2. **DOMContentLoaded is faster and more reliable** than networkidle
 3. **networkidle is deprecated** for modern apps with persistent connections
@@ -71,12 +81,15 @@ await page.waitForLoadState('domcontentloaded');
 ## Remaining 8 Failures (Categorized)
 
 ### Category 1: Vercel Analytics CSP Violation (3 tests)
+
 **Error:**
+
 ```
 Refused to load the script 'https://va.vercel-scripts.com/v1/script.debug.js'
 ```
 
 **Affected Tests:**
+
 - `firebase.spec.js:16` - Firebase SDK loads without CSP violations
 - `firebase.spec.js:46` - Firebase config properly initialized
 - `firestore.spec.js:175` - NO CSP violations for Firestore domains
@@ -86,13 +99,16 @@ Refused to load the script 'https://va.vercel-scripts.com/v1/script.debug.js'
 **Effort:** 5 minutes (update `site/pages/_document.js`)
 
 ### Category 2: Test Ending Too Quickly (2 tests)
+
 **Error:**
+
 ```
 Error: page.waitForTimeout: Test ended.
    at dismiss-dev-overlay.js:145
 ```
 
 **Affected Tests:**
+
 - `csp-validation.spec.js:145` - CSP meta tag exists
 - `csp-validation.spec.js:206` - CSP allows required CDNs
 
@@ -103,12 +119,15 @@ Error: page.waitForTimeout: Test ended.
 **Effort:** 10 minutes (add `page.isClosed()` check)
 
 ### Category 3: Next.js Portal Blocking Clicks (3 tests)
+
 **Error:**
+
 ```
 <nextjs-portal></nextjs-portal> intercepts pointer events
 ```
 
 **Affected Tests:**
+
 - `guestbook-realtime.spec.js:17` - Message sync across contexts
 - `guestbook-realtime.spec.js:166` - Realtime sync latency
 - `guestbook-realtime.spec.js:229` - Multiple messages sync
@@ -122,22 +141,26 @@ Error: page.waitForTimeout: Test ended.
 ## Major Learnings
 
 ### 1. Context7 is Invaluable
+
 - Retrieved 3000 tokens of official Playwright docs in seconds
 - Found EXACT solution in official examples
 - Trust score filtering ensured authoritative sources
 
 ### 2. 'networkidle' is a Red Flag
+
 - Modern apps: WebSockets, polling, service workers, background sync
 - Firebase: Realtime listeners keep connections open
 - Analytics: Ongoing tracking requests
 - **Rule:** Never use 'networkidle' with Firebase/Firestore apps
 
 ### 3. Playwright Auto-Waiting is Powerful
+
 - `goto()` auto-waits for 'load'
 - Element interactions auto-wait for actionability
 - Explicit waits often unnecessary (and problematic)
 
 ### 4. Research Before Guessing
+
 - Spent 30 minutes researching → saved hours of trial-and-error
 - Official docs > Stack Overflow > random blog posts
 - Context7 made this research instant
@@ -145,6 +168,7 @@ Error: page.waitForTimeout: Test ended.
 ## MCP Server Audit Summary
 
 ### Tools Used This Session
+
 1. **Context7** ✅ - CRITICAL: Found exact solution
 2. **Pieces Memory** ✅ - Stored breakthrough for future reference
 3. **Filesystem** ✅ - File operations
@@ -152,6 +176,7 @@ Error: page.waitForTimeout: Test ended.
 5. **Sequential Thinking** (implied) - Problem analysis
 
 ### Tools Available (Not Yet Used)
+
 - **Brave Search** - Could search for "playwright networkidle timeout firebase"
 - **Firebase MCP** - Direct Firebase management (needs auth)
 - **GitHub MCP** - Repo operations (needs token)
@@ -159,6 +184,7 @@ Error: page.waitForTimeout: Test ended.
 - **Playwright MCP** - Advanced browser automation
 
 ### Usage Rating: 8/10
+
 - ✅ Excellent use of Context7 for documentation
 - ✅ Proper MCP tool selection
 - ⏳ Could have used Brave Search to verify community patterns
@@ -167,6 +193,7 @@ Error: page.waitForTimeout: Test ended.
 ## Time Investment
 
 ### This Session (October 2025)
+
 - **Research:** 30 minutes (Context7 documentation lookup)
 - **Implementation:** 45 minutes (find/replace + testing)
 - **Verification:** 30 minutes (test runs + analysis)
@@ -174,6 +201,7 @@ Error: page.waitForTimeout: Test ended.
 - **Total:** 2.5 hours
 
 ### Cumulative (All Sessions)
+
 - **Previous:** 3 hours (infrastructure refactor)
 - **This Session:** 2.5 hours
 - **Total:** 5.5 hours
@@ -182,6 +210,7 @@ Error: page.waitForTimeout: Test ended.
 ## Next Steps (30 minutes estimated)
 
 ### Immediate Fixes (High Value)
+
 1. **Vercel Analytics CSP** (5 min): Add domain to CSP policy
    - File: `site/pages/_document.js`
    - Line: CSP meta tag `script-src` directive
@@ -199,6 +228,7 @@ Error: page.waitForTimeout: Test ended.
      - OR ensure portal fully dismissed before form interaction
 
 ### Expected Final Results
+
 - **After these fixes:** 28/28 critical tests passing (100%)
 - **Total time investment:** 6 hours (including these fixes)
 - **Pass rate improvement:** 7% → 100% (+1,329%)
@@ -206,6 +236,7 @@ Error: page.waitForTimeout: Test ended.
 ## Knowledge Persistence
 
 ### Pieces Memory Created
+
 - **Title:** Playwright networkidle timeout fix
 - **Content:** Full root cause analysis + solution
 - **Context:** Wedding website project
@@ -213,6 +244,7 @@ Error: page.waitForTimeout: Test ended.
 - **Status:** ✅ Stored for future reference
 
 ### Documentation Created
+
 1. **This file:** Complete session summary
 2. **Pieces Memory:** Technical details + Playwright guidance
 3. **Git Commits:** Will document changes
