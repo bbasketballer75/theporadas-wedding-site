@@ -7,7 +7,9 @@ on:
     branches: [main]
 
 jobs:
-  e2e:
+  # Phase 1: Critical tests (MUST PASS)
+  test-critical:
+    name: Critical Tests (P0)
     runs-on: windows-latest
     env:
       NEXT_TURBOPACK: '1'
@@ -42,21 +44,243 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: |
           cd site
-          npx playwright install --with-deps
+          npx playwright install --with-deps chromium
 
       - name: Verify Next config (no webpack when Turbopack active)
         run: |
           cd site
           npm run verify:next-config
 
-      - name: Run Playwright tests
+      - name: Run Critical Tests
         run: |
           cd site
-          npx playwright test --reporter=list
+          npm run test:critical
 
-      - name: Upload Playwright artifacts
+      - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
-          path: site/test-results || site/playwright-report || site/playwright-report
+          name: critical-test-results
+          path: |
+            site/test-results/
+            site/playwright-report/
+          retention-days: 30
+
+  # Phase 2: Feature tests (run after critical pass)
+  test-features:
+    name: Feature Tests (P1)
+    runs-on: windows-latest
+    needs: test-critical
+    if: success()
+    env:
+      NEXT_TURBOPACK: '1'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'site/package-lock.json'
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            ~/AppData/Local/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('site/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install dependencies
+        run: |
+          cd site
+          npm ci
+
+      - name: Install Playwright browsers
+        run: |
+          cd site
+          npx playwright install --with-deps chromium
+
+      - name: Run Feature Tests
+        run: |
+          cd site
+          npm run test:features
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: feature-test-results
+          path: |
+            site/test-results/
+            site/playwright-report/
+          retention-days: 30
+
+  # Phase 3: UI tests (parallel with features)
+  test-ui:
+    name: UI Tests (P2)
+    runs-on: windows-latest
+    needs: test-critical
+    if: success()
+    env:
+      NEXT_TURBOPACK: '1'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'site/package-lock.json'
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            ~/AppData/Local/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('site/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install dependencies
+        run: |
+          cd site
+          npm ci
+
+      - name: Install Playwright browsers
+        run: |
+          cd site
+          npx playwright install --with-deps chromium
+
+      - name: Run UI Tests
+        run: |
+          cd site
+          npm run test:ui
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-results
+          path: |
+            site/test-results/
+            site/playwright-report/
+          retention-days: 30
+
+  # Phase 4: Production smoke tests (only on main branch)
+  test-production:
+    name: Production Smoke Tests
+    runs-on: ubuntu-latest
+    needs: [test-critical, test-features]
+    if: github.ref == 'refs/heads/main' && success()
+    env:
+      BASE_URL: 'https://wedding-website-sepia-ten.vercel.app'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'site/package-lock.json'
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('site/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install dependencies
+        run: |
+          cd site
+          npm ci
+
+      - name: Install Playwright browsers
+        run: |
+          cd site
+          npx playwright install --with-deps chromium
+
+      - name: Wait for Vercel deployment (if recent push)
+        run: |
+          echo "Waiting 30 seconds for deployment to propagate..."
+          sleep 30
+
+      - name: Run Production Smoke Tests
+        run: |
+          cd site
+          npm run test:production
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-test-results
+          path: |
+            site/test-results/
+            site/playwright-report/
+          retention-days: 30
+
+      - name: Comment on PR with production test results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Read test results if available
+            let comment = '## 🚀 Production Smoke Tests\n\n';
+            comment += `**Status:** ${{ job.status }}\n`;
+            comment += `**Site:** ${process.env.BASE_URL}\n\n`;
+            
+            if ('${{ job.status }}' === 'success') {
+              comment += '✅ All production smoke tests passed!\n';
+            } else {
+              comment += '❌ Some production tests failed. Check artifacts for details.\n';
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+  # Summary job
+  test-summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: [test-critical, test-features, test-ui]
+    if: always()
+    steps:
+      - name: Check test results
+        run: |
+          echo "Critical Tests: ${{ needs.test-critical.result }}"
+          echo "Feature Tests: ${{ needs.test-features.result }}"
+          echo "UI Tests: ${{ needs.test-ui.result }}"
+          
+          if [ "${{ needs.test-critical.result }}" != "success" ]; then
+            echo "❌ Critical tests failed - BLOCKING"
+            exit 1
+          fi
+          
+          if [ "${{ needs.test-features.result }}" != "success" ]; then
+            echo "⚠️ Feature tests failed - WARNING"
+          fi
+          
+          if [ "${{ needs.test-ui.result }}" != "success" ]; then
+            echo "⚠️ UI tests failed - WARNING"
+          fi
+          
+          echo "✅ Test run complete"

@@ -42,7 +42,22 @@ export default defineConfig({
   // Configure projects for major browsers
   // Local: Fast iteration with Chromium only (2.4 min vs 12 min)
   // CI: Full coverage across all browsers and devices
-  projects: process.env.CI
+  // Production: Smoke tests against live site
+  projects: process.env.BASE_URL
+    ? [
+        // Production smoke tests: Run against live site
+        {
+          name: 'production',
+          testMatch: '**/production/*.spec.js',
+          use: {
+            ...devices['Desktop Chrome'],
+            baseURL: process.env.BASE_URL,
+          },
+          retries: 1, // Single retry for production tests
+          timeout: 30000, // Longer timeout for production network calls
+        },
+      ]
+    : process.env.CI
     ? [
         // CI: Test all browsers for comprehensive coverage
         {
