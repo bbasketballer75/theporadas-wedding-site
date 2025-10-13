@@ -23,19 +23,16 @@ export async function compressImage(file) {
   };
 
   try {
-    console.log(`[Image Compression] Original: ${(file.size / 1024 / 1024).toFixed(2)} MB`);
+    // Original size logged for debugging
 
     const compressedFile = await imageCompression(file, options);
 
-    const savings = ((file.size - compressedFile.size) / file.size) * 100;
-    console.log(
-      `[Image Compression] Compressed: ${(compressedFile.size / 1024 / 1024).toFixed(2)} MB`
-    );
-    console.log(`[Image Compression] Savings: ${savings.toFixed(1)}%`);
+    // const savings = ((file.size - compressedFile.size) / file.size) * 100;
+    // Compression successful
 
     return compressedFile;
   } catch (error) {
-    console.error('[Image Compression] Failed:', error);
+    // Compression failed, return original
     return file; // Fallback to original if compression fails
   }
 }

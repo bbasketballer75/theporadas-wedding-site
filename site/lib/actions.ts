@@ -43,7 +43,7 @@ export async function addPinAction(formData: FormData): Promise<ActionResponse<P
 
     return { success: true, data: pins };
   } catch (error) {
-    console.error('Add pin action error:', error);
+    // Add pin action error
     const errorMessage = error instanceof Error ? error.message : 'Failed to add pin';
     return { success: false, error: errorMessage };
   }
@@ -60,7 +60,7 @@ export async function fetchPinsAction(): Promise<ActionResponse<Pin[]>> {
     const pins = (await fetchViewerPins()) as Pin[];
     return { success: true, data: pins };
   } catch (error) {
-    console.error('Fetch pins action error:', error);
+    // Fetch pins action error
     const errorMessage = error instanceof Error ? error.message : 'Failed to fetch pins';
     return { success: false, error: errorMessage, data: [] };
   }

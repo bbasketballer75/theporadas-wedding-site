@@ -36,11 +36,9 @@ const PINS_CACHE_TTL_MS = 60_000;
 // Allows multi-tab support and offline-first functionality
 if (typeof window !== 'undefined') {
   enableMultiTabIndexedDbPersistence(db).catch((err) => {
-    if (err.code === 'failed-precondition') {
-      console.warn('Multiple tabs open, persistence only enabled in one tab');
-    } else if (err.code === 'unimplemented') {
-      console.warn('Browser does not support offline persistence');
-    }
+    // Persistence errors handled silently
+    // Multiple tabs: only first tab gets persistence
+    // Unimplemented: browser doesn't support IndexedDB
   });
 }
 
@@ -72,7 +70,7 @@ export async function addViewerPin({ lat, lng, message }) {
 
     return { success: true, id: docRef.id };
   } catch (error) {
-    console.error('Error adding viewer pin:', error);
+    // Error adding viewer pin
     return { success: false, error: error.message };
   }
 }
@@ -110,7 +108,7 @@ export async function fetchViewerPins() {
 
     return pins;
   } catch (error) {
-    console.error('Error fetching viewer pins:', error);
+    // Error fetching viewer pins
     inflightPinsPromise = null;
     return [];
   }

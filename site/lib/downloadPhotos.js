@@ -25,7 +25,7 @@ export async function downloadAllPhotos(media, onProgress = () => {}) {
       throw new Error('No photos available to download');
     }
 
-    console.log(`[DownloadAll] Starting download of ${photos.length} photos...`);
+    // Starting download of photos
     onProgress(0);
 
     // Create ZIP archive
@@ -37,7 +37,7 @@ export async function downloadAllPhotos(media, onProgress = () => {}) {
 
     for (const photo of photos) {
       try {
-        console.log(`[DownloadAll] Downloading ${photo.name}...`);
+        // Downloading photo
 
         // Fetch photo from Supabase
         const response = await fetch(photo.url);
@@ -62,12 +62,12 @@ export async function downloadAllPhotos(media, onProgress = () => {}) {
         completed++;
         onProgress(Math.round((completed / photos.length) * 80)); // 0-80% for downloads
       } catch (err) {
-        console.error(`[DownloadAll] Error downloading ${photo.name}:`, err);
+        // Error downloading photo (continue with others)
         // Continue with other photos even if one fails
       }
     }
 
-    console.log('[DownloadAll] Compressing ZIP...');
+    // Compressing ZIP
     onProgress(85);
 
     // Generate ZIP file
@@ -90,13 +90,13 @@ export async function downloadAllPhotos(media, onProgress = () => {}) {
     const date = new Date().toISOString().split('T')[0];
     const filename = `wedding-photos-${date}.zip`;
 
-    console.log(`[DownloadAll] Saving ${filename}...`);
+    // Saving file
     saveAs(zipBlob, filename);
 
-    console.log('[DownloadAll] Download complete!');
+    // Download complete
     return { success: true, photoCount: completed, filename };
   } catch (err) {
-    console.error('[DownloadAll] Error:', err);
+    // Error during download process
     throw err;
   }
 }

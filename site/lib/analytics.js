@@ -25,9 +25,9 @@ export function initAnalytics() {
   if (typeof window !== 'undefined' && !analytics) {
     try {
       analytics = getAnalytics(app);
-      console.log('[Analytics] Initialized successfully');
+      // Analytics initialized successfully
     } catch (err) {
-      console.error('[Analytics] Initialization failed:', err);
+      // Analytics initialization failed
     }
   }
   return analytics;
@@ -46,9 +46,9 @@ export function logEvent(eventName, params = {}) {
   if (analytics) {
     try {
       firebaseLogEvent(analytics, eventName, params);
-      console.log('[Analytics] Event:', eventName, params);
+      // Event logged successfully (console removed for production)
     } catch (err) {
-      console.error('[Analytics] Event logging failed:', err);
+      // Event logging failed silently (console removed for production)
     }
   }
 }

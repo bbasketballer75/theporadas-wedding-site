@@ -40,6 +40,6 @@ const db = getFirestore(app);
 //     console.log('🔧 Connected to Firestore Emulator');
 //   }
 // }
-console.log('🔥 Using Production Firestore');
+// Production Firestore active (console log removed for production)
 
 export { app, db };
