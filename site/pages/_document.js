@@ -13,6 +13,12 @@ export default function Document() {
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#8B9C8E" />
 
+        {/* Security - Content Security Policy */}
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.google-analytics.com https://*.googletagmanager.com https://*.firebase.googleapis.com https://*.firebaseio.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: https: blob:; font-src 'self' data:; connect-src 'self' https://*.supabase.co https://*.google-analytics.com https://*.firebase.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com; frame-src 'self' https://*.google.com; object-src 'none'; base-uri 'self'; form-action 'self';"
+        />
+
         {/* PWA Icons */}
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
