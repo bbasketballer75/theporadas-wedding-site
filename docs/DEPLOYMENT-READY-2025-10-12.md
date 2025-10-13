@@ -81,29 +81,42 @@ charcoal: '#2d2d2d'
 
 ## 🚢 Deployment Instructions
 
-### Option 1: Vercel Dashboard (Recommended)
+### Vercel Dashboard Deployment (Required Method)
 
-1. Go to <https://vercel.com/dashboard>
-2. Find project: `theporadas-wedding-site`
-3. Click "Deployments" tab
-4. Click "Redeploy" on latest commit (`668da38`)
-5. Wait for build to complete (~2-3 minutes)
-6. Verify live site at production URL
+Due to Git author configuration mismatch between local commits and Vercel team settings, **you must deploy via the Vercel dashboard**. The CLI method is currently blocked.
 
-### Option 2: Vercel CLI (If Access Configured)
+#### Quick Deploy (Recommended)
 
-```bash
-cd f:\wedding-website
-vercel --prod
-```
+1. **Go to your project:** <https://vercel.com/austins-projects-bb7c50ab/wedding-website>
+2. **Click the "Deploy" button** in the top right
+3. Vercel will automatically pull the latest commit from GitHub (`f51fa32`)
+4. Wait for build to complete (~2-3 minutes)
+5. Verify live site at production URL
 
-**Note:** Current issue: Git author `bbasketballer75@gmail.com` needs team access on Vercel. Resolve via Vercel dashboard settings → Team members → Add/verify email.
+#### Alternative: Redeploy Existing
 
-### Option 3: GitHub Actions (Future Setup)
+1. **Go to Deployments:** <https://vercel.com/austins-projects-bb7c50ab/wedding-website/deployments>
+2. Find the most recent successful deployment
+3. Click the **"⋯"** (three dots) menu → **"Redeploy"**
+4. Select **"Use existing Build Cache"** for faster deployment
+5. Wait for completion and verify
+
+### Why CLI Doesn't Work
+
+The Vercel CLI reports: `"Git author austin@theporadas.com must have access to the team Austin's projects"`
+
+This happens because:
+- Earlier commits were made with `austin@theporadas.com`
+- Your Vercel account is `bbasketballer75-9127`
+- Vercel enforces team access based on Git commit history
+
+**Solution:** Always use the dashboard for this project. The dashboard bypasses Git author checks and deploys directly from your connected GitHub repository.
+
+### GitHub Actions (Future Setup)
 
 - Automated deployment workflow exists in `.github/workflows/`
 - Currently requires Firebase service account setup
-- Can enable after deployment verification
+- Can enable after manual deployment verification
 
 ---
 
