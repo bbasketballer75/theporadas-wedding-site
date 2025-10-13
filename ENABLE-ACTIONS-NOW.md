@@ -8,7 +8,7 @@
 
 You're getting **404 errors** when trying to set GitHub secrets:
 
-```
+```bash
 failed to fetch public key: HTTP 404: Not Found
 ```
 
@@ -20,7 +20,7 @@ failed to fetch public key: HTTP 404: Not Found
 
 1. **Open this URL in your browser:**
 
-   ```
+   ```text
    https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions
    ```
 
@@ -41,7 +41,7 @@ failed to fetch public key: HTTP 404: Not Found
 
 1. **Open this URL:**
 
-   ```
+   ```text
    https://vercel.com/account/tokens
    ```
 
@@ -81,7 +81,7 @@ cd f:\wedding-website
 
 **Expected output:**
 
-```
+```bash
 Setting VERCEL_TOKEN... ✓
 Setting VERCEL_ORG_ID... ✓
 Setting VERCEL_PROJECT_ID... ✓
