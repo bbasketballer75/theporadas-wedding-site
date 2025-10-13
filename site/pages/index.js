@@ -113,8 +113,7 @@ export default function Home() {
       <ErrorBoundary>
         <Navigation />
 
-        <main className="min-h-screen bg-gradient-to-br from-cream via-mint to-blush/20">
-          {/* Hero Section - Welcome & Introduction */}
+        <main className="min-h-screen">{/* Hero Section - Welcome & Introduction */}
           <ErrorBoundary>
             <HeroSection />
           </ErrorBoundary>

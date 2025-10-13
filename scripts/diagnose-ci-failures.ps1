@@ -21,11 +21,13 @@ try {
         $ghUser = gh api user --jq .login 2>&1
         if ($LASTEXITCODE -eq 0) {
             Write-Host "   ✅ Authenticated as: $ghUser" -ForegroundColor Green
-        } else {
+        }
+        else {
             Write-Host "   ❌ Not authenticated" -ForegroundColor Red
             $issues += "GitHub CLI not authenticated"
         }
-    } catch {
+    }
+    catch {
         Write-Host "   ❌ GitHub CLI not installed or not in PATH" -ForegroundColor Red
         $issues += "GitHub CLI not available"
     }
@@ -36,11 +38,13 @@ try {
         $vercelVersion = vercel --version 2>&1
         if ($LASTEXITCODE -eq 0) {
             Write-Host "   ✅ Vercel CLI installed: $vercelVersion" -ForegroundColor Green
-        } else {
+        }
+        else {
             Write-Host "   ❌ Vercel CLI not responding" -ForegroundColor Red
             $issues += "Vercel CLI not installed"
         }
-    } catch {
+    }
+    catch {
         Write-Host "   ❌ Vercel CLI not installed" -ForegroundColor Red
         $issues += "Vercel CLI missing"
     }
@@ -48,7 +52,7 @@ try {
     # 3. Check recent workflow runs
     Write-Host "`n3️⃣ Checking recent workflow runs..." -ForegroundColor Yellow
     try {
-        $runs = gh run list --limit 10 --json conclusion,name,createdAt,databaseId,workflowName 2>&1
+        $runs = gh run list --limit 10 --json conclusion, name, createdAt, databaseId, workflowName 2>&1
         if ($LASTEXITCODE -eq 0) {
             $runsObj = $runs | ConvertFrom-Json
             Write-Host "   ✅ Found $($runsObj.Count) recent runs" -ForegroundColor Green
@@ -63,18 +67,20 @@ try {
                 $icon = if ($_.conclusion -eq "success") { "✅" } elseif ($_.conclusion -eq "failure") { "❌" } else { "⏳" }
                 Write-Host "   $icon $($_.workflowName): $($_.name) - $($_.createdAt)" -ForegroundColor DarkGray
             }
-        } else {
+        }
+        else {
             Write-Host "   ⚠️  Could not fetch workflow runs (workflows may not exist on GitHub yet)" -ForegroundColor Yellow
             Write-Host "   Reason: $runs" -ForegroundColor DarkGray
         }
-    } catch {
+    }
+    catch {
         Write-Host "   ❌ Error checking workflows: $_" -ForegroundColor Red
     }
 
     # 4. Check failed jobs details
     Write-Host "`n4️⃣ Analyzing failed jobs..." -ForegroundColor Yellow
     try {
-        $failedRuns = gh run list --status failure --limit 3 --json databaseId,workflowName | ConvertFrom-Json
+        $failedRuns = gh run list --status failure --limit 3 --json databaseId, workflowName | ConvertFrom-Json
         
         if ($failedRuns.Count -gt 0) {
             foreach ($run in $failedRuns) {
@@ -91,10 +97,12 @@ try {
                     }
                 }
             }
-        } else {
+        }
+        else {
             Write-Host "   ✅ No failed runs in recent history" -ForegroundColor Green
         }
-    } catch {
+    }
+    catch {
         Write-Host "   ⚠️  Could not analyze failed jobs" -ForegroundColor Yellow
     }
 
@@ -110,15 +118,18 @@ try {
             foreach ($required in $requiredSecrets) {
                 if ($secrets -match $required) {
                     Write-Host "      ✅ $required" -ForegroundColor Green
-                } else {
+                }
+                else {
                     Write-Host "      ❌ $required (missing)" -ForegroundColor Red
                     $issues += "Missing secret: $required"
                 }
             }
-        } else {
+        }
+        else {
             Write-Host "   ⚠️  Could not check secrets" -ForegroundColor Yellow
         }
-    } catch {
+    }
+    catch {
         Write-Host "   ❌ Error checking secrets: $_" -ForegroundColor Red
     }
 
@@ -128,7 +139,8 @@ try {
     if ($gitStatus) {
         Write-Host "   ⚠️  Uncommitted changes detected:" -ForegroundColor Yellow
         $gitStatus | ForEach-Object { Write-Host "      $_" -ForegroundColor DarkGray }
-    } else {
+    }
+    else {
         Write-Host "   ✅ Working tree clean" -ForegroundColor Green
     }
 
@@ -138,7 +150,8 @@ try {
     if ($workflowFiles) {
         Write-Host "   ✅ Found $($workflowFiles.Count) workflow files:" -ForegroundColor Green
         $workflowFiles | ForEach-Object { Write-Host "      • $($_.Name)" -ForegroundColor DarkGray }
-    } else {
+    }
+    else {
         Write-Host "   ❌ No workflow files found" -ForegroundColor Red
         $issues += "No workflow files in .github/workflows/"
     }
@@ -149,7 +162,8 @@ try {
     if ($trackedWorkflows) {
         $trackedCount = ($trackedWorkflows -split "`n").Count
         Write-Host "   ✅ $trackedCount workflow files tracked in git" -ForegroundColor Green
-    } else {
+    }
+    else {
         Write-Host "   ❌ Workflows not tracked in git" -ForegroundColor Red
         $issues += "Workflows not committed to git"
     }
@@ -162,7 +176,8 @@ try {
     if ($issues.Count -eq 0) {
         Write-Host "`n✅ No major issues detected!" -ForegroundColor Green
         Write-Host "   Your CI/CD pipeline appears to be configured correctly." -ForegroundColor Gray
-    } else {
+    }
+    else {
         Write-Host "`n⚠️  Issues found: $($issues.Count)" -ForegroundColor Yellow
         foreach ($issue in $issues) {
             Write-Host "   • $issue" -ForegroundColor Red
@@ -186,7 +201,8 @@ try {
         }
     }
 
-} catch {
+}
+catch {
     Write-Host "`n❌ Diagnostic error: $_" -ForegroundColor Red
     Write-Host $_.ScriptStackTrace -ForegroundColor DarkGray
     exit 1

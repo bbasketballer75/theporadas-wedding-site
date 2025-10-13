@@ -34,7 +34,7 @@
 
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory=$false)]
+    [Parameter(Mandatory = $false)]
     [string]$VercelToken
 )
 
@@ -52,7 +52,8 @@ try {
         throw "GitHub CLI not authenticated"
     }
     Write-Host "✓ GitHub CLI authenticated" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "✗ GitHub CLI not authenticated" -ForegroundColor Red
     Write-Host "`nPlease run: gh auth login" -ForegroundColor Yellow
     exit 1
@@ -66,7 +67,8 @@ try {
         throw "Actions not enabled"
     }
     Write-Host "✓ GitHub Actions is enabled" -ForegroundColor Green
-} catch {
+}
+catch {
     Write-Host "✗ GitHub Actions is NOT enabled (404 error)" -ForegroundColor Red
     Write-Host "`n⚠️  REQUIRED: Enable GitHub Actions first!" -ForegroundColor Yellow
     Write-Host "`n1. Go to: https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions" -ForegroundColor Cyan
@@ -152,8 +154,8 @@ Write-Host "Setting GitHub Secrets (9 total)" -ForegroundColor Cyan
 Write-Host "========================================`n" -ForegroundColor Cyan
 
 $secrets = @{
-    'VERCEL_TOKEN' = $VercelToken
-    'VERCEL_ORG_ID' = $vercelOrgId
+    'VERCEL_TOKEN'      = $VercelToken
+    'VERCEL_ORG_ID'     = $vercelOrgId
     'VERCEL_PROJECT_ID' = $vercelProjectId
 }
 
@@ -174,10 +176,12 @@ foreach ($secretName in $secrets.Keys | Sort-Object) {
         if ($LASTEXITCODE -eq 0) {
             Write-Host " ✓" -ForegroundColor Green
             $successCount++
-        } else {
+        }
+        else {
             throw "gh CLI returned exit code $LASTEXITCODE"
         }
-    } catch {
+    }
+    catch {
         Write-Host " ✗" -ForegroundColor Red
         Write-Host "  Error: $_" -ForegroundColor Red
         $failCount++
@@ -208,7 +212,8 @@ if ($successCount -eq 9) {
     Write-Host "2. npm run gh:diagnose    # Verify setup" -ForegroundColor White
     Write-Host "3. npm run gh:status      # Check workflows" -ForegroundColor White
     Write-Host "4. git push origin main   # Trigger first workflow`n" -ForegroundColor White
-} else {
+}
+else {
     Write-Host "`n⚠️  Some secrets failed to set. Check errors above." -ForegroundColor Yellow
     exit 1
 }

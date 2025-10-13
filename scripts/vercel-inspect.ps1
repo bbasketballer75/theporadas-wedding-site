@@ -30,7 +30,8 @@ try {
         if ($deployments -and $deployments.Count -gt 0) {
             $Url = $deployments[0].url
             Write-Host "✅ Using latest deployment: $Url" -ForegroundColor Green
-        } else {
+        }
+        else {
             Write-Host "❌ No deployments found" -ForegroundColor Red
             exit 1
         }
@@ -45,7 +46,8 @@ try {
         $inspection.alias | ForEach-Object {
             Write-Host "   • https://$_" -ForegroundColor Green
         }
-    } else {
+    }
+    else {
         Write-Host "   (none)" -ForegroundColor DarkGray
     }
 
@@ -54,10 +56,12 @@ try {
     Write-Host "   • View logs: vercel logs $Url" -ForegroundColor Gray
     Write-Host "   • Promote to prod: vercel promote $Url --prod" -ForegroundColor Gray
 
-} catch {
+}
+catch {
     Write-Host "`n❌ Error: $_" -ForegroundColor Red
     exit 1
-} finally {
+}
+finally {
     Pop-Location
 }
 

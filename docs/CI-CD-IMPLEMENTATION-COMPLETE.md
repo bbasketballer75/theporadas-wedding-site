@@ -14,6 +14,7 @@ Successfully implemented comprehensive GitHub Actions and Vercel CLI integration
 ### 1. GitHub CLI Helper Scripts (3 files)
 
 #### `scripts/gh-workflow-status.ps1` (86 lines)
+
 - Dashboard view of all workflow runs
 - Groups runs by workflow name with statistics
 - Calculates success rates (Total, Success, Failed, Pending, %)
@@ -22,6 +23,7 @@ Successfully implemented comprehensive GitHub Actions and Vercel CLI integration
 - Usage: `npm run gh:status` or `npm run gh:status -Workflow "e2e" -Limit 5`
 
 #### `scripts/gh-workflow-logs.ps1` (90 lines)
+
 - Interactive failed run log viewer
 - Numbered menu for selecting failed runs
 - Displays full run details and failed job logs
@@ -29,6 +31,7 @@ Successfully implemented comprehensive GitHub Actions and Vercel CLI integration
 - Usage: `npm run gh:logs` (latest), `npm run gh:logs -Failed` (select from failures)
 
 #### `scripts/diagnose-ci-failures.ps1` (220 lines)
+
 - Comprehensive 8-point diagnostic system:
   1. GitHub CLI authentication status
   2. Vercel CLI installation check
@@ -45,6 +48,7 @@ Successfully implemented comprehensive GitHub Actions and Vercel CLI integration
 ### 2. Vercel CLI Helper Scripts (3 files)
 
 #### `scripts/vercel-deploy-preview.ps1` (82 lines)
+
 - One-command preview deployments
 - Auth checking before deployment
 - Automatic URL extraction
@@ -55,6 +59,7 @@ Successfully implemented comprehensive GitHub Actions and Vercel CLI integration
 - Note: Has minor lint warning (unused $whoami variable) - non-critical
 
 #### `scripts/vercel-deploy-prod.ps1` (110 lines)
+
 - Safe production deployments
 - RED warning banners
 - Git status check for uncommitted changes
@@ -65,6 +70,7 @@ Successfully implemented comprehensive GitHub Actions and Vercel CLI integration
 - Usage: `npm run deploy:prod`
 
 #### `scripts/vercel-inspect.ps1` (63 lines)
+
 - Quick deployment inspection
 - Auto-detects latest deployment if no URL provided
 - Lists all deployment aliases
@@ -75,6 +81,7 @@ Successfully implemented comprehensive GitHub Actions and Vercel CLI integration
 ### 3. Automated Deployment Workflow
 
 #### `.github/workflows/deploy-vercel.yml` (95 lines)
+
 - **Triggers:**
   - Push to main → Production deployment
   - Pull request to main → Preview deployment
@@ -121,6 +128,7 @@ Updated `site/package.json` with 6 new npm scripts:
 ### 5. Documentation
 
 Created `docs/GITHUB-ACTIONS-SETUP.md` - comprehensive setup guide with:
+
 - Step-by-step instructions for enabling GitHub Actions
 - Two methods for creating Vercel tokens
 - Complete secret configuration commands
@@ -181,12 +189,14 @@ gh api repos/.../actions/permissions
 ```
 
 **Diagnosis:**
+
 - All workflow files successfully pushed to GitHub (commit c2e9793)
 - Git remote confirmed: bbasketballer75/theporadas-wedding-site
 - GitHub CLI authenticated: bbasketballer75 (active)
 - **Conclusion:** GitHub Actions not enabled for repository
 
 **Common Causes:**
+
 1. First-time setup - Actions never enabled before
 2. Repository created without Actions enabled
 3. Organization-level Actions restrictions
@@ -197,7 +207,7 @@ gh api repos/.../actions/permissions
 ### Step 1: Enable GitHub Actions (YOU MUST DO THIS)
 
 1. **Go to repository settings:**
-   https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions
+   <https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions>
 
 2. **Under "Actions permissions", select:**
    - ✅ Allow all actions and reusable workflows
@@ -209,13 +219,13 @@ gh api repos/.../actions/permissions
 4. **Click Save**
 
 5. **Verify Actions tab is accessible:**
-   https://github.com/bbasketballer75/theporadas-wedding-site/actions
+   <https://github.com/bbasketballer75/theporadas-wedding-site/actions>
 
 ### Step 2: Get Vercel Token
 
 **Option A: Vercel Dashboard (Easiest)**
 
-1. Go to: https://vercel.com/account/tokens
+1. Go to: <https://vercel.com/account/tokens>
 2. Click **Create Token**
 3. Name: `GitHub Actions CI/CD`
 4. Scope: `Full Account`
@@ -259,7 +269,7 @@ gh secret list
 
 **Alternative: Set via Web Interface**
 
-https://github.com/bbasketballer75/theporadas-wedding-site/settings/secrets/actions
+<https://github.com/bbasketballer75/theporadas-wedding-site/settings/secrets/actions>
 
 All values pre-filled in `docs/GITHUB-ACTIONS-SETUP.md` - just copy/paste!
 
@@ -311,12 +321,14 @@ npm run gh:status
 Once setup is complete, you'll have:
 
 ### One-Command Deployments
+
 ```powershell
 npm run deploy:preview  # Deploy preview in ~30 seconds
 npm run deploy:prod     # Deploy production with safety checks
 ```
 
 ### Easy Workflow Management
+
 ```powershell
 npm run gh:status       # See all workflow runs with success rates
 npm run gh:logs         # View failed logs interactively
@@ -324,11 +336,13 @@ npm run gh:diagnose     # Run full diagnostics in seconds
 ```
 
 ### Automated CI/CD
+
 - Every push to main → Automatic production deployment
 - Every PR → Automatic preview deployment + comment with URL
 - Failed workflows → Easy log access via `npm run gh:logs`
 
 ### Time Savings
+
 - **Before:** Complex CLI commands, multiple steps, manual URL checking
 - **After:** Single npm command, automatic URL copy, browser open option
 - **Estimated:** 5-10 minutes saved per deployment
@@ -343,6 +357,7 @@ npm run gh:diagnose     # Run full diagnostics in seconds
 **Severity:** Non-critical (script functions correctly)
 
 **Resolution Options:**
+
 1. Remove the variable (1-line fix)
 2. Use for logging (2-line fix)
 3. Ignore (acceptable - doesn't affect functionality)
@@ -354,6 +369,7 @@ npm run gh:diagnose     # Run full diagnostics in seconds
 **Severity:** Non-critical (documentation renders correctly)
 
 **Resolution Options:**
+
 1. Fix formatting (wrap URLs in `<>`, add blank lines)
 2. Ignore (acceptable - content is accurate and clear)
 
@@ -370,6 +386,7 @@ npm run gh:diagnose     # Run full diagnostics in seconds
 ## Success Metrics
 
 ### Infrastructure Complete ✅
+
 - 7 new files created and pushed
 - 1 file modified (package.json)
 - 747 lines of code added
@@ -377,11 +394,13 @@ npm run gh:diagnose     # Run full diagnostics in seconds
 - 1 comprehensive setup guide
 
 ### Automation Ready ⏸️
+
 - Waiting for: GitHub Actions manual enablement
 - After enablement: ~5 minutes to configure secrets
 - Then: Fully automated CI/CD pipeline
 
 ### Quality Assurance ✅
+
 - All scripts include error handling
 - All scripts include auth checking
 - All scripts include user-friendly output
@@ -391,6 +410,7 @@ npm run gh:diagnose     # Run full diagnostics in seconds
 ## Files Reference
 
 ### Scripts Location
+
 ```
 f:\wedding-website\scripts\
 ├── gh-workflow-status.ps1      (GitHub Actions status dashboard)
@@ -402,18 +422,21 @@ f:\wedding-website\scripts\
 ```
 
 ### Workflow Location
+
 ```
 f:\wedding-website\.github\workflows\
 └── deploy-vercel.yml           (Automated Vercel deployment)
 ```
 
 ### Documentation Location
+
 ```
 f:\wedding-website\docs\
 └── GITHUB-ACTIONS-SETUP.md     (Complete setup guide)
 ```
 
 ### Configuration Files
+
 ```
 f:\wedding-website\
 ├── .vercel\project.json        (Vercel project IDs)
@@ -425,6 +448,7 @@ f:\wedding-website\
 ## Commands Quick Reference
 
 ### GitHub Actions Management
+
 ```powershell
 npm run gh:status      # View workflow run status and statistics
 npm run gh:logs        # View logs for failed workflow runs  
@@ -432,6 +456,7 @@ npm run gh:diagnose    # Run comprehensive CI/CD diagnostics
 ```
 
 ### Vercel Deployments
+
 ```powershell
 npm run deploy:preview  # Deploy preview to Vercel
 npm run deploy:prod     # Deploy to production (requires confirmation)
@@ -439,6 +464,7 @@ npm run deploy:inspect  # Inspect latest deployment details
 ```
 
 ### Setup Commands (After Manual Enablement)
+
 ```powershell
 gh secret set VERCEL_TOKEN                        # Interactive token input
 gh secret set VERCEL_ORG_ID --body "..."         # Set org ID
@@ -468,12 +494,14 @@ gh secret list                                    # Verify all 9 secrets
 ## Project Health Impact
 
 ### Before This Session
+
 - **Deployment:** Manual Vercel CLI commands
 - **Workflow Management:** Manual GitHub web interface
 - **Diagnostics:** Manual investigation
 - **Time per deployment:** 5-10 minutes
 
 ### After Manual Setup Complete
+
 - **Deployment:** One npm command (`npm run deploy:preview`)
 - **Workflow Management:** CLI scripts with statistics
 - **Diagnostics:** Automated 8-point check
@@ -487,11 +515,13 @@ Successfully implemented comprehensive CI/CD infrastructure with GitHub Actions 
 **Current blocker:** GitHub Actions needs manual enablement via web interface (404 errors from API).
 
 **User action required:**
-1. Enable GitHub Actions: https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions
-2. Create Vercel token: https://vercel.com/account/tokens
+
+1. Enable GitHub Actions: <https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions>
+2. Create Vercel token: <https://vercel.com/account/tokens>
 3. Configure 9 secrets via `gh secret set` commands (all values provided in setup guide)
 
 **After manual setup (~10 minutes):**
+
 - Fully automated deployments on every push/PR
 - One-command local deployments
 - Easy workflow management and diagnostics

@@ -65,33 +65,39 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-lg">
-      <div className="max-w-7xl mx-auto px-8 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 glass-elegant shadow-elegant border-b border-gold-200/30">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 py-3">
         <div className="flex justify-between items-center">
-          {/* Logo/Brand */}
+          {/* Logo/Brand - Enhanced */}
           <button
             onClick={() => scrollToSection('hero')}
-            className="font-display text-2xl font-bold text-sage hover:text-blush transition-colors cursor-pointer"
+            className="group font-display text-2xl md:text-3xl font-bold cursor-pointer transition-all duration-300"
+            aria-label="Return to top of page"
           >
-            A & J
+            <span className="bg-gradient-to-r from-sage-600 to-blush-500 bg-clip-text text-transparent group-hover:from-sage-500 group-hover:to-gold-500 transition-all duration-300">
+              A & J
+            </span>
+            <span className="block h-0.5 w-0 group-hover:w-full bg-gradient-to-r from-sage-500 to-gold-500 transition-all duration-300 rounded-full"></span>
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className={`font-body text-lg transition-colors relative group cursor-pointer ${
+                className={`font-body text-base transition-all duration-300 relative group cursor-pointer ${
                   activeSection === link.id
-                    ? 'text-sage font-semibold'
-                    : 'text-gray-700 hover:text-sage'
+                    ? 'text-sage-600 font-semibold'
+                    : 'text-charcoal/70 hover:text-sage-600'
                 }`}
               >
                 {link.label}
                 <span
-                  className={`absolute bottom-0 left-0 h-0.5 bg-sage transition-all duration-300 ${
-                    activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'
+                  className={`absolute -bottom-1 left-0 h-0.5 rounded-full transition-all duration-300 ${
+                    activeSection === link.id 
+                      ? 'w-full bg-gradient-to-r from-sage-500 to-gold-500' 
+                      : 'w-0 group-hover:w-full bg-gradient-to-r from-sage-400 to-blush-400'
                   }`}
                 ></span>
               </button>
@@ -101,7 +107,7 @@ export default function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-sage hover:text-blush transition-colors"
+            className="md:hidden p-2 text-sage-600 hover:text-gold-500 transition-colors rounded-lg hover:bg-sage-50"
             aria-label="Toggle menu"
           >
             {isOpen ? (
@@ -128,15 +134,15 @@ export default function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden mt-4 pb-4 space-y-4 animate-fade-in">
+          <div className="md:hidden mt-4 pb-4 space-y-2 animate-fade-in bg-white/50 backdrop-blur-md rounded-2xl p-4 border border-gold-200/30">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className={`block w-full text-left font-body text-lg transition-colors py-2 cursor-pointer ${
+                className={`block w-full text-left font-body text-base transition-all duration-300 py-3 px-4 rounded-xl cursor-pointer ${
                   activeSection === link.id
-                    ? 'text-sage font-semibold'
-                    : 'text-gray-700 hover:text-sage'
+                    ? 'text-sage-600 font-semibold bg-sage-50 shadow-sm'
+                    : 'text-charcoal/70 hover:text-sage-600 hover:bg-sage-50/50'
                 }`}
               >
                 {link.label}

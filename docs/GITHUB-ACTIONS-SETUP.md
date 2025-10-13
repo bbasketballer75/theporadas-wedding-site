@@ -15,7 +15,7 @@ All workflow files have been pushed to GitHub, but GitHub Actions returns 404 er
 
 ### Step 1: Enable GitHub Actions
 
-1. Go to: https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions
+1. Go to: <https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions>
 2. Under "Actions permissions", select:
    - ✅ **Allow all actions and reusable workflows**
 3. Under "Workflow permissions", select:
@@ -25,7 +25,7 @@ All workflow files have been pushed to GitHub, but GitHub Actions returns 404 er
 
 ### Step 2: Verify Actions Tab
 
-1. Go to: https://github.com/bbasketballer75/theporadas-wedding-site/actions
+1. Go to: <https://github.com/bbasketballer75/theporadas-wedding-site/actions>
 2. You should now see the Actions tab (not 404)
 3. If workflows appear, GitHub Actions is now enabled!
 
@@ -36,7 +36,8 @@ Once Actions is enabled, set up required secrets:
 #### A. Get Vercel Token
 
 **Option 1: Vercel Dashboard (Recommended)**
-1. Go to: https://vercel.com/account/tokens
+
+1. Go to: <https://vercel.com/account/tokens>
 2. Click **Create Token**
 3. Name: `GitHub Actions CI/CD`
 4. Scope: `Full Account`
@@ -45,6 +46,7 @@ Once Actions is enabled, set up required secrets:
 7. **Copy the token** (you won't see it again!)
 
 **Option 2: Vercel CLI**
+
 ```powershell
 # This may work after Actions is enabled
 vercel token create "GitHub-Actions-CICD"
@@ -77,7 +79,7 @@ gh secret list
 
 #### C. Alternative: Set via Web Interface
 
-1. Go to: https://github.com/bbasketballer75/theporadas-wedding-site/settings/secrets/actions
+1. Go to: <https://github.com/bbasketballer75/theporadas-wedding-site/settings/secrets/actions>
 2. Click **New repository secret** for each:
 
 | Secret Name | Value | Source |
@@ -126,6 +128,7 @@ npm run gh:status
 Once setup is complete:
 
 ### GitHub Actions Commands
+
 ```powershell
 npm run gh:status      # View workflow run status and statistics
 npm run gh:logs        # View logs for failed workflow runs
@@ -133,6 +136,7 @@ npm run gh:diagnose    # Run comprehensive CI/CD diagnostics
 ```
 
 ### Vercel Deployment Commands
+
 ```powershell
 npm run deploy:preview  # Deploy preview to Vercel (one command)
 npm run deploy:prod     # Deploy to production (with confirmations)
@@ -144,13 +148,13 @@ npm run deploy:inspect  # Inspect latest deployment details
 1. **deploy-vercel.yml** - Automated Vercel deployments
    - Triggers: Push to main (production), PRs to main (preview)
    - Features: PR comments with URLs, step summaries
-   
+
 2. **e2e.yml** - Playwright E2E tests
    - Runs on: windows-latest with Turbopack
-   
+
 3. **deploy-site.yml** - Firebase Hosting deployment
    - Uses: Workload Identity Federation
-   
+
 4. Other workflows: no-env-commit, release, post-deploy-smoke, etc.
 
 ## Troubleshooting
@@ -166,11 +170,13 @@ npm run deploy:inspect  # Inspect latest deployment details
 **Problem:** Push to main but no workflow runs
 
 **Possible causes:**
+
 1. Actions not enabled - see Step 1
 2. Workflow files have syntax errors - check `.github/workflows/`
 3. Branch protection rules blocking Actions
 
 **Solution:**
+
 ```powershell
 # Check workflow files for errors
 npm run gh:diagnose
@@ -204,7 +210,8 @@ gh workflow run deploy-vercel.yml
 ## Support
 
 If issues persist:
-- Check: https://github.com/bbasketballer75/theporadas-wedding-site/actions
+
+- Check: <https://github.com/bbasketballer75/theporadas-wedding-site/actions>
 - Run: `npm run gh:diagnose` for detailed diagnostics
 - Review: Workflow files in `.github/workflows/`
 - Contact: GitHub Support if Actions unavailable for repository

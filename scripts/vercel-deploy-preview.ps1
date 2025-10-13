@@ -54,7 +54,8 @@ try {
             try {
                 Set-Clipboard -Value $deployUrl
                 Write-Host "`n📋 URL copied to clipboard!" -ForegroundColor Yellow
-            } catch {
+            }
+            catch {
                 Write-Host "`n⚠️  Could not copy to clipboard" -ForegroundColor Yellow
             }
             
@@ -67,24 +68,28 @@ try {
             # Show inspection command
             Write-Host "`n💡 Inspect deployment:" -ForegroundColor Cyan
             Write-Host "   vercel inspect $deployUrl" -ForegroundColor Gray
-        } else {
+        }
+        else {
             Write-Host "`n✅ Deployment completed" -ForegroundColor Green
             Write-Host "⚠️  Could not extract URL from output" -ForegroundColor Yellow
             Write-Host "`nFull output:" -ForegroundColor Gray
             Write-Host $url
         }
-    } else {
+    }
+    else {
         Write-Host "`n❌ Deployment failed!" -ForegroundColor Red
         Write-Host "`nError output:" -ForegroundColor Yellow
         Write-Host $url
         exit 1
     }
 
-} catch {
+}
+catch {
     Write-Host "`n❌ Error: $_" -ForegroundColor Red
     Write-Host $_.ScriptStackTrace -ForegroundColor DarkGray
     exit 1
-} finally {
+}
+finally {
     Pop-Location
 }
 

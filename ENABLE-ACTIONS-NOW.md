@@ -19,6 +19,7 @@ failed to fetch public key: HTTP 404: Not Found
 ### Step 1: Enable GitHub Actions (2 minutes) - **DO THIS FIRST!**
 
 1. **Open this URL in your browser:**
+
    ```
    https://github.com/bbasketballer75/theporadas-wedding-site/settings/actions
    ```
@@ -33,12 +34,13 @@ failed to fetch public key: HTTP 404: Not Found
 4. **Click the green "Save" button**
 
 5. **Verify it worked:**
-   - Visit: https://github.com/bbasketballer75/theporadas-wedding-site/actions
+   - Visit: <https://github.com/bbasketballer75/theporadas-wedding-site/actions>
    - You should see the Actions tab (not a 404 error)
 
 ### Step 2: Get Your Vercel Token (3 minutes)
 
 1. **Open this URL:**
+
    ```
    https://vercel.com/account/tokens
    ```
@@ -68,6 +70,7 @@ cd f:\wedding-website
 ```
 
 **What happens:**
+
 1. ✅ Script checks if Actions is enabled (fails gracefully if not)
 2. 💬 Prompts you to paste your Vercel token
 3. ✅ Automatically loads Vercel IDs from `.vercel/project.json`
@@ -77,6 +80,7 @@ cd f:\wedding-website
 7. 🎉 Shows success message with next steps
 
 **Expected output:**
+
 ```
 Setting VERCEL_TOKEN... ✓
 Setting VERCEL_ORG_ID... ✓
@@ -135,16 +139,19 @@ After these 3 simple steps (5-7 minutes total):
 ## 🆘 Need Help?
 
 **If setup script fails:**
+
 - Make sure Step 1 (Enable Actions) is complete - this is the #1 cause of failures
 - Check you copied the full Vercel token (no spaces, complete string)
 - Try manual commands from `CI-CD-QUICK-START.md` (Option B)
 
 **If you see 404 errors:**
+
 - Actions not enabled yet - complete Step 1 first
 - Wait 30 seconds after enabling, then try again
 - GitHub may need a moment to propagate the settings
 
 **Documentation:**
+
 - Quick Start: `CI-CD-QUICK-START.md`
 - Full Setup Guide: `docs/GITHUB-ACTIONS-SETUP.md`
 - Implementation Details: `docs/CI-CD-IMPLEMENTATION-COMPLETE.md`

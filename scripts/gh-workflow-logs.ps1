@@ -30,7 +30,7 @@ try {
     if ([string]::IsNullOrEmpty($RunId)) {
         if ($Failed) {
             Write-Host "🔍 Finding latest failed run..." -ForegroundColor Yellow
-            $failedRuns = gh run list --status failure --limit 5 --json databaseId,name,workflowName,conclusion,createdAt | ConvertFrom-Json
+            $failedRuns = gh run list --status failure --limit 5 --json databaseId, name, workflowName, conclusion, createdAt | ConvertFrom-Json
             
             if ($failedRuns.Count -eq 0) {
                 Write-Host "✅ No failed runs found!" -ForegroundColor Green
@@ -47,16 +47,19 @@ try {
             
             if ([string]::IsNullOrWhiteSpace($selection)) {
                 $RunId = $failedRuns[0].databaseId
-            } else {
+            }
+            else {
                 $index = [int]$selection - 1
                 if ($index -ge 0 -and $index -lt $failedRuns.Count) {
                     $RunId = $failedRuns[$index].databaseId
-                } else {
+                }
+                else {
                     Write-Host "❌ Invalid selection" -ForegroundColor Red
                     exit 1
                 }
             }
-        } else {
+        }
+        else {
             Write-Host "🔍 Finding latest run..." -ForegroundColor Yellow
             $RunId = gh run list --limit 1 --json databaseId --jq '.[0].databaseId'
         }
@@ -75,7 +78,8 @@ try {
 
     Write-Host "`n💡 Tip: View full logs at: https://github.com/$(gh repo view --json nameWithOwner --jq .nameWithOwner)/actions/runs/$RunId" -ForegroundColor Cyan
 
-} catch {
+}
+catch {
     Write-Host "`n❌ Error: $_" -ForegroundColor Red
     exit 1
 }

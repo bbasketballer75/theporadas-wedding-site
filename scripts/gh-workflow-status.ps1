@@ -38,13 +38,14 @@ try {
     Write-Host "`n📋 Recent workflow runs:" -ForegroundColor Yellow
     if ($Workflow -eq "all") {
         gh run list --limit $Limit
-    } else {
+    }
+    else {
         gh run list --workflow=$Workflow --limit $Limit
     }
 
     # Get workflow summary
     Write-Host "`n📊 Workflow summary (last 50 runs):" -ForegroundColor Green
-    $summary = gh run list --limit 50 --json status,conclusion,name,workflowName | ConvertFrom-Json
+    $summary = gh run list --limit 50 --json status, conclusion, name, workflowName | ConvertFrom-Json
     
     $grouped = $summary | Group-Object -Property workflowName | ForEach-Object {
         $workflow = $_.Name
@@ -54,11 +55,11 @@ try {
         $pending = ($_.Group | Where-Object { $_.status -eq "in_progress" -or $_.status -eq "queued" }).Count
         
         [PSCustomObject]@{
-            Workflow = $workflow
-            Total = $total
-            Success = $success
-            Failed = $failed
-            Pending = $pending
+            Workflow    = $workflow
+            Total       = $total
+            Success     = $success
+            Failed      = $failed
+            Pending     = $pending
             SuccessRate = if ($total -gt 0) { [math]::Round(($success / $total) * 100, 1) } else { 0 }
         }
     }
@@ -67,17 +68,19 @@ try {
 
     # Show active runs
     Write-Host "`n🔄 Active workflow runs:" -ForegroundColor Cyan
-    $active = gh run list --limit 20 --json status,name,databaseId,createdAt | ConvertFrom-Json | Where-Object { $_.status -eq "in_progress" -or $_.status -eq "queued" }
+    $active = gh run list --limit 20 --json status, name, databaseId, createdAt | ConvertFrom-Json | Where-Object { $_.status -eq "in_progress" -or $_.status -eq "queued" }
     
     if ($active.Count -gt 0) {
         $active | ForEach-Object {
             Write-Host "  • $($_.name) (ID: $($_.databaseId)) - Started: $($_.createdAt)" -ForegroundColor Yellow
         }
-    } else {
+    }
+    else {
         Write-Host "  (none)" -ForegroundColor DarkGray
     }
 
-} catch {
+}
+catch {
     Write-Host "`n❌ Error: $_" -ForegroundColor Red
     Write-Host $_.ScriptStackTrace -ForegroundColor DarkGray
     exit 1

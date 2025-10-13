@@ -59,6 +59,7 @@ cd f:\wedding-website
 ```
 
 The script will:
+
 - ✅ Check if Actions is enabled (fails with helpful message if not)
 - ✅ Load all values from `.vercel/project.json` and `site/.env.production`
 - ✅ Set all 9 secrets automatically

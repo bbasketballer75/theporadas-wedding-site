@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -67,22 +67,22 @@ jobs:
           script: |
             const deploymentUrl = '${{ steps.deploy.outputs.url }}';
             const comment = `## 🚀 Preview Deployment Ready!
-            
+
             **Preview URL:** ${deploymentUrl}
-            
+
             ### Deployment Details
             - **Environment:** Preview
             - **Commit:** \`${{ github.sha }}\`
             - **Branch:** \`${{ github.head_ref }}\`
-            
+
             ### Quick Links
             - [View Preview](${deploymentUrl})
             - [View Deployment Logs](${deploymentUrl}/_logs)
             - [Inspect Deployment](https://vercel.com/austins-projects-bb7c50ab/wedding-website)
-            
+
             ---
             *This preview will be automatically deleted after 30 days.*`;
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
