@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+// NOTE: Tailwind v4 uses CSS-based configuration in globals.css
+// This file is kept for backward compatibility but is not actively used
+module.exports = {
   content: ['./pages/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {

@@ -1,8 +1,95 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Sophisticated Wedding Theme - 2025 */
+@theme {
+  /* Custom Color Palette */
+  --color-sage-50: #f0f7f2;
+  --color-sage-100: #d9ebe0;
+  --color-sage-200: #b3d7c1;
+  --color-sage-300: #8cc3a2;
+  --color-sage-400: #66af83;
+  --color-sage-500: #4a8c66;
+  --color-sage-600: #3d7355;
+  --color-sage-700: #305a44;
+  --color-sage-800: #234133;
+  --color-sage-900: #162822;
+  
+  --color-blush-50: #fdf4f5;
+  --color-blush-100: #fbe8eb;
+  --color-blush-200: #f5c1ca;
+  --color-blush-300: #ef9aa9;
+  --color-blush-400: #e97388;
+  --color-blush-500: #d4556d;
+  --color-blush-600: #b54558;
+  --color-blush-700: #963643;
+  --color-blush-800: #77272e;
+  --color-blush-900: #581819;
+  
+  --color-gold-50: #fefbf3;
+  --color-gold-100: #fcf5e1;
+  --color-gold-200: #f8e8b8;
+  --color-gold-300: #f4db8f;
+  --color-gold-400: #f0ce66;
+  --color-gold-500: #d4af37;
+  --color-gold-600: #b8932e;
+  --color-gold-700: #9c7725;
+  --color-gold-800: #805b1c;
+  --color-gold-900: #643f13;
+  
+  --color-ivory: #faf8f3;
+  --color-champagne: #f7e7ce;
+  --color-dusty: #c9ada7;
+  --color-charcoal: #4a4e69;
+  
+  /* Custom Fonts */
+  --font-display: var(--font-playfair), Georgia, serif;
+  --font-body: var(--font-lora), Georgia, serif;
+  
+  /* Custom Animations */
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
+  --animate-fade-in-delay: fadeIn 0.8s ease-out 0.2s forwards;
+  --animate-slide-up: slideUp 0.8s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.5s infinite;
+  --animate-glow: glow 2s ease-in-out infinite;
+  
+  /* Custom Shadows */
+  --shadow-elegant: 0 10px 40px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-elegant-lg: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-glow-gold: 0 0 30px rgba(212, 175, 55, 0.3), 0 0 60px rgba(212, 175, 55, 0.1);
+  --shadow-glow-sage: 0 0 30px rgba(74, 140, 102, 0.3), 0 0 60px rgba(74, 140, 102, 0.1);
+  --shadow-inner-elegant: inset 0 2px 8px rgba(0, 0, 0, 0.06);
+  
+  /* Custom Blur */
+  --blur-xs: 2px;
+}
+
+/* Keyframes for custom animations */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.5), 0 0 60px rgba(212, 175, 55, 0.3); }
+}
+
 @layer base {
   body {
     font-family: var(--font-lora), Georgia, serif;
