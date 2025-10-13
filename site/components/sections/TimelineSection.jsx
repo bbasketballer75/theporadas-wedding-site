@@ -134,12 +134,12 @@ export default function TimelineSection() {
 
   const getCategoryColor = (category) => {
     const colors = {
-      ceremony: 'from-sage to-mint',
-      photos: 'from-blush to-cream',
-      reception: 'from-sage/80 to-blush/80',
-      sendoff: 'from-blush via-sage to-mint',
+      ceremony: 'from-sage-500 to-sage-600',
+      photos: 'from-blush-500 to-blush-600',
+      reception: 'from-sage-600 to-blush-600',
+      sendoff: 'from-blush-500 via-gold-500 to-sage-500',
     };
-    return colors[category] || 'from-sage to-blush';
+    return colors[category] || 'from-sage-500 to-blush-500';
   };
 
   const scrollToSection = (id) => {
@@ -150,14 +150,24 @@ export default function TimelineSection() {
   };
 
   return (
-    <section id="timeline" className="w-full py-20 bg-gradient-to-br from-blush/10 to-cream/50">
+    <section
+      id="timeline"
+      className="section-elegant bg-gradient-to-br from-ivory via-blush-50/30 to-ivory"
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         <SectionTransition>
           {/* Header */}
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-7xl font-display text-sage mb-4">Our Wedding Day</h2>
-            <p className="text-2xl text-blush font-display mb-6">May 10, 2025</p>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
+            <div className="flex justify-center items-center mb-6">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+              <div className="mx-4 text-4xl">⏰</div>
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+            </div>
+            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-4">
+              Our Wedding Day
+            </h2>
+            <p className="text-2xl text-blush-500 font-display mb-6">May 10, 2025</p>
+            <p className="text-xl text-charcoal/80 max-w-2xl mx-auto leading-relaxed">
               From the moment we said &ldquo;I do&rdquo; to our sparkler sendoff, here&rsquo;s how
               our perfect day unfolded. ✨
             </p>
@@ -173,7 +183,7 @@ export default function TimelineSection() {
         ) : (
           <div className="relative">
             {/* Timeline Line */}
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-sage via-blush to-sage h-full opacity-30"></div>
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-sage-500 via-blush-500 to-gold-500 h-full opacity-30"></div>
 
             {/* Events */}
             <div className="space-y-12">
@@ -185,31 +195,31 @@ export default function TimelineSection() {
                   }`}
                 >
                   {/* Timeline Dot */}
-                  <div className="hidden md:flex absolute left-1/2 top-8 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-sage to-blush shadow-lg z-10 items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-white"></div>
+                  <div className="hidden md:flex absolute left-1/2 top-8 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-sage-500 to-blush-500 shadow-glow-gold z-10 items-center justify-center">
+                    <div className="w-4 h-4 rounded-full bg-white"></div>
                   </div>
 
                   {/* Event Card */}
                   <div className={`md:w-11/12 ${index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
                     <SectionTransition threshold={0.3}>
-                      <div className="bg-white/90 backdrop-blur rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-2 border-transparent hover:border-sage/20">
+                      <div className="card-elegant p-8 hover:-translate-y-1">
                         {/* Icon & Time */}
                         <div
                           className={`flex items-center gap-4 mb-4 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
                         >
-                          <div
-                            className={`text-5xl bg-gradient-to-br ${getCategoryColor(event.category)} bg-clip-text`}
-                          >
+                          <div className={`text-5xl ${index % 2 === 0 ? 'float-elegant' : ''}`}>
                             {event.icon}
                           </div>
                           <div className={index % 2 !== 0 ? 'md:text-right' : ''}>
-                            <h3 className="text-2xl font-display text-sage">{event.title}</h3>
-                            <p className="text-lg text-blush font-semibold">{event.time}</p>
+                            <h3 className="text-2xl font-display text-sage-600">{event.title}</h3>
+                            <p className="text-lg text-blush-500 font-semibold">{event.time}</p>
                           </div>
                         </div>
 
                         {/* Description */}
-                        <p className="text-gray-700 leading-relaxed text-lg">{event.description}</p>
+                        <p className="text-charcoal/80 leading-relaxed text-lg">
+                          {event.description}
+                        </p>
 
                         {/* Category Badge */}
                         <div className={`mt-4 ${index % 2 !== 0 ? 'md:text-right' : ''}`}>
@@ -230,17 +240,14 @@ export default function TimelineSection() {
 
         {/* Call to Action */}
         <SectionTransition>
-          <div className="mt-16 text-center bg-gradient-sage-blush rounded-3xl p-12 shadow-2xl">
+          <div className="mt-16 text-center bg-gradient-to-r from-sage-500 via-blush-500 to-gold-500 rounded-3xl p-12 shadow-elegant-lg">
             <h3 className="text-3xl font-display text-white mb-4">
               Were you there? Share your perspective! 📸
             </h3>
             <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
               We&rsquo;d love to see your photos and videos from any of these moments.
             </p>
-            <button
-              onClick={() => scrollToSection('upload')}
-              className="inline-block bg-white text-sage px-8 py-4 rounded-full font-semibold text-lg hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-            >
+            <button onClick={() => scrollToSection('upload')} className="btn-accent cursor-pointer">
               Upload Your Memories
             </button>
           </div>

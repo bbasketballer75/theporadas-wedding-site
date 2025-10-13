@@ -52,13 +52,18 @@ export default function VenueSection() {
   };
 
   return (
-    <section id="venue" className="w-full py-20 bg-gradient-to-br from-sage/10 to-blush/10">
+    <section id="venue" className="section-elegant bg-gradient-to-br from-ivory via-sage-50/20 to-ivory">
       <div className="container mx-auto px-4 max-w-6xl">
         <SectionTransition>
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-5xl md:text-6xl font-display text-sage mb-4">Our Venues</h2>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
+            <div className="flex justify-center items-center mb-6">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+              <div className="mx-4 text-4xl">🏛️</div>
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+            </div>
+            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-4">Our Venues</h2>
+            <p className="text-xl text-charcoal/70 max-w-2xl mx-auto leading-relaxed">
               Where we celebrated the most important day of our lives.
             </p>
           </div>
@@ -67,24 +72,16 @@ export default function VenueSection() {
         {/* Tab Switcher */}
         <SectionTransition>
           <div className="flex justify-center mb-8">
-            <div className="bg-white rounded-2xl shadow-xl p-2 inline-flex">
+            <div className="card-elegant p-2 inline-flex">
               <button
                 onClick={() => setActiveTab('ceremony')}
-                className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                  activeTab === 'ceremony'
-                    ? 'bg-gradient-sage-blush text-white shadow-lg'
-                    : 'text-gray-600 hover:text-sage'
-                }`}
+                className={activeTab === 'ceremony' ? 'btn-primary' : 'px-8 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'}
               >
                 💍 Ceremony
               </button>
               <button
                 onClick={() => setActiveTab('reception')}
-                className={`px-8 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                  activeTab === 'reception'
-                    ? 'bg-gradient-sage-blush text-white shadow-lg'
-                    : 'text-gray-600 hover:text-sage'
-                }`}
+                className={activeTab === 'reception' ? 'btn-primary' : 'px-8 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'}
               >
                 🎉 Reception
               </button>
@@ -98,16 +95,16 @@ export default function VenueSection() {
           <SectionTransition>
             <div className="space-y-6">
               {/* Main Info Card */}
-              <div className="bg-white rounded-3xl shadow-2xl p-8">
+              <div className="card-elegant p-8">
                 <div className="text-5xl mb-4">{activeVenue.icon}</div>
-                <h3 className="text-3xl font-display text-sage mb-2">{activeVenue.name}</h3>
-                <p className="text-blush font-semibold text-lg mb-4">{activeVenue.time}</p>
-                <p className="text-gray-700 leading-relaxed mb-6">{activeVenue.description}</p>
+                <h3 className="text-3xl font-display text-sage-600 mb-2">{activeVenue.name}</h3>
+                <p className="text-blush-500 font-semibold text-lg mb-4">{activeVenue.time}</p>
+                <p className="text-charcoal/80 leading-relaxed mb-6">{activeVenue.description}</p>
 
                 {/* Address */}
-                <div className="flex items-start gap-3 mb-6 p-4 bg-sage/10 rounded-xl">
+                <div className="flex items-start gap-3 mb-6 p-4 bg-sage-100 rounded-xl">
                   <svg
-                    className="w-6 h-6 text-sage flex-shrink-0 mt-1"
+                    className="w-6 h-6 text-sage-600 flex-shrink-0 mt-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -126,19 +123,19 @@ export default function VenueSection() {
                     />
                   </svg>
                   <div>
-                    <p className="font-semibold text-sage mb-1">Address</p>
-                    <p className="text-gray-700">{activeVenue.address}</p>
+                    <p className="font-semibold text-sage-700 mb-1">Address</p>
+                    <p className="text-charcoal/80">{activeVenue.address}</p>
                   </div>
                 </div>
 
                 {/* Features */}
                 <div>
-                  <h4 className="font-display text-xl text-sage mb-3">Features & Amenities</h4>
+                  <h4 className="font-display text-xl text-sage-600 mb-3">Features & Amenities</h4>
                   <ul className="space-y-2">
                     {activeVenue.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-2 text-gray-700">
+                      <li key={index} className="flex items-center gap-2 text-charcoal/80">
                         <svg
-                          className="w-5 h-5 text-blush flex-shrink-0"
+                          className="w-5 h-5 text-blush-500 flex-shrink-0"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -161,14 +158,14 @@ export default function VenueSection() {
               <div className="grid grid-cols-2 gap-4">
                 <button
                   onClick={() => scrollToSection('gallery')}
-                  className="bg-gradient-to-br from-sage to-mint text-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                  className="bg-gradient-to-br from-sage-500 to-sage-600 text-white rounded-2xl p-6 text-center hover:shadow-elegant-lg transition-all duration-300 hover:scale-105 cursor-pointer"
                 >
                   <div className="text-3xl mb-2">📸</div>
                   <div className="font-semibold">View Photos</div>
                 </button>
                 <button
                   onClick={() => scrollToSection('timeline')}
-                  className="bg-gradient-to-br from-blush to-cream text-white rounded-2xl p-6 text-center hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                  className="bg-gradient-to-br from-blush-500 to-blush-600 text-white rounded-2xl p-6 text-center hover:shadow-elegant-lg transition-all duration-300 hover:scale-105 cursor-pointer"
                 >
                   <div className="text-3xl mb-2">⏰</div>
                   <div className="font-semibold">See Timeline</div>
@@ -195,22 +192,22 @@ export default function VenueSection() {
               </div>
 
               {/* Travel Tips */}
-              <div className="bg-white/80 backdrop-blur rounded-2xl p-6 shadow-lg">
-                <h4 className="font-display text-xl text-sage mb-4 flex items-center gap-2">
+              <div className="card-elegant p-6">
+                <h4 className="font-display text-xl text-sage-600 mb-4 flex items-center gap-2">
                   <span>🚗</span>
                   <span>Getting There</span>
                 </h4>
-                <div className="space-y-3 text-sm text-gray-700">
+                <div className="space-y-3 text-sm text-charcoal/80">
                   <p>
-                    <strong className="text-sage">Parking:</strong> Ample free parking available
+                    <strong className="text-sage-700">Parking:</strong> Ample free parking available
                     on-site
                   </p>
                   <p>
-                    <strong className="text-sage">Public Transit:</strong> Accessible via local bus
+                    <strong className="text-sage-700">Public Transit:</strong> Accessible via local bus
                     routes
                   </p>
                   <p>
-                    <strong className="text-sage">Rideshare:</strong> Uber & Lyft pickup/dropoff
+                    <strong className="text-sage-700">Rideshare:</strong> Uber & Lyft pickup/dropoff
                     area available
                   </p>
                 </div>
@@ -221,7 +218,7 @@ export default function VenueSection() {
 
         {/* Bottom CTA */}
         <SectionTransition>
-          <div className="mt-16 bg-gradient-sage-blush rounded-3xl p-12 text-center shadow-2xl">
+          <div className="mt-16 bg-gradient-to-r from-sage-500 via-blush-500 to-gold-500 rounded-3xl p-12 text-center shadow-elegant-lg">
             <h3 className="text-3xl font-display text-white mb-4">Share Your Venue Photos!</h3>
             <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
               Did you capture any beautiful shots of our venues? We&rsquo;d love to see your
@@ -229,7 +226,7 @@ export default function VenueSection() {
             </p>
             <button
               onClick={() => scrollToSection('upload')}
-              className="inline-block bg-white text-sage px-8 py-4 rounded-full font-semibold text-lg hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+              className="btn-accent cursor-pointer"
             >
               Upload Photos
             </button>

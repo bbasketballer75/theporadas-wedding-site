@@ -95,8 +95,8 @@ export default function Navigation() {
                 {link.label}
                 <span
                   className={`absolute -bottom-1 left-0 h-0.5 rounded-full transition-all duration-300 ${
-                    activeSection === link.id 
-                      ? 'w-full bg-gradient-to-r from-sage-500 to-gold-500' 
+                    activeSection === link.id
+                      ? 'w-full bg-gradient-to-r from-sage-500 to-gold-500'
                       : 'w-0 group-hover:w-full bg-gradient-to-r from-sage-400 to-blush-400'
                   }`}
                 ></span>

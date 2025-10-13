@@ -42,13 +42,18 @@ export default function GallerySection() {
   };
 
   return (
-    <section id="gallery" className="w-full py-20 bg-gradient-to-br from-mint/20 to-sage/10">
+    <section id="gallery" className="section-elegant bg-gradient-to-br from-ivory via-sage-50/20 to-ivory">
       <div className="container mx-auto px-4 max-w-7xl">
         <SectionTransition>
           {/* Header */}
           <div className="text-center mb-12">
-            <h2 className="text-5xl md:text-6xl font-display text-sage mb-4">Wedding Gallery</h2>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
+            <div className="flex justify-center items-center mb-6">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+              <div className="mx-4 text-4xl">📸</div>
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+            </div>
+            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-4">Wedding Gallery</h2>
+            <p className="text-xl text-charcoal/70 max-w-2xl mx-auto leading-relaxed">
               Relive the magic of our special day through these beautiful photos and videos shared
               by our guests.
             </p>
@@ -58,11 +63,11 @@ export default function GallerySection() {
         {/* Wedding Video Section */}
         <SectionTransition>
           <div className="mb-16">
-            <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+            <div className="card-elegant p-8 md:p-12">
               <div className="flex items-center justify-center mb-6">
-                <h3 className="text-4xl font-display text-sage text-center">🎬 Our Wedding Film</h3>
+                <h3 className="text-4xl font-display text-gradient-sage text-center">🎬 Our Wedding Film</h3>
               </div>
-              <p className="text-center text-gray-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-center text-charcoal/70 mb-6 max-w-2xl mx-auto">
                 Watch the highlight reel of our unforgettable day
               </p>
               <VideoPlayer videoId="dQw4w9WgXcQ" title="Austin & Jordyn Wedding Film" />
@@ -73,16 +78,12 @@ export default function GallerySection() {
         {/* Filter Tabs */}
         <SectionTransition>
           <div className="flex justify-center mb-8">
-            <div className="bg-white rounded-2xl shadow-xl p-2 inline-flex flex-wrap gap-2">
+            <div className="card-elegant p-2 inline-flex flex-wrap gap-2">
               {filters.map((f) => (
                 <button
                   key={f.id}
                   onClick={() => setFilter(f.id)}
-                  className={`px-6 py-3 rounded-xl font-semibold transition-all duration-300 ${
-                    filter === f.id
-                      ? 'bg-gradient-sage-blush text-white shadow-lg'
-                      : 'text-gray-600 hover:text-sage hover:bg-gray-50'
-                  }`}
+                  className={filter === f.id ? 'btn-primary' : 'px-6 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'}
                 >
                   <span className="mr-2">{f.icon}</span>
                   {f.label}
@@ -99,7 +100,7 @@ export default function GallerySection() {
 
         {/* Upload CTA */}
         <SectionTransition>
-          <div className="mt-16 bg-gradient-sage-blush rounded-3xl p-12 text-center shadow-2xl">
+          <div className="mt-16 bg-gradient-to-r from-sage-500 via-blush-500 to-gold-500 rounded-3xl p-12 text-center shadow-elegant-lg">
             <h3 className="text-3xl font-display text-white mb-4">
               Have photos or videos to share?
             </h3>
@@ -110,13 +111,13 @@ export default function GallerySection() {
             <div className="flex flex-wrap gap-4 justify-center">
               <button
                 onClick={() => scrollToSection('upload')}
-                className="inline-block bg-white text-sage px-8 py-4 rounded-full font-semibold text-lg hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                className="btn-accent cursor-pointer"
               >
                 📤 Upload Your Photos
               </button>
               <button
                 onClick={() => scrollToSection('timeline')}
-                className="inline-block bg-white/20 backdrop-blur text-white border-2 border-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-sage hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                className="btn-secondary cursor-pointer"
               >
                 ⏰ View Timeline
               </button>

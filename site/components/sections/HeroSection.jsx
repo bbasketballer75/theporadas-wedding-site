@@ -16,27 +16,44 @@ export default function HeroSection() {
       {/* Elegant Background Layers */}
       <div className="absolute inset-0 bg-gradient-to-br from-ivory via-champagne/30 to-ivory"></div>
       <div className="absolute inset-0 pattern-dots opacity-40"></div>
-      
+
       {/* Floating Decorative Elements */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-gold-200/20 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-40 right-20 w-40 h-40 bg-sage-200/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-      <div className="absolute top-1/3 right-10 w-24 h-24 bg-blush-200/20 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }}></div>
+      <div
+        className="absolute bottom-40 right-20 w-40 h-40 bg-sage-200/20 rounded-full blur-3xl animate-float"
+        style={{ animationDelay: '1s' }}
+      ></div>
+      <div
+        className="absolute top-1/3 right-10 w-24 h-24 bg-blush-200/20 rounded-full blur-2xl animate-float"
+        style={{ animationDelay: '2s' }}
+      ></div>
 
       <SectionTransition className="relative z-10 w-full max-w-6xl text-center">
         {/* Decorative Top Border */}
         <div className="flex justify-center items-center mb-8">
           <div className="h-px w-20 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
-          <div className="mx-4 text-5xl animate-float" style={{ filter: 'drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3))' }}>💐</div>
+          <div
+            className="mx-4 text-5xl animate-float"
+            style={{ filter: 'drop-shadow(0 4px 8px rgba(212, 175, 55, 0.3))' }}
+          >
+            💐
+          </div>
           <div className="h-px w-20 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
         </div>
 
         {/* Names with Elegant Typography */}
         <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold mb-6 animate-fade-in">
-          <span className="bg-gradient-to-r from-sage-600 via-sage-500 to-blush-500 bg-clip-text text-transparent" style={{ textShadow: '0 2px 20px rgba(74, 140, 102, 0.2)' }}>
+          <span
+            className="bg-gradient-to-r from-sage-600 via-sage-500 to-blush-500 bg-clip-text text-transparent"
+            style={{ textShadow: '0 2px 20px rgba(74, 140, 102, 0.2)' }}
+          >
             Austin
           </span>
           <span className="text-gold-500 mx-3 md:mx-6">&</span>
-          <span className="bg-gradient-to-r from-blush-500 via-blush-400 to-gold-500 bg-clip-text text-transparent" style={{ textShadow: '0 2px 20px rgba(212, 85, 109, 0.2)' }}>
+          <span
+            className="bg-gradient-to-r from-blush-500 via-blush-400 to-gold-500 bg-clip-text text-transparent"
+            style={{ textShadow: '0 2px 20px rgba(212, 85, 109, 0.2)' }}
+          >
             Jordyn
           </span>
         </h1>
@@ -59,7 +76,9 @@ export default function HeroSection() {
         >
           Celebrating love, family, and the beautiful memories of our special day.
           <br />
-          <span className="text-sage-600 font-semibold">Thank you for being part of our journey.</span>
+          <span className="text-sage-600 font-semibold">
+            Thank you for being part of our journey.
+          </span>
         </p>
 
         {/* CTA Buttons - Sophisticated Design */}
@@ -100,17 +119,14 @@ export default function HeroSection() {
         </div>
 
         {/* Elegant Quote Card with Enhanced Design */}
-        <div
-          className="max-w-3xl mx-auto animate-fade-in"
-          style={{ animationDelay: '800ms' }}
-        >
+        <div className="max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '800ms' }}>
           <div className="card-elegant p-8 md:p-12 relative">
             {/* Decorative Corners */}
             <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-gold-400/50 rounded-tl-lg"></div>
             <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-gold-400/50 rounded-tr-lg"></div>
             <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-gold-400/50 rounded-bl-lg"></div>
             <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-gold-400/50 rounded-br-lg"></div>
-            
+
             <div className="text-6xl text-gold-400 opacity-30 mb-2">&ldquo;</div>
             <p className="font-display text-xl md:text-2xl text-sage-700 italic leading-relaxed mb-2">
               Two hearts, one love, forever intertwined

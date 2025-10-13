@@ -61,13 +61,23 @@ export default function OurStorySection() {
   };
 
   return (
-    <section id="our-story" className="w-full py-20 bg-gradient-to-br from-cream/50 to-mint/30">
+    <section
+      id="our-story"
+      className="section-elegant bg-gradient-to-br from-ivory via-champagne/20 to-ivory"
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         <SectionTransition>
           {/* Hero Section */}
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-7xl font-display text-sage mb-6">Our Love Story</h2>
-            <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <div className="flex justify-center items-center mb-6">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+              <div className="mx-4 text-4xl">💫</div>
+              <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
+            </div>
+            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-6">
+              Our Love Story
+            </h2>
+            <p className="text-xl md:text-2xl text-charcoal/80 max-w-3xl mx-auto leading-relaxed">
               Every love story is beautiful, but ours is our favorite. From our first meeting to our
               wedding day, here&rsquo;s how our journey unfolded.
             </p>
@@ -77,7 +87,7 @@ export default function OurStorySection() {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-sage via-blush to-sage opacity-30"></div>
+          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-sage-500 via-blush-500 to-gold-500 opacity-30"></div>
 
           {/* Milestones */}
           {milestones.map((milestone, index) => (
@@ -88,29 +98,31 @@ export default function OurStorySection() {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="hidden lg:flex absolute left-1/2 top-12 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-sage to-blush shadow-xl z-10 items-center justify-center">
-                  <div className="w-4 h-4 rounded-full bg-white"></div>
+                <div className="hidden lg:flex absolute left-1/2 top-12 transform -translate-x-1/2 w-10 h-10 rounded-full bg-gradient-to-br from-sage-500 to-blush-500 shadow-glow-gold z-10 items-center justify-center">
+                  <div className="w-5 h-5 rounded-full bg-white"></div>
                 </div>
 
                 {/* Content Card */}
                 <div
                   className={`lg:w-11/12 ${milestone.side === 'left' ? 'lg:mr-auto' : 'lg:ml-auto'}`}
                 >
-                  <div className="bg-white/90 backdrop-blur rounded-3xl p-8 md:p-10 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                  <div className="card-elegant p-8 md:p-10 hover:-translate-y-2 transition-all duration-500">
                     {/* Icon & Title */}
                     <div
                       className={`flex items-center gap-4 mb-4 ${milestone.side === 'right' ? 'lg:flex-row-reverse lg:text-right' : ''}`}
                     >
-                      <div className="text-6xl">{milestone.icon}</div>
+                      <div className="text-6xl float-elegant">{milestone.icon}</div>
                       <div>
-                        <h3 className="text-3xl font-display text-sage mb-1">{milestone.title}</h3>
-                        <p className="text-xl text-blush font-semibold">{milestone.date}</p>
+                        <h3 className="text-3xl font-display text-sage-600 mb-1">
+                          {milestone.title}
+                        </h3>
+                        <p className="text-xl text-blush-500 font-semibold">{milestone.date}</p>
                       </div>
                     </div>
 
                     {/* Story */}
                     <p
-                      className={`text-gray-700 leading-relaxed text-lg ${milestone.side === 'right' ? 'lg:text-right' : ''}`}
+                      className={`text-charcoal/80 leading-relaxed text-lg ${milestone.side === 'right' ? 'lg:text-right' : ''}`}
                     >
                       {milestone.story}
                     </p>
@@ -123,48 +135,45 @@ export default function OurStorySection() {
 
         {/* Photo Memories Section */}
         <ScrollReveal>
-          <section className="mt-20 bg-gradient-to-br from-white/90 to-white/70 backdrop-blur rounded-3xl shadow-2xl p-8 md:p-12">
-            <h3 className="text-4xl font-display text-sage text-center mb-6">
+          <section className="mt-20 card-elegant p-8 md:p-12">
+            <h3 className="text-4xl font-display text-sage-600 text-center mb-6">
               Our Favorite Memories
             </h3>
-            <p className="text-center text-gray-600 mb-10 text-lg">
+            <p className="text-center text-charcoal/70 mb-10 text-lg">
               A glimpse into the moments that made our journey special
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="group relative aspect-square bg-gradient-to-br from-sage/20 to-mint/30 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <div className="group relative aspect-square bg-gradient-to-br from-sage-100 to-sage-200/50 rounded-2xl shadow-elegant overflow-hidden hover:shadow-elegant-lg transition-all duration-300 hover:-translate-y-1">
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
                   <span className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
                     📸
                   </span>
-                  <p className="text-sage font-semibold text-lg">Adventures Together</p>
+                  <p className="text-sage-700 font-semibold text-lg">Adventures Together</p>
                 </div>
               </div>
 
-              <div className="group relative aspect-square bg-gradient-to-br from-blush/20 to-cream/40 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <div className="group relative aspect-square bg-gradient-to-br from-blush-100 to-blush-200/50 rounded-2xl shadow-elegant overflow-hidden hover:shadow-elegant-lg transition-all duration-300 hover:-translate-y-1">
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
                   <span className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
                     💕
                   </span>
-                  <p className="text-blush font-semibold text-lg">Celebrating Love</p>
+                  <p className="text-blush-700 font-semibold text-lg">Celebrating Love</p>
                 </div>
               </div>
 
-              <div className="group relative aspect-square bg-gradient-to-br from-mint/30 to-sage/20 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
+              <div className="group relative aspect-square bg-gradient-to-br from-gold-100 to-gold-200/50 rounded-2xl shadow-elegant overflow-hidden hover:shadow-elegant-lg transition-all duration-300 hover:-translate-y-1">
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
                   <span className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
                     🎉
                   </span>
-                  <p className="text-sage font-semibold text-lg">Making Memories</p>
+                  <p className="text-gold-700 font-semibold text-lg">Making Memories</p>
                 </div>
               </div>
             </div>
 
             <div className="text-center mt-10">
-              <button
-                onClick={() => scrollToSection('gallery')}
-                className="inline-block bg-gradient-sage-blush text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
-              >
+              <button onClick={() => scrollToSection('gallery')} className="btn-primary">
                 View Our Full Gallery →
               </button>
             </div>
@@ -173,24 +182,24 @@ export default function OurStorySection() {
 
         {/* CTA Section */}
         <ScrollReveal>
-          <div className="mt-20 bg-gradient-sage-blush rounded-3xl p-12 text-center shadow-2xl">
+          <div className="mt-20 bg-gradient-to-r from-sage-500 via-blush-500 to-gold-500 rounded-3xl p-12 text-center shadow-elegant-lg">
             <h3 className="text-3xl md:text-4xl font-display text-white mb-4">
               Thank you for being part of our story! 🙏
             </h3>
-            <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-white/95 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
               We&rsquo;re so grateful to have shared our special day with you. Explore more
               memories, leave us a message, or share your photos!
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <button
                 onClick={() => scrollToSection('guestbook')}
-                className="bg-white text-sage px-6 py-3 rounded-full font-semibold hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                className="bg-white text-sage-600 px-8 py-4 rounded-full font-semibold hover:shadow-elegant transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 ✍️ Sign Guest Book
               </button>
               <button
                 onClick={() => scrollToSection('upload')}
-                className="bg-white text-sage px-6 py-3 rounded-full font-semibold hover:bg-cream hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+                className="bg-white/20 backdrop-blur-sm border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-sage-600 hover:shadow-elegant transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 📤 Share Photos
               </button>
