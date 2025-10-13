@@ -106,6 +106,7 @@ Due to Git author configuration mismatch between local commits and Vercel team s
 The Vercel CLI reports: `"Git author austin@theporadas.com must have access to the team Austin's projects"`
 
 This happens because:
+
 - Earlier commits were made with `austin@theporadas.com`
 - Your Vercel account is `bbasketballer75-9127`
 - Vercel enforces team access based on Git commit history
