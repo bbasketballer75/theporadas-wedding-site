@@ -174,7 +174,71 @@ jobs:
             site/playwright-report/
           retention-days: 30
 
-  # Phase 4: Production smoke tests (only on main branch)
+  # Phase 4: Firebase Emulator Integration Tests
+  test-integration:
+    name: Integration Tests (Firebase Emulator)
+    runs-on: windows-latest
+    needs: test-critical
+    if: success()
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'site/package-lock.json'
+
+      - name: Setup Java 11 (Required for Firebase Emulators)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'microsoft'
+          java-version: '11'
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            ~/AppData/Local/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('site/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install dependencies
+        run: |
+          cd site
+          npm ci
+
+      - name: Install Playwright browsers
+        run: |
+          cd site
+          npx playwright install --with-deps chromium
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Verify Java installation
+        run: java -version
+
+      - name: Run Firebase Emulator Integration Tests
+        run: |
+          cd site
+          npm run test:emulator
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-results
+          path: |
+            site/test-results/
+            site/playwright-report/
+          retention-days: 30
+
+  # Phase 5: Production smoke tests (only on main branch)
   test-production:
     name: Production Smoke Tests
     runs-on: ubuntu-latest
@@ -261,7 +325,7 @@ jobs:
   test-summary:
     name: Test Summary
     runs-on: ubuntu-latest
-    needs: [test-critical, test-features, test-ui]
+    needs: [test-critical, test-features, test-ui, test-integration]
     if: always()
     steps:
       - name: Check test results
@@ -269,9 +333,15 @@ jobs:
           echo "Critical Tests: ${{ needs.test-critical.result }}"
           echo "Feature Tests: ${{ needs.test-features.result }}"
           echo "UI Tests: ${{ needs.test-ui.result }}"
+          echo "Integration Tests: ${{ needs.test-integration.result }}"
 
           if [ "${{ needs.test-critical.result }}" != "success" ]; then
             echo "❌ Critical tests failed - BLOCKING"
+            exit 1
+          fi
+
+          if [ "${{ needs.test-integration.result }}" != "success" ]; then
+            echo "❌ Integration tests failed - BLOCKING"
             exit 1
           fi
 
