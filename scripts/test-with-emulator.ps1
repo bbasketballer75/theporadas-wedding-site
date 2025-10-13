@@ -37,6 +37,9 @@ Write-Host ""
 # Change to project root
 Set-Location -Path $PSScriptRoot\..
 
+# Refresh PATH to pick up Java and other tools
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+
 # Check if Firebase CLI is installed
 $firebaseInstalled = Get-Command firebase -ErrorAction SilentlyContinue
 if (-not $firebaseInstalled) {
@@ -72,11 +75,13 @@ if (-not $emulatorsAlreadyRunning) {
     }
 
     # Start emulators in background
+    $currentPath = $env:Path
     $emulatorJob = Start-Job -ScriptBlock {
-        param($cmd)
+        param($cmd, $path)
+        $env:Path = $path
         Set-Location -Path $using:PWD
         Invoke-Expression $cmd
-    } -ArgumentList $emulatorCmd
+    } -ArgumentList $emulatorCmd, $currentPath
 
     Write-Host "⏳ Waiting for emulators to be ready..." -ForegroundColor Yellow
 
