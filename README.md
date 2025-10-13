@@ -261,10 +261,12 @@ npm test
 **Why emulators?** Playwright's browser context isolation prevents realtime Firestore sync testing between contexts. Emulator tests use the Firebase SDK directly for deterministic, fast testing.
 
 **Requirements:**
+
 - Java 11+ (required for Firebase emulators)
 - Firebase CLI (installed automatically)
 
 **Installation:**
+
 ```bash
 # Install Java 11
 choco install openjdk11
@@ -277,6 +279,7 @@ npm run test:emulator
 ```
 
 **Features:**
+
 - ✅ Realtime sync testing (<100ms latency)
 - ✅ Concurrent operations (5+ simultaneous users)
 - ✅ Stress testing (50+ rapid writes)
@@ -285,6 +288,7 @@ npm run test:emulator
 - ✅ CI/CD ready with automated lifecycle
 
 **Documentation:**
+
 - `docs/FIREBASE-EMULATOR-INTEGRATION-TESTING.md` - Complete usage guide
 - `docs/EMULATOR-SETUP-REQUIREMENTS.md` - Java setup instructions
 
@@ -298,12 +302,14 @@ npm run test:emulator
 ### Test Suites
 
 **E2E Tests (Playwright):**
+
 - Critical user flows (authentication, navigation, forms)
 - Feature validation (gallery, timeline, map)
 - UI/UX tests (responsive, accessibility)
 - Mobile tests (device-specific)
 
 **Integration Tests (Firebase Emulator):**
+
 - Realtime Firestore sync
 - Message ordering and latency
 - Concurrent write operations
@@ -313,6 +319,7 @@ npm run test:emulator
 ### Known Limitations
 
 **3 tests skipped** due to Playwright browser context isolation (security feature):
+
 - Message sync across contexts
 - Realtime listener latency testing
 - Multiple message ordering validation
@@ -571,4 +578,5 @@ Built with ❤️ using:
 ---
 
 **Made with 💒 for Austin & Jordyn's Wedding**
+
 # CI/CD Pipeline is Live! 🚀
