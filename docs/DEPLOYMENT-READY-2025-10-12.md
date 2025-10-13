@@ -9,6 +9,7 @@ All Phase 1 and Phase 2 redesign work is **COMPLETE** and pushed to GitHub (comm
 ## ✅ Completed Work
 
 ### Phase 1: Foundation (Commit: 8e9bbd4)
+
 - ✅ Color palette transformation (washed pastels → rich sophisticated colors)
 - ✅ Tailwind config with 3-scale color system (sage/blush/gold 500-700)
 - ✅ Global CSS with component classes (card-elegant, btn-*, glass-elegant)
@@ -16,6 +17,7 @@ All Phase 1 and Phase 2 redesign work is **COMPLETE** and pushed to GitHub (comm
 - ✅ Navigation glass morphism (backdrop blur, gradient logo, animated underlines)
 
 ### Phase 2: All Sections (Commit: 668da38)
+
 - ✅ **OurStorySection**: Decorative headers, timeline dots with glow, card-elegant, sage/blush/gold memory cards
 - ✅ **TimelineSection**: Gold borders, gradient text, card-elegant events, updated gradients
 - ✅ **GallerySection**: Elegant video card, btn-primary filter tabs, refined CTA
@@ -31,6 +33,7 @@ All Phase 1 and Phase 2 redesign work is **COMPLETE** and pushed to GitHub (comm
 ## 🎨 Design System Summary
 
 ### Color Palette
+
 ```javascript
 sage: {
   500: '#4a8c66', // Deep forest green
@@ -55,6 +58,7 @@ charcoal: '#2d2d2d'
 ```
 
 ### Component Classes
+
 - `.card-elegant` - Main card styling with depth and shadows
 - `.glass-elegant` - Glass morphism effect for overlays
 - `.btn-primary` - Sage-to-blush gradient button
@@ -67,6 +71,7 @@ charcoal: '#2d2d2d'
 - `.pattern-dots` - Decorative dot pattern
 
 ### Animations
+
 - `float` (6s ease-in-out infinite) - Gentle floating effect
 - `fadeIn` (0.8s ease-out) - Smooth fade-in
 - `shimmer` (2.5s infinite) - Subtle shimmer effect
@@ -77,7 +82,8 @@ charcoal: '#2d2d2d'
 ## 🚢 Deployment Instructions
 
 ### Option 1: Vercel Dashboard (Recommended)
-1. Go to https://vercel.com/dashboard
+
+1. Go to <https://vercel.com/dashboard>
 2. Find project: `theporadas-wedding-site`
 3. Click "Deployments" tab
 4. Click "Redeploy" on latest commit (`668da38`)
@@ -85,14 +91,16 @@ charcoal: '#2d2d2d'
 6. Verify live site at production URL
 
 ### Option 2: Vercel CLI (If Access Configured)
+
 ```bash
 cd f:\wedding-website
 vercel --prod
 ```
 
-**Note:** Current issue: Git author `austin@theporadas.com` needs team access on Vercel. Resolve via Vercel dashboard settings → Team members → Add/verify email.
+**Note:** Current issue: Git author `bbasketballer75@gmail.com` needs team access on Vercel. Resolve via Vercel dashboard settings → Team members → Add/verify email.
 
 ### Option 3: GitHub Actions (Future Setup)
+
 - Automated deployment workflow exists in `.github/workflows/`
 - Currently requires Firebase service account setup
 - Can enable after deployment verification
@@ -102,6 +110,7 @@ vercel --prod
 ## 🧪 Testing Before Go-Live
 
 ### Manual Testing Checklist
+
 - [ ] Hero section displays properly (gradient text, floating orbs)
 - [ ] Navigation glass morphism works on scroll
 - [ ] All 9 sections have decorative headers with gold borders
@@ -114,6 +123,7 @@ vercel --prod
 - [ ] Lighthouse score > 90 for performance, accessibility
 
 ### Automated Testing (When Dev Server Stopped)
+
 ```bash
 cd f:\wedding-website\site
 # Stop dev server first (Ctrl+C in terminal)
@@ -126,6 +136,7 @@ npm run build  # Verify production build succeeds
 ## 📊 Expected Improvements
 
 ### Before (October 12, 2025 AM)
+
 - ❌ Excessive white space (min-h-screen + large padding)
 - ❌ Washed-out single colors (#7ca982, #d8a7b1)
 - ❌ Flat backgrounds with no depth
@@ -134,6 +145,7 @@ npm run build  # Verify production build succeeds
 - ❌ No visual hierarchy or decorative elements
 
 ### After (October 12, 2025 PM)
+
 - ✅ Refined spacing (section-elegant, intentional gaps)
 - ✅ Rich 3-scale color system (500-700 depth)
 - ✅ Layered backgrounds (gradient + texture + floating orbs)
@@ -146,6 +158,7 @@ npm run build  # Verify production build succeeds
 ## 🔥 What Changed (Git Diff Summary)
 
 ### Modified Files (15 total)
+
 1. `tailwind.config.js` - Extended color system, animations, shadows
 2. `site/styles/globals.css` - Component classes, layered backgrounds
 3. `site/components/Navigation.jsx` - Glass morphism
@@ -163,6 +176,7 @@ npm run build  # Verify production build succeeds
 15. `docs/REDESIGN-SUMMARY-2025-10-12.md` - This documentation
 
 ### Lines Changed
+
 - **+536 additions** (new elegant styles, component classes, decorative elements)
 - **-201 deletions** (removed old colors, basic styles, generic patterns)
 
@@ -171,9 +185,11 @@ npm run build  # Verify production build succeeds
 ## 🎯 User Satisfaction Metrics
 
 ### Original Complaint (Oct 12, 2025)
+>
 > "the website looks terrible there is a ton of white space and the themeing is not at all itutitive. looks very bad and very basic.... opposite of what im asking for."
 
 ### Resolution
+
 ✅ **Eliminated excessive white space** - Replaced min-h-screen with section-elegant, refined padding
 ✅ **Fixed washed-out colors** - Implemented rich 3-scale color system (sage/blush/gold 500-700)
 ✅ **Added sophisticated theming** - Glass morphism, gradient text, decorative gold borders, layered backgrounds
@@ -214,7 +230,7 @@ If additional polish is desired:
 - [x] Design system documented
 - [x] No TypeScript errors
 - [x] No ESLint errors
-- [ ] Vercel team access configured (austin@theporadas.com)
+- [ ] Vercel team access configured (<austin@theporadas.com>)
 - [ ] Production deployment triggered
 - [ ] Live site verified
 - [ ] Mobile responsiveness tested

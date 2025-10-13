@@ -52,7 +52,10 @@ export default function VenueSection() {
   };
 
   return (
-    <section id="venue" className="section-elegant bg-gradient-to-br from-ivory via-sage-50/20 to-ivory">
+    <section
+      id="venue"
+      className="section-elegant bg-gradient-to-br from-ivory via-sage-50/20 to-ivory"
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         <SectionTransition>
           {/* Header */}
@@ -62,7 +65,9 @@ export default function VenueSection() {
               <div className="mx-4 text-4xl">🏛️</div>
               <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
             </div>
-            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-4">Our Venues</h2>
+            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-4">
+              Our Venues
+            </h2>
             <p className="text-xl text-charcoal/70 max-w-2xl mx-auto leading-relaxed">
               Where we celebrated the most important day of our lives.
             </p>
@@ -75,13 +80,21 @@ export default function VenueSection() {
             <div className="card-elegant p-2 inline-flex">
               <button
                 onClick={() => setActiveTab('ceremony')}
-                className={activeTab === 'ceremony' ? 'btn-primary' : 'px-8 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'}
+                className={
+                  activeTab === 'ceremony'
+                    ? 'btn-primary'
+                    : 'px-8 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'
+                }
               >
                 💍 Ceremony
               </button>
               <button
                 onClick={() => setActiveTab('reception')}
-                className={activeTab === 'reception' ? 'btn-primary' : 'px-8 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'}
+                className={
+                  activeTab === 'reception'
+                    ? 'btn-primary'
+                    : 'px-8 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'
+                }
               >
                 🎉 Reception
               </button>
@@ -203,8 +216,8 @@ export default function VenueSection() {
                     on-site
                   </p>
                   <p>
-                    <strong className="text-sage-700">Public Transit:</strong> Accessible via local bus
-                    routes
+                    <strong className="text-sage-700">Public Transit:</strong> Accessible via local
+                    bus routes
                   </p>
                   <p>
                     <strong className="text-sage-700">Rideshare:</strong> Uber & Lyft pickup/dropoff
@@ -224,10 +237,7 @@ export default function VenueSection() {
               Did you capture any beautiful shots of our venues? We&rsquo;d love to see your
               perspective!
             </p>
-            <button
-              onClick={() => scrollToSection('upload')}
-              className="btn-accent cursor-pointer"
-            >
+            <button onClick={() => scrollToSection('upload')} className="btn-accent cursor-pointer">
               Upload Photos
             </button>
           </div>

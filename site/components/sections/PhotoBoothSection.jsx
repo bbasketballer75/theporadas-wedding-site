@@ -9,7 +9,10 @@ export default function PhotoBoothSection() {
   };
 
   return (
-    <section id="photobooth" className="section-elegant bg-gradient-to-br from-ivory via-champagne/30 to-ivory">
+    <section
+      id="photobooth"
+      className="section-elegant bg-gradient-to-br from-ivory via-champagne/30 to-ivory"
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         <SectionTransition>
           <div className="card-elegant p-12 text-center">
@@ -18,7 +21,9 @@ export default function PhotoBoothSection() {
               <div className="mx-4 text-6xl float-elegant">📸</div>
               <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
             </div>
-            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-6">Photo Booth</h2>
+            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-6">
+              Photo Booth
+            </h2>
             <p className="text-xl text-charcoal/70 max-w-2xl mx-auto leading-relaxed mb-8">
               Strike a pose! Take fun photos with filters, wedding-themed frames, and Canva
               overlays.
@@ -42,10 +47,7 @@ export default function PhotoBoothSection() {
               </div>
             </div>
 
-            <a
-              href="/photobooth"
-              className="btn-primary inline-block"
-            >
+            <a href="/photobooth" className="btn-primary inline-block">
               Launch Photo Booth →
             </a>
 

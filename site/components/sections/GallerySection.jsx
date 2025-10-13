@@ -42,7 +42,10 @@ export default function GallerySection() {
   };
 
   return (
-    <section id="gallery" className="section-elegant bg-gradient-to-br from-ivory via-sage-50/20 to-ivory">
+    <section
+      id="gallery"
+      className="section-elegant bg-gradient-to-br from-ivory via-sage-50/20 to-ivory"
+    >
       <div className="container mx-auto px-4 max-w-7xl">
         <SectionTransition>
           {/* Header */}
@@ -52,7 +55,9 @@ export default function GallerySection() {
               <div className="mx-4 text-4xl">📸</div>
               <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
             </div>
-            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-4">Wedding Gallery</h2>
+            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-4">
+              Wedding Gallery
+            </h2>
             <p className="text-xl text-charcoal/70 max-w-2xl mx-auto leading-relaxed">
               Relive the magic of our special day through these beautiful photos and videos shared
               by our guests.
@@ -65,7 +70,9 @@ export default function GallerySection() {
           <div className="mb-16">
             <div className="card-elegant p-8 md:p-12">
               <div className="flex items-center justify-center mb-6">
-                <h3 className="text-4xl font-display text-gradient-sage text-center">🎬 Our Wedding Film</h3>
+                <h3 className="text-4xl font-display text-gradient-sage text-center">
+                  🎬 Our Wedding Film
+                </h3>
               </div>
               <p className="text-center text-charcoal/70 mb-6 max-w-2xl mx-auto">
                 Watch the highlight reel of our unforgettable day
@@ -83,7 +90,11 @@ export default function GallerySection() {
                 <button
                   key={f.id}
                   onClick={() => setFilter(f.id)}
-                  className={filter === f.id ? 'btn-primary' : 'px-6 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'}
+                  className={
+                    filter === f.id
+                      ? 'btn-primary'
+                      : 'px-6 py-3 rounded-xl font-semibold text-charcoal/70 hover:text-sage-600 hover:bg-sage-50 transition-all duration-300'
+                  }
                 >
                   <span className="mr-2">{f.icon}</span>
                   {f.label}

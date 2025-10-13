@@ -2,7 +2,10 @@ import SectionTransition from '../SectionTransition';
 
 export default function UploadSection() {
   return (
-    <section id="upload" className="section-elegant bg-gradient-to-br from-ivory via-blush-50/20 to-ivory">
+    <section
+      id="upload"
+      className="section-elegant bg-gradient-to-br from-ivory via-blush-50/20 to-ivory"
+    >
       <div className="container mx-auto px-4 max-w-6xl">
         <SectionTransition>
           <div className="card-elegant p-12 text-center">
@@ -11,7 +14,9 @@ export default function UploadSection() {
               <div className="mx-4 text-6xl">📤</div>
               <div className="h-px w-16 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></div>
             </div>
-            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-6">Upload Photos</h2>
+            <h2 className="font-display text-5xl md:text-7xl text-gradient-elegant mb-6">
+              Upload Photos
+            </h2>
             <p className="text-xl text-charcoal/70 max-w-2xl mx-auto leading-relaxed mb-8">
               Share your favorite moments from the wedding! Upload photos and videos to our shared
               album.
@@ -36,10 +41,7 @@ export default function UploadSection() {
               </div>
             </div>
 
-            <a
-              href="/upload"
-              className="btn-primary inline-block"
-            >
+            <a href="/upload" className="btn-primary inline-block">
               Upload Your Photos →
             </a>
 
