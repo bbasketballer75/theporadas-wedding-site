@@ -16,7 +16,7 @@ import JSZip from 'jszip';
  * @param {Function} onProgress - Callback for progress updates (0-100)
  * @returns {Promise<void>}
  */
-export async function downloadAllPhotos(media, onProgress = () => {}) {
+export async function downloadAllPhotos(media, onProgress = () => { }) {
   try {
     // Filter to only images (videos are too large)
     const photos = media.filter((item) => item.type && item.type.startsWith('image/'));

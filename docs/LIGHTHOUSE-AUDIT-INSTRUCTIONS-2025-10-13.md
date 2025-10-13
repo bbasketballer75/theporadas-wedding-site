@@ -62,11 +62,11 @@
 
 ### Core Web Vitals
 
-- **First Contentful Paint (FCP):** __.__ s
-- **Largest Contentful Paint (LCP):** __.__ s (target: < 2.5s)
+- **First Contentful Paint (FCP):** **.** s
+- **Largest Contentful Paint (LCP):** **.** s (target: < 2.5s)
 - **Total Blocking Time (TBT):** ___ ms
 - **Cumulative Layout Shift (CLS):** 0.___ (target: < 0.1)
-- **Speed Index:** __.__ s
+- **Speed Index:** **.** s
 
 ### Improvements Validated
 

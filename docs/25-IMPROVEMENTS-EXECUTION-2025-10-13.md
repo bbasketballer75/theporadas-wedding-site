@@ -101,11 +101,13 @@
 **Problem:** Firebase superstatic@9.2.0 requires Node 18/20/22, but system has Node v24.10.0
 
 **Impact:**
+
 - Cannot update @supabase/supabase-js (2.74.0 → 2.75.0)
 - Cannot update @types/node (24.7.1 → 24.7.2)
 - npm update fails with EBADENGINE error
 
 **Resolution Options:**
+
 1. **Wait for superstatic update** (recommended) - Dependencies will catch up to Node 24
 2. **Downgrade to Node 22 LTS** - Would allow updates but loses cutting-edge features
 3. **Force install** - Not recommended, may cause runtime issues
@@ -117,11 +119,13 @@
 ## 📁 FILES MODIFIED (10)
 
 ### Configuration Files (3)
+
 - ✅ `site/next.config.js` - Added outputFileTracingRoot, removed duplicate block
 - ✅ `site/.npmrc` - Created Windows-optimized npm config
 - ✅ `site/pages/_document.js` - Added CSP meta tag
 
 ### Code Files (5)
+
 - ✅ `site/lib/firebase.js` - Removed production console.log
 - ✅ `site/lib/analytics.js` - Removed console.log/error (2 locations)
 - ✅ `site/lib/downloadPhotos.js` - Removed console logs (7 locations)
@@ -130,10 +134,12 @@
 - ✅ `site/lib/actions.ts` - Removed console.error (2 locations)
 
 ### Documentation Files (2)
+
 - ✅ `ENABLE-ACTIONS-NOW.md` - Added code block languages
 - ✅ `docs/DEPLOYMENT-SUCCESS-2025-10-13.md` - Fixed markdown linting
 
 ### Public Assets (3)
+
 - ✅ `site/public/robots.txt` - Updated to production URL
 - ✅ `site/public/icon-192x192.png` - Created from apple-touch-icon
 - ✅ `site/public/icon-512x512.png` - Created from apple-touch-icon
@@ -143,16 +149,19 @@
 ## 🎯 NEXT STEPS
 
 ### Immediate (Before Next Deployment)
+
 1. ✅ Test build locally: `npm run build` - Verify no console warnings
 2. ✅ Check markdown linting: `npm run lint` - Ensure 0 errors
 3. ✅ Verify CSP doesn't break features - Test in production
 
 ### Future (Post-Deployment)
+
 4. 📸 Create PWA screenshots - Use actual website screenshots (screenshot-narrow.png 540x720, screenshot-wide.png 1280x720)
 5. 🎨 Create custom PWA icons - Replace placeholder icons with actual wedding logo/branding
 6. 📦 Monitor dependency updates - Check when Node v24 compatibility improves
 
 ### Optional (Low Priority)
+
 7. 🔄 Consider Node 22 LTS downgrade - If dependency updates become critical
 8. 📊 Lighthouse audit - Measure performance impact of changes
 9. 🔍 Verify CSP in production - Ensure no legitimate scripts blocked

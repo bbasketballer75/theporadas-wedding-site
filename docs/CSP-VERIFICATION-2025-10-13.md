@@ -171,7 +171,7 @@
 
 **Symptom:** Map tiles not loading, gray squares instead
 
-**Detection:** Console error: "Refused to connect to 'https://tile.openstreetmap.org' because it violates CSP connect-src directive"
+**Detection:** Console error: "Refused to connect to '<https://tile.openstreetmap.org>' because it violates CSP connect-src directive"
 
 **Fix:**
 
@@ -216,7 +216,7 @@ File: site/pages/_document.js
 
 ## Manual Verification Steps
 
-### To verify production CSP (5 minutes):
+### To verify production CSP (5 minutes)
 
 1. Open: <https://wedding-website-sepia-ten.vercel.app>
 2. Open DevTools: F12
