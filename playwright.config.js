@@ -45,20 +45,20 @@ export default defineConfig({
   // Production: Smoke tests against live site
   projects: process.env.BASE_URL
     ? [
-        // Production smoke tests: Run against live site
-        {
-          name: 'production',
-          testMatch: '**/production/*.spec.js',
-          use: {
-            ...devices['Desktop Chrome'],
-            baseURL: process.env.BASE_URL,
-          },
-          retries: 1, // Single retry for production tests
-          timeout: 30000, // Longer timeout for production network calls
+      // Production smoke tests: Run against live site
+      {
+        name: 'production',
+        testMatch: '**/production/*.spec.js',
+        use: {
+          ...devices['Desktop Chrome'],
+          baseURL: process.env.BASE_URL,
         },
-      ]
+        retries: 1, // Single retry for production tests
+        timeout: 30000, // Longer timeout for production network calls
+      },
+    ]
     : process.env.CI
-    ? [
+      ? [
         // CI: Test all browsers for comprehensive coverage
         {
           name: 'chromium',
@@ -81,7 +81,7 @@ export default defineConfig({
           use: { ...devices['iPhone 12'] },
         },
       ]
-    : [
+      : [
         // Local: Fast iteration with Chromium only
         {
           name: 'chromium',

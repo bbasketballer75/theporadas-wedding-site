@@ -1,4 +1,5 @@
 # Test Infrastructure Overhaul Complete
+
 **October 13, 2025 - Implementation Summary**
 
 ## Executive Summary
@@ -37,17 +38,20 @@ During Phase 1 verification, discovered **CRLF bug in Vercel environment variabl
 ## Implementation Timeline
 
 ### Phase 1: Critical Test Suite (2.5 hours)
+
 **October 13, 2025 15:00-17:30 UTC**
 
 Created 5 comprehensive test files targeting infrastructure health:
 
 #### 1. `firebase.spec.js` (4 tests, 160 lines)
+
 - Firebase SDK initialization
 - App configuration validation
 - CSP policy for Firebase domains
 - Environment variable validation
 
 #### 2. `firestore.spec.js` (5 tests, 180 lines)
+
 - Firestore connectivity
 - Offline mode detection
 - Transport error monitoring
@@ -55,6 +59,7 @@ Created 5 comprehensive test files targeting infrastructure health:
 - Connection state tracking
 
 #### 3. `csp-validation.spec.js` (7 tests, 200+ lines)
+
 - Comprehensive CSP validation
 - Firebase domain allowlist verification
 - External resource policy checks
@@ -64,6 +69,7 @@ Created 5 comprehensive test files targeting infrastructure health:
 - Dynamic resource loading
 
 #### 4. `guestbook-realtime.spec.js` (4 tests, 250+ lines)
+
 - Multi-context message synchronization
 - Realtime listener functionality
 - Message persistence
@@ -71,6 +77,7 @@ Created 5 comprehensive test files targeting infrastructure health:
 - Network interruption recovery
 
 #### 5. `console-monitoring.spec.js` (8 tests, 200+ lines)
+
 - Global error detection
 - Firebase initialization errors
 - Network failure tracking
@@ -85,6 +92,7 @@ Created 5 comprehensive test files targeting infrastructure health:
 ---
 
 ### Phase 2: Feature Test Suite (1.5 hours)
+
 **October 13, 2025 18:00-19:30 UTC**
 
 Created 3 comprehensive test files targeting user-facing functionality:
@@ -92,12 +100,14 @@ Created 3 comprehensive test files targeting user-facing functionality:
 #### 1. `guestbook.spec.js` (20+ tests, 400+ lines)
 
 **Test Suites:**
+
 - **Structure & Loading (4 tests):** Page structure, form fields, loading states, messages area
 - **Form Validation (6 tests):** Empty fields, long messages, special characters, XSS protection
 - **Message Display (3 tests):** Information display, ordering, count/stats
 - **User Experience (7 tests):** Loading states, success messages, relationship field, mobile responsive
 
 **Coverage:**
+
 - Form validation edge cases (empty, long, special chars)
 - Submission workflows
 - Error handling
@@ -107,6 +117,7 @@ Created 3 comprehensive test files targeting user-facing functionality:
 #### 2. `photo-upload.spec.js` (28 tests, 500+ lines)
 
 **Test Suites:**
+
 - **Page Structure (3 tests):** Upload page layout, file input accessibility, navigation/footer
 - **File Selection (3 tests):** Image file selection, guest name prompt, state management
 - **Validation (3 tests):** File cancellation, upload button, file size information
@@ -115,6 +126,7 @@ Created 3 comprehensive test files targeting user-facing functionality:
 - **Integration (3 tests):** Gallery navigation, console errors, layout integration
 
 **Additional Tests:**
+
 - Comprehensive upload page validation (structure, forms, inputs)
 - File selection and preview testing
 - Error message validation
@@ -122,6 +134,7 @@ Created 3 comprehensive test files targeting user-facing functionality:
 - Accessibility attributes
 
 **Features:**
+
 - Created test fixtures directory and test image (631-byte 1x1 JPEG)
 - Created `create-test-image.cjs` script for automated fixture generation
 - Comprehensive file upload simulation
@@ -129,12 +142,14 @@ Created 3 comprehensive test files targeting user-facing functionality:
 #### 3. Enhanced `gallery.spec.js` (14 new tests, +300 lines)
 
 **New Test Suites:**
+
 - **Filter Tabs (5 tests):** All/Photos/Videos filtering, active state indication
 - **Lazy Loading (3 tests):** lazy attribute, scroll loading, placeholder skeletons
 - **Lightbox/Modal (3 tests):** Open/close, navigation arrows, keyboard controls
 - **Image Optimization (3 tests):** srcset responsive sizing, alt text, dimensions
 
 **Improvements:**
+
 - Removed skipped upload test (moved to dedicated photo-upload.spec.js)
 - Added upload CTA verification
 - Total gallery tests: 21 (7 original + 14 new)
@@ -144,48 +159,56 @@ Created 3 comprehensive test files targeting user-facing functionality:
 ---
 
 ### Phase 4: Production Smoke Tests (45 minutes)
+
 **October 13, 2025 20:00-20:45 UTC**
 
 Created `smoke-tests.spec.js` with 22 critical production verification tests:
 
-#### Test Categories:
+#### Test Categories
 
 **1. Availability (4 tests)**
+
 - Homepage loads successfully (200 OK, <5s)
 - Critical pages accessible (/, /gallery, /guestbook, /upload, /map)
 - Navigation menu functional
 - No 404 errors on navigation
 
 **2. Firebase Health (4 tests)**
+
 - Firebase SDK initializes without errors
 - Firestore NOT in offline mode (no transport errors)
 - No CSP violations
 - Firebase config has no CRLF characters (validates bug fix)
 
 **3. Core Functionality (4 tests)**
+
 - Guestbook page loads and displays form
 - Gallery page loads and displays content
 - Upload page accessible with file input
 - Map page loads without errors
 
 **4. Performance (3 tests)**
+
 - Homepage loads in under 5 seconds
 - Time to interactive <8 seconds
 - Images load progressively (lazy loading)
 
 **5. Console Health (4 tests)**
+
 - No critical JavaScript errors on homepage
 - No uncaught exceptions on guestbook
 - No memory leaks on navigation
 - Error count stays below threshold (<5 errors/page)
 
 **6. Deployment Verification (3 tests)**
+
 - Vercel headers present (X-Vercel-ID, X-Vercel-Cache)
 - Correct cache headers
 - HTTPS enforced with security headers
 - Next.js build artifacts accessible
 
 **Configuration:**
+
 - BASE_URL environment variable support
 - Production project in playwright.config.js
 - Longer timeouts for network calls (30s)
@@ -196,6 +219,7 @@ Created `smoke-tests.spec.js` with 22 critical production verification tests:
 ---
 
 ### Phase 5: CI/CD Integration (45 minutes)
+
 **October 13, 2025 20:45-21:30 UTC**
 
 #### GitHub Actions Workflow Enhancement
@@ -203,6 +227,7 @@ Created `smoke-tests.spec.js` with 22 critical production verification tests:
 Transformed single-job workflow into **parallel test pipeline**:
 
 **Job Structure:**
+
 ```
 test-critical (P0) ← MUST PASS (blocks deployment)
     ├── test-features (P1) ← Runs if critical passes
@@ -239,7 +264,7 @@ test-critical (P0) ← MUST PASS (blocks deployment)
    - Tests: 22 smoke tests against live site
    - Purpose: Post-deployment verification
    - Duration: ~3 minutes
-   - Env: BASE_URL=https://wedding-website-sepia-ten.vercel.app
+   - Env: BASE_URL=<https://wedding-website-sepia-ten.vercel.app>
    - Features: PR commenting with results
 
 5. **test-summary**
@@ -248,6 +273,7 @@ test-critical (P0) ← MUST PASS (blocks deployment)
    - Logic: Critical failure = BLOCK, feature/UI failure = WARN
 
 **Optimizations:**
+
 - Browser caching (speeds up repeat runs by 35%)
 - npm dependency caching
 - Parallel job execution (3 jobs can run simultaneously)
@@ -269,6 +295,7 @@ Added 8 new npm scripts for targeted test execution:
 ```
 
 **Usage Examples:**
+
 ```bash
 # Local development (fast iteration)
 npm run test:critical       # Run critical tests only (5 min)
@@ -288,6 +315,7 @@ npm run test:debug         # Step through with debugger
 #### Playwright Configuration Updates
 
 **Added production project:**
+
 ```javascript
 projects: process.env.BASE_URL
   ? [
@@ -305,6 +333,7 @@ projects: process.env.BASE_URL
 ```
 
 **Benefits:**
+
 - Conditional test execution based on environment
 - Production-specific timeout and retry configuration
 - Cleaner test organization by priority
@@ -316,6 +345,7 @@ projects: process.env.BASE_URL
 ## Test Coverage Analysis
 
 ### Before Implementation
+
 - **9 test files**
 - **44 tests total**
 - **~35% coverage** (basic E2E only)
@@ -325,6 +355,7 @@ projects: process.env.BASE_URL
 - **Manual deployment checks**
 
 ### After Implementation
+
 - **18 test files** (+100%)
 - **128+ tests total** (+191%)
 - **~85% coverage** (+50% absolute)
@@ -378,16 +409,19 @@ Production (Smoke) - VERIFICATION
 ### Test Infrastructure
 
 **Fixtures Created:**
+
 - `tests/fixtures/test-image.jpg` (631-byte 1x1 JPEG)
 - `scripts/create-test-image.cjs` (automated fixture generation)
 
 **Verification Scripts:**
+
 - `scripts/verify-csp-production.js` (automated CSP + Firestore verification)
 - 5-minute console log capture
 - JSON output for analysis
 - Automated issue detection
 
 **Playwright Configuration:**
+
 - Production project configuration
 - Environment-based test execution
 - Longer timeouts for production (30s)
@@ -396,6 +430,7 @@ Production (Smoke) - VERIFICATION
 - Full browser matrix for CI
 
 **GitHub Actions:**
+
 - 5 parallel jobs (critical/features/ui/production/summary)
 - Browser caching (35% faster)
 - npm dependency caching
@@ -405,6 +440,7 @@ Production (Smoke) - VERIFICATION
 ### Test Patterns Used
 
 **1. Layered Testing:**
+
 ```javascript
 // Layer 1: Structure (fast, stable)
 test('page loads with correct structure', async ({ page }) => {
@@ -426,6 +462,7 @@ test('realtime sync between contexts', async ({ page, context }) => {
 ```
 
 **2. Console Monitoring:**
+
 ```javascript
 const errors = [];
 page.on('console', (msg) => {
@@ -436,6 +473,7 @@ expect(errors.length).toBe(0);
 ```
 
 **3. Production Verification:**
+
 ```javascript
 // Use live URL, check actual health
 const PRODUCTION_URL = process.env.BASE_URL || 'https://...';
@@ -444,6 +482,7 @@ expect(response.status()).toBe(200);
 ```
 
 **4. Error Threshold Testing:**
+
 ```javascript
 // Allow some errors, but cap at threshold
 const errorCount = await getErrorCount(page);
@@ -459,12 +498,14 @@ expect(errorCount).toBeLessThan(5);
 **Discovery Method:** Automated verification script (Phase 1)
 
 **Symptoms:**
+
 - 15 Firestore transport errors per 5-minute period
 - "Could not reach Cloud Firestore backend" messages
 - Firestore in offline mode (no realtime sync)
 - Guestbook messages not syncing between users
 
 **Root Cause Analysis:**
+
 ```javascript
 // Vercel environment variable (raw):
 NEXT_PUBLIC_FIREBASE_PROJECT_ID="the-poradas-2025-813c7\r\n"
@@ -476,6 +517,7 @@ https://firestore.googleapis.com/v1/projects/the-poradas-2025-813c7%0D%0A/databa
 ```
 
 **Fix Applied:**
+
 ```javascript
 // Before:
 projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default'
@@ -485,15 +527,18 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 ```
 
 **Files Modified:**
+
 - `site/lib/firebase.js` (7 environment variables)
 - `site/lib/firebaseClient.js` (6 environment variables)
 
 **Deployment:**
+
 - Committed: 18ccce8 (October 13, 2025 20:17 UTC)
 - Deployed: Vercel automatic deployment
 - Verified: Second verification script confirmed fix working
 
 **Impact:**
+
 - **Before Fix:** Guestbook completely broken in production (no realtime sync)
 - **After Fix:** Guestbook fully functional, messages sync instantly
 - **Time to Discovery:** 5 minutes (automated verification)
@@ -502,6 +547,7 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 - **Bug Value:** $500+ (estimated consulting time saved)
 
 **Lesson Learned:**
+
 - Always use defensive `.trim()` on environment variables from external sources
 - Vercel/deployment platforms may add invisible characters
 - Automated verification catches issues manual testing misses
@@ -523,6 +569,7 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 | **TOTAL (CI)** | 128 | ~15 min | Parallel execution |
 
 **Optimizations:**
+
 - **Chromium-only (local):** 2.4 min vs 12 min (5x faster)
 - **Browser caching:** 35% faster CI runs
 - **Parallel jobs:** 3 jobs run simultaneously (15 min vs 25+ min sequential)
@@ -531,6 +578,7 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 ### CI/CD Pipeline Efficiency
 
 **Before:**
+
 - Single job, sequential execution
 - All tests in one run
 - No test prioritization
@@ -538,6 +586,7 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 - Failure: Hard to identify which category failed
 
 **After:**
+
 - 5 parallel jobs
 - Priority-based execution (critical → features/UI → production → summary)
 - Fast failure (critical fails = stop pipeline)
@@ -545,6 +594,7 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 - Failure: Clear job identification (e.g., "features failed")
 
 **Time Savings:**
+
 - **Per CI run:** 10 minutes saved
 - **Daily (10 commits):** 100 minutes = 1.67 hours saved
 - **Monthly:** ~35 hours saved
@@ -569,14 +619,17 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 ### Time Savings (Estimated Annual)
 
 **Automated Issue Detection:**
+
 - **CRLF bug discovery:** 2-3 hours saved (one-time)
 - **Ongoing monitoring:** 1.5-2 hours/day × 250 workdays = **375-500 hours/year**
 
 **CI/CD Efficiency:**
+
 - **Pipeline speedup:** 10 min/run × 10 runs/day × 250 days = **417 hours/year**
 - **Faster feedback:** Reduced context switching = **100 hours/year estimated**
 
 **Prevented Production Issues:**
+
 - **Fewer hotfixes:** Catch issues pre-deployment = **50 hours/year estimated**
 - **Reduced customer support:** Fewer bug reports = **30 hours/year estimated**
 
@@ -585,9 +638,11 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 ### Financial ROI
 
 **Investment:**
+
 - 5.5 hours × $100/hour (developer time) = **$550**
 
 **Annual Return:**
+
 - 972-1,127 hours × $100/hour = **$97,200-$112,700**
 
 **ROI: 17,581% to 20,427%** (177x to 205x return)
@@ -716,6 +771,7 @@ projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'default').trim()
 ### Immediate (Next Week)
 
 1. **Run full test suite locally** to validate all 128+ tests pass
+
    ```bash
    npm run test:all
    npx playwright show-report
@@ -818,11 +874,13 @@ All phases executed successfully. Test infrastructure is production-ready, fully
 **Implementation Date:** October 13, 2025  
 **Total Duration:** 3.5 hours (5.5 hours estimated)  
 **Commits:**
+
 - Phase 1 + CRLF fix: `18ccce8` (15:00-17:30 UTC)
 - Phase 2: `a3ca2bf` (18:00-19:30 UTC)
 - Phase 4 & 5: `311dc32` (20:00-21:30 UTC)
 
 **Deployment:**
+
 - CRLF fix deployed to production (Vercel)
 - CI/CD pipeline active in GitHub Actions
 - Production smoke tests enabled for main branch

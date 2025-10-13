@@ -4,8 +4,15 @@
  */
 
 const { test, expect } = require('@playwright/test');
+const { dismissAllDevOverlays } = require('../../helpers/dismiss-dev-overlay');
 
 test.describe('Firebase Initialization (CRITICAL)', () => {
+    test.beforeEach(async ({ page }) => {
+        // Dismiss dev overlays on page load
+        page.on('load', async () => {
+            await dismissAllDevOverlays(page);
+        });
+    });
     test('Firebase SDK loads without CSP violations', async ({ page }) => {
         const cspViolations = [];
 
@@ -21,7 +28,7 @@ test.describe('Firebase Initialization (CRITICAL)', () => {
         });
 
         await page.goto('/');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
 
         // Wait for Firebase to initialize
         await page.waitForTimeout(5000);
@@ -90,7 +97,7 @@ test.describe('Firebase Initialization (CRITICAL)', () => {
         });
 
         await page.goto('/');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(5000);
 
         // NO Firebase requests should fail
@@ -126,7 +133,7 @@ test.describe('Firebase Initialization (CRITICAL)', () => {
         });
 
         await page.goto('/');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(5000);
 
         // Should have at least attempted webConfig fetch

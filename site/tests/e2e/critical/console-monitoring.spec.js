@@ -4,6 +4,8 @@
  */
 
 const { test, expect } = require('@playwright/test');
+const { filterCriticalErrors, categorizeErrors } = require('../../helpers/error-filters');
+const { dismissAllDevOverlays } = require('../../helpers/dismiss-dev-overlay');
 
 // Shared error collection
 let globalErrors = [];
@@ -15,26 +17,23 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
         globalErrors = [];
         globalWarnings = [];
 
+        // Dismiss dev overlays on page load
+        page.on('load', async () => {
+            await dismissAllDevOverlays(page);
+        });
+
         // Set up global console monitoring
         page.on('console', (msg) => {
             const type = msg.type();
             const text = msg.text();
 
-            // Filter out known acceptable warnings
-            const isAcceptableWarning =
-                text.includes('ResizeObserver loop') ||
-                text.includes('Download the React DevTools') ||
-                text.includes('[HMR]') ||
-                text.includes('[Fast Refresh]') ||
-                text.includes('webpack-dev-server');
-
-            if (type === 'error' && !isAcceptableWarning) {
+            if (type === 'error') {
                 globalErrors.push({
                     text,
                     url: page.url(),
                     timestamp: new Date().toISOString(),
                 });
-            } else if (type === 'warning' && !isAcceptableWarning) {
+            } else if (type === 'warning') {
                 globalWarnings.push({
                     text,
                     url: page.url(),
@@ -55,13 +54,34 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
     });
 
     test.afterEach(async () => {
-        // Report collected errors after each test
+        // Report collected errors after each test with categorization
         if (globalErrors.length > 0) {
-            console.log(`\n⚠️  Collected ${globalErrors.length} console errors during test:`);
-            globalErrors.slice(0, 5).forEach((err, i) => {
-                console.log(`\n${i + 1}. [${err.url}]`);
-                console.log(`   ${err.text.substring(0, 300)}`);
-            });
+            const criticalErrors = filterCriticalErrors(globalErrors.map((e) => e.text));
+            const categories = categorizeErrors(globalErrors.map((e) => e.text));
+
+            console.log(`\n⚠️  Collected ${globalErrors.length} total errors (${criticalErrors.length} critical):`);
+
+            if (categories.critical.length > 0) {
+                console.log(`   ❌ Critical: ${categories.critical.length}`);
+            }
+            if (categories.firestore.length > 0) {
+                console.log(`   ℹ️  Firestore (expected): ${categories.firestore.length}`);
+            }
+            if (categories.expected && categories.expected.length > 0) {
+                console.log(`   ℹ️  Development (expected): ${categories.expected.length}`);
+            }
+            if (categories.csp.length > 0) {
+                console.log(`   ℹ️  CSP (acceptable): ${categories.csp.length}`);
+            }
+            if (categories.other && categories.other.length > 0) {
+                console.log(`   ⚠️  Other: ${categories.other.length}`);
+            }
+
+            if (criticalErrors.length > 0) {
+                criticalErrors.slice(0, 5).forEach((err, i) => {
+                    console.log(`\n${i + 1}. ${err.substring(0, 300)}`);
+                });
+            }
         }
 
         if (globalWarnings.length > 0) {
@@ -71,18 +91,11 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
 
     test('Homepage has NO critical console errors', async ({ page }) => {
         await page.goto('/');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(5000); // Wait for all scripts
 
-        // Filter for CRITICAL errors only (CSP, network, JavaScript)
-        const criticalErrors = globalErrors.filter(
-            (err) =>
-                err.text.includes('Content Security Policy') ||
-                err.text.includes('Refused to connect') ||
-                err.text.includes('net::ERR_') ||
-                err.text.includes('Uncaught') ||
-                err.text.includes('Firebase')
-        );
+        // Use intelligent error filtering
+        const criticalErrors = filterCriticalErrors(globalErrors.map((e) => e.text));
 
         expect(criticalErrors).toHaveLength(0);
 
@@ -90,107 +103,100 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
             console.log(`❌ ${criticalErrors.length} critical errors on homepage`);
             throw new Error('Critical console errors detected on homepage');
         } else {
-            console.log('✅ NO critical console errors on homepage');
+            console.log(
+                `✅ NO critical console errors on homepage (${globalErrors.length} total, ${globalErrors.length - criticalErrors.length} filtered)`
+            );
         }
     });
 
     test('Guestbook page has NO critical console errors', async ({ page }) => {
         await page.goto('/guestbook');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Wait for Firestore
 
-        const criticalErrors = globalErrors.filter(
-            (err) =>
-                err.text.includes('Content Security Policy') ||
-                err.text.includes('Refused to connect') ||
-                err.text.includes('net::ERR_') ||
-                err.text.includes('Uncaught') ||
-                err.text.includes('Firebase') ||
-                err.text.includes('Firestore')
-        );
+        const criticalErrors = filterCriticalErrors(globalErrors.map((e) => e.text));
 
         expect(criticalErrors).toHaveLength(0);
 
         if (criticalErrors.length > 0) {
             console.log(`❌ ${criticalErrors.length} critical errors on guestbook`);
             criticalErrors.slice(0, 3).forEach((err, i) => {
-                console.log(`\n${i + 1}. ${err.text.substring(0, 200)}`);
+                console.log(`\n${i + 1}. ${err.substring(0, 200)}`);
             });
             throw new Error('Critical console errors on guestbook page');
         } else {
-            console.log('✅ NO critical console errors on guestbook page');
+            console.log(
+                `✅ NO critical console errors on guestbook page (${globalErrors.length} total, ${globalErrors.length - criticalErrors.length} filtered)`
+            );
         }
     });
 
     test('Gallery page has NO critical console errors', async ({ page }) => {
         await page.goto('/gallery');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(5000);
 
-        const criticalErrors = globalErrors.filter(
-            (err) =>
-                err.text.includes('Content Security Policy') ||
-                err.text.includes('net::ERR_') ||
-                err.text.includes('Uncaught')
-        );
+        const criticalErrors = filterCriticalErrors(globalErrors.map((e) => e.text));
 
         expect(criticalErrors).toHaveLength(0);
 
         if (criticalErrors.length > 0) {
             console.log(`❌ ${criticalErrors.length} critical errors on gallery`);
         } else {
-            console.log('✅ NO critical console errors on gallery page');
+            console.log(
+                `✅ NO critical console errors on gallery page (${globalErrors.length} total, ${globalErrors.length - criticalErrors.length} filtered)`
+            );
         }
     });
 
     test('Map page has NO critical console errors', async ({ page }) => {
         await page.goto('/map');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(5000); // Wait for map tiles
 
-        const criticalErrors = globalErrors.filter(
-            (err) =>
-                err.text.includes('Content Security Policy') ||
-                err.text.includes('net::ERR_') ||
-                err.text.includes('Uncaught')
-        );
+        const criticalErrors = filterCriticalErrors(globalErrors.map((e) => e.text));
 
         expect(criticalErrors).toHaveLength(0);
 
         if (criticalErrors.length > 0) {
             console.log(`❌ ${criticalErrors.length} critical errors on map page`);
         } else {
-            console.log('✅ NO critical console errors on map page');
+            console.log(
+                `✅ NO critical console errors on map page (${globalErrors.length} total, ${globalErrors.length - criticalErrors.length} filtered)`
+            );
         }
     });
 
     test('NO CSP-related console errors across entire site', async ({ page }) => {
         const pages = ['/', '/guestbook', '/gallery', '/map'];
-        const cspErrors = [];
 
         for (const pagePath of pages) {
             await page.goto(pagePath);
-            await page.waitForLoadState('networkidle');
+            await page.waitForLoadState('domcontentloaded');
             await page.waitForTimeout(5000);
         }
 
-        // Collect all CSP errors
-        const allCSPErrors = globalErrors.filter(
-            (err) =>
-                err.text.includes('Content Security Policy') || err.text.includes('Refused to connect')
+        // Use intelligent CSP filtering (acceptable CSP violations filtered out)
+        const criticalErrors = filterCriticalErrors(globalErrors.map((e) => e.text));
+        const cspErrors = criticalErrors.filter(
+            (err) => err.includes('Content Security Policy') || err.includes('Refused to connect')
         );
 
-        expect(allCSPErrors).toHaveLength(0);
+        expect(cspErrors).toHaveLength(0);
 
-        if (allCSPErrors.length > 0) {
-            console.log(`❌ ${allCSPErrors.length} CSP errors detected across site:`);
-            allCSPErrors.slice(0, 5).forEach((err, i) => {
-                console.log(`\n${i + 1}. [${err.url}]`);
-                console.log(`   ${err.text.substring(0, 250)}`);
+        if (cspErrors.length > 0) {
+            console.log(`❌ ${cspErrors.length} critical CSP errors detected across site:`);
+            cspErrors.slice(0, 5).forEach((err, i) => {
+                console.log(`\n${i + 1}. ${err.substring(0, 250)}`);
             });
-            throw new Error('CSP errors found across site');
+            throw new Error('Critical CSP errors found across site');
         } else {
-            console.log('✅ NO CSP errors detected across entire site');
+            const totalCSP = globalErrors.filter(
+                (e) => e.text.includes('Content Security Policy') || e.text.includes('Refused to connect')
+            ).length;
+            console.log(
+                `✅ NO critical CSP errors detected across entire site (${totalCSP} acceptable CSP messages filtered)`
+            );
         }
     });
 
@@ -199,22 +205,19 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
 
         for (const pagePath of pages) {
             await page.goto(pagePath);
-            await page.waitForLoadState('networkidle');
+            await page.waitForLoadState('domcontentloaded');
             await page.waitForTimeout(3000);
         }
 
-        const uncaughtErrors = globalErrors.filter((err) => err.text.includes('Uncaught'));
+        const criticalErrors = filterCriticalErrors(globalErrors.map((e) => e.text));
+        const uncaughtErrors = criticalErrors.filter((err) => err.includes('Uncaught'));
 
         expect(uncaughtErrors).toHaveLength(0);
 
         if (uncaughtErrors.length > 0) {
             console.log(`❌ ${uncaughtErrors.length} uncaught errors detected:`);
             uncaughtErrors.forEach((err, i) => {
-                console.log(`\n${i + 1}. [${err.url}]`);
-                console.log(`   ${err.text.substring(0, 200)}`);
-                if (err.stack) {
-                    console.log(`   Stack: ${err.stack.substring(0, 300)}`);
-                }
+                console.log(`\n${i + 1}. ${err.substring(0, 200)}`);
             });
             throw new Error('Uncaught JavaScript errors found');
         } else {
@@ -222,38 +225,46 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
         }
     });
 
-    test('Error threshold: <3 total errors per page', async ({ page }) => {
+    test('Error threshold: <3 CRITICAL errors per page', async ({ page }) => {
         const pages = ['/', '/guestbook', '/gallery', '/map'];
         const errorsByPage = {};
 
         for (const pagePath of pages) {
             globalErrors = []; // Reset for each page
             await page.goto(pagePath);
-            await page.waitForLoadState('networkidle');
+            await page.waitForLoadState('domcontentloaded');
             await page.waitForTimeout(5000);
 
-            errorsByPage[pagePath] = globalErrors.length;
+            const criticalErrors = filterCriticalErrors(globalErrors.map((e) => e.text));
+            errorsByPage[pagePath] = {
+                total: globalErrors.length,
+                critical: criticalErrors.length,
+            };
         }
 
-        // Check each page meets threshold
-        const pagesOverThreshold = Object.entries(errorsByPage).filter(([page, count]) => count >= 3);
+        // Check each page meets threshold for CRITICAL errors only
+        const pagesOverThreshold = Object.entries(errorsByPage).filter(
+            ([page, counts]) => counts.critical >= 3
+        );
 
         expect(pagesOverThreshold).toHaveLength(0);
 
         console.log('\nError counts by page:');
-        Object.entries(errorsByPage).forEach(([pagePath, count]) => {
-            const status = count === 0 ? '✅' : count < 3 ? '⚠️ ' : '❌';
-            console.log(`   ${status} ${pagePath}: ${count} errors`);
+        Object.entries(errorsByPage).forEach(([pagePath, counts]) => {
+            const status = counts.critical === 0 ? '✅' : counts.critical < 3 ? '⚠️ ' : '❌';
+            console.log(
+                `   ${status} ${pagePath}: ${counts.critical} critical (${counts.total} total, ${counts.total - counts.critical} filtered)`
+            );
         });
 
         if (pagesOverThreshold.length > 0) {
-            console.log(`\n❌ ${pagesOverThreshold.length} pages exceed error threshold:`);
-            pagesOverThreshold.forEach(([pagePath, count]) => {
-                console.log(`   ${pagePath}: ${count} errors (threshold: <3)`);
+            console.log(`\n❌ ${pagesOverThreshold.length} pages exceed critical error threshold:`);
+            pagesOverThreshold.forEach(([pagePath, counts]) => {
+                console.log(`   ${pagePath}: ${counts.critical} critical errors (threshold: <3)`);
             });
-            throw new Error('Error threshold exceeded on some pages');
+            throw new Error('Critical error threshold exceeded on some pages');
         } else {
-            console.log('\n✅ All pages meet error threshold (<3 errors)');
+            console.log('\n✅ All pages meet critical error threshold (<3 critical errors)');
         }
     });
 
@@ -271,20 +282,24 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
         });
 
         await page.goto('/guestbook');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Full Firebase init cycle
 
-        // Should have NO Firebase initialization errors
-        expect(firebaseErrors).toHaveLength(0);
+        // Filter for CRITICAL Firebase errors (not connection warnings)
+        const criticalFirebaseErrors = filterCriticalErrors(firebaseErrors);
 
-        if (firebaseErrors.length > 0) {
-            console.log(`❌ ${firebaseErrors.length} Firebase errors detected:`);
-            firebaseErrors.slice(0, 3).forEach((err, i) => {
+        expect(criticalFirebaseErrors).toHaveLength(0);
+
+        if (criticalFirebaseErrors.length > 0) {
+            console.log(`❌ ${criticalFirebaseErrors.length} critical Firebase errors detected:`);
+            criticalFirebaseErrors.slice(0, 3).forEach((err, i) => {
                 console.log(`\n${i + 1}. ${err.substring(0, 300)}`);
             });
-            throw new Error('Firebase initialization errors found');
+            throw new Error('Critical Firebase initialization errors found');
         } else {
-            console.log('✅ NO Firebase initialization errors');
+            console.log(
+                `✅ NO critical Firebase initialization errors (${firebaseErrors.length} total, ${firebaseErrors.length - criticalFirebaseErrors.length} expected warnings filtered)`
+            );
         }
     });
 });

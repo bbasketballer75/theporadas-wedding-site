@@ -238,18 +238,18 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
-            
+
             // Read test results if available
             let comment = '## 🚀 Production Smoke Tests\n\n';
             comment += `**Status:** ${{ job.status }}\n`;
             comment += `**Site:** ${process.env.BASE_URL}\n\n`;
-            
+
             if ('${{ job.status }}' === 'success') {
               comment += '✅ All production smoke tests passed!\n';
             } else {
               comment += '❌ Some production tests failed. Check artifacts for details.\n';
             }
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -269,18 +269,18 @@ jobs:
           echo "Critical Tests: ${{ needs.test-critical.result }}"
           echo "Feature Tests: ${{ needs.test-features.result }}"
           echo "UI Tests: ${{ needs.test-ui.result }}"
-          
+
           if [ "${{ needs.test-critical.result }}" != "success" ]; then
             echo "❌ Critical tests failed - BLOCKING"
             exit 1
           fi
-          
+
           if [ "${{ needs.test-features.result }}" != "success" ]; then
             echo "⚠️ Feature tests failed - WARNING"
           fi
-          
+
           if [ "${{ needs.test-ui.result }}" != "success" ]; then
             echo "⚠️ UI tests failed - WARNING"
           fi
-          
+
           echo "✅ Test run complete"

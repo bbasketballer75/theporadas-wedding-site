@@ -4,8 +4,15 @@
  */
 
 const { test, expect } = require('@playwright/test');
+const { dismissAllDevOverlays } = require('../../helpers/dismiss-dev-overlay');
 
 test.describe('Firestore Connectivity (CRITICAL)', () => {
+    test.beforeEach(async ({ page }) => {
+        // Dismiss dev overlays on page load
+        page.on('load', async () => {
+            await dismissAllDevOverlays(page);
+        });
+    });
     test('Firestore connects successfully (NOT offline mode)', async ({ page }) => {
         const firestoreMessages = [];
         const transportErrors = [];
@@ -24,7 +31,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
         });
 
         await page.goto('/guestbook');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
 
         // Wait for Firestore to initialize
         await page.waitForTimeout(10000); // 10 seconds for connection
@@ -85,7 +92,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
         });
 
         await page.goto('/guestbook');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Wait for Listen channels to establish
 
         // Should have NO 400 errors on Listen channels
@@ -103,7 +110,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
 
     test('Firestore queries return data successfully', async ({ page }) => {
         await page.goto('/guestbook');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
 
         // Wait for messages to load
         await page.waitForTimeout(5000);
@@ -139,7 +146,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
 
     test('Firestore realtime listener is active', async ({ page }) => {
         await page.goto('/guestbook');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(5000);
 
         // Get initial message count
@@ -181,7 +188,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
         });
 
         await page.goto('/guestbook');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000);
 
         // Should have ZERO CSP violations for Firestore

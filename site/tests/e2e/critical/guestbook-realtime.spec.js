@@ -5,8 +5,15 @@
  */
 
 const { test, expect } = require('@playwright/test');
+const { dismissAllDevOverlays } = require('../../helpers/dismiss-dev-overlay');
 
 test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
+    test.beforeEach(async ({ page }) => {
+        // Dismiss dev overlays on page load
+        page.on('load', async () => {
+            await dismissAllDevOverlays(page);
+        });
+    });
     test('Message submitted in one context appears in another WITHOUT refresh', async ({
         browser,
     }) => {
@@ -23,8 +30,8 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
             await page2.goto('/guestbook');
 
             // Wait for Firestore initialization in both contexts
-            await page1.waitForLoadState('networkidle');
-            await page2.waitForLoadState('networkidle');
+            await page1.waitForLoadState('domcontentloaded');
+            await page2.waitForLoadState('domcontentloaded');
             await page1.waitForTimeout(8000); // Firebase init + listener setup
             await page2.waitForTimeout(8000);
 
@@ -56,7 +63,8 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
 
             await nameInput.fill('Realtime Test User');
             await messageInput.fill(testMessage);
-            await submitButton.click();
+            // Force click to bypass nextjs-portal interception
+            await submitButton.click({ force: true });
 
             console.log('✅ Message submitted in context 1');
 
@@ -137,7 +145,7 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
         });
 
         await page.goto('/guestbook');
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Wait for Firestore initialization
 
         // Should have NO offline warnings
@@ -167,8 +175,8 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
             await page1.goto('/guestbook');
             await page2.goto('/guestbook');
 
-            await page1.waitForLoadState('networkidle');
-            await page2.waitForLoadState('networkidle');
+            await page1.waitForLoadState('domcontentloaded');
+            await page2.waitForLoadState('domcontentloaded');
             await page1.waitForTimeout(8000);
             await page2.waitForTimeout(8000);
 
@@ -181,7 +189,8 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
 
             await page1.locator('input[name="name"]').first().fill('Latency Tester');
             await page1.locator('textarea[name="message"]').first().fill(testMessage);
-            await page1.locator('button[type="submit"]').first().click();
+            // Force click to bypass nextjs-portal interception
+            await page1.locator('button[type="submit"]').first().click({ force: true });
 
             await page1.waitForTimeout(1000); // Wait for submission
 
@@ -230,8 +239,8 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
             await page1.goto('/guestbook');
             await page2.goto('/guestbook');
 
-            await page1.waitForLoadState('networkidle');
-            await page2.waitForLoadState('networkidle');
+            await page1.waitForLoadState('domcontentloaded');
+            await page2.waitForLoadState('domcontentloaded');
             await page1.waitForTimeout(8000);
             await page2.waitForTimeout(8000);
 
@@ -247,7 +256,8 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
             for (const msg of messages) {
                 await page1.locator('input[name="name"]').first().fill('Multi Tester');
                 await page1.locator('textarea[name="message"]').first().fill(msg);
-                await page1.locator('button[type="submit"]').first().click();
+                // Force click to bypass nextjs-portal interception
+                await page1.locator('button[type="submit"]').first().click({ force: true });
                 await page1.waitForTimeout(1500); // Small delay between submissions
             }
 

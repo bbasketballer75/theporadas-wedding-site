@@ -203,10 +203,10 @@ test.describe('Gallery - Filter Tabs', () => {
 
       // Check for active state styling
       const activeClasses = await firstButton.getAttribute('class');
-      const hasActiveIndicator = activeClasses.includes('active') || 
-                                  activeClasses.includes('selected') || 
-                                  activeClasses.includes('border') ||
-                                  activeClasses.includes('bg-');
+      const hasActiveIndicator = activeClasses.includes('active') ||
+        activeClasses.includes('selected') ||
+        activeClasses.includes('border') ||
+        activeClasses.includes('bg-');
 
       if (hasActiveIndicator) {
         console.log('✅ Active filter has visual indicator');
@@ -233,7 +233,7 @@ test.describe('Gallery - Lazy Loading', () => {
       const lazyPercentage = (lazyCount / imageCount) * 100;
 
       console.log(`✅ Lazy loading: ${lazyCount}/${imageCount} images (${lazyPercentage.toFixed(0)}%)`);
-      
+
       // At least some images should be lazy loaded
       expect(lazyCount).toBeGreaterThan(0);
     } else {
@@ -366,7 +366,7 @@ test.describe('Gallery - Lightbox/Modal', () => {
 
         // Modal should be closed
         const modalStillVisible = await modal.isVisible().catch(() => false);
-        
+
         if (!modalStillVisible) {
           console.log('✅ Lightbox closes with Escape key');
         } else {
@@ -390,7 +390,7 @@ test.describe('Gallery - Image Optimization', () => {
     if (allImages > 0) {
       const optimizationRate = (srcsetCount / allImages) * 100;
       console.log(`✅ Image optimization: ${srcsetCount}/${allImages} images use srcset (${optimizationRate.toFixed(0)}%)`);
-      
+
       // At least some images should use srcset for optimization
       if (srcsetCount > 0) {
         expect(srcsetCount).toBeGreaterThan(0);
@@ -417,7 +417,7 @@ test.describe('Gallery - Image Optimization', () => {
 
       const sampleSize = Math.min(imageCount, 5);
       console.log(`✅ Accessibility: ${imagesWithAlt}/${sampleSize} sampled images have alt text`);
-      
+
       expect(imagesWithAlt).toBeGreaterThan(0);
     }
   });
