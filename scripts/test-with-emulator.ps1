@@ -85,17 +85,17 @@ if (-not $emulatorsAlreadyRunning) {
 
     Write-Host "⏳ Waiting for emulators to be ready..." -ForegroundColor Yellow
 
-    # Wait for emulators to start (max 30 seconds)
-    $timeout = 30
+    # Wait for emulators to start (max 60 seconds)
+    $timeout = 60
     $elapsed = 0
     $ready = $false
 
     while ($elapsed -lt $timeout) {
-        Start-Sleep -Seconds 1
-        $elapsed++
+        Start-Sleep -Seconds 2
+        $elapsed += 2
 
         try {
-            $response = Invoke-WebRequest -Uri "http://localhost:8002" -UseBasicParsing -TimeoutSec 1 -ErrorAction SilentlyContinue
+            $response = Invoke-WebRequest -Uri "http://localhost:8002" -UseBasicParsing -TimeoutSec 2 -ErrorAction SilentlyContinue
             $ready = $true
             break
         }
@@ -108,6 +108,9 @@ if (-not $emulatorsAlreadyRunning) {
 
     if (-not $ready) {
         Write-Host "❌ Emulators failed to start within $timeout seconds" -ForegroundColor Red
+        Write-Host ""
+        Write-Host "Job output:" -ForegroundColor Yellow
+        Receive-Job -Job $emulatorJob | Write-Host
         if ($emulatorJob) {
             Stop-Job -Job $emulatorJob
             Remove-Job -Job $emulatorJob
