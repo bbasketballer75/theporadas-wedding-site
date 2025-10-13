@@ -27,10 +27,8 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 const nextConfig = {
   reactStrictMode: true,
 
-  // Enable React Compiler (Next.js 15 experimental feature)
-  experimental: {
-    reactCompiler: true,
-  },
+  // Silence workspace root inference warning
+  outputFileTracingRoot: require('path').join(__dirname, '../'),
 
   // Security headers for production
   async headers() {
@@ -63,10 +61,7 @@ const nextConfig = {
     ];
   },
 
-  // Experimental features
-  experimental: {
-    // instrumentationHook removed — Sentry integration has been disabled/removed.
-  },
+
 
   // Removed 'output: export' to enable API routes for Canva integration
   // Note: For Firebase hosting, we'll use 'next export' in build script
