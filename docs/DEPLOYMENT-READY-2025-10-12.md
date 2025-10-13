@@ -81,15 +81,26 @@ charcoal: '#2d2d2d'
 
 ## 🚢 Deployment Instructions
 
-### Vercel Dashboard Deployment (Required Method)
+### IMPORTANT: Configure Root Directory First
 
-Due to Git author configuration mismatch between local commits and Vercel team settings, **you must deploy via the Vercel dashboard**. The CLI method is currently blocked.
+Your Next.js app is in the `site/` subdirectory. Before deploying, you MUST configure Vercel:
+
+1. **Go to Project Settings:** <https://vercel.com/austins-projects-bb7c50ab/wedding-website/settings>
+2. **Click "General"** in the left sidebar (if not already there)
+3. **Find "Root Directory"** section
+4. **Click "Edit"** button
+5. **Enter:** `site` (just the word "site", not a full path)
+6. **Click "Save"**
+
+### Deploy After Configuration
+
+Once Root Directory is set to `site`, proceed with deployment:
 
 #### Quick Deploy (Recommended)
 
 1. **Go to your project:** <https://vercel.com/austins-projects-bb7c50ab/wedding-website>
 2. **Click the "Deploy" button** in the top right
-3. Vercel will automatically pull the latest commit from GitHub (`f51fa32`)
+3. Vercel will automatically pull the latest commit from GitHub (`6bbe77e`)
 4. Wait for build to complete (~2-3 minutes)
 5. Verify live site at production URL
 
