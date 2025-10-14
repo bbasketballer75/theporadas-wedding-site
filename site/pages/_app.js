@@ -15,18 +15,23 @@ import '../lib/env';
 import '../styles/globals.css';
 
 // Optimize font loading with next/font (2025 best practice)
+// Uses Google Fonts API v2 with automatic subsetting and preloading
 const playfair = Playfair_Display({
   subsets: ['latin'],
   weight: ['700'],
   variable: '--font-playfair',
-  display: 'swap',
+  display: 'swap', // Show fallback immediately, swap when font loads
+  preload: true, // Preload font for faster initial render
+  fallback: ['Georgia', 'serif'],
 });
 
 const lora = Lora({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-lora',
-  display: 'swap',
+  display: 'swap', // Show fallback immediately, swap when font loads
+  preload: true, // Preload font for faster initial render
+  fallback: ['Georgia', 'serif'],
 });
 
 export default function App({ Component, pageProps }) {
