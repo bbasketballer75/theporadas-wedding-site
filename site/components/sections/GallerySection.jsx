@@ -18,19 +18,20 @@ export default function GallerySection() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
 
-  // Wedding video chapters (45:53 = 2753 seconds total)
+  // Wedding video chapters - ACTUAL timestamps from video
   const weddingChapters = [
-    { title: 'Getting Ready', time: 0, description: 'Preparations and anticipation' },
-    { title: 'Pre-Ceremony', time: 420, description: 'Guests arrive and find their seats' }, // 7:00
-    { title: 'Ceremony Begins', time: 720, description: 'The processional' }, // 12:00
-    { title: 'Vows & Rings', time: 960, description: 'Exchange of vows and rings' }, // 16:00
-    { title: 'First Kiss', time: 1200, description: 'Sealed with a kiss' }, // 20:00
-    { title: 'Recessional', time: 1320, description: 'Married!' }, // 22:00
-    { title: 'Cocktail Hour', time: 1500, description: 'Drinks and mingling' }, // 25:00
-    { title: 'Grand Entrance', time: 1800, description: 'Introducing the newlyweds' }, // 30:00
-    { title: 'First Dance', time: 2040, description: 'Our first dance as husband and wife' }, // 34:00
-    { title: 'Speeches & Toasts', time: 2280, description: 'Words from family and friends' }, // 38:00
-    { title: 'Celebration', time: 2520, description: 'Dancing and joy' }, // 42:00
+    { title: 'Start', time: 0, description: 'Our story begins' }, // 0:00
+    { title: 'Bachelor+ette Weekend', time: 44.64, description: 'Pre-wedding celebrations' }, // 0:44
+    { title: '"Who Is It" Gameshow', time: 300.44, description: 'Fun and games with our guests' }, // 5:00
+    { title: 'Words From Our Wedding Party', time: 863.36, description: 'Heartfelt messages from our friends' }, // 14:23
+    { title: 'Our Vows', time: 1211, description: 'We promise forever' }, // 20:11
+    { title: 'The Ceremony', time: 1537.88, description: 'We tie the knot' }, // 25:37
+    { title: 'The Reception', time: 1688.92, description: 'Dinner and celebration begins' }, // 28:08
+    { title: 'First Dance', time: 1814.88, description: 'Our first dance as husband and wife' }, // 30:14
+    { title: 'Behind The Scenes & Bloopers', time: 2165.28, description: 'Outtakes and fun moments' }, // 36:05
+    { title: 'The REAL Party', time: 2375.12, description: 'Dancing the night away' }, // 39:35
+    { title: 'Thank You', time: 2643.24, description: 'Gratitude for our loved ones' }, // 44:03
+    { title: 'One Final Clip...', time: 2683.84, description: 'A surprise ending' }, // 44:43
   ];
 
   const filters = [
