@@ -25,6 +25,18 @@ export default function Navigation() {
 
   // Scroll-spy: Track which section is currently in view
   useEffect(() => {
+    // Handle initial hash navigation
+    if (router.asPath.includes('#')) {
+      const hash = router.asPath.split('#')[1];
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setActiveSection(hash);
+        }
+      }, 100);
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -49,17 +61,24 @@ export default function Navigation() {
     });
 
     return () => observer.disconnect();
-  }, [navLinks]);
+  }, [navLinks, router.asPath]);
 
-  const scrollToSection = (id) => {
+  const handleNavClick = async (id) => {
+    setIsOpen(false); // Close mobile menu immediately
+    
+    // If we're not on the homepage, navigate there first
+    if (router.pathname !== '/') {
+      await router.push('/#' + id);
+      return;
+    }
+    
+    // If already on homepage, just scroll to section
     const element = document.getElementById(id);
     if (element) {
-      // Use block: 'start' to position section at top of viewport (matches test expectations)
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setIsOpen(false); // Close mobile menu after clicking
-
+      // Update URL hash without reloading
+      window.history.pushState(null, '', '/#' + id);
       // Manually trigger active state after scroll animation completes
-      // Use setTimeout to wait for smooth scroll (typically 500-1000ms)
       setTimeout(() => {
         setActiveSection(id);
       }, 1000);
@@ -72,7 +91,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center">
           {/* Logo/Brand - Enhanced */}
           <button
-            onClick={() => scrollToSection('hero')}
+            onClick={() => handleNavClick('hero')}
             className="group font-display text-2xl md:text-3xl font-bold cursor-pointer transition-all duration-300"
             aria-label="Return to top of page"
           >
@@ -87,7 +106,7 @@ export default function Navigation() {
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleNavClick(link.id)}
                 className={`font-body text-base transition-all duration-300 relative group cursor-pointer ${
                   activeSection === link.id
                     ? 'text-sage-600 font-semibold'
@@ -140,7 +159,7 @@ export default function Navigation() {
             {navLinks.map((link) => (
               <button
                 key={link.id}
-                onClick={() => scrollToSection(link.id)}
+                onClick={() => handleNavClick(link.id)}
                 className={`block w-full text-left font-body text-base transition-all duration-300 py-3 px-4 rounded-xl cursor-pointer ${
                   activeSection === link.id
                     ? 'text-sage-600 font-semibold bg-sage-50 shadow-sm'
