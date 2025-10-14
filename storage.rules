@@ -18,6 +18,11 @@ service firebase.storage {
       allow write: if false; // Only Functions can write thumbnails
     }
     
+    // Test uploads (for integration tests only - should not exist in production)
+    match /test-uploads/{allPaths=**} {
+      allow read, write: if true; // Open for emulator tests
+    }
+    
     // Default deny all other paths
     match /{allPaths=**} {
       allow read, write: if false;
