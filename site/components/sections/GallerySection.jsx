@@ -77,7 +77,7 @@ export default function GallerySection() {
               <p className="text-center text-charcoal/70 mb-6 max-w-2xl mx-auto">
                 Watch the highlight reel of our unforgettable day
               </p>
-              <VideoPlayer videoId="ZOIRb_ghdh0" title="Austin & Jordyn Wedding Film" />
+              <VideoPlayer videoId="ZOIRb_ghdh0" title="Austin & Jordyn Wedding Film" showChapters={false} />
             </div>
           </div>
         </SectionTransition>
