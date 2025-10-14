@@ -218,7 +218,7 @@ export default function AlbumGeneratorPage() {
                 🔗 Connect to Canva
               </button>
               <div className="mt-8 bg-blush/10 rounded-xl p-6 text-left">
-                <h3 className="font-semibold text-sage mb-3">What you'll get:</h3>
+                <h3 className="font-semibold text-sage mb-3">What you&apos;ll get:</h3>
                 <ul className="space-y-2 text-sm text-gray-700">
                   <li className="flex items-start">
                     <span className="mr-2">✓</span>
@@ -239,7 +239,7 @@ export default function AlbumGeneratorPage() {
                 </ul>
               </div>
               <p className="mt-6 text-xs text-gray-500">
-                You'll be redirected to Canva to authorize access. Your photos remain private and secure.
+                You&apos;ll be redirected to Canva to authorize access. Your photos remain private and secure.
               </p>
             </div>
           ) : generatedAlbum ? (
@@ -383,8 +383,8 @@ export default function AlbumGeneratorPage() {
                         onClick={() => setSelectedTemplate(template.id)}
                         disabled={generating}
                         className={`w-full px-4 py-3 rounded-xl font-semibold transition-all duration-300 text-left ${selectedTemplate === template.id
-                            ? 'bg-gradient-sage-blush text-white shadow-lg'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          ? 'bg-gradient-sage-blush text-white shadow-lg'
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                           } disabled:opacity-50`}
                       >
                         <div className="font-semibold">{template.name}</div>
