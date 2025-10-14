@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 import SectionTransition from '../SectionTransition';
-import VideoPlayer from '../VideoPlayer';
+import YouTubePlayer from '../YouTubePlayer';
 
 const GalleryDisplay = dynamic(() => import('../GalleryDisplay'), {
   ssr: false,
@@ -17,6 +17,21 @@ export default function GallerySection() {
   const [filter, setFilter] = useState('all');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState(null);
+
+  // Wedding video chapters (45:53 = 2753 seconds total)
+  const weddingChapters = [
+    { title: 'Getting Ready', time: 0, description: 'Preparations and anticipation' },
+    { title: 'Pre-Ceremony', time: 420, description: 'Guests arrive and find their seats' }, // 7:00
+    { title: 'Ceremony Begins', time: 720, description: 'The processional' }, // 12:00
+    { title: 'Vows & Rings', time: 960, description: 'Exchange of vows and rings' }, // 16:00
+    { title: 'First Kiss', time: 1200, description: 'Sealed with a kiss' }, // 20:00
+    { title: 'Recessional', time: 1320, description: 'Married!' }, // 22:00
+    { title: 'Cocktail Hour', time: 1500, description: 'Drinks and mingling' }, // 25:00
+    { title: 'Grand Entrance', time: 1800, description: 'Introducing the newlyweds' }, // 30:00
+    { title: 'First Dance', time: 2040, description: 'Our first dance as husband and wife' }, // 34:00
+    { title: 'Speeches & Toasts', time: 2280, description: 'Words from family and friends' }, // 38:00
+    { title: 'Celebration', time: 2520, description: 'Dancing and joy' }, // 42:00
+  ];
 
   const filters = [
     { id: 'all', label: 'All', icon: '📸' },
@@ -77,7 +92,12 @@ export default function GallerySection() {
               <p className="text-center text-charcoal/70 mb-6 max-w-2xl mx-auto">
                 Watch the highlight reel of our unforgettable day
               </p>
-              <VideoPlayer videoId="ZOIRb_ghdh0" title="Austin & Jordyn Wedding Film" showChapters={false} />
+              <YouTubePlayer
+                videoId="ZOIRb_ghdh0"
+                title="Austin & Jordyn Wedding Film"
+                chapters={weddingChapters}
+                showChapters={true}
+              />
             </div>
           </div>
         </SectionTransition>
