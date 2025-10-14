@@ -293,3 +293,12 @@ tasksync/
 *.service-account.json
 node_modules
 .vercel
+
+# ============================================================================
+# LARGE MEDIA FILES
+# ============================================================================
+# Video files too large for GitHub (>100MB limit)
+FINAL WEDDING MEDIA/videos/*.mp4
+FINAL WEDDING MEDIA/parents/parent_videos/*.mp4
+site/public/videos/*.mp4
+!site/public/videos/*.vtt  # Keep VTT chapter files

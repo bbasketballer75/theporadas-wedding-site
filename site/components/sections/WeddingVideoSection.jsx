@@ -8,9 +8,9 @@ import { useState } from 'react';
 export default function WeddingVideoSection() {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // Local wedding video file
-  const videoUrl = '/videos/final-wedding-video.mp4';
-  const isLocalVideo = true; // Flag to use HTML5 video player instead of iframe
+  // Main wedding video from YouTube
+  const videoUrl = 'https://www.youtube.com/embed/ZOIRb_ghdh0';
+  const useYouTube = true;
 
   return (
     <section
@@ -55,22 +55,15 @@ export default function WeddingVideoSection() {
 
             {/* Video Player */}
             <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl">
-              {/* HTML5 Video Player for local file */}
-              <video
-                controls
+              {/* YouTube Embed */}
+              <iframe
+                src={`${videoUrl}?rel=0&modestbranding=1`}
+                title="Austin & Jordyn Wedding Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
                 className="w-full h-full"
-                poster="/images/video-poster.jpg"
-                preload="metadata"
-              >
-                <source src={videoUrl} type="video/mp4" />
-                <track
-                  kind="chapters"
-                  src="/videos/main-film-chapters.vtt"
-                  srcLang="en"
-                  label="Chapters"
-                />
-                Your browser does not support the video tag.
-              </video>
+              />
             </div>
 
             {/* Optional: Video caption or date */}
