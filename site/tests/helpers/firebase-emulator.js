@@ -261,7 +261,7 @@ async function waitForEmulators(timeout = 10000) {
  * @returns {Promise<Object>} Summary of cleared collections
  */
 async function clearAllTestData() {
-    const collections = ['guestbook_messages', 'test_messages', 'test_collection'];
+    const collections = ['guestbook_messages', 'test_messages', 'test_collection', 'test_photos', 'wedding_photos'];
     const results = {};
     let totalDeleted = 0;
 

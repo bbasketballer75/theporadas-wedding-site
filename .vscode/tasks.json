@@ -73,6 +73,148 @@
         "reveal": "always",
         "panel": "new"
       }
+    },
+    {
+      "label": "Start Firebase Emulators",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "cd '${workspaceFolder}'; firebase emulators:start --project demo-test"
+      ],
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": false
+      }
+    },
+    {
+      "label": "Stop Firebase Emulators",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Stop-Process -Name 'java' -Force -ErrorAction SilentlyContinue; Write-Host '✅ Firebase emulators stopped'"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Clear Emulator Data",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "cd '${workspaceFolder}'; if (Test-Path 'firebase-export') { Remove-Item -Recurse -Force firebase-export; Write-Host '✅ Cleared firebase-export directory' } else { Write-Host 'ℹ️  No firebase-export directory to clear' }"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Restart Firebase Emulators",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "Stop-Process -Name 'java' -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 2; if (Test-Path 'firebase-export') { Remove-Item -Recurse -Force firebase-export }; Write-Host '🔄 Restarting emulators...'; Start-Process pwsh -ArgumentList '-NoProfile','-ExecutionPolicy','Bypass','-Command','cd ${workspaceFolder}; firebase emulators:start --project demo-test' -WindowStyle Minimized; Start-Sleep -Seconds 12; Write-Host '✅ Emulators restarted'"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Run Integration Tests",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "cd '${workspaceFolder}/site'; npx.cmd playwright test --project=integration --reporter=list"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Run All Tests",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "cd '${workspaceFolder}/site'; Write-Host '🧪 Running all test suites (E2E + Integration)...'; npx.cmd playwright test --reporter=list"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Run Performance Tests",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "cd '${workspaceFolder}/site'; Write-Host '🧪 Running performance tests...'; npx.cmd playwright test --project=integration --reporter=list performance-emulator.spec.js"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Run Security Tests",
+      "type": "shell",
+      "command": "pwsh",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "cd '${workspaceFolder}/site'; Write-Host '🔒 Running security tests...'; npx.cmd playwright test --project=integration --reporter=list security-emulator.spec.js"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
     }
   ]
 }
