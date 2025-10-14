@@ -11,6 +11,7 @@ After VS Code restart and Playwright config update, Firebase emulator integratio
 ### ✅ What's Working
 
 1. **Java 21 Installed & Accessible**
+
    ```
    openjdk version "21.0.8" 2025-07-15 LTS
    OpenJDK Runtime Environment Temurin-21.0.8+9
@@ -55,6 +56,7 @@ Running 7 tests using 2 workers
 ### Test Breakdown
 
 **✅ Consistently Passing (3 tests):**
+
 1. Direct Firestore write validation
 2. Browser page emulator connection
 3. Multiple messages correct order
@@ -76,11 +78,13 @@ Running 7 tests using 2 workers
 **Root Cause:** Firebase emulator persists data between test runs by default.
 
 **Symptoms:**
+
 - Test expects 1 message, finds 2 or 51
 - Test expects 5 messages, finds 6
 - Test expects 50 messages, finds 51
 
 **Evidence:**
+
 ```javascript
 // Test expects clean state
 expect(messages.length).toBe(1);
@@ -92,6 +96,7 @@ expect(messages.length).toBe(5);
 ```
 
 **Current Cleanup:**
+
 ```javascript
 async function clearEmulatorData() {
     const snapshot = await db.collection('guestbook_messages').get();
@@ -121,6 +126,7 @@ This happened during the "Listener persists across rapid updates" test, likely d
 ### Option 1: Restart Emulator Between Runs (Current)
 
 **Manual workflow:**
+
 1. Stop emulator: `Ctrl+C` in emulator window
 2. Restart: `firebase emulators:start --project demo-test`
 3. Run tests: `npx playwright test --project=integration`
@@ -148,6 +154,7 @@ firebase emulators:start --project demo-test
 ### Option 3: Improve Test Cleanup (Best Long-term)
 
 Update `clearEmulatorData()` to:
+
 1. Add longer wait after deletion
 2. Verify collection is empty before proceeding
 3. Use transactions for atomic cleanup
@@ -194,19 +201,25 @@ const collection = `guestbook_messages_${testId}`;
 
 1. **Stop current emulator** (`Ctrl+C` in emulator window)
 2. **Clear emulator data:**
+
    ```powershell
    cd f:\wedding-website
    Remove-Item -Recurse -Force ./firebase-export -ErrorAction SilentlyContinue
    ```
+
 3. **Restart emulator fresh:**
+
    ```powershell
    firebase emulators:start --project demo-test
    ```
+
 4. **Run tests again:**
+
    ```powershell
    cd site
    npx playwright test --project=integration
    ```
+
 5. **Expected:** Higher pass rate (5-6 passing, 1-2 flaky)
 
 ### Short-Term (30 minutes)
@@ -217,6 +230,7 @@ const collection = `guestbook_messages_${testId}`;
    - Add verification
 
 7. **Add test setup helper:**
+
    ```javascript
    async function ensureCleanState() {
        await clearEmulatorData();
@@ -249,18 +263,23 @@ const collection = `guestbook_messages_${testId}`;
 ## Git Commits
 
 ### Commit 1: `769382b`
+
 **Message:** "fix: pass PATH environment to Firebase emulator background job"  
 **Changes:** Updated `scripts/test-with-emulator.ps1`
 
 ### Commit 2: `b6c61ab`
+
 **Message:** "docs: Java 21 installation complete + emulator manual workflow"  
 **Changes:**
+
 - Created `docs/JAVA-21-EMULATOR-SETUP-COMPLETE.md`
 - Updated `scripts/test-with-emulator.ps1`
 
 ### Commit 3: `2af94e7`
+
 **Message:** "feat: add integration test project to Playwright config"  
 **Changes:** Updated `site/playwright.config.js`
+
 - Added `integration` project
 - testDir: `./tests/integration`
 - timeout: 90s
@@ -312,11 +331,13 @@ const collection = `guestbook_messages_${testId}`;
 ### ROI Analysis
 
 **Before:**
+
 - Integration tests: 0
 - Firebase emulator usage: Manual only
 - Realtime sync validation: None
 
 **After:**
+
 - Integration tests: 7 (with framework for more)
 - Emulator tests: Automated
 - Confident Firebase changes: High

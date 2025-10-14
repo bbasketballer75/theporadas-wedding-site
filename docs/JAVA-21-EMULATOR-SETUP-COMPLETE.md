@@ -15,6 +15,7 @@
 **Package:** Eclipse Temurin 21 (OpenJDK 21.0.8 LTS)  
 **Method:** Chocolatey (`choco install temurin21`)  
 **Verification:**
+
 ```powershell
 PS> java -version
 openjdk version "21.0.8" 2025-07-15 LTS
@@ -28,12 +29,14 @@ Firebase tools will drop support for Java < 21 in v15. Java 21 is now the minimu
 ### 2. Firebase Emulator Configuration ✅
 
 **Emulators Configured:**
+
 - **Firestore:** `localhost:8002`
 - **Storage:** `localhost:9199`
 - **Hosting:** `localhost:5000`
 - **Emulator UI:** `localhost:4000`
 
 **Configuration File:** `firebase.json`
+
 ```json
 {
   "emulators": {
@@ -51,11 +54,12 @@ Firebase tools will drop support for Java < 21 in v15. Java 21 is now the minimu
 }
 ```
 
-###  3. Emulator Script Improvements ✅
+### 3. Emulator Script Improvements ✅
 
 **File:** `scripts/test-with-emulator.ps1`
 
 **Changes Made:**
+
 1. Added PATH refresh to pick up Java 21
 2. Pass current PATH to background PowerShell job
 3. Increased timeout to 60 seconds (from 30)
@@ -69,6 +73,7 @@ Firebase tools will drop support for Java < 21 in v15. Java 21 is now the minimu
 **Issue:** PowerShell `Start-Job` background jobs on Windows have restricted network context
 
 **Symptoms:**
+
 - Emulator starts successfully in background job
 - Emulator reports "All emulators ready!" and correct ports
 - Parent PowerShell process CANNOT connect to emulator ports
@@ -79,6 +84,7 @@ Firebase tools will drop support for Java < 21 in v15. Java 21 is now the minimu
 Windows PowerShell jobs run in isolated session with limited network permissions. The Java process binds to localhost:8002 within the job context, but the port is not accessible from the parent process or other processes.
 
 **Attempted Solutions (all failed):**
+
 - ❌ Pass `$env:Path` to background job → Emulator starts but ports not accessible
 - ❌ Increase wait timeout → Emulator ready but still not accessible
 - ❌ Use `Invoke-WebRequest` with various timeouts → Always fails
@@ -93,6 +99,7 @@ Since automated background job approach has Windows limitations, use this proven
 ### Option 1: Two-Terminal Workflow (Recommended)
 
 **Terminal 1 - Start Emulator:**
+
 ```powershell
 # In project root
 cd f:\wedding-website
@@ -100,6 +107,7 @@ firebase emulators:start --project demo-test
 ```
 
 **Terminal 2 - Run Tests:**
+
 ```powershell
 # In site directory
 cd f:\wedding-website\site
@@ -107,12 +115,14 @@ npx playwright test tests/integration/guestbook-emulator.spec.js
 ```
 
 **When done:**
+
 - Terminal 1: `Ctrl+C` to stop emulators
 - Terminal 2: Close or continue development
 
 ### Option 2: VS Code Tasks (Future Enhancement)
 
 Could create VS Code tasks for one-click emulator management:
+
 - Task 1: "Start Firebase Emulators" (background)
 - Task 2: "Run Emulator Tests"
 - Task 3: "Stop Firebase Emulators"
@@ -144,6 +154,7 @@ Ctrl+C in emulator terminal
 **Tests:** 8 comprehensive Firestore integration tests
 
 **Test Coverage:**
+
 1. **Direct Firestore Write** - Validate emulator write operations
 2. **Realtime Listener** - Immediate updates (<2000ms)
 3. **Multiple Messages** - Correct descending timestamp order
@@ -155,6 +166,7 @@ Ctrl+C in emulator terminal
 
 **Helper File:** `site/tests/helpers/firebase-emulator.js`  
 **Functions:**
+
 - `connectToEmulator()` - Initialize emulator connection
 - `seedTestData()` - Pre-populate test data
 - `clearEmulatorData()` - Clean up after tests
@@ -162,17 +174,20 @@ Ctrl+C in emulator terminal
 ### Running Integration Tests
 
 **Prerequisites:**
+
 1. ✅ Java 21+ installed
 2. ✅ Firebase CLI installed (`npm install -g firebase-tools`)
 3. ✅ Emulator running in separate terminal
 
 **Command:**
+
 ```powershell
 cd f:\wedding-website\site
 npx playwright test tests/integration/guestbook-emulator.spec.js
 ```
 
 **Expected Results:**
+
 ```
 Running 8 tests using 1 worker
 
@@ -294,12 +309,14 @@ Running 8 tests using 1 worker
 ### 🎯 Recommended Workflow
 
 **For Development:**
+
 1. Open Terminal 1: `firebase emulators:start --project demo-test`
 2. Keep running during development session
 3. Open Terminal 2: Run tests anytime with `npx playwright test tests/integration/...`
 4. End of day: `Ctrl+C` in Terminal 1
 
 **For CI/CD:**
+
 - GitHub Actions auto-installs Java and Firebase CLI
 - Emulator starts and stops automatically
 - No Windows PowerShell job limitations in Linux CI environment
