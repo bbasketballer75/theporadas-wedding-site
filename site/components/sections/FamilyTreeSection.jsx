@@ -27,31 +27,45 @@ export default function FamilyTreeSection() {
 
   // Family data structure
   const couple = {
-    bride: { name: 'Jordyn Porada', image: '/images/family/jordyn.jpg' },
-    groom: { name: 'Austin Porada', image: '/images/family/austin.jpg' },
+    bride: {
+      name: 'Jordyn Porada',
+      image: '/images/family/496093297_9839735762736111_2592755804783153377_n.jpg',
+    },
+    groom: {
+      name: 'Austin Porada',
+      image: '/images/family/495660452_23961794676737340_6440789571967380360_n.jpg',
+    },
   };
 
   const parents = {
     brideParents: [
-      { name: "Bride's Mother", image: '/images/family/bride-mom.jpg' },
-      { name: "Bride's Father", image: '/images/family/bride-dad.jpg' },
+      { name: 'Heather', image: '/images/family/heather.webp' },
+      { name: 'Jerame', image: '/images/family/jerame.webp' },
     ],
     groomParents: [
-      { name: "Groom's Mother", image: '/images/family/groom-mom.jpg' },
-      { name: "Groom's Father", image: '/images/family/groom-dad.jpg' },
+      { name: 'Christine', image: '/images/family/christine.webp' },
+      { name: 'Melony', image: '/images/family/melony.webp' },
     ],
   };
 
   const weddingParty = {
     bridesmaids: [
-      { name: 'Bridesmaid 1', image: '/images/family/bridesmaid-1.jpg' },
-      { name: 'Bridesmaid 2', image: '/images/family/bridesmaid-2.jpg' },
-      { name: 'Bridesmaid 3', image: '/images/family/bridesmaid-3.jpg' },
+      { name: 'Caitie Helsel', image: '/images/family/caitie-helsel.webp' },
+      { name: 'Emily Aurandt', image: '/images/family/emily-aurandt.webp' },
+      { name: 'Hannah Porada', image: '/images/family/hannah-porada.webp' },
+      { name: 'Lexi Ferg', image: '/images/family/lexi-ferg.webp' },
+      { name: 'Maria McCray', image: '/images/family/maria-mccray.webp' },
+      { name: 'Brinnah Porada', image: '/images/family/brinnah-porada.webp' },
+      { name: 'MIC', image: '/images/family/mic.webp' },
     ],
     groomsmen: [
-      { name: 'Groomsman 1', image: '/images/family/groomsman-1.jpg' },
-      { name: 'Groomsman 2', image: '/images/family/groomsman-2.jpg' },
-      { name: 'Groomsman 3', image: '/images/family/groomsman-3.jpg' },
+      { name: 'Alex Molnar', image: '/images/family/alex-molnar.webp' },
+      { name: 'Brosonan McCray', image: '/images/family/brosonan-mccray.webp' },
+      { name: 'Ean Pringle', image: '/images/family/ean-pringle.webp' },
+      { name: 'Eddie Migut', image: '/images/family/eddie-migut.webp' },
+      { name: 'Ian Porada', image: '/images/family/ian-porada.webp' },
+      { name: 'Nate Berkebile', image: '/images/family/nate-berkebile.webp' },
+      { name: 'Tyler Sharpe', image: '/images/family/tyler-sharpe.webp' },
     ],
   };
 

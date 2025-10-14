@@ -8,9 +8,9 @@ import { useState } from 'react';
 export default function WeddingVideoSection() {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // TODO: Replace with actual wedding video URL
-  // Format: https://www.youtube.com/embed/VIDEO_ID or https://player.vimeo.com/video/VIDEO_ID
-  const videoUrl = 'https://www.youtube.com/embed/dQw4w9WgXcQ'; // Placeholder
+  // Local wedding video file
+  const videoUrl = '/videos/final-wedding-video.mp4';
+  const isLocalVideo = true; // Flag to use HTML5 video player instead of iframe
 
   return (
     <section
@@ -55,35 +55,22 @@ export default function WeddingVideoSection() {
 
             {/* Video Player */}
             <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-xl">
-              {/* Custom play button overlay (shown before video plays) */}
-              {!isPlaying && (
-                <motion.button
-                  onClick={() => setIsPlaying(true)}
-                  className="absolute inset-0 z-10 flex items-center justify-center bg-black/30 backdrop-blur-sm group cursor-pointer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center shadow-2xl transition-all">
-                    <svg
-                      className="w-10 h-10 md:w-14 md:h-14 text-gold ml-2"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </motion.button>
-              )}
-
-              {/* Actual Video Embed */}
-              <iframe
-                src={`${videoUrl}?autoplay=${isPlaying ? 1 : 0}&rel=0&modestbranding=1`}
-                title="Wedding Video"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+              {/* HTML5 Video Player for local file */}
+              <video
+                controls
                 className="w-full h-full"
-              />
+                poster="/images/video-poster.jpg"
+                preload="metadata"
+              >
+                <source src={videoUrl} type="video/mp4" />
+                <track
+                  kind="chapters"
+                  src="/videos/main-film-chapters.vtt"
+                  srcLang="en"
+                  label="Chapters"
+                />
+                Your browser does not support the video tag.
+              </video>
             </div>
 
             {/* Optional: Video caption or date */}
