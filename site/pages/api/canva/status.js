@@ -1,11 +1,17 @@
 /**
  * Canva Status API Route
  * Checks if Canva OAuth is authenticated and available
+ * 
+ * Optimizations:
+ * - 5-minute cache for authenticated status
+ * - Rate limit: 30 requests/minute per IP
+ * - Error handling with proper status codes
  */
 
 import { getValidToken, canvaApiRequest } from '../../../utils/canvaAuth';
+import { rateLimitAndCache } from '../../../lib/rateLimit';
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -52,3 +58,20 @@ export default async function handler(req, res) {
     });
   }
 }
+
+// Export with rate limiting (30 req/min) and caching (5 min)
+export default rateLimitAndCache(handler, {
+  rate: {
+    maxRequests: 30,
+    windowMs: 60000,
+    message: 'Too many status checks. Please wait before trying again.',
+  },
+  cache: {
+    ttl: 300, // 5 minutes
+    cacheKey: (req) => {
+      // Cache per session (or global if no session)
+      const sessionId = req.cookies?.session || 'global';
+      return `canva-status-${sessionId}`;
+    },
+  },
+});

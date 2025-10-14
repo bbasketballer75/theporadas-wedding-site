@@ -19,6 +19,40 @@
           "order": "DESCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "guestbook_messages",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "guestbook_messages",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "moderationStatus",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "timestamp",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "wedding-photos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "uploadedAt",
+          "order": "DESCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": []

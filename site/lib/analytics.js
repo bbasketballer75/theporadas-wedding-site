@@ -181,6 +181,62 @@ export function logLightbox(action, photoId) {
 }
 
 /**
+ * Track guestbook message submission (conversion goal)
+ * @param {number} messageLength - Length of message
+ * @param {boolean} hasRelationship - Whether relationship was provided
+ */
+export function logGuestbookSubmission(messageLength, hasRelationship = false) {
+  logEvent('guestbook_submission', {
+    message_length: messageLength,
+    has_relationship: hasRelationship,
+    conversion: true, // Mark as conversion
+    timestamp: new Date().toISOString(),
+  });
+}
+
+/**
+ * Track video chapter click (engagement metric)
+ * @param {string} chapterTitle - Chapter title
+ * @param {number} chapterIndex - Chapter index (0-based)
+ * @param {number} timestamp - Video timestamp in seconds
+ */
+export function logVideoChapterClick(chapterTitle, chapterIndex, timestamp) {
+  logEvent('video_chapter_click', {
+    chapter_title: chapterTitle,
+    chapter_index: chapterIndex,
+    video_timestamp: timestamp,
+    engagement: true, // Mark as engagement
+    timestamp: new Date().toISOString(),
+  });
+}
+
+/**
+ * Track social share (conversion goal)
+ * @param {string} platform - 'facebook', 'twitter', 'whatsapp', 'copy_link'
+ * @param {string} contentType - 'photo', 'video', 'page'
+ */
+export function logSocialShare(platform, contentType) {
+  logEvent('social_share', {
+    platform,
+    content_type: contentType,
+    conversion: true, // Mark as conversion
+    timestamp: new Date().toISOString(),
+  });
+}
+
+/**
+ * Track PWA install prompt (conversion goal)
+ * @param {string} action - 'shown', 'accepted', 'dismissed'
+ */
+export function logPWAInstall(action) {
+  logEvent('pwa_install', {
+    action,
+    conversion: action === 'accepted', // Only count accepted as conversion
+    timestamp: new Date().toISOString(),
+  });
+}
+
+/**
  * Track error
  * @param {string} errorType - Error category
  * @param {string} errorMessage - Error message
