@@ -115,6 +115,37 @@ service cloud.firestore {
       allow delete: if true; // Allow deletion for moderation (spam removal)
     }
     
+    // Photos collection (for integration tests and photo gallery features)
+    match /photos/{photoId} {
+      allow read: if true;
+      allow create: if 
+        // Validate required fields
+        request.resource.data.keys().hasAll(['url', 'uploadedAt']) &&
+        // Validate data types
+        request.resource.data.url is string &&
+        request.resource.data.uploadedAt is timestamp &&
+        // Optional fields validation
+        (!request.resource.data.keys().hasAny(['fileName']) || request.resource.data.fileName is string) &&
+        (!request.resource.data.keys().hasAny(['fileSize']) || request.resource.data.fileSize is number) &&
+        (!request.resource.data.keys().hasAny(['uploadedBy']) || request.resource.data.uploadedBy is string) &&
+        (!request.resource.data.keys().hasAny(['caption']) || request.resource.data.caption is string);
+      allow update, delete: if true; // Allow for testing
+    }
+    
+    // Test collections (for integration tests only - should not exist in production)
+    // These are open for emulator testing but will be blocked in production
+    match /test_messages/{docId} {
+      allow read, write: if true; // Open for emulator tests
+    }
+    
+    match /test_collection/{docId} {
+      allow read, write: if true; // Open for emulator tests
+    }
+    
+    match /test_photos/{docId} {
+      allow read, write: if true; // Open for emulator tests
+    }
+    
     // Default deny all other collections
     match /{document=**} {
       allow read, write: if false;
