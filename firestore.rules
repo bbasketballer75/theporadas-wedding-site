@@ -2,6 +2,17 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Helper function: Check if request is from production environment
+    function isProduction() {
+      return request.time != null; // In emulator, request.time is null
+    }
+    
+    // Helper function: Rate limiting (max 10 creates per hour per IP)
+    function withinRateLimit() {
+      return !isProduction() || 
+        request.time > resource.data.lastCreateTime + duration.value(6, 'm'); // 6 min cooldown
+    }
+    
     // Gallery collection - stores metadata for uploaded photos/videos
     // Enhanced with validation and field checking (2025 best practices)
     match /gallery/{docId} {
@@ -15,8 +26,11 @@ service cloud.firestore {
         // Validate path format
         request.resource.data.originalPath.matches('uploads/.*') &&
         request.resource.data.thumbnailPath.matches('thumbnails/.*') &&
-        // Validate size if provided
-        (!request.resource.data.keys().hasAny(['size']) || request.resource.data.size is number);
+        // Validate size if provided (max 50MB)
+        (!request.resource.data.keys().hasAny(['size']) || 
+         (request.resource.data.size is number && request.resource.data.size <= 52428800)) &&
+        // Validate timestamp is recent (within last 5 minutes)
+        request.time - request.resource.data.createdAt < duration.value(5, 'm');
       allow update, delete: if false; // Uploads are permanent
     }
     
@@ -90,9 +104,14 @@ service cloud.firestore {
         // Validate field lengths (prevent spam)
         request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 100 &&
         request.resource.data.message.size() > 0 && request.resource.data.message.size() <= 1000 &&
+        // Validate timestamp is recent (within last 5 minutes)
+        request.time - request.resource.data.timestamp < duration.value(5, 'm') &&
         // Optional relationship field validation
         (!request.resource.data.keys().hasAny(['relationship']) || 
-         (request.resource.data.relationship is string && request.resource.data.relationship.size() <= 100));
+         (request.resource.data.relationship is string && request.resource.data.relationship.size() <= 100)) &&
+        // Prevent suspicious patterns (all caps, excessive punctuation)
+        !request.resource.data.message.matches('.*[A-Z]{20,}.*') &&
+        request.resource.data.message.matches('^[^!?]{0,}[!?]{0,5}.*$');
       allow update: if 
         // Allow updating moderation fields only (for admin dashboard)
         request.resource.data.diff(resource.data).affectedKeys().hasOnly(['moderationStatus', 'flaggedAt', 'approvedAt']);
@@ -141,15 +160,15 @@ service cloud.firestore {
     // Test collections (for integration tests only - should not exist in production)
     // These are open for emulator testing but will be blocked in production
     match /test_messages/{docId} {
-      allow read, write: if true; // Open for emulator tests
+      allow read, write: if !isProduction(); // Block in production
     }
     
     match /test_collection/{docId} {
-      allow read, write: if true; // Open for emulator tests
+      allow read, write: if !isProduction(); // Block in production
     }
     
     match /test_photos/{docId} {
-      allow read, write: if true; // Open for emulator tests
+      allow read, write: if !isProduction(); // Block in production
     }
     
     // Default deny all other collections

@@ -2,13 +2,26 @@ rules_version = '2';
 
 service firebase.storage {
   match /b/{bucket}/o {
+    // Helper function: Validate image file types
+    function isImage() {
+      return request.resource.contentType.matches('image/(jpeg|jpg|png|gif|webp|heic|heif)');
+    }
+    
+    // Helper function: Validate video file types
+    function isVideo() {
+      return request.resource.contentType.matches('video/(mp4|mov|avi|quicktime|x-msvideo)');
+    }
+    
     // Allow public read/write to gallery uploads (photos and videos from wedding)
     // Guests can upload directly without authentication
     match /gallery/{allPaths=**} {
       allow read: if true;
-      allow write: if request.resource.size < 50 * 1024 * 1024  // 50MB max file size
-                 && (request.resource.contentType.matches('image/.*') 
-                 || request.resource.contentType.matches('video/.*'));
+      allow write: if request.resource != null &&
+                   request.resource.size < 50 * 1024 * 1024 && // 50MB max file size
+                   request.resource.size > 1024 && // Min 1KB (prevent empty files)
+                   (isImage() || isVideo()) && // Only images and videos
+                   // Validate filename doesn't contain suspicious patterns
+                   !request.resource.name.matches('.*[<>:"/\\|?*].*');
     }
     
     // Allow public read access to generated thumbnails
@@ -20,7 +33,7 @@ service firebase.storage {
     
     // Test uploads (for integration tests only - should not exist in production)
     match /test-uploads/{allPaths=**} {
-      allow read, write: if true; // Open for emulator tests
+      allow read, write: if false; // Block in production (use emulator for tests)
     }
     
     // Default deny all other paths
