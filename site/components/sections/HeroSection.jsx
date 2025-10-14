@@ -71,39 +71,35 @@ export default function HeroSection() {
 
         {/* Subtitle - Refined Spacing */}
         <p
-          className="font-body text-lg md:text-xl text-charcoal/80 mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in px-4"
+          className="font-body text-lg md:text-xl text-charcoal/80 mb-10 max-w-2xl mx-auto leading-relaxed animate-fade-in px-4"
           style={{ animationDelay: '400ms' }}
         >
-          Celebrating love, family, and the beautiful memories of our special day.
-          <br />
-          <span className="text-sage-600 font-semibold">
-            Thank you for being part of our journey.
-          </span>
+          Celebrating our love story and the beautiful memories from May 10, 2025.
         </p>
 
         {/* CTA Buttons - Sophisticated Design */}
         <div
-          className="flex flex-wrap gap-4 justify-center mb-12 animate-fade-in"
+          className="flex flex-wrap gap-4 justify-center animate-fade-in"
           style={{ animationDelay: '600ms' }}
         >
           <button
-            onClick={() => scrollToSection('gallery')}
+            onClick={() => scrollToSection('video')}
             className="btn-primary group"
+            aria-label="Watch our wedding video"
+          >
+            <span className="flex items-center gap-2">
+              <span className="text-2xl group-hover:scale-110 transition-transform">🎬</span>
+              <span>Watch Video</span>
+            </span>
+          </button>
+          <button
+            onClick={() => scrollToSection('gallery')}
+            className="btn-secondary group"
             aria-label="View our wedding gallery"
           >
             <span className="flex items-center gap-2">
               <span className="text-2xl group-hover:scale-110 transition-transform">📸</span>
-              <span>View Gallery</span>
-            </span>
-          </button>
-          <button
-            onClick={() => scrollToSection('upload')}
-            className="btn-secondary group"
-            aria-label="Upload your photos from the wedding"
-          >
-            <span className="flex items-center gap-2">
-              <span className="text-2xl group-hover:scale-110 transition-transform">⬆️</span>
-              <span>Share Photos</span>
+              <span>View Photos</span>
             </span>
           </button>
           <button
@@ -116,23 +112,6 @@ export default function HeroSection() {
               <span>Guest Book</span>
             </span>
           </button>
-        </div>
-
-        {/* Elegant Quote Card with Enhanced Design */}
-        <div className="max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '800ms' }}>
-          <div className="card-elegant p-8 md:p-12 relative">
-            {/* Decorative Corners */}
-            <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-gold-400/50 rounded-tl-lg"></div>
-            <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-gold-400/50 rounded-tr-lg"></div>
-            <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-gold-400/50 rounded-bl-lg"></div>
-            <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-gold-400/50 rounded-br-lg"></div>
-
-            <div className="text-6xl text-gold-400 opacity-30 mb-2">&ldquo;</div>
-            <p className="font-display text-xl md:text-2xl text-sage-700 italic leading-relaxed mb-2">
-              Two hearts, one love, forever intertwined
-            </p>
-            <div className="text-6xl text-gold-400 opacity-30 text-right">&rdquo;</div>
-          </div>
         </div>
 
         {/* Decorative Bottom Separator */}
