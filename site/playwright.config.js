@@ -95,6 +95,22 @@ module.exports = defineConfig({
     },
 
     // ============================================================================
+    // INTEGRATION TESTS (P0) - Firebase emulator integration
+    // ============================================================================
+    {
+      name: 'integration',
+      testDir: './tests/integration',
+      testMatch: /.*\.spec\.js/,
+      use: {
+        ...devices['Desktop Chrome'],
+        // Integration tests need longer timeouts for emulator operations
+        actionTimeout: 45000,
+      },
+      timeout: 90000, // Firebase emulator operations can be slow
+      retries: 1,
+    },
+
+    // ============================================================================
     // UI/COMPONENT TESTS (P2) - Visual and layout validation
     // ============================================================================
     {
