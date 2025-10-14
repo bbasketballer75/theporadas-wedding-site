@@ -58,13 +58,19 @@ export default function YouTubeChapters({ chapters = [], currentTime = 0, durati
   if (chapters.length === 0) return null;
 
   return (
-    <div className="card-elegant p-6 md:p-8 space-y-6">
-      {/* Header with Navigation Hint */}
-      <div className="flex items-center justify-between">
-        <h3 className="text-2xl font-display text-gradient-sage">✨ Video Chapters</h3>
-        <div className="hidden md:flex items-center gap-2 text-xs text-charcoal/50">
-          <span>Use ← → arrow keys to navigate</span>
-        </div>
+    <nav
+      className="card-elegant p-6 md:p-8 space-y-6"
+      aria-label="Video chapter navigation"
+      role="navigation"
+    >
+      {/* Header with keyboard shortcuts hint */}
+      <div className="flex justify-between items-center flex-wrap gap-4">
+        <h3 className="text-2xl font-display text-gradient-sage">
+          📖 Chapters ({chapters.length})
+        </h3>
+        <p className="text-sm text-charcoal/60 hidden md:block" aria-live="polite">
+          Tip: Use ← → arrow keys to navigate chapters
+        </p>
       </div>
 
       {/* Chapter Grid with Enhanced Interactions */}
@@ -86,6 +92,8 @@ export default function YouTubeChapters({ chapters = [], currentTime = 0, durati
                   ? 'bg-gradient-to-br from-sage-500 via-blush-400 to-gold-500 border-sage-500 text-white shadow-2xl shadow-sage-300/50 scale-105 animate-float'
                   : 'bg-white border-sage-200 hover:border-sage-400 hover:shadow-xl hover:scale-105 hover:-translate-y-1'
               }`}
+              aria-label={`Chapter ${index + 1}: ${chapter.title} at ${formatTime(chapter.time)}`}
+              aria-current={isActive ? 'true' : 'false'}
             >
               {/* Animated Background Glow */}
               {isActive && (
@@ -308,6 +316,6 @@ export default function YouTubeChapters({ chapters = [], currentTime = 0, durati
           </svg>
         </button>
       </div>
-    </div>
+    </nav>
   );
 }
