@@ -9,16 +9,7 @@ import SEOHead from '../components/SEOHead';
 import { SectionLoadingSkeleton } from '../components/LoadingSkeleton';
 
 // Dynamic imports with loading states for code splitting
-// This reduces initial bundle size by ~60-70%
 const HeroSection = dynamic(() => import('../components/sections/HeroSection'), {
-  loading: () => <SectionLoadingSkeleton />,
-});
-
-const OurStorySection = dynamic(() => import('../components/sections/OurStorySection'), {
-  loading: () => <SectionLoadingSkeleton />,
-});
-
-const TimelineSection = dynamic(() => import('../components/sections/TimelineSection'), {
   loading: () => <SectionLoadingSkeleton />,
 });
 
@@ -27,27 +18,22 @@ const GallerySection = dynamic(() => import('../components/sections/GallerySecti
   ssr: false, // Gallery is client-side only
 });
 
-const VenueSection = dynamic(() => import('../components/sections/VenueSection'), {
+const FamilyTreeSection = dynamic(() => import('../components/sections/FamilyTreeSection'), {
   loading: () => <SectionLoadingSkeleton />,
 });
 
-const PhotoBoothSection = dynamic(() => import('../components/sections/PhotoBoothSection'), {
+const WeddingVideoSection = dynamic(() => import('../components/sections/WeddingVideoSection'), {
   loading: () => <SectionLoadingSkeleton />,
-  ssr: false, // Camera requires client-side APIs
-});
-
-const GuestBookSection = dynamic(() => import('../components/sections/GuestBookSection'), {
-  loading: () => <SectionLoadingSkeleton />,
-});
-
-const AlbumSection = dynamic(() => import('../components/sections/AlbumSection'), {
-  loading: () => <SectionLoadingSkeleton />,
-  ssr: false, // Album creation is client-side only
+  ssr: false, // Video player is client-side only
 });
 
 const UploadSection = dynamic(() => import('../components/sections/UploadSection'), {
   loading: () => <SectionLoadingSkeleton />,
   ssr: false, // File upload requires client-side APIs
+});
+
+const GuestBookSection = dynamic(() => import('../components/sections/GuestBookSection'), {
+  loading: () => <SectionLoadingSkeleton />,
 });
 
 const MapSection = dynamic(() => import('../components/sections/MapSection'), {
@@ -97,44 +83,25 @@ export default function Home() {
       <ErrorBoundary>
         <Navigation />
 
-        <main className="min-h-screen">{/* Hero Section - Welcome & Introduction */}
+        <main className="min-h-screen">
+          {/* Hero Section - Welcome & Introduction */}
           <ErrorBoundary>
             <HeroSection />
           </ErrorBoundary>
 
-          {/* Our Story Section - Love Journey Timeline */}
-          <ErrorBoundary>
-            <OurStorySection />
-          </ErrorBoundary>
-
-          {/* Timeline Section - Wedding Day Events */}
-          <ErrorBoundary>
-            <TimelineSection />
-          </ErrorBoundary>
-
-          {/* Gallery Section - Photos & Videos */}
+          {/* Engagement Photos Gallery */}
           <ErrorBoundary>
             <GallerySection />
           </ErrorBoundary>
 
-          {/* Venue Section - Ceremony & Reception Locations */}
+          {/* Family Tree Section - Wedding Party, Parents, Couple */}
           <ErrorBoundary>
-            <VenueSection />
+            <FamilyTreeSection />
           </ErrorBoundary>
 
-          {/* Photo Booth Section - Interactive Camera Feature */}
+          {/* Main Wedding Video Section */}
           <ErrorBoundary>
-            <PhotoBoothSection />
-          </ErrorBoundary>
-
-          {/* Guest Book Section - Messages & Well Wishes */}
-          <ErrorBoundary>
-            <GuestBookSection />
-          </ErrorBoundary>
-
-          {/* Album Section - Create Print Albums */}
-          <ErrorBoundary>
-            <AlbumSection />
+            <WeddingVideoSection />
           </ErrorBoundary>
 
           {/* Upload Section - Share Guest Photos */}
@@ -142,7 +109,12 @@ export default function Home() {
             <UploadSection />
           </ErrorBoundary>
 
-          {/* Map Section - Viewer Locations */}
+          {/* Guest Book Section - Messages & Well Wishes */}
+          <ErrorBoundary>
+            <GuestBookSection />
+          </ErrorBoundary>
+
+          {/* Map Section - Visitor Locations */}
           <ErrorBoundary>
             <MapSection />
           </ErrorBoundary>

@@ -10,15 +10,12 @@ export default function Navigation() {
   const navLinks = useMemo(
     () => [
       { href: '/', label: 'Home', id: 'hero', isPage: true },
-      { href: '/our-story', label: 'Our Story', id: 'our-story', isPage: true },
-      { href: '/timeline', label: 'Timeline', id: 'timeline', isPage: true },
-      { href: '/gallery', label: 'Gallery', id: 'gallery', isPage: true },
-      { href: '/venue', label: 'Venue', id: 'venue', isPage: true },
-      { href: '/photobooth', label: 'Photo Booth', id: 'photobooth', isPage: true },
-      { href: '/guestbook', label: 'Guest Book', id: 'guestbook', isPage: true },
-      { href: '/album', label: 'Album', id: 'album', isPage: true },
-      { href: '/upload', label: 'Upload', id: 'upload', isPage: true },
-      { href: '/map', label: 'Map', id: 'map', isPage: true },
+      { href: '/#gallery', label: 'Gallery', id: 'gallery', isPage: false },
+      { href: '/#family-tree', label: 'Family Tree', id: 'family-tree', isPage: false },
+      { href: '/#video', label: 'Video', id: 'video', isPage: false },
+      { href: '/#upload', label: 'Upload', id: 'upload', isPage: false },
+      { href: '/#guestbook', label: 'Guest Book', id: 'guestbook', isPage: false },
+      { href: '/#map', label: 'Map', id: 'map', isPage: false },
     ],
     []
   );
@@ -65,13 +62,13 @@ export default function Navigation() {
 
   const handleNavClick = async (id) => {
     setIsOpen(false); // Close mobile menu immediately
-    
+
     // If we're not on the homepage, navigate there first
     if (router.pathname !== '/') {
       await router.push('/#' + id);
       return;
     }
-    
+
     // If already on homepage, just scroll to section
     const element = document.getElementById(id);
     if (element) {
