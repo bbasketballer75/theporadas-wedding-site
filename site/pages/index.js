@@ -18,28 +18,7 @@ const GallerySection = dynamic(() => import('../components/sections/GallerySecti
   ssr: false, // Gallery is client-side only
 });
 
-const FamilyTreeSection = dynamic(() => import('../components/sections/FamilyTreeSection'), {
-  loading: () => <SectionLoadingSkeleton />,
-});
 
-const WeddingVideoSection = dynamic(() => import('../components/sections/WeddingVideoSection'), {
-  loading: () => <SectionLoadingSkeleton />,
-  ssr: false, // Video player is client-side only
-});
-
-const UploadSection = dynamic(() => import('../components/sections/UploadSection'), {
-  loading: () => <SectionLoadingSkeleton />,
-  ssr: false, // File upload requires client-side APIs
-});
-
-const GuestBookSection = dynamic(() => import('../components/sections/GuestBookSection'), {
-  loading: () => <SectionLoadingSkeleton />,
-});
-
-const MapSection = dynamic(() => import('../components/sections/MapSection'), {
-  loading: () => <SectionLoadingSkeleton />,
-  ssr: false, // Leaflet maps are client-side only
-});
 
 export default function Home() {
   // Enable smooth scrolling globally
@@ -89,34 +68,9 @@ export default function Home() {
             <HeroSection />
           </ErrorBoundary>
 
-          {/* Engagement Photos Gallery */}
+          {/* Wedding Gallery - Photos & Video */}
           <ErrorBoundary>
             <GallerySection />
-          </ErrorBoundary>
-
-          {/* Family Tree Section - Wedding Party, Parents, Couple */}
-          <ErrorBoundary>
-            <FamilyTreeSection />
-          </ErrorBoundary>
-
-          {/* Main Wedding Video Section */}
-          <ErrorBoundary>
-            <WeddingVideoSection />
-          </ErrorBoundary>
-
-          {/* Upload Section - Share Guest Photos */}
-          <ErrorBoundary>
-            <UploadSection />
-          </ErrorBoundary>
-
-          {/* Guest Book Section - Messages & Well Wishes */}
-          <ErrorBoundary>
-            <GuestBookSection />
-          </ErrorBoundary>
-
-          {/* Map Section - Visitor Locations */}
-          <ErrorBoundary>
-            <MapSection />
           </ErrorBoundary>
         </main>
 
