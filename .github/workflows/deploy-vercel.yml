@@ -36,6 +36,10 @@ jobs:
         working-directory: ./site
         run: npm ci
 
+      - name: Clear Vercel cache
+        working-directory: ./site
+        run: rm -rf .vercel
+
       - name: Pull Vercel Environment Information
         working-directory: ./site
         run: vercel pull --yes --environment=${{ github.event_name == 'push' && 'production' || 'preview' }} --token=${{ secrets.VERCEL_TOKEN }}
