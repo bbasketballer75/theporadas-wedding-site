@@ -1,22 +1,24 @@
 import { useEffect, useState, useMemo } from 'react';
+import { useRouter } from 'next/router';
 
-// Navigation component with scroll-spy and smooth scrolling
+// Navigation component with page routing and scroll-spy for homepage
 export default function Navigation() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
   const navLinks = useMemo(
     () => [
-      { href: '#hero', label: 'Home', id: 'hero' },
-      { href: '#our-story', label: 'Our Story', id: 'our-story' },
-      { href: '#timeline', label: 'Timeline', id: 'timeline' },
-      { href: '#gallery', label: 'Gallery', id: 'gallery' },
-      { href: '#venue', label: 'Venue', id: 'venue' },
-      { href: '#photobooth', label: 'Photo Booth', id: 'photobooth' },
-      { href: '#guestbook', label: 'Guest Book', id: 'guestbook' },
-      { href: '#album', label: 'Album', id: 'album' },
-      { href: '#upload', label: 'Upload', id: 'upload' },
-      { href: '#map', label: 'Map', id: 'map' },
+      { href: '/', label: 'Home', id: 'hero', isPage: true },
+      { href: '/our-story', label: 'Our Story', id: 'our-story', isPage: true },
+      { href: '/timeline', label: 'Timeline', id: 'timeline', isPage: true },
+      { href: '/gallery', label: 'Gallery', id: 'gallery', isPage: true },
+      { href: '/venue', label: 'Venue', id: 'venue', isPage: true },
+      { href: '/photobooth', label: 'Photo Booth', id: 'photobooth', isPage: true },
+      { href: '/guestbook', label: 'Guest Book', id: 'guestbook', isPage: true },
+      { href: '/album', label: 'Album', id: 'album', isPage: true },
+      { href: '/upload', label: 'Upload', id: 'upload', isPage: true },
+      { href: '/map', label: 'Map', id: 'map', isPage: true },
     ],
     []
   );
