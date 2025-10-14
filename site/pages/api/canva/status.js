@@ -1,7 +1,9 @@
 /**
  * Canva Status API Route
- * Checks if Canva MCP server is authenticated and available
+ * Checks if Canva OAuth is authenticated and available
  */
+
+import { getValidToken, canvaApiRequest } from '../../../utils/canvaAuth';
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {
@@ -9,14 +11,37 @@ export default async function handler(req, res) {
   }
 
   try {
-    // In a real implementation, this would check the Canva MCP server connection
-    // For now, we'll return a placeholder response
-    // TODO: Implement actual Canva MCP server status check after authentication
+    const token = await getValidToken(req, res);
+
+    if (!token) {
+      return res.status(200).json({
+        authenticated: false,
+        available: true,
+        message: 'Canva authentication required. Click "Connect to Canva" to get started.',
+      });
+    }
+
+    // Verify token by fetching user profile
+    const profileResponse = await canvaApiRequest('/v1/users/me/profile', req, res);
+
+    if (!profileResponse.ok) {
+      return res.status(200).json({
+        authenticated: false,
+        available: true,
+        message: 'Canva token invalid. Please re-authenticate.',
+      });
+    }
+
+    const profile = await profileResponse.json();
 
     res.status(200).json({
-      authenticated: false, // Will be true after OAuth authentication
+      authenticated: true,
       available: true,
-      message: 'Canva MCP server configured. Authentication required.',
+      user: {
+        displayName: profile.display_name,
+        email: profile.email,
+      },
+      message: 'Canva connected successfully!',
     });
   } catch (error) {
     console.error('Canva status check error:', error);

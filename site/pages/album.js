@@ -15,7 +15,9 @@ export default function AlbumGeneratorPage() {
   const [generating, setGenerating] = useState(false);
   const [generatedAlbum, setGeneratedAlbum] = useState(null);
   const [canvaAvailable, setCanvaAvailable] = useState(false);
+  const [canvaUser, setCanvaUser] = useState(null);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     const initializeCanva = async () => {
@@ -31,8 +33,47 @@ export default function AlbumGeneratorPage() {
       }
     };
 
+    // Check for Canva connection success message
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('canva_connected') === 'true') {
+      setSuccessMessage('Successfully connected to Canva! 🎉');
+      // Remove query param from URL
+      window.history.replaceState({}, '', window.location.pathname);
+    } else if (urlParams.get('error')) {
+      const errorType = urlParams.get('error');
+      const errorMessages = {
+        canva_auth_failed: 'Failed to connect to Canva. Please try again.',
+        invalid_state: 'Security validation failed. Please try again.',
+        no_code: 'Authorization failed. Please try again.',
+        token_exchange_failed: 'Failed to complete authorization. Please try again.',
+        callback_failed: 'Connection error occurred. Please try again.',
+      };
+      setError(errorMessages[errorType] || 'An error occurred. Please try again.');
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+
     initializeCanva();
   }, []);
+
+  const connectToCanva = () => {
+    // Redirect to Canva authorization endpoint
+    window.location.href = '/api/canva/authorize';
+  };
+
+  const disconnectCanva = async () => {
+    try {
+      const response = await fetch('/api/canva/logout', { method: 'POST' });
+      if (response.ok) {
+        setCanvaAvailable(false);
+        setCanvaUser(null);
+        setSuccessMessage('Disconnected from Canva');
+        setTimeout(() => setSuccessMessage(''), 3000);
+      }
+    } catch (err) {
+      console.error('Disconnect error:', err);
+      setError('Failed to disconnect. Please try again.');
+    }
+  };
 
   const handlePhotoUpload = (event) => {
     const files = Array.from(event.target.files);
@@ -146,6 +187,18 @@ export default function AlbumGeneratorPage() {
                 <span>Powered by Canva Design Templates</span>
               </div>
             )}
+            {successMessage && (
+              <div className="mt-4 inline-flex items-center gap-2 bg-green-100 px-4 py-2 rounded-full text-sm text-green-700 font-semibold">
+                <span>✓</span>
+                <span>{successMessage}</span>
+              </div>
+            )}
+            {error && (
+              <div className="mt-4 inline-flex items-center gap-2 bg-red-100 px-4 py-2 rounded-full text-sm text-red-700 font-semibold">
+                <span>⚠</span>
+                <span>{error}</span>
+              </div>
+            )}
           </div>
 
           {!canvaAvailable ? (
@@ -153,32 +206,41 @@ export default function AlbumGeneratorPage() {
             <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-2xl p-8 text-center">
               <div className="text-6xl mb-4">🎨</div>
               <h2 className="text-3xl font-display text-sage mb-4">
-                Canva Authentication Required
+                Connect to Canva
               </h2>
               <p className="text-gray-700 mb-6">
-                To use the Album Generator, you need to authenticate with Canva first.
+                To use the Album Generator with professional templates, connect your Canva account.
               </p>
-              <div className="bg-blush/10 rounded-xl p-6 text-left">
-                <h3 className="font-semibold text-sage mb-3">How to authenticate:</h3>
-                <ol className="space-y-2 text-sm text-gray-700">
+              <button
+                onClick={connectToCanva}
+                className="px-8 py-4 bg-gradient-sage-blush text-white rounded-xl font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                🔗 Connect to Canva
+              </button>
+              <div className="mt-8 bg-blush/10 rounded-xl p-6 text-left">
+                <h3 className="font-semibold text-sage mb-3">What you'll get:</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
                   <li className="flex items-start">
-                    <span className="mr-2">1.</span>
-                    <span>Open Chat in Agent Mode (Ctrl+Alt+I)</span>
+                    <span className="mr-2">✓</span>
+                    <span>Access to professional wedding album templates</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="mr-2">2.</span>
-                    <span>Ask: &quot;Show me my Canva designs&quot;</span>
+                    <span className="mr-2">✓</span>
+                    <span>Beautiful layouts automatically arranged</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="mr-2">3.</span>
-                    <span>Click &quot;Allow&quot; and login to your Canva account</span>
+                    <span className="mr-2">✓</span>
+                    <span>Export as high-quality PDF for printing</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="mr-2">4.</span>
-                    <span>Return here and refresh the page</span>
+                    <span className="mr-2">✓</span>
+                    <span>Customize with your photos and captions</span>
                   </li>
-                </ol>
+                </ul>
               </div>
+              <p className="mt-6 text-xs text-gray-500">
+                You'll be redirected to Canva to authorize access. Your photos remain private and secure.
+              </p>
             </div>
           ) : generatedAlbum ? (
             /* Generated Album View */
@@ -320,11 +382,10 @@ export default function AlbumGeneratorPage() {
                         key={template.id}
                         onClick={() => setSelectedTemplate(template.id)}
                         disabled={generating}
-                        className={`w-full px-4 py-3 rounded-xl font-semibold transition-all duration-300 text-left ${
-                          selectedTemplate === template.id
+                        className={`w-full px-4 py-3 rounded-xl font-semibold transition-all duration-300 text-left ${selectedTemplate === template.id
                             ? 'bg-gradient-sage-blush text-white shadow-lg'
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                        } disabled:opacity-50`}
+                          } disabled:opacity-50`}
                       >
                         <div className="font-semibold">{template.name}</div>
                         <div className="text-xs opacity-75 mt-1">{template.description}</div>
