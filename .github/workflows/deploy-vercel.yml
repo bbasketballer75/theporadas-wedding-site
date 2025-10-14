@@ -36,13 +36,9 @@ jobs:
         working-directory: ./site
         run: npm ci
 
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=${{ github.event_name == 'push' && 'production' || 'preview' }} --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Next.js Application
         working-directory: ./site
-
-      - name: Build Project Artifacts
-        run: vercel build ${{ github.event_name == 'push' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
-        working-directory: ./site
+        run: npm run build
         env:
           # Pass through environment variables needed for build
           NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
@@ -54,15 +50,15 @@ jobs:
 
       - name: Deploy to Vercel
         id: deploy
+        working-directory: ./site
         run: |
-          url=$(vercel deploy --prebuilt ${{ github.event_name == 'push' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }})
+          url=$(vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }})
           echo "url=$url" >> $GITHUB_OUTPUT
           echo "### 🚀 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**URL:** $url" >> $GITHUB_STEP_SUMMARY
           echo "**Environment:** ${{ github.event_name == 'push' && 'Production' || 'Preview' }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-        working-directory: ./site
 
       - name: Comment Deployment URL on PR
         if: github.event_name == 'pull_request'
