@@ -91,10 +91,10 @@ function getTestFirestore() {
 async function clearCollection(collectionName) {
     const db = getTestFirestore();
     const collectionRef = collection(db, collectionName);
-    
+
     // Get all documents
     const snapshot = await getDocs(collectionRef);
-    
+
     if (snapshot.empty) {
         console.log(`ℹ️  Collection ${collectionName} is already empty`);
         return 0;
@@ -106,23 +106,23 @@ async function clearCollection(collectionName) {
     // Use batch deletion for reliability (max 500 operations per batch)
     const BATCH_SIZE = 500;
     let deleteCount = 0;
-    
+
     const docs = snapshot.docs;
     for (let i = 0; i < docs.length; i += BATCH_SIZE) {
         const batch = writeBatch(db);
         const batchDocs = docs.slice(i, i + BATCH_SIZE);
-        
+
         batchDocs.forEach((document) => {
             batch.delete(doc(db, collectionName, document.id));
             deleteCount++;
         });
-        
+
         await batch.commit();
         console.log(`   Deleted batch ${Math.floor(i / BATCH_SIZE) + 1}: ${batchDocs.length} documents`);
     }
 
     // Wait for propagation (emulator needs time to process deletes)
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Increased from 500ms
 
     // Verify cleanup succeeded
     const verifySnapshot = await getDocs(collectionRef);
