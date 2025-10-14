@@ -72,6 +72,18 @@
     background-attachment: fixed;
   }
 
+  /* Performance: GPU acceleration for animated elements */
+  .animate-fade-in,
+  .animate-fade-in-delay,
+  .animate-slide-up,
+  .animate-float,
+  .animate-shimmer,
+  .animate-glow {
+    will-change: transform, opacity;
+    transform: translateZ(0); /* Force GPU layer */
+    backface-visibility: hidden; /* Smooth animations */
+  }
+
   h1 {
     font-family: var(--font-playfair), Georgia, serif;
     @apply text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight;

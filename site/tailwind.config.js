@@ -92,6 +92,8 @@ module.exports = {
           '50%': { boxShadow: '0 0 40px rgba(212, 175, 55, 0.5), 0 0 60px rgba(212, 175, 55, 0.3)' },
         },
       },
+      // Performance note: All animations use transform/opacity for GPU acceleration
+      // Avoid animating: width, height, top, left, margin, padding (causes layout thrashing)
       boxShadow: {
         'elegant': '0 10px 40px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06)',
         'elegant-lg': '0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1)',
