@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { useState } from 'react';
 
 import SectionTransition from '../SectionTransition';
@@ -189,11 +190,19 @@ export default function GallerySection() {
                 className="max-w-full max-h-[90vh] rounded-lg"
               />
             ) : (
-              <img
-                src={selectedMedia.originalPath}
-                alt="Full size"
-                className="max-w-full max-h-[90vh] rounded-lg object-contain"
-              />
+              <div className="relative max-w-full max-h-[90vh]">
+                <Image
+                  src={selectedMedia.originalPath}
+                  alt="Full size gallery image"
+                  width={1920}
+                  height={1080}
+                  className="rounded-lg object-contain"
+                  style={{ maxWidth: '100%', maxHeight: '90vh', width: 'auto', height: 'auto' }}
+                  priority
+                  quality={95}
+                  unoptimized={selectedMedia.originalPath?.includes('supabase')}
+                />
+              </div>
             )}
 
             {/* Media Info */}

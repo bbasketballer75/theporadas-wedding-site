@@ -4,6 +4,47 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* Primary Meta Tags */}
+        <meta name="title" content="Austin & Jordyn Porada's Wedding | May 10, 2025" />
+        <meta
+          name="description"
+          content="Celebrate Austin & Jordyn Porada's wedding on May 10, 2025. View our wedding film, browse photos, share memories, and relive our special day."
+        />
+        <meta name="keywords" content="Porada wedding, Austin Porada, Jordyn Porada, wedding video, wedding photos, May 2025 wedding, wedding gallery, wedding memories" />
+        <meta name="author" content="Austin & Jordyn Porada" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://wedding-website-sepia-ten.vercel.app" />
+        <meta property="og:title" content="Austin & Jordyn Porada's Wedding | May 10, 2025" />
+        <meta
+          property="og:description"
+          content="Watch our wedding film, browse photos, and share memories from Austin & Jordyn's special day."
+        />
+        <meta property="og:image" content="https://wedding-website-sepia-ten.vercel.app/og-image.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Austin & Jordyn Porada Wedding" />
+        <meta property="og:site_name" content="The Poradas Wedding" />
+        <meta property="og:locale" content="en_US" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://wedding-website-sepia-ten.vercel.app" />
+        <meta name="twitter:title" content="Austin & Jordyn Porada's Wedding | May 10, 2025" />
+        <meta
+          name="twitter:description"
+          content="Watch our wedding film, browse photos, and share memories from Austin & Jordyn's special day."
+        />
+        <meta name="twitter:image" content="https://wedding-website-sepia-ten.vercel.app/og-image.jpg" />
+        <meta name="twitter:image:alt" content="Austin & Jordyn Porada Wedding" />
+
+        {/* Additional SEO */}
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <link rel="canonical" href="https://wedding-website-sepia-ten.vercel.app" />
+
         {/* PWA Primary Tags */}
         <meta name="application-name" content="The Poradas Wedding" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

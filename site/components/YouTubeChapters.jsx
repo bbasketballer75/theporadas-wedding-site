@@ -150,9 +150,7 @@ export default function YouTubeChapters({ chapters = [], currentTime = 0, durati
                 {chapter.description && (
                   <div
                     className={`text-sm leading-relaxed transition-all duration-300 ${
-                      isActive
-                        ? 'text-white/90'
-                        : 'text-charcoal/60 group-hover:text-charcoal/80'
+                      isActive ? 'text-white/90' : 'text-charcoal/60 group-hover:text-charcoal/80'
                     } ${isHovered ? 'line-clamp-none' : 'line-clamp-2'}`}
                   >
                     {chapter.description}
@@ -278,9 +276,7 @@ export default function YouTubeChapters({ chapters = [], currentTime = 0, durati
       {/* Navigation Buttons */}
       <div className="flex gap-3 justify-center pt-2">
         <button
-          onClick={() =>
-            activeChapterIndex > 0 && onSeek(chapters[activeChapterIndex - 1].time)
-          }
+          onClick={() => activeChapterIndex > 0 && onSeek(chapters[activeChapterIndex - 1].time)}
           disabled={activeChapterIndex === 0}
           className={`px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition-all duration-300 ${
             activeChapterIndex === 0
