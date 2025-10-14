@@ -5,7 +5,7 @@ import YouTubeChapters from './YouTubeChapters';
 /**
  * YouTubePlayer Component with IFrame API
  * Supports programmatic control, chapter navigation, and time tracking
- * 
+ *
  * @param {string} videoId - YouTube video ID
  * @param {string} title - Video title for accessibility
  * @param {array} chapters - Array of chapter objects: [{ title, time, description }]

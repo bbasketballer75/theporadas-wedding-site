@@ -23,12 +23,20 @@ export default function GallerySection() {
     { title: 'Start', time: 0, description: 'Our story begins' }, // 0:00
     { title: 'Bachelor+ette Weekend', time: 44.64, description: 'Pre-wedding celebrations' }, // 0:44
     { title: '"Who Is It" Gameshow', time: 300.44, description: 'Fun and games with our guests' }, // 5:00
-    { title: 'Words From Our Wedding Party', time: 863.36, description: 'Heartfelt messages from our friends' }, // 14:23
+    {
+      title: 'Words From Our Wedding Party',
+      time: 863.36,
+      description: 'Heartfelt messages from our friends',
+    }, // 14:23
     { title: 'Our Vows', time: 1211, description: 'We promise forever' }, // 20:11
     { title: 'The Ceremony', time: 1537.88, description: 'We tie the knot' }, // 25:37
     { title: 'The Reception', time: 1688.92, description: 'Dinner and celebration begins' }, // 28:08
     { title: 'First Dance', time: 1814.88, description: 'Our first dance as husband and wife' }, // 30:14
-    { title: 'Behind The Scenes & Bloopers', time: 2165.28, description: 'Outtakes and fun moments' }, // 36:05
+    {
+      title: 'Behind The Scenes & Bloopers',
+      time: 2165.28,
+      description: 'Outtakes and fun moments',
+    }, // 36:05
     { title: 'The REAL Party', time: 2375.12, description: 'Dancing the night away' }, // 39:35
     { title: 'Thank You', time: 2643.24, description: 'Gratitude for our loved ones' }, // 44:03
     { title: 'One Final Clip...', time: 2683.84, description: 'A surprise ending' }, // 44:43
