@@ -19,6 +19,7 @@
 **Impact:** Enables photo/video upload features
 
 **Current State:**
+
 ```env
 ✅ NEXT_PUBLIC_SUPABASE_URL=https://shegniwzcjkqfsrgvajs.supabase.co
 ⏳ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key_here  # NEEDS UPDATE
@@ -36,6 +37,7 @@
    - Replace `your_anon_key_here` with actual key
 
 3. **Restart Dev Server:**
+
    ```powershell
    # In terminal running dev server
    Ctrl+C

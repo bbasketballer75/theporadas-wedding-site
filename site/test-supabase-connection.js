@@ -11,10 +11,10 @@ const envContent = fs.readFileSync(envPath, 'utf8');
 // Parse environment variables
 const envVars = {};
 envContent.split('\n').forEach(line => {
-  const match = line.match(/^([^#=]+)=(.*)$/);
-  if (match) {
-    envVars[match[1].trim()] = match[2].trim();
-  }
+    const match = line.match(/^([^#=]+)=(.*)$/);
+    if (match) {
+        envVars[match[1].trim()] = match[2].trim();
+    }
 });
 
 // Debug: Show all parsed vars
@@ -33,17 +33,17 @@ if (key) console.log(`     ${key.substring(0, 30)}...`);
 console.log('');
 
 if (!url || !key) {
-  console.log('❌ Supabase configuration incomplete!\n');
-  process.exit(1);
+    console.log('❌ Supabase configuration incomplete!\n');
+    process.exit(1);
 }
 
 if (url !== 'https://shegniwzcjkqfsrgvajs.supabase.co') {
-  console.log('⚠️  Warning: URL does not match expected project URL\n');
+    console.log('⚠️  Warning: URL does not match expected project URL\n');
 }
 
 if (key === 'your_anon_key_here') {
-  console.log('❌ Placeholder key detected! Replace with actual key from dashboard.\n');
-  process.exit(1);
+    console.log('❌ Placeholder key detected! Replace with actual key from dashboard.\n');
+    process.exit(1);
 }
 
 console.log('✅ All environment variables are configured!\n');

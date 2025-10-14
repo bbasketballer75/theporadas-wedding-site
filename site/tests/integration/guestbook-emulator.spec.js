@@ -14,6 +14,7 @@ const { test, expect } = require('@playwright/test');
 const {
     getTestFirestore,
     clearCollection,
+    clearAllTestData,
     addTestMessage,
     getAllMessages,
     waitForMessageCount,
@@ -24,12 +25,20 @@ test.describe('Guestbook Integration (Firebase Emulator)', () => {
     test.beforeAll(async () => {
         // Ensure emulators are running
         await waitForEmulators();
+        // Clear all test data before starting test suite
+        await clearAllTestData();
     });
 
     test.beforeEach(async () => {
-        // Clear guestbook before each test
+        // Clear guestbook before each test for isolation
         await clearCollection('guestbook_messages');
-        console.log('✅ Guestbook collection cleared');
+        console.log('✅ Guestbook collection cleared for test');
+    });
+
+    test.afterEach(async () => {
+        // Additional cleanup after each test to prevent data leakage
+        await clearCollection('guestbook_messages');
+        console.log('✅ Post-test cleanup complete');
     });
 
     test('Direct Firestore write creates document successfully', async () => {

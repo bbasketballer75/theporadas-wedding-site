@@ -3,7 +3,7 @@
  * Utilities for integration testing with Firebase emulators
  */
 
-const { getFirestore, connectFirestoreEmulator, collection, addDoc, serverTimestamp, getDocs, query, orderBy, onSnapshot, deleteDoc, doc } = require('firebase/firestore');
+const { getFirestore, connectFirestoreEmulator, collection, addDoc, serverTimestamp, getDocs, query, orderBy, onSnapshot, deleteDoc, doc, writeBatch } = require('firebase/firestore');
 const { initializeApp, getApps } = require('firebase/app');
 
 // Emulator configuration
@@ -84,23 +84,55 @@ function getTestFirestore() {
 }
 
 /**
- * Clear all documents from a collection
+ * Clear all documents from a collection with batch deletion and verification
  * @param {string} collectionName - Name of collection to clear
  * @returns {Promise<number>} Number of documents deleted
  */
 async function clearCollection(collectionName) {
     const db = getTestFirestore();
     const collectionRef = collection(db, collectionName);
+    
+    // Get all documents
     const snapshot = await getDocs(collectionRef);
+    
+    if (snapshot.empty) {
+        console.log(`ℹ️  Collection ${collectionName} is already empty`);
+        return 0;
+    }
 
+    const totalDocs = snapshot.size;
+    console.log(`🗑️  Clearing ${totalDocs} documents from ${collectionName}...`);
+
+    // Use batch deletion for reliability (max 500 operations per batch)
+    const BATCH_SIZE = 500;
     let deleteCount = 0;
-    const deletePromises = snapshot.docs.map((document) => {
-        deleteCount++;
-        return deleteDoc(doc(db, collectionName, document.id));
-    });
+    
+    const docs = snapshot.docs;
+    for (let i = 0; i < docs.length; i += BATCH_SIZE) {
+        const batch = writeBatch(db);
+        const batchDocs = docs.slice(i, i + BATCH_SIZE);
+        
+        batchDocs.forEach((document) => {
+            batch.delete(doc(db, collectionName, document.id));
+            deleteCount++;
+        });
+        
+        await batch.commit();
+        console.log(`   Deleted batch ${Math.floor(i / BATCH_SIZE) + 1}: ${batchDocs.length} documents`);
+    }
 
-    await Promise.all(deletePromises);
-    console.log(`🗑️  Cleared ${deleteCount} documents from ${collectionName}`);
+    // Wait for propagation (emulator needs time to process deletes)
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Verify cleanup succeeded
+    const verifySnapshot = await getDocs(collectionRef);
+    if (!verifySnapshot.empty) {
+        const remaining = verifySnapshot.size;
+        console.error(`❌ Cleanup verification failed: ${remaining} documents remain in ${collectionName}`);
+        throw new Error(`Failed to clear ${collectionName} - ${remaining} documents remain. Try restarting the emulator.`);
+    }
+
+    console.log(`✅ Successfully cleared ${deleteCount} documents from ${collectionName}`);
     return deleteCount;
 }
 
@@ -223,11 +255,39 @@ async function waitForEmulators(timeout = 10000) {
     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
 }
 
+/**
+ * Clear all test data from emulator (comprehensive cleanup)
+ * Clears all known test collections to ensure clean state
+ * @returns {Promise<Object>} Summary of cleared collections
+ */
+async function clearAllTestData() {
+    const collections = ['guestbook_messages', 'test_messages', 'test_collection'];
+    const results = {};
+    let totalDeleted = 0;
+
+    console.log('🧹 Starting comprehensive test data cleanup...');
+
+    for (const collectionName of collections) {
+        try {
+            const count = await clearCollection(collectionName);
+            results[collectionName] = count;
+            totalDeleted += count;
+        } catch (error) {
+            console.error(`❌ Error clearing ${collectionName}:`, error.message);
+            results[collectionName] = { error: error.message };
+        }
+    }
+
+    console.log(`✅ Cleanup complete: ${totalDeleted} total documents deleted`);
+    return results;
+}
+
 module.exports = {
     EMULATOR_CONFIG,
     initializeTestApp,
     getTestFirestore,
     clearCollection,
+    clearAllTestData,
     addTestMessage,
     getAllMessages,
     listenToMessages,
