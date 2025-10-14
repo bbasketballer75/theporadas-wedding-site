@@ -9,6 +9,7 @@
 ## 🎯 What Was Implemented
 
 ### OAuth Authentication Flow
+
 - ✅ Authorization endpoint (`/api/canva/authorize`)
 - ✅ OAuth callback handler (`/api/canva/callback`)
 - ✅ Token management utilities (`/utils/canvaAuth.js`)
@@ -16,11 +17,13 @@
 - ✅ Logout endpoint (`/api/canva/logout`)
 
 ### User Interface
+
 - ✅ "Connect to Canva" button on Album Generator page
 - ✅ Success/error message handling
 - ✅ Automatic template loading after authentication
 
 ### Security Features
+
 - ✅ CSRF protection with state parameter
 - ✅ HTTP-only cookies for tokens
 - ✅ Automatic token refresh
@@ -59,14 +62,16 @@ Add the following variables:
 
 ### Redirect URLs (Already Configured)
 
-In your Canva app settings at https://www.canva.com/developers/apps:
+In your Canva app settings at <https://www.canva.com/developers/apps>:
 
 1. **Development URL:**
+
    ```
    http://127.0.0.1:3000/api/canva/callback
    ```
 
 2. **Production URL:**
+
    ```
    https://wedding-website-sepia-ten.vercel.app/api/canva/callback
    ```
@@ -74,6 +79,7 @@ In your Canva app settings at https://www.canva.com/developers/apps:
 ### OAuth Scopes
 
 The integration requests these permissions:
+
 - `asset:read` - Read uploaded assets
 - `asset:write` - Upload new assets
 - `design:content:read` - Read design content
@@ -90,8 +96,8 @@ The integration requests these permissions:
 ### First-Time Setup
 
 1. **Navigate to Album Generator**
-   - Go to: https://wedding-website-sepia-ten.vercel.app/album
-   - Or locally: http://localhost:3000/album
+   - Go to: <https://wedding-website-sepia-ten.vercel.app/album>
+   - Or locally: <http://localhost:3000/album>
 
 2. **Click "Connect to Canva"**
    - You'll be redirected to Canva
@@ -157,16 +163,19 @@ The integration requests these permissions:
 ### Token Management
 
 **Access Token:**
+
 - Stored in HTTP-only cookie: `canva_access_token`
 - Expires in ~1 hour
 - Automatically refreshed when expired
 
 **Refresh Token:**
+
 - Stored in HTTP-only cookie: `canva_refresh_token`
 - Expires in 30 days
 - Used to get new access tokens
 
 **Token Expiry:**
+
 - Stored in cookie: `canva_token_expires`
 - Checked before each API call
 - Automatic refresh if expired
@@ -189,7 +198,7 @@ The integration requests these permissions:
 ### Local Testing
 
 - [ ] Start dev server: `npm run dev`
-- [ ] Visit http://localhost:3000/album
+- [ ] Visit <http://localhost:3000/album>
 - [ ] Click "Connect to Canva"
 - [ ] Authorize on Canva
 - [ ] Verify success message appears
@@ -211,25 +220,32 @@ The integration requests these permissions:
 ## 🐛 Troubleshooting
 
 ### Error: "redirect_uri_mismatch"
+
 **Cause:** Redirect URI doesn't match Canva app settings  
 **Fix:** Verify exact match in Canva Developer Portal:
+
 - Development: `http://127.0.0.1:3000/api/canva/callback`
 - Production: `https://wedding-website-sepia-ten.vercel.app/api/canva/callback`
 
 ### Error: "invalid_client"
+
 **Cause:** Client ID or Secret is incorrect  
-**Fix:** 
+**Fix:**
+
 1. Check environment variables in Vercel
 2. Verify credentials match Canva Developer Portal
 3. Redeploy after updating
 
 ### Error: "Not authenticated with Canva"
+
 **Cause:** Token expired or cleared  
 **Fix:** Click "Connect to Canva" again
 
 ### Templates Not Loading
+
 **Cause:** Authentication not complete or template endpoint needs implementation  
-**Fix:** 
+**Fix:**
+
 1. Check browser console for errors
 2. Verify `/api/canva/status` returns `authenticated: true`
 3. Implement actual template fetching from Canva API
@@ -239,6 +255,7 @@ The integration requests these permissions:
 ## 📊 Current Status
 
 **✅ COMPLETED:**
+
 - OAuth authentication flow
 - Token management (access + refresh)
 - Authorization endpoints
@@ -248,6 +265,7 @@ The integration requests these permissions:
 - Security (CSRF, HTTP-only cookies)
 
 **⚠️ TODO (Optional Enhancements):**
+
 - Implement actual Canva API template fetching
 - Add template preview images
 - Implement album generation with real Canva API
@@ -267,6 +285,7 @@ The integration requests these permissions:
 ### Next Steps
 
 1. **Deploy to Production:**
+
    ```bash
    git add .
    git commit -m "feat: complete Canva OAuth integration (Task 5)"

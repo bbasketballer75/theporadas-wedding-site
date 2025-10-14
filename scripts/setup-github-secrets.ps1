@@ -135,10 +135,7 @@ if (-not $VercelToken) {
     Write-Host "Get your token from: https://vercel.com/account/tokens" -ForegroundColor Cyan
     Write-Host "Token name: 'GitHub Actions CI/CD'" -ForegroundColor Cyan
     Write-Host "Scope: 'Full Account'" -ForegroundColor Cyan
-    $VercelToken = Read-Host -Prompt "`nPaste your Vercel token" -AsSecureString
-    $VercelToken = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto(
-        [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($VercelToken)
-    )
+    $VercelToken = Read-Host -Prompt "`nPaste your Vercel token"
 }
 
 if ([string]::IsNullOrWhiteSpace($VercelToken)) {

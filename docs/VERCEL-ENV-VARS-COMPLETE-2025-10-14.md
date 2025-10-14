@@ -60,6 +60,6 @@ echo "https://wedding-website-sepia-ten.vercel.app/api/canva/callback" | vercel 
 
 ## Production URL
 
-**Live Site:** https://wedding-website-sepia-ten.vercel.app
+**Live Site:** <https://wedding-website-sepia-ten.vercel.app>
 
 Once the new deployment completes, the Canva OAuth integration will be fully functional in production.
