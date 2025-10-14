@@ -24,13 +24,24 @@
 function sendToAnalytics(metric) {
   const { name, value, id, rating } = metric;
 
-  // Log to console in development
+  // Log to console in development with color coding
   if (process.env.NODE_ENV === 'development') {
-    console.log(`[Web Vitals] ${name}:`, {
-      value: Math.round(value),
-      rating,
-      id,
-    });
+    const colors = {
+      good: '\x1b[32m', // green
+      'needs-improvement': '\x1b[33m', // yellow
+      poor: '\x1b[31m', // red
+      reset: '\x1b[0m',
+    };
+    const color = colors[rating] || colors.reset;
+    console.log(
+      `${color}[Web Vitals] ${name}:${colors.reset}`,
+      {
+        value: Math.round(name === 'CLS' ? value * 1000 : value),
+        unit: name === 'CLS' ? 'score × 1000' : 'ms',
+        rating,
+        id: id.substring(0, 8),
+      }
+    );
   }
 
   // Send to Google Analytics (GA4)
@@ -38,9 +49,10 @@ function sendToAnalytics(metric) {
     window.gtag('event', name, {
       event_category: 'Web Vitals',
       event_label: id,
-      value: Math.round(value),
+      value: Math.round(name === 'CLS' ? value * 1000 : value),
       non_interaction: true,
       metric_rating: rating,
+      page_path: window.location.pathname,
     });
   }
 
@@ -48,26 +60,43 @@ function sendToAnalytics(metric) {
   if (typeof window !== 'undefined' && window.firebase?.analytics) {
     window.firebase.analytics().logEvent('web_vitals', {
       metric_name: name,
-      metric_value: Math.round(value),
+      metric_value: Math.round(name === 'CLS' ? value * 1000 : value),
       metric_id: id,
       metric_rating: rating,
+      page_path: window.location.pathname,
     });
   }
 
-  // TODO: Send to custom analytics endpoint
-  // fetch('/api/analytics', {
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     metric: name,
-  //     value: Math.round(value),
-  //     id,
-  //     rating,
-  //     page: window.location.pathname,
-  //     timestamp: Date.now(),
-  //   }),
-  //   headers: { 'Content-Type': 'application/json' },
-  //   keepalive: true,
-  // });
+  // Send to Vercel Analytics
+  if (typeof window !== 'undefined' && window.va) {
+    window.va('event', {
+      name: 'Web Vitals',
+      data: {
+        metric: name,
+        value: Math.round(name === 'CLS' ? value * 1000 : value),
+        rating,
+      },
+    });
+  }
+
+  // Store in localStorage for performance dashboard
+  if (typeof window !== 'undefined') {
+    try {
+      const stored = JSON.parse(localStorage.getItem('web_vitals_history') || '[]');
+      stored.push({
+        metric: name,
+        value: Math.round(name === 'CLS' ? value * 1000 : value),
+        rating,
+        timestamp: Date.now(),
+        page: window.location.pathname,
+      });
+      // Keep last 100 metrics
+      if (stored.length > 100) stored.shift();
+      localStorage.setItem('web_vitals_history', JSON.stringify(stored));
+    } catch (e) {
+      // Ignore localStorage errors
+    }
+  }
 }
 
 /**

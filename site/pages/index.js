@@ -3,9 +3,11 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 
 import ErrorBoundary from '../components/ErrorBoundary';
-import Footer from '../components/Footer';
+import LazySection from '../components/LazySection';
 import Navigation from '../components/Navigation';
 import SEOHead from '../components/SEOHead';
+import SectionErrorBoundary from '../components/SectionErrorBoundary';
+import SkeletonLoader from '../components/SkeletonLoader';
 import { SectionLoadingSkeleton } from '../components/LoadingSkeleton';
 
 // Dynamic imports with loading states for code splitting
@@ -48,15 +50,33 @@ export default function Home() {
       />
 
       <Head>
+        {/* Font preloading for faster LCP - Playfair Display & Lora */}
+        <link
+          rel="preload"
+          href="/_next/static/media/playfair-display-latin-700-normal.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/_next/static/media/lora-latin-400-normal.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+
         {/* Preconnect to external domains for faster resource loading */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
         <link rel="preconnect" href="https://www.googleapis.com" />
+        <link rel="preconnect" href="https://www.youtube.com" />
 
         {/* DNS prefetch for additional domains */}
         <link rel="dns-prefetch" href="https://firebase.googleapis.com" />
         <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
       </Head>
 
       <ErrorBoundary>
@@ -64,17 +84,21 @@ export default function Home() {
 
         <main className="min-h-screen">
           {/* Hero Section - Welcome & Introduction */}
-          <ErrorBoundary>
+          <SectionErrorBoundary sectionName="Hero">
             <HeroSection />
-          </ErrorBoundary>
+          </SectionErrorBoundary>
 
           {/* Wedding Gallery - Photos & Video */}
-          <ErrorBoundary>
+          <SectionErrorBoundary sectionName="Gallery">
             <GallerySection />
-          </ErrorBoundary>
+          </SectionErrorBoundary>
         </main>
 
-        <Footer />
+        {/* Footer - Lazy loaded below fold */}
+        <LazySection
+          importFunc={() => import('../components/Footer')}
+          fallback={<SkeletonLoader type="section" lines={4} />}
+        />
       </ErrorBoundary>
     </>
   );
