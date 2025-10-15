@@ -3,7 +3,7 @@ module.exports = {
   siteUrl: process.env.SITE_URL || 'https://wedding-website-15zx5z06n-austins-projects-bb7c50ab.vercel.app',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
-  
+
   // Exclude SPA anchor redirects and admin/API routes
   exclude: [
     '/admin/*',
@@ -16,7 +16,7 @@ module.exports = {
     '/venue',           // Redirects to /#venue (SPA anchor)
     '/index-optimized', // Legacy/test file
   ],
-  
+
   // Additional paths to include (single-page app - only real standalone routes)
   additionalPaths: async (config) => [
     await config.transform(config, '/'),

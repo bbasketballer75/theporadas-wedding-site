@@ -1,0 +1,494 @@
+
+> theporadas-site@0.0.1 test:integration
+> playwright test tests/integration
+
+
+Running 34 tests using 2 workers
+
+  Γ£ÿ   1 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:194:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by date range (0ms)
+  -   3 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:235:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Handle empty gallery gracefully
+  -   4 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:247:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Search photos by caption
+  -   5 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:285:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Get photo count for gallery stats
+  Γ£ÿ   2 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:44:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Display all photos in gallery (0ms)
+  -   6 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:75:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by uploader
+  -   7 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:111:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Sort photos by upload date (newest first)
+  -   8 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:147:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Paginate gallery results (limit and startAfter)
+  Γ£ÿ   9 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:194:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by date range (retry #1) (0ms)
+  -  11 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:235:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Handle empty gallery gracefully (retry #1)
+  -  12 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:247:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Search photos by caption (retry #1)
+  -  13 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:285:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Get photo count for gallery stats (retry #1)
+  Γ£ÿ  10 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:44:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Display all photos in gallery (retry #1) (0ms)
+  -  14 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:75:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by uploader (retry #1)
+  -  15 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:111:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Sort photos by upload date (newest first) (retry #1)
+  -  16 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:147:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Paginate gallery results (limit and startAfter) (retry #1)
+  Γ£ÿ  17 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:45:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Direct Firestore write creates document successfully (0ms)
+  -  19 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:62:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Realtime listener receives updates immediately
+  -  20 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:110:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Multiple messages sync in correct order
+  -  21 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:144:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Concurrent writes from multiple sources
+  Γ£ÿ  18 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:166:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Browser page can read from emulator Firestore (0ms)
+  -  22 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:188:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Stress test: 50 rapid writes
+  -  23 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:214:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Listener persists across rapid updates
+  Γ£ÿ  24 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:45:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Direct Firestore write creates document successfully (retry #1) (0ms)
+  -  26 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:62:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Realtime listener receives updates immediately (retry #1)
+  -  27 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:110:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Multiple messages sync in correct order (retry #1)
+  -  28 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:144:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Concurrent writes from multiple sources (retry #1)
+  Γ£ÿ  25 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:166:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Browser page can read from emulator Firestore (retry #1) (0ms)
+  -  29 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:188:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Stress test: 50 rapid writes (retry #1)
+  -  30 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:214:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Listener persists across rapid updates (retry #1)
+  Γ£ÿ  32 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:243:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Concurrent uploads performance (10 simultaneous) (0ms)
+  Γ£ÿ  31 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:79:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Gallery performance with 1000+ photos (0ms)
+  -  33 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:288:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Query performance with complex filters
+  -  34 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:185:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Guestbook performance with 500+ messages
+  Γ£ÿ  36 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:79:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Gallery performance with 1000+ photos (retry #1) (0ms)
+  -  37 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:185:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Guestbook performance with 500+ messages (retry #1)
+  Γ£ÿ  35 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:243:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Concurrent uploads performance (10 simultaneous) (retry #1) (0ms)
+  -  38 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:288:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Query performance with complex filters (retry #1)
+  Γ£ÿ  39 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:80:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload small image file to Storage emulator (0ms)
+  -  41 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:112:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Store photo metadata in Firestore after upload
+  -  42 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:148:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload multiple files and verify all stored
+  Γ£ÿ  40 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:188:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Query photos by upload time (0ms)
+  -  43 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:229:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Handle invalid file upload gracefully
+  Γ£ÿ  44 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:80:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload small image file to Storage emulator (retry #1) (0ms)
+  -  46 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:112:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Store photo metadata in Firestore after upload (retry #1)
+  -  47 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:148:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload multiple files and verify all stored (retry #1)
+  Γ£ÿ  45 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:188:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Query photos by upload time (retry #1) (0ms)
+  -  48 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:229:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Handle invalid file upload gracefully (retry #1)
+  Γ£ÿ  49 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:77:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Test collections allow read/write in emulator (0ms)
+  -  51 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:108:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: wedding_photos collection allows read/write in test environment
+  -  52 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:140:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: guestbook_messages collection enforces rules
+  -  53 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:164:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: test-uploads path allows read/write in emulator
+  -  54 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:179:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Validate required fields in wedding_photos
+  Γ£ÿ  50 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:198:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Query performance with security rules (0ms)
+  -  55 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:230:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: Multiple file operations with security rules
+  -  56 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:256:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Batch operations with security rules
+  -  57 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:284:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Real-time listener with security rules
+  -  58 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:316:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: File size validation (emulator allows all sizes)
+  Γ£ÿ  59 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:77:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Test collections allow read/write in emulator (retry #1) (0ms)
+  -  61 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:108:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: wedding_photos collection allows read/write in test environment (retry #1)
+  -  62 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:140:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: guestbook_messages collection enforces rules (retry #1)
+  -  63 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:164:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: test-uploads path allows read/write in emulator (retry #1)
+  -  64 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:179:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Validate required fields in wedding_photos (retry #1)
+  Γ£ÿ  60 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:198:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Query performance with security rules (retry #1) (0ms)
+  -  65 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:230:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: Multiple file operations with security rules (retry #1)
+  -  66 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:256:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Batch operations with security rules (retry #1)
+  -  67 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:284:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Real-time listener with security rules (retry #1)
+  -  68 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:316:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: File size validation (emulator allows all sizes) (retry #1)
+
+
+  1) [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:44:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Display all photos in gallery 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\gallery-emulator.spec.js:26:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\gallery-emulator.spec.js:26:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\gallery-emulator-Photo-Gal-f8c27-splay-all-photos-in-gallery-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\gallery-emulator-Photo-Gal-f8c27-splay-all-photos-in-gallery-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  2) [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:194:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by date range 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\gallery-emulator.spec.js:26:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\gallery-emulator.spec.js:26:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\gallery-emulator-Photo-Gal-98dd9-Filter-photos-by-date-range-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\gallery-emulator-Photo-Gal-98dd9-Filter-photos-by-date-range-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  3) [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:45:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Direct Firestore write creates document successfully 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\guestbook-emulator.spec.js:28:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\guestbook-emulator.spec.js:28:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\guestbook-emulator-Guestbo-3ec83-eates-document-successfully-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\guestbook-emulator-Guestbo-3ec83-eates-document-successfully-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  4) [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:166:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Browser page can read from emulator Firestore 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\guestbook-emulator.spec.js:28:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\guestbook-emulator.spec.js:28:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\guestbook-emulator-Guestbo-ea648-ead-from-emulator-Firestore-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\guestbook-emulator-Guestbo-ea648-ead-from-emulator-Firestore-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  5) [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:79:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Gallery performance with 1000+ photos 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\performance-emulator.spec.js:66:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\performance-emulator.spec.js:66:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\performance-emulator-Perfo-30662-erformance-with-1000-photos-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\performance-emulator-Perfo-30662-erformance-with-1000-photos-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  6) [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:243:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Concurrent uploads performance (10 simultaneous) 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\performance-emulator.spec.js:66:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\performance-emulator.spec.js:66:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\performance-emulator-Perfo-fb26f-erformance-10-simultaneous--integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\performance-emulator-Perfo-fb26f-erformance-10-simultaneous--integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  7) [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:80:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload small image file to Storage emulator 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\photo-upload-emulator.spec.js:30:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\photo-upload-emulator.spec.js:30:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\photo-upload-emulator-Phot-0e3e6-ge-file-to-Storage-emulator-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\photo-upload-emulator-Phot-0e3e6-ge-file-to-Storage-emulator-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  8) [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:188:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Query photos by upload time 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\photo-upload-emulator.spec.js:30:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\photo-upload-emulator.spec.js:30:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\photo-upload-emulator-Phot-c8924-Query-photos-by-upload-time-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\photo-upload-emulator-Phot-c8924-Query-photos-by-upload-time-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  9) [integration] ΓÇ║ tests\integration\security-emulator.spec.js:77:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Test collections allow read/write in emulator 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\security-emulator.spec.js:64:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\security-emulator.spec.js:64:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\security-emulator-Security-be037-llow-read-write-in-emulator-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\security-emulator-Security-be037-llow-read-write-in-emulator-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  10) [integration] ΓÇ║ tests\integration\security-emulator.spec.js:198:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Query performance with security rules 
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\security-emulator.spec.js:64:9
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: Firebase emulators not running. Run: firebase emulators:start
+
+       at ..\helpers\firebase-emulator.js:255
+
+      253 |     }
+      254 |
+    > 255 |     throw new Error('Firebase emulators not running. Run: firebase emulators:start');
+          |           ^
+      256 | }
+      257 |
+      258 | /**
+        at waitForEmulators (F:\wedding-website\site\tests\helpers\firebase-emulator.js:255:11)
+        at F:\wedding-website\site\tests\integration\security-emulator.spec.js:64:9
+
+    attachment #1: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\security-emulator-Security-e3778-ormance-with-security-rules-integration-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\security-emulator-Security-e3778-ormance-with-security-rules-integration-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  10 failed
+    [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:44:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Display all photos in gallery 
+    [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:194:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by date range 
+    [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:45:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Direct Firestore write creates document successfully 
+    [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:166:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Browser page can read from emulator Firestore 
+    [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:79:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Gallery performance with 1000+ photos 
+    [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:243:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Concurrent uploads performance (10 simultaneous) 
+    [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:80:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload small image file to Storage emulator 
+    [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:188:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Query photos by upload time 
+    [integration] ΓÇ║ tests\integration\security-emulator.spec.js:77:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Test collections allow read/write in emulator 
+    [integration] ΓÇ║ tests\integration\security-emulator.spec.js:198:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Query performance with security rules 
+  24 did not run
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

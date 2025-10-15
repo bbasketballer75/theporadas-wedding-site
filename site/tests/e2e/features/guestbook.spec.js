@@ -11,7 +11,9 @@ test.describe('Guestbook Page - Structure & Loading', () => {
         await page.waitForLoadState('domcontentloaded');
 
         // Check main heading (section heading should be visible on the single-page app)
-        await expect(page.locator('text=Guest Book')).toBeVisible();
+        // Use getByRole to disambiguate multiple elements with same text
+        const guestBookHeading = page.getByRole('heading', { name: /Guest Book/i }).first();
+        await expect(guestBookHeading).toBeVisible();
 
         // Check form is present
         const form = page.locator('form').first();
