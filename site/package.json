@@ -75,7 +75,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@lhci/cli": "^0.15.1",
-    "@next/bundle-analyzer": "^15.5.4",
+    "@next/bundle-analyzer": "^15.5.5",
     "@playwright/test": "^1.55.1",
     "@types/node": "24.7.2",
     "@types/react": "^19.1.16",
