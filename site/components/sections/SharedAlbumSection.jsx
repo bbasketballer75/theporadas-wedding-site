@@ -14,46 +14,48 @@ export default function SharedAlbumSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Placeholder guest-uploaded photos (will connect to Firebase Storage)
+  // Use existing committed images (avoid missing-file 404s in CI)
   const guestPhotos = [
     {
       id: 1,
-      src: '/images/guest-photos/photo1.jpg',
+      src: '/images/engagement/PoradaProposal-11.webp',
       uploader: 'Sarah & Mike',
       caption: 'Beautiful ceremony! ❤️',
       type: 'photo',
     },
     {
       id: 2,
-      src: '/images/guest-photos/photo2.jpg',
+      src: '/images/engagement/PoradaProposal-28.webp',
       uploader: 'The Johnson Family',
       caption: 'Amazing reception!',
       type: 'photo',
     },
     {
       id: 3,
-      src: '/images/guest-photos/photo3.jpg',
+      src: '/images/engagement/PoradaProposal-146.webp',
       uploader: 'Emily',
       caption: 'Love this moment 💕',
       type: 'photo',
     },
     {
       id: 4,
-      src: '/images/guest-photos/video1.jpg',
+      src: '/images/parents/christine.webp',
       uploader: 'Chris & Amy',
-      caption: 'First dance video',
+      caption: 'First dance video (thumbnail)',
       type: 'video',
-      videoUrl: '/videos/guest-videos/video1.mp4',
+      // Use an existing parent message video as a small demo file
+      videoUrl: '/videos/parent-messages/christine_video_combined.mp4',
     },
     {
       id: 5,
-      src: '/images/guest-photos/photo4.jpg',
+      src: '/images/wedding-party/bridesmaids/hannah-porada.webp',
       uploader: 'David',
       caption: 'Cheers to the newlyweds!',
       type: 'photo',
     },
     {
       id: 6,
-      src: '/images/guest-photos/photo5.jpg',
+      src: '/images/wedding-party/groomsmen/ian-porada.webp',
       uploader: 'Jessica & Tom',
       caption: 'What a night! 🎉',
       type: 'photo',
@@ -214,6 +216,7 @@ export default function SharedAlbumSection() {
                 <div
                   key={photo.id}
                   onClick={() => openLightbox(index)}
+                  data-testid={`guest-photo-${photo.id}`}
                   className="group relative aspect-square overflow-hidden rounded-2xl shadow-elegant cursor-pointer bg-gradient-to-br from-ivory to-blush-50"
                 >
                   {/* Photo/Video Thumbnail */}

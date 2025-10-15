@@ -248,6 +248,7 @@ export default function GuestBookSection() {
                 {guestMessages.map((message) => (
                   <div
                     key={message.id}
+                    data-testid="guestbook-message"
                     className="card-elegant p-6 hover:shadow-xl transition-shadow duration-300"
                   >
                     <div className="flex items-start gap-4">

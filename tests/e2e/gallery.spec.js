@@ -3,7 +3,6 @@
  * Tests guest photo/video upload functionality
  */
 
-import path from 'path';
 
 import { expect, test } from '@playwright/test';
 
@@ -25,12 +24,19 @@ test.describe('Gallery and Photo Upload', () => {
     // Wait for gallery to load
     await page.waitForLoadState('networkidle');
 
-    // Check if any images are displayed (if gallery has photos)
+    // Check if any images are displayed (gallery should work even if empty)
     const images = page.locator('img');
     const count = await images.count();
 
     // Gallery should have at least the page structure, even if no photos yet
+    // Accept 0 images for fresh deployments
     expect(count).toBeGreaterThanOrEqual(0);
+
+    if (count === 0) {
+      console.log('ℹ️ Gallery is empty (expected for fresh deployment)');
+    } else {
+      console.log(`✅ Gallery loaded with ${count} images`);
+    }
   });
 
   test('upload CTA is present and links to upload page', async ({ page }) => {
@@ -75,6 +81,9 @@ test.describe('Gallery and Photo Upload', () => {
     const allImages = await page.locator('img').count();
     if (allImages > 0) {
       expect(count).toBeGreaterThan(0);
+      console.log(`✅ Lazy loading: ${count}/${allImages} images use lazy loading`);
+    } else {
+      console.log('ℹ️ No images in gallery to test lazy loading (expected for fresh deployment)');
     }
   });
 

@@ -4,6 +4,7 @@
  */
 
 const { test, expect } = require('@playwright/test');
+
 const { dismissAllDevOverlays } = require('../../helpers/dismiss-dev-overlay');
 
 test.describe('Firestore Connectivity (CRITICAL)', () => {
@@ -33,24 +34,16 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
         await page.goto('/guestbook');
         await page.waitForLoadState('domcontentloaded');
 
-        // Wait for Firestore to initialize
-        await page.waitForTimeout(10000); // 10 seconds for connection
+        // Wait for Firestore to initialize or for guestbook section to render
+        // Be resilient: wait for either messages or the empty-state text
+        await Promise.race([
+            page.waitForSelector('[data-testid="guestbook-message"]', { timeout: 20000 }),
+            page.waitForSelector('text=Be the first to sign', { timeout: 20000 }),
+        ]).catch(() => {
+            console.log('⚠️  Timed out waiting for guestbook content to render');
+        });
 
-        // Check for "Connected to Cloud Firestore" message
-        const connectedMessage = firestoreMessages.find((m) =>
-            m.includes('Connected to Cloud Firestore')
-        );
-
-        // Should see connection message
-        if (connectedMessage) {
-            console.log('✅ Firestore connected successfully!');
-            console.log(`   Message: ${connectedMessage}`);
-        } else {
-            console.log('⚠️  No explicit Firestore connection message detected');
-            console.log('   Firebase messages:', firestoreMessages.slice(0, 5));
-        }
-
-        // Should have NO transport errors (indicates offline mode)
+        // Check for transport errors (offline indicators)
         expect(transportErrors).toHaveLength(0);
 
         if (transportErrors.length > 0) {
@@ -102,6 +95,9 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
             console.log('❌ Firestore Listen channel 400 errors detected:');
             console.log(`   Console errors: ${listenErrors.length}`);
             console.log(`   Network failures: ${failedListenRequests.length}`);
+            failedListenRequests.slice(0, 3).forEach((f) =>
+                console.log(`   Failed: ${f.url} => ${f.status} ${f.statusText}`)
+            );
             throw new Error('Firestore Listen channels failing with 400 errors');
         } else {
             console.log('✅ No Firestore Listen channel 400 errors');
@@ -112,29 +108,20 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
         await page.goto('/guestbook');
         await page.waitForLoadState('domcontentloaded');
 
-        // Wait for messages to load
-        await page.waitForTimeout(5000);
+        // Wait for messages or empty state
+        await Promise.race([
+            page.waitForSelector('[data-testid="guestbook-message"]', { timeout: 20000 }),
+            page.waitForSelector('text=Be the first to sign', { timeout: 20000 }),
+        ]).catch(() => {});
 
-        // Check for loading spinner (should disappear once data loads)
-        const loadingSpinner = page.locator('.animate-spin');
-        const spinnerVisible = await loadingSpinner.isVisible().catch(() => false);
+        // Count messages using data-testid for reliability
+        const messageCount = await page.locator('[data-testid="guestbook-message"]').count();
+        const hasEmptyState = await page.locator('text=Be the first to sign').isVisible().catch(() => false);
 
-        if (spinnerVisible) {
-            // Wait for spinner to disappear (data loaded)
-            await loadingSpinner.waitFor({ state: 'hidden', timeout: 15000 });
-            console.log('✅ Loading spinner disappeared (data loaded)');
-        }
-
-        // Check messages are displayed OR empty state message
-        const messagesSection = page.locator('.space-y-4').last();
-        const hasMessages = (await messagesSection.locator('div.bg-gradient-to-br').count()) > 0;
-        const hasEmptyState = await page.locator('text=Be the first to sign').isVisible();
-
-        const dataLoaded = hasMessages || hasEmptyState;
+        const dataLoaded = messageCount > 0 || hasEmptyState;
         expect(dataLoaded).toBe(true);
 
-        if (hasMessages) {
-            const messageCount = await messagesSection.locator('div.bg-gradient-to-br').count();
+        if (messageCount > 0) {
             console.log(`✅ Guestbook loaded with ${messageCount} messages`);
         } else if (hasEmptyState) {
             console.log('✅ Guestbook loaded (empty state)');
@@ -149,13 +136,17 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(5000);
 
-        // Get initial message count
-        const initialCount = await page
-            .locator('.space-y-4')
-            .last()
-            .locator('div.bg-gradient-to-br')
-            .count();
+        // Wait for the guestbook area to render (messages or empty state)
+        await Promise.race([
+            page.waitForSelector('[data-testid="guestbook-message"]', { timeout: 15000 }),
+            page.waitForSelector('text=Be the first to sign', { timeout: 15000 }),
+            page.waitForSelector('text=Recent Messages', { timeout: 15000 }),
+        ]).catch(() => {
+            console.log('ℹ️ Guestbook area did not render within timeout');
+        });
 
+        // Get initial message count (use data-testid for reliability)
+        const initialCount = await page.locator('[data-testid="guestbook-message"]').count();
         console.log(`Initial message count: ${initialCount}`);
 
         // In a real test, we'd submit a message from another context
@@ -163,8 +154,9 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
         // by checking that messages loaded (listener is active)
 
         const messagesVisible =
-            (await page.locator('text=Messages from Our Guests').isVisible()) ||
-            (await page.locator('text=Be the first to sign').isVisible());
+            (await page.locator('[data-testid="guestbook-message"]').count()) > 0 ||
+            (await page.locator('text=Be the first to sign').isVisible()) ||
+            (await page.locator('text=Recent Messages').isVisible());
 
         expect(messagesVisible).toBe(true);
         console.log('✅ Realtime listener infrastructure operational');

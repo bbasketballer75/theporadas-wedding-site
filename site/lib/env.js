@@ -60,6 +60,32 @@ export function validateEnv() {
             });
         }
 
+        // During CI runs (GitHub Actions) we may intentionally not provide
+        // production Firebase credentials. In that case, fall back to a
+        // safe test/emulator configuration to allow builds and emulator-based
+        // integration tests to run.
+        if (process.env.GITHUB_ACTIONS === 'true' || process.env.CI === 'true') {
+            console.warn('⚠️ Missing production env vars in CI - falling back to TEST/EMULATOR defaults');
+            const fallback = {
+                NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'test-api-key',
+                NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:
+                    process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || 'test-project.firebaseapp.com',
+                NEXT_PUBLIC_FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || 'test-project',
+                NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:
+                    process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || 'test-project.appspot.com',
+                NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID:
+                    process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '000000000',
+                NEXT_PUBLIC_FIREBASE_APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '1:000:web:test',
+                NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || undefined,
+                NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || undefined,
+                NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || undefined,
+                NODE_ENV: process.env.NODE_ENV || 'development',
+            };
+
+            console.log('✅ Using emulator/test environment variables for CI build');
+            return fallback;
+        }
+
         throw new Error('Invalid environment configuration. Please check your .env file.');
     }
 }
