@@ -1,5 +1,7 @@
 # 💒 The Poradas Wedding Website
 
+> **Repository Status:** Now public! All secrets protected via `.env` files. ✅
+
 A modern, responsive wedding website built with Next.js 15.5.4 and Firebase. Share your special day with a beautiful gallery, interactive map, and event timeline.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?logo=next.js)
