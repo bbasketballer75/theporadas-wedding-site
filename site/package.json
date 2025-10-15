@@ -79,7 +79,7 @@
     "@playwright/test": "^1.55.1",
     "@types/node": "24.7.2",
     "@types/react": "^19.1.16",
-    "@types/react-dom": "^19.1.9",
+    "@types/react-dom": "^19.2.2",
     "@vercel/analytics": "^1.5.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.36.0",
