@@ -194,7 +194,7 @@ Here are 10 useful queries to try:
    "Give me a summary of all RSVPs"
 
 5. **Guest details:**  
-   "Find guest by email: example@email.com"
+   "Find guest by email: <example@email.com>"
 
 ### Storage Operations
 

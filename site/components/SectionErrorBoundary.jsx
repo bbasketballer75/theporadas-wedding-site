@@ -10,22 +10,22 @@ export default class SectionErrorBoundary extends React.Component {
     this.state = { hasError: false, error: null, errorInfo: null };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(_error) {
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
-    this.setState({ error, errorInfo });
-    
+  componentDidCatch(_error, errorInfo) {
+    this.setState({ error: _error, errorInfo });
+
     // Log to console in development
     if (process.env.NODE_ENV === 'development') {
-      console.error('Section Error:', error, errorInfo);
+      console.error('Section Error:', _error, errorInfo);
     }
-    
+
     // Log to analytics in production
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'exception', {
-        description: `Section Error: ${error.message}`,
+        description: `Section Error: ${_error.message}`,
         fatal: false,
       });
     }

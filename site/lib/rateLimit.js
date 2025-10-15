@@ -9,12 +9,12 @@ const CLEANUP_INTERVAL = 60000; // Clean up old entries every minute
 
 // Periodic cleanup to prevent memory leaks
 setInterval(() => {
-  const now = Date.now();
-  for (const [ip, data] of requestCounts.entries()) {
-    if (now > data.resetAt) {
-      requestCounts.delete(ip);
+    const now = Date.now();
+    for (const [ip, data] of requestCounts.entries()) {
+        if (now > data.resetAt) {
+            requestCounts.delete(ip);
+        }
     }
-  }
 }, CLEANUP_INTERVAL);
 
 /**
@@ -23,9 +23,9 @@ setInterval(() => {
  * @returns {string} IP address
  */
 export function getClientIP(req) {
-  const forwarded = req.headers['x-forwarded-for'];
-  const ip = forwarded ? forwarded.split(',')[0] : req.socket.remoteAddress;
-  return ip || 'unknown';
+    const forwarded = req.headers['x-forwarded-for'];
+    const ip = forwarded ? forwarded.split(',')[0] : req.socket.remoteAddress;
+    return ip || 'unknown';
 }
 
 /**
@@ -40,54 +40,54 @@ export function getClientIP(req) {
  * @returns {Function} Wrapped handler with rate limiting
  */
 export function rateLimitMiddleware(handler, options = {}) {
-  const {
-    maxRequests = 60,
-    windowMs = 60000,
-    message = 'Too many requests, please try again later.',
-  } = options;
+    const {
+        maxRequests = 60,
+        windowMs = 60000,
+        message = 'Too many requests, please try again later.',
+    } = options;
 
-  return async (req, res) => {
-    const ip = getClientIP(req);
-    const now = Date.now();
+    return async (req, res) => {
+        const ip = getClientIP(req);
+        const now = Date.now();
 
-    // Get or initialize request count for this IP
-    let requestData = requestCounts.get(ip);
+        // Get or initialize request count for this IP
+        let requestData = requestCounts.get(ip);
 
-    if (!requestData || now > requestData.resetAt) {
-      // New window, reset count
-      requestData = {
-        count: 0,
-        resetAt: now + windowMs,
-      };
-      requestCounts.set(ip, requestData);
-    }
+        if (!requestData || now > requestData.resetAt) {
+            // New window, reset count
+            requestData = {
+                count: 0,
+                resetAt: now + windowMs,
+            };
+            requestCounts.set(ip, requestData);
+        }
 
-    // Increment request count
-    requestData.count += 1;
+        // Increment request count
+        requestData.count += 1;
 
-    // Check if over limit
-    if (requestData.count > maxRequests) {
-      const retryAfter = Math.ceil((requestData.resetAt - now) / 1000);
-      
-      res.setHeader('X-RateLimit-Limit', maxRequests);
-      res.setHeader('X-RateLimit-Remaining', 0);
-      res.setHeader('X-RateLimit-Reset', Math.ceil(requestData.resetAt / 1000));
-      res.setHeader('Retry-After', retryAfter);
+        // Check if over limit
+        if (requestData.count > maxRequests) {
+            const retryAfter = Math.ceil((requestData.resetAt - now) / 1000);
 
-      return res.status(429).json({
-        error: message,
-        retryAfter,
-      });
-    }
+            res.setHeader('X-RateLimit-Limit', maxRequests);
+            res.setHeader('X-RateLimit-Remaining', 0);
+            res.setHeader('X-RateLimit-Reset', Math.ceil(requestData.resetAt / 1000));
+            res.setHeader('Retry-After', retryAfter);
 
-    // Set rate limit headers
-    res.setHeader('X-RateLimit-Limit', maxRequests);
-    res.setHeader('X-RateLimit-Remaining', maxRequests - requestData.count);
-    res.setHeader('X-RateLimit-Reset', Math.ceil(requestData.resetAt / 1000));
+            return res.status(429).json({
+                error: message,
+                retryAfter,
+            });
+        }
 
-    // Continue to handler
-    return handler(req, res);
-  };
+        // Set rate limit headers
+        res.setHeader('X-RateLimit-Limit', maxRequests);
+        res.setHeader('X-RateLimit-Remaining', maxRequests - requestData.count);
+        res.setHeader('X-RateLimit-Reset', Math.ceil(requestData.resetAt / 1000));
+
+        // Continue to handler
+        return handler(req, res);
+    };
 }
 
 /**
@@ -101,12 +101,13 @@ export function rateLimitMiddleware(handler, options = {}) {
  * @returns {Function} Wrapped handler
  */
 export function rateLimitAndCache(handler, options = {}) {
-  const { rate = {}, cache = {} } = options;
-  
-  // Import cache middleware dynamically to avoid circular dependency
-  const { cacheMiddleware } = require('./apiCache');
-  
-  // Apply rate limit first, then cache
-  const rateLimited = rateLimitMiddleware(handler, rate);
-  return cacheMiddleware(rateLimited, cache);
+    const { rate = {}, cache = {} } = options;
+
+    // Import cache middleware dynamically to avoid circular dependency
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { cacheMiddleware } = require('./apiCache');
+
+    // Apply rate limit first, then cache
+    const rateLimited = rateLimitMiddleware(handler, rate);
+    return cacheMiddleware(rateLimited, cache);
 }

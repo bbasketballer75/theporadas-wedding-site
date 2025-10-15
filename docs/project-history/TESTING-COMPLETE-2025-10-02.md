@@ -467,7 +467,7 @@ Total: 6 test suites, 22 tests, ~27 seconds runtime
 - **Workers:** 8 parallel (local), 1 (CI)
 - **Retries:** 0 (local), 2 (CI)
 - **Browser:** Chromium Desktop (1280x720)
-- **Base URL:** http://localhost:3000
+- **Base URL:** <http://localhost:3000>
 - **Web Server:** Auto-starts Next.js dev server
 - **Reporters:** HTML + List
 - **Screenshots:** On failure only

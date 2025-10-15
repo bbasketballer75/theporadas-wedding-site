@@ -64,6 +64,7 @@ This document outlines the complete roadmap for integrating Canva design capabil
 ### Deliverables (All Complete)
 
 #### 1. API Routes Created (7 files)
+
 - ✅ `apply-overlay.js` (1,350 lines) - Photo booth overlay application
 - ✅ `create-design.js` (898 lines) - Create new Canva design
 - ✅ `export-design.js` (1,036 lines) - Export design to image/PDF
@@ -75,9 +76,11 @@ This document outlines the complete roadmap for integrating Canva design capabil
 **Total Lines**: 10,084 lines of API route code
 
 #### 2. Client-Side Utility Created
+
 - ✅ `canvaService.js` (7,490 lines) - Client-side wrapper for Canva API calls
 
 #### 3. Page Integration Complete
+
 - ✅ `guestbook.js` (11,492 lines) - Guest book with Canva card generation
 - ✅ `photobooth.js` (17,668 lines) - Photo booth with Canva overlays
 - ✅ `timeline.js` (9,789 lines) - Timeline page (no Canva integration)
@@ -103,11 +106,13 @@ All API routes currently return placeholder/mock data:
 **status.js**: Returns `{ authenticated: false, available: true }`
 
 **templates.js**: Returns 7 mock templates:
+
 - 3 overlay templates (OVERLAY_TEMPLATE_1/2/3)
 - 2 guestbook templates (GUESTBOOK_TEMPLATE_1/2)
 - 2 album templates (ALBUM_TEMPLATE_1/2)
 
 ### Testing Results
+
 - ✅ ESLint: 0 errors (all files pass linting)
 - ⚠️ Playwright: 38/44 tests passing (86.4% pass rate)
 - ⚠️ 6 test failures unrelated to Canva integration (pre-existing issues)
@@ -123,7 +128,8 @@ All API routes currently return placeholder/mock data:
 ### Requirements
 
 #### 1. Canva Developer Account
-- [ ] Create Canva developer account at https://www.canva.com/developers/
+
+- [ ] Create Canva developer account at <https://www.canva.com/developers/>
 - [ ] Register new application
 - [ ] Obtain Client ID and Client Secret
 - [ ] Configure redirect URIs for OAuth flow
@@ -136,6 +142,7 @@ All API routes currently return placeholder/mock data:
   - `asset:write` - Upload assets
 
 #### 2. Canva MCP Server Setup
+
 - [ ] Review Canva MCP server documentation in `mcp-config.json`
 - [ ] Install Canva MCP server dependencies
 - [ ] Configure server with Canva API credentials
@@ -144,23 +151,28 @@ All API routes currently return placeholder/mock data:
 - [ ] Document authentication process
 
 #### 3. Environment Configuration
+
 - [ ] Add Canva credentials to `.env.local`:
+
   ```env
   CANVA_CLIENT_ID=your_client_id_here
   CANVA_CLIENT_SECRET=your_client_secret_here
   CANVA_REDIRECT_URI=http://localhost:3000/api/auth/canva/callback
   ```
+
 - [ ] Add production credentials to Firebase environment config
 - [ ] Set up OAuth callback route: `/api/auth/canva/callback`
 - [ ] Implement token storage (secure session or database)
 
 #### 4. Status Route Implementation
+
 - [ ] Replace `status.js` placeholder with real Canva MCP status check
 - [ ] Check MCP server connection status
 - [ ] Verify authentication token validity
 - [ ] Return user's Canva account info if authenticated
 
 ### Deliverables
+
 - [ ] Canva developer account with application registered
 - [ ] Canva MCP server running and authenticated
 - [ ] OAuth flow working (login → redirect → token storage)
@@ -168,6 +180,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Documentation: `docs/canva-authentication-setup.md`
 
 ### Testing Checklist
+
 - [ ] MCP server starts without errors
 - [ ] OAuth flow redirects correctly
 - [ ] Tokens are stored securely
@@ -185,6 +198,7 @@ All API routes currently return placeholder/mock data:
 ### Requirements
 
 #### 1. Design Template Creation (in Canva)
+
 - [ ] **Overlay Templates** (3 templates):
   - [ ] Overlay 1: Sage green frame with floral corners
   - [ ] Overlay 2: Blush pink frame with "The Poradas Wedding" text
@@ -206,6 +220,7 @@ All API routes currently return placeholder/mock data:
   - [ ] Size: 1200x1600 px (portrait)
 
 #### 2. Template Configuration
+
 - [ ] Get template IDs from Canva for each template
 - [ ] Document template element IDs for auto-fill fields
 - [ ] Test template manipulation via Canva API
@@ -214,6 +229,7 @@ All API routes currently return placeholder/mock data:
 #### 3. API Route Implementation
 
 **Apply Overlay** (`apply-overlay.js`):
+
 - [ ] Load Canva overlay template by ID
 - [ ] Create new design from template
 - [ ] Set photo as background layer
@@ -222,17 +238,20 @@ All API routes currently return placeholder/mock data:
 - [ ] Return image data URL
 
 **Create Design** (`create-design.js`):
+
 - [ ] Use Canva MCP to create blank design
 - [ ] Set design dimensions based on type
 - [ ] Return design ID for further manipulation
 
 **Export Design** (`export-design.js`):
+
 - [ ] Use Canva MCP to export design by ID
 - [ ] Support formats: PNG, JPG, PDF
 - [ ] Upload exported file to Firebase Storage
 - [ ] Return public download URL
 
 **Generate Album** (`generate-album.js`):
+
 - [ ] Load album template by ID
 - [ ] Calculate number of pages needed (photos per page)
 - [ ] For each page:
@@ -246,6 +265,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Return album URL
 
 **Generate Card** (`generate-card.js`):
+
 - [ ] Load guest book card template by ID
 - [ ] Auto-fill message text field
 - [ ] Auto-fill author name field
@@ -255,6 +275,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Return card image URL
 
 **Templates** (`templates.js`):
+
 - [ ] Replace mock templates with real Canva template IDs
 - [ ] Fetch templates from Canva API
 - [ ] Include template metadata (name, preview URL, dimensions)
@@ -262,6 +283,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Cache template list for 24 hours
 
 #### 4. Error Handling
+
 - [ ] Add try-catch blocks for all Canva API calls
 - [ ] Handle authentication errors (401)
 - [ ] Handle rate limiting (429)
@@ -270,6 +292,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Return user-friendly error messages
 
 #### 5. Firebase Storage Integration
+
 - [ ] Create storage bucket: `theporadas-canva-exports`
 - [ ] Set up storage rules for public read access
 - [ ] Organize by type:
@@ -279,6 +302,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Implement automatic cleanup (delete after 30 days)
 
 ### Deliverables
+
 - [ ] 7 Canva templates created and configured
 - [ ] `canva-templates.config.js` with all template IDs
 - [ ] All 7 API routes fully implemented (no TODOs)
@@ -287,6 +311,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Documentation: `docs/canva-template-guide.md`
 
 ### Testing Checklist
+
 - [ ] Each template loads correctly via API
 - [ ] Overlays apply to photos without distortion
 - [ ] Guest book cards generate with correct text
@@ -306,12 +331,14 @@ All API routes currently return placeholder/mock data:
 ### Requirements
 
 #### 1. Production Environment Setup
+
 - [ ] Add production Canva credentials to Firebase config
 - [ ] Update OAuth redirect URIs for production domain
 - [ ] Test authentication flow in production
 - [ ] Verify MCP server works in production environment
 
 #### 2. Performance Optimization
+
 - [ ] **Caching**:
   - [ ] Cache template list (24 hours)
   - [ ] Cache generated images (7 days)
@@ -326,6 +353,7 @@ All API routes currently return placeholder/mock data:
   - [ ] Add retry logic for failed exports
 
 #### 3. Monitoring & Analytics
+
 - [ ] Track Canva API usage (requests per day)
 - [ ] Monitor export success rate
 - [ ] Track template popularity
@@ -333,6 +361,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Log performance metrics (export time, file size)
 
 #### 4. User Experience Enhancements
+
 - [ ] Add loading indicators for Canva operations
 - [ ] Show preview before final export
 - [ ] Add "Edit in Canva" button (opens design in Canva editor)
@@ -340,6 +369,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Add template selection UI (let users choose template)
 
 #### 5. Security Hardening
+
 - [ ] Validate all user inputs (image data, text fields)
 - [ ] Sanitize text before sending to Canva API
 - [ ] Rate limit per user (not just per IP)
@@ -347,6 +377,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Add Content Security Policy headers
 
 #### 6. Documentation & Handoff
+
 - [ ] Update README with Canva integration details
 - [ ] Create user guide for Canva features
 - [ ] Document troubleshooting steps
@@ -354,6 +385,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Record demo video of Canva features
 
 ### Deliverables
+
 - [ ] Production deployment complete
 - [ ] Performance optimizations implemented
 - [ ] Monitoring dashboards configured
@@ -362,6 +394,7 @@ All API routes currently return placeholder/mock data:
 - [ ] Complete documentation package
 
 ### Testing Checklist
+
 - [ ] Load testing (100 concurrent users)
 - [ ] Stress testing (Canva API rate limits)
 - [ ] Security testing (input validation, XSS, CSRF)
@@ -374,9 +407,11 @@ All API routes currently return placeholder/mock data:
 ## Integration Points
 
 ### Guest Book Page (`guestbook.js`)
+
 **Canva Feature**: Generate decorative card image for each guest message
 
 **Workflow**:
+
 1. Guest submits message via form
 2. Message saved to Firestore
 3. If Canva available (`isCanvaAvailable()`):
@@ -392,9 +427,11 @@ All API routes currently return placeholder/mock data:
 ---
 
 ### Photo Booth Page (`photobooth.js`)
+
 **Canva Feature**: Apply wedding-themed overlays to captured photos
 
 **Workflow**:
+
 1. Guest opens photo booth and captures photo
 2. Photo displayed in preview
 3. If Canva available:
@@ -411,9 +448,11 @@ All API routes currently return placeholder/mock data:
 ---
 
 ### Album Page (future)
+
 **Canva Feature**: Generate multi-photo album PDF with captions
 
 **Workflow**:
+
 1. Guest selects photos for album (up to 20 photos)
 2. Adds captions for each photo
 3. Clicks "Generate Album"
@@ -434,6 +473,7 @@ All API routes currently return placeholder/mock data:
 ### API Request/Response Examples
 
 #### Apply Overlay
+
 ```javascript
 // Request
 POST /api/canva/apply-overlay
@@ -452,6 +492,7 @@ Content-Type: application/json
 ```
 
 #### Generate Card
+
 ```javascript
 // Request
 POST /api/canva/generate-card
@@ -471,6 +512,7 @@ Content-Type: application/json
 ```
 
 #### Generate Album
+
 ```javascript
 // Request
 POST /api/canva/generate-album
@@ -497,6 +539,7 @@ Content-Type: application/json
 ## Rate Limits & Quotas
 
 ### Canva API Limits (Expected)
+
 - **Requests per hour**: 1,000 requests/hour (typical free tier)
 - **Requests per day**: 10,000 requests/day
 - **Concurrent requests**: 10 concurrent
@@ -504,6 +547,7 @@ Content-Type: application/json
 - **Design storage**: 100 designs stored (rotate old designs)
 
 ### Mitigation Strategies
+
 1. **Caching**: Cache generated images for 7 days (reduce API calls)
 2. **Queueing**: Queue album generation requests (avoid burst traffic)
 3. **Fallback**: If rate limit hit, disable Canva features temporarily
@@ -514,18 +558,21 @@ Content-Type: application/json
 ## Success Metrics
 
 ### Phase 2 Success Criteria
+
 - ✅ Canva MCP server authenticated
 - ✅ OAuth flow works end-to-end
 - ✅ `/api/canva/status` returns `authenticated: true`
 - ✅ No authentication errors in logs
 
 ### Phase 3 Success Criteria
+
 - ✅ All 7 API routes implemented (no TODOs)
 - ✅ 7 templates created in Canva
 - ✅ At least 50 successful exports in testing
 - ✅ Error rate < 5%
 
 ### Phase 4 Success Criteria
+
 - ✅ Production deployment successful
 - ✅ 95% uptime for Canva features
 - ✅ Average export time < 5 seconds
@@ -538,18 +585,21 @@ Content-Type: application/json
 ### High-Priority Risks
 
 **Risk 1: Canva API Downtime**
+
 - **Impact**: High - Canva features unavailable
 - **Probability**: Low
 - **Mitigation**: Graceful degradation (pages work without Canva)
 - **Fallback**: CSS filters for photo booth, text-only for guest book
 
 **Risk 2: Rate Limiting**
+
 - **Impact**: Medium - Temporary feature unavailability
 - **Probability**: Medium (high traffic events)
 - **Mitigation**: Caching, queueing, user limits
 - **Fallback**: Queue requests and notify users of wait time
 
 **Risk 3: Template Deletion**
+
 - **Impact**: Medium - Broken exports
 - **Probability**: Low
 - **Mitigation**: Store template backups, version control
@@ -558,6 +608,7 @@ Content-Type: application/json
 ### Low-Priority Risks
 
 **Risk 4: OAuth Token Expiry**
+
 - **Impact**: Low - Re-authentication needed
 - **Probability**: High (tokens expire after 1 hour typically)
 - **Mitigation**: Token refresh logic
@@ -568,12 +619,14 @@ Content-Type: application/json
 ## Dependencies
 
 ### External Services
-1. **Canva Design API** - https://api.canva.com/
+
+1. **Canva Design API** - <https://api.canva.com/>
 2. **Canva MCP Server** - Part of MCP server ecosystem
 3. **Firebase Storage** - For storing exported images/PDFs
 4. **Google Cloud Functions** - For background album generation
 
 ### Internal Dependencies
+
 1. **Firebase Firestore** - Store guest book messages with card URLs
 2. **Next.js API Routes** - Host Canva API routes
 3. **canvaService.js** - Client-side utility
@@ -602,18 +655,21 @@ TARGET COMPLETION: October 15, 2025
 ## Next Steps (Immediate)
 
 ### Week 1 (Oct 3-9, 2025): Phase 2 Authentication
+
 1. **Day 1-2**: Create Canva developer account, register app
 2. **Day 3**: Set up Canva MCP server, configure credentials
 3. **Day 4**: Implement OAuth flow and test authentication
 4. **Day 5**: Update `/api/canva/status` with real checks
 
 ### Week 2 (Oct 10-16, 2025): Phase 3 Implementation
+
 1. **Day 1-3**: Create 7 Canva templates (overlays, cards, albums)
 2. **Day 4-5**: Implement apply-overlay, generate-card, generate-album
 3. **Day 6**: Implement remaining API routes (create, export, templates)
 4. **Day 7**: Testing and bug fixes
 
 ### Week 3 (Oct 17-20, 2025): Phase 4 Production
+
 1. **Day 1**: Production deployment and environment setup
 2. **Day 2**: Performance optimization (caching, rate limiting)
 3. **Day 3**: Security hardening and monitoring

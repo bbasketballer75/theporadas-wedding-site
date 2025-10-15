@@ -184,7 +184,7 @@
 
 **How:**
 
-1. Go to: https://support.google.com/youtube/contact/yt_api_form
+1. Go to: <https://support.google.com/youtube/contact/yt_api_form>
 2. Fill out form:
    - Request: 1,000,000 units/day (625 videos/day)
    - Reason: Wedding website, temporary spike, 100+ guests
@@ -415,7 +415,7 @@ TOTAL                      = $0/month
 ### Immediate (Before Wedding - 3-5 Days)
 
 1. **Request YouTube Quota Increase** ⚠️ CRITICAL
-   - Form: https://support.google.com/youtube/contact/yt_api_form
+   - Form: <https://support.google.com/youtube/contact/yt_api_form>
    - Takes 3-5 business days
    - DO THIS NOW!
 
@@ -504,7 +504,7 @@ firebase functions:log
 
 ---
 
-## 🎉 Congratulations!
+## 🎉 Congratulations
 
 You now have a **fully implemented, production-ready system** for:
 

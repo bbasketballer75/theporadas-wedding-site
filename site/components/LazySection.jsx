@@ -19,7 +19,7 @@ export default function LazySection({ importFunc, fallback, threshold = 0.1, ...
           observer.disconnect();
         }
       },
-      { threshold, rootMargin: '200px' },
+      { threshold, rootMargin: '200px' }
     );
 
     if (ref.current) {

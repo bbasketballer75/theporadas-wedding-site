@@ -1,4 +1,4 @@
-# 🚀 Ready to Push to GitHub!
+# 🚀 Ready to Push to GitHub
 
 Your fresh repository is initialized and ready! Here's what to do next:
 
@@ -24,7 +24,7 @@ Your fresh repository is initialized and ready! Here's what to do next:
 
 ### Option A: Via GitHub Website (Easiest)
 
-1. Go to: **https://github.com/new**
+1. Go to: **<https://github.com/new>**
 2. **Repository name:** `theporadas_wedding_site`
 3. **Description:** `Modern Next.js wedding website with Firebase`
 4. **Visibility:**
@@ -80,7 +80,7 @@ Branch 'main' set up to track remote branch 'main' from 'origin'.
 ## 🎉 Step 3: Verify on GitHub
 
 After pushing, visit your repository:
-**https://github.com/bbasketballer75/theporadas_wedding_site**
+**<https://github.com/bbasketballer75/theporadas_wedding_site>**
 
 You should see:
 
@@ -139,13 +139,13 @@ npm run deploy:functions  # Cloud Functions only
 
 ## 📊 What You Achieved
 
-### Before Cleanup:
+### Before Cleanup
 
 - Repository: 500 MB
 - Files: 30,000+ (with MCP servers)
 - History: Messy with MCP development
 
-### After Cleanup:
+### After Cleanup
 
 - Repository: ~5-10 MB
 - Files: 108 (wedding website only)
@@ -216,7 +216,7 @@ git remote set-url origin https://github.com/bbasketballer75/NEW_REPO_NAME.git
 
 ---
 
-## 🎊 You're Done!
+## 🎊 You're Done
 
 Your wedding website is now:
 
@@ -236,4 +236,4 @@ Your wedding website is now:
 - Check README.md for development instructions
 - Check COMMIT-PLAN.md for what was committed
 
-**Repository URL:** https://github.com/bbasketballer75/theporadas_wedding_site
+**Repository URL:** <https://github.com/bbasketballer75/theporadas_wedding_site>

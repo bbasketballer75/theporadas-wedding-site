@@ -26,7 +26,7 @@ export function VideoSkeleton() {
     <div className="animate-pulse space-y-4">
       {/* Video player skeleton */}
       <div className="aspect-video bg-sage-100 rounded-2xl" />
-      
+
       {/* Chapters skeleton */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {[...Array(6)].map((_, i) => (

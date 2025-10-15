@@ -15,13 +15,8 @@ if [ -z "$STAGED_JS_FILES" ] && [ -z "$STAGED_CSS_FILES" ] && [ -z "$STAGED_MD_F
   exit 0
 fi
 
-# Change to site directory if needed
-if [ -d "site" ]; then
-  cd site || exit 1
-fi
-
-# Check if node_modules exists
-if [ ! -d "node_modules" ]; then
+# Check if node_modules exists (in site directory)
+if [ ! -d "site/node_modules" ]; then
   echo "⚠️  Warning: node_modules not found, skipping lint checks"
   exit 0
 fi
@@ -58,10 +53,11 @@ if [ -n "$STAGED_MD_FILES" ]; then
 fi
 
 # Run TypeScript type checking (if tsconfig.json exists)
-if [ -f "tsconfig.json" ]; then
+if [ -f "site/tsconfig.json" ]; then
   echo "🔍 Type checking TypeScript..."
-  npx tsc --noEmit
+  cd site && npx tsc --noEmit
   TSC_EXIT_CODE=$?
+  cd ..
   
   if [ $TSC_EXIT_CODE -ne 0 ]; then
     echo "❌ TypeScript type errors found. Please fix them before committing."

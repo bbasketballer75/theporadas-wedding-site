@@ -661,7 +661,7 @@ Or per-section:
 
 ---
 
-## 🎉 SUCCESS!
+## 🎉 SUCCESS
 
 You now have a beautiful single-page scrolling wedding website that:
 
@@ -672,7 +672,7 @@ You now have a beautiful single-page scrolling wedding website that:
 ✅ **Loads faster** (no route changes, instant navigation)  
 ✅ **Feels modern** (native smooth scroll, contemporary single-page experience)
 
-**Next Step**: Open http://localhost:3000 in your browser and start testing! 🚀
+**Next Step**: Open <http://localhost:3000> in your browser and start testing! 🚀
 
 Refer to `SINGLE-PAGE-TESTING-GUIDE.md` for detailed test instructions.
 

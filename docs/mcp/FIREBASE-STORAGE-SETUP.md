@@ -4,7 +4,7 @@
 
 ### **Step 1: Enable Storage in Console** ⏰ **Do This First!**
 
-**URL:** https://console.firebase.google.com/project/the-poradas-2025-813c7/storage
+**URL:** <https://console.firebase.google.com/project/the-poradas-2025-813c7/storage>
 
 1. Click **"Get Started"**
 2. Select **"Production mode"** → Click **"Next"**
@@ -122,7 +122,7 @@ firebase deploy --only functions
 
 ### **2. Test Gallery Upload**
 
-1. Open: https://the-poradas-2025-813c7.web.app/gallery
+1. Open: <https://the-poradas-2025-813c7.web.app/gallery>
 2. Try uploading a test photo
 3. Verify it appears in Firebase Console → Storage
 
@@ -131,7 +131,7 @@ firebase deploy --only functions
 Check Storage usage in console:
 
 - **Free tier:** 5 GB storage, 1 GB/day downloads
-- **URL:** https://console.firebase.google.com/project/the-poradas-2025-813c7/storage
+- **URL:** <https://console.firebase.google.com/project/the-poradas-2025-813c7/storage>
 
 ---
 

@@ -288,7 +288,7 @@ Every push to `main` branch triggers automatic deployment:
 1. Build Next.js application
 2. Run pre-push checks (Next.js config, webpack audit)
 3. Deploy to Vercel
-4. Update production URL: https://wedding-website-sepia-ten.vercel.app
+4. Update production URL: <https://wedding-website-sepia-ten.vercel.app>
 
 ### Manual Deployment (Firebase)
 
