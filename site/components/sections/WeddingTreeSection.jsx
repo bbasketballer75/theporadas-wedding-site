@@ -60,22 +60,74 @@ export default function WeddingTreeSection() {
   // Wedding party data
   const weddingParty = {
     bridesmaids: [
-      { name: 'Hannah Porada', image: '/images/wedding-party/bridesmaids/hannah-porada.webp', role: 'Maid of Honor' },
-      { name: 'Brinnah Porada', image: '/images/wedding-party/bridesmaids/brinnah-porada.webp', role: 'Bridesmaid' },
-      { name: 'Caitie Helsel', image: '/images/wedding-party/bridesmaids/caitie-helsel.webp', role: 'Bridesmaid' },
-      { name: 'Emily Aurandt', image: '/images/wedding-party/bridesmaids/emily-aurandt.webp', role: 'Bridesmaid' },
-      { name: 'Lexi Ferg', image: '/images/wedding-party/bridesmaids/lexi-ferg.webp', role: 'Bridesmaid' },
-      { name: 'Maria McCray', image: '/images/wedding-party/bridesmaids/maria-mccray.webp', role: 'Bridesmaid' },
+      {
+        name: 'Hannah Porada',
+        image: '/images/wedding-party/bridesmaids/hannah-porada.webp',
+        role: 'Maid of Honor',
+      },
+      {
+        name: 'Brinnah Porada',
+        image: '/images/wedding-party/bridesmaids/brinnah-porada.webp',
+        role: 'Bridesmaid',
+      },
+      {
+        name: 'Caitie Helsel',
+        image: '/images/wedding-party/bridesmaids/caitie-helsel.webp',
+        role: 'Bridesmaid',
+      },
+      {
+        name: 'Emily Aurandt',
+        image: '/images/wedding-party/bridesmaids/emily-aurandt.webp',
+        role: 'Bridesmaid',
+      },
+      {
+        name: 'Lexi Ferg',
+        image: '/images/wedding-party/bridesmaids/lexi-ferg.webp',
+        role: 'Bridesmaid',
+      },
+      {
+        name: 'Maria McCray',
+        image: '/images/wedding-party/bridesmaids/maria-mccray.webp',
+        role: 'Bridesmaid',
+      },
       { name: 'Mic', image: '/images/wedding-party/bridesmaids/mic.webp', role: 'Bridesmaid' },
     ],
     groomsmen: [
-      { name: 'Ian Porada', image: '/images/wedding-party/groomsmen/ian-porada.webp', role: 'Best Man' },
-      { name: 'Alex Molnar', image: '/images/wedding-party/groomsmen/alex-molnar.webp', role: 'Groomsman' },
-      { name: 'Brosonan McCray', image: '/images/wedding-party/groomsmen/brosonan-mccray.webp', role: 'Groomsman' },
-      { name: 'Ean Pringle', image: '/images/wedding-party/groomsmen/ean-pringle.webp', role: 'Groomsman' },
-      { name: 'Eddie Migut', image: '/images/wedding-party/groomsmen/eddie-migut.webp', role: 'Groomsman' },
-      { name: 'Nate Berkebile', image: '/images/wedding-party/groomsmen/nate-berkebile.webp', role: 'Groomsman' },
-      { name: 'Tyler Sharpe', image: '/images/wedding-party/groomsmen/tyler-sharpe.webp', role: 'Groomsman' },
+      {
+        name: 'Ian Porada',
+        image: '/images/wedding-party/groomsmen/ian-porada.webp',
+        role: 'Best Man',
+      },
+      {
+        name: 'Alex Molnar',
+        image: '/images/wedding-party/groomsmen/alex-molnar.webp',
+        role: 'Groomsman',
+      },
+      {
+        name: 'Brosonan McCray',
+        image: '/images/wedding-party/groomsmen/brosonan-mccray.webp',
+        role: 'Groomsman',
+      },
+      {
+        name: 'Ean Pringle',
+        image: '/images/wedding-party/groomsmen/ean-pringle.webp',
+        role: 'Groomsman',
+      },
+      {
+        name: 'Eddie Migut',
+        image: '/images/wedding-party/groomsmen/eddie-migut.webp',
+        role: 'Groomsman',
+      },
+      {
+        name: 'Nate Berkebile',
+        image: '/images/wedding-party/groomsmen/nate-berkebile.webp',
+        role: 'Groomsman',
+      },
+      {
+        name: 'Tyler Sharpe',
+        image: '/images/wedding-party/groomsmen/tyler-sharpe.webp',
+        role: 'Groomsman',
+      },
     ],
   };
 

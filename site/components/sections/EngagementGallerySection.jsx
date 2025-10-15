@@ -8,80 +8,83 @@ export default function EngagementGallerySection() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   // Engagement photos - real photos from proposal
-  const engagementPhotos = useMemo(() => [
-    {
-      id: 1,
-      src: '/images/engagement/PoradaProposal-11.webp',
-      alt: 'Austin and Jordyn engagement photo 1',
-      caption: 'The Perfect Moment',
-    },
-    {
-      id: 2,
-      src: '/images/engagement/PoradaProposal-28.webp',
-      alt: 'Austin and Jordyn engagement photo 2',
-      caption: 'Pure Joy!',
-    },
-    {
-      id: 3,
-      src: '/images/engagement/PoradaProposal-146.webp',
-      alt: 'Austin and Jordyn engagement photo 3',
-      caption: 'Celebrating Our Love',
-    },
-    {
-      id: 4,
-      src: '/images/engagement/PoradaProposal-156.webp',
-      alt: 'Austin and Jordyn engagement photo 4',
-      caption: 'Forever Starts Now',
-    },
-    {
-      id: 5,
-      src: '/images/engagement/PoradaProposal-198.webp',
-      alt: 'Austin and Jordyn engagement photo 5',
-      caption: 'Our Adventure Begins',
-    },
-    {
-      id: 6,
-      src: '/images/engagement/PoradaProposal-255.webp',
-      alt: 'Austin and Jordyn engagement photo 6',
-      caption: 'She Said Yes!',
-    },
-    {
-      id: 7,
-      src: '/images/engagement/PoradaProposal-268.webp',
-      alt: 'Austin and Jordyn engagement photo 7',
-      caption: 'So Happy Together',
-    },
-    {
-      id: 8,
-      src: '/images/engagement/PoradaProposal-286.webp',
-      alt: 'Austin and Jordyn engagement photo 8',
-      caption: 'Beautiful Memories',
-    },
-    {
-      id: 9,
-      src: '/images/engagement/PoradaProposal-316.webp',
-      alt: 'Austin and Jordyn engagement photo 9',
-      caption: 'Love in the Air',
-    },
-    {
-      id: 10,
-      src: '/images/engagement/PoradaProposal-359.webp',
-      alt: 'Austin and Jordyn engagement photo 10',
-      caption: 'Perfect Day',
-    },
-    {
-      id: 11,
-      src: '/images/engagement/PoradaProposal-421.webp',
-      alt: 'Austin and Jordyn engagement photo 11',
-      caption: 'Engaged!',
-    },
-    {
-      id: 12,
-      src: '/images/engagement/PoradaProposal-482.webp',
-      alt: 'Austin and Jordyn engagement photo 12',
-      caption: 'Forever Love',
-    },
-  ], []);
+  const engagementPhotos = useMemo(
+    () => [
+      {
+        id: 1,
+        src: '/images/engagement/PoradaProposal-11.webp',
+        alt: 'Austin and Jordyn engagement photo 1',
+        caption: 'The Perfect Moment',
+      },
+      {
+        id: 2,
+        src: '/images/engagement/PoradaProposal-28.webp',
+        alt: 'Austin and Jordyn engagement photo 2',
+        caption: 'Pure Joy!',
+      },
+      {
+        id: 3,
+        src: '/images/engagement/PoradaProposal-146.webp',
+        alt: 'Austin and Jordyn engagement photo 3',
+        caption: 'Celebrating Our Love',
+      },
+      {
+        id: 4,
+        src: '/images/engagement/PoradaProposal-156.webp',
+        alt: 'Austin and Jordyn engagement photo 4',
+        caption: 'Forever Starts Now',
+      },
+      {
+        id: 5,
+        src: '/images/engagement/PoradaProposal-198.webp',
+        alt: 'Austin and Jordyn engagement photo 5',
+        caption: 'Our Adventure Begins',
+      },
+      {
+        id: 6,
+        src: '/images/engagement/PoradaProposal-255.webp',
+        alt: 'Austin and Jordyn engagement photo 6',
+        caption: 'She Said Yes!',
+      },
+      {
+        id: 7,
+        src: '/images/engagement/PoradaProposal-268.webp',
+        alt: 'Austin and Jordyn engagement photo 7',
+        caption: 'So Happy Together',
+      },
+      {
+        id: 8,
+        src: '/images/engagement/PoradaProposal-286.webp',
+        alt: 'Austin and Jordyn engagement photo 8',
+        caption: 'Beautiful Memories',
+      },
+      {
+        id: 9,
+        src: '/images/engagement/PoradaProposal-316.webp',
+        alt: 'Austin and Jordyn engagement photo 9',
+        caption: 'Love in the Air',
+      },
+      {
+        id: 10,
+        src: '/images/engagement/PoradaProposal-359.webp',
+        alt: 'Austin and Jordyn engagement photo 10',
+        caption: 'Perfect Day',
+      },
+      {
+        id: 11,
+        src: '/images/engagement/PoradaProposal-421.webp',
+        alt: 'Austin and Jordyn engagement photo 11',
+        caption: 'Engaged!',
+      },
+      {
+        id: 12,
+        src: '/images/engagement/PoradaProposal-482.webp',
+        alt: 'Austin and Jordyn engagement photo 12',
+        caption: 'Forever Love',
+      },
+    ],
+    []
+  );
 
   const openLightbox = (photo) => {
     setSelectedImage(photo);
@@ -93,18 +96,21 @@ export default function EngagementGallerySection() {
     setSelectedImage(null);
   };
 
-  const navigateImage = useCallback((direction) => {
-    const currentIndex = engagementPhotos.findIndex((p) => p.id === selectedImage?.id);
-    let newIndex;
+  const navigateImage = useCallback(
+    (direction) => {
+      const currentIndex = engagementPhotos.findIndex((p) => p.id === selectedImage?.id);
+      let newIndex;
 
-    if (direction === 'next') {
-      newIndex = (currentIndex + 1) % engagementPhotos.length;
-    } else {
-      newIndex = (currentIndex - 1 + engagementPhotos.length) % engagementPhotos.length;
-    }
+      if (direction === 'next') {
+        newIndex = (currentIndex + 1) % engagementPhotos.length;
+      } else {
+        newIndex = (currentIndex - 1 + engagementPhotos.length) % engagementPhotos.length;
+      }
 
-    setSelectedImage(engagementPhotos[newIndex]);
-  }, [selectedImage, engagementPhotos]);
+      setSelectedImage(engagementPhotos[newIndex]);
+    },
+    [selectedImage, engagementPhotos]
+  );
 
   // Keyboard navigation
   useEffect(() => {

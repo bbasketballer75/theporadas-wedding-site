@@ -67,12 +67,19 @@ const nextConfig = {
   // Note: For Firebase hosting, we'll use 'next export' in build script
   images: {
     unoptimized: false, // Enable optimization for better performance
+    domains: ['wedding-website-jgfleztfx-austins-projects-bb7c50ab.vercel.app'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: '**.supabase.co', // Allow Supabase CDN images
         port: '',
         pathname: '/storage/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.vercel.app', // Allow Vercel preview domains
+        port: '',
+        pathname: '/**',
       },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

@@ -210,7 +210,10 @@ export default function MapSection() {
                 <form onSubmit={handlePinSubmit} className="space-y-4">
                   {/* Name Input */}
                   <div>
-                    <label htmlFor="pin-name" className="block text-sm font-semibold text-charcoal mb-2">
+                    <label
+                      htmlFor="pin-name"
+                      className="block text-sm font-semibold text-charcoal mb-2"
+                    >
                       Your Name *
                     </label>
                     <input
@@ -226,7 +229,10 @@ export default function MapSection() {
 
                   {/* Location Input */}
                   <div>
-                    <label htmlFor="pin-location" className="block text-sm font-semibold text-charcoal mb-2">
+                    <label
+                      htmlFor="pin-location"
+                      className="block text-sm font-semibold text-charcoal mb-2"
+                    >
                       Location *
                     </label>
                     <input
@@ -242,7 +248,10 @@ export default function MapSection() {
 
                   {/* Icon Selector */}
                   <div>
-                    <label htmlFor="pin-icon" className="block text-sm font-semibold text-charcoal mb-2">
+                    <label
+                      htmlFor="pin-icon"
+                      className="block text-sm font-semibold text-charcoal mb-2"
+                    >
                       Pin Icon
                     </label>
                     <div id="pin-icon" className="grid grid-cols-5 gap-2">
@@ -265,7 +274,10 @@ export default function MapSection() {
 
                   {/* Color Selector */}
                   <div>
-                    <label htmlFor="pin-color" className="block text-sm font-semibold text-charcoal mb-2">
+                    <label
+                      htmlFor="pin-color"
+                      className="block text-sm font-semibold text-charcoal mb-2"
+                    >
                       Pin Color
                     </label>
                     <div id="pin-color" className="grid grid-cols-3 gap-2">
