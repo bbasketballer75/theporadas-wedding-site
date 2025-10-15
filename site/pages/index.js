@@ -15,9 +15,38 @@ const HeroSection = dynamic(() => import('../components/sections/HeroSection'), 
   loading: () => <SectionLoadingSkeleton />,
 });
 
-const GallerySection = dynamic(() => import('../components/sections/GallerySection'), {
+const EngagementGallerySection = dynamic(() => import('../components/sections/EngagementGallerySection'), {
   loading: () => <SectionLoadingSkeleton />,
-  ssr: false, // Gallery is client-side only
+  ssr: false,
+});
+
+const RingsSection = dynamic(() => import('../components/sections/RingsSection'), {
+  loading: () => <SectionLoadingSkeleton />,
+});
+
+const WeddingTreeSection = dynamic(() => import('../components/sections/WeddingTreeSection'), {
+  loading: () => <SectionLoadingSkeleton />,
+  ssr: false,
+});
+
+const WeddingVideoSection = dynamic(() => import('../components/sections/WeddingVideoSection'), {
+  loading: () => <SectionLoadingSkeleton />,
+  ssr: false,
+});
+
+const SharedAlbumSection = dynamic(() => import('../components/sections/SharedAlbumSection'), {
+  loading: () => <SectionLoadingSkeleton />,
+  ssr: false,
+});
+
+const GuestBookSection = dynamic(() => import('../components/sections/GuestBookSection'), {
+  loading: () => <SectionLoadingSkeleton />,
+  ssr: false,
+});
+
+const MapSection = dynamic(() => import('../components/sections/MapSection'), {
+  loading: () => <SectionLoadingSkeleton />,
+  ssr: false,
 });
 
 
@@ -83,14 +112,44 @@ export default function Home() {
         <Navigation />
 
         <main className="min-h-screen">
-          {/* Hero Section - Welcome & Introduction */}
+          {/* 1. Short Intro - Welcome & Introduction */}
           <SectionErrorBoundary sectionName="Hero">
             <HeroSection />
           </SectionErrorBoundary>
 
-          {/* Wedding Gallery - Photos & Video */}
-          <SectionErrorBoundary sectionName="Gallery">
-            <GallerySection />
+          {/* 2. Engagement Gallery */}
+          <SectionErrorBoundary sectionName="Engagement Gallery">
+            <EngagementGallerySection />
+          </SectionErrorBoundary>
+
+          {/* 3. Pictures of Rings */}
+          <SectionErrorBoundary sectionName="Rings">
+            <RingsSection />
+          </SectionErrorBoundary>
+
+          {/* 4. Wedding Tree (Interactive) - Us, Parents (unified), Wedding Party */}
+          <SectionErrorBoundary sectionName="Wedding Tree">
+            <WeddingTreeSection />
+          </SectionErrorBoundary>
+
+          {/* 5. Main Wedding Video with Intuitive Chaptering */}
+          <SectionErrorBoundary sectionName="Wedding Video">
+            <WeddingVideoSection />
+          </SectionErrorBoundary>
+
+          {/* 6. Shared Wedding Album - Guest Photo/Video Upload */}
+          <SectionErrorBoundary sectionName="Shared Album">
+            <SharedAlbumSection />
+          </SectionErrorBoundary>
+
+          {/* 7. Interactive Guest Book */}
+          <SectionErrorBoundary sectionName="Guest Book">
+            <GuestBookSection />
+          </SectionErrorBoundary>
+
+          {/* 8. Interactive Map - Where Website Has Been Viewed */}
+          <SectionErrorBoundary sectionName="Map">
+            <MapSection />
           </SectionErrorBoundary>
         </main>
 

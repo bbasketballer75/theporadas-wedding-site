@@ -90,28 +90,6 @@ export default function GallerySection() {
           </div>
         </SectionTransition>
 
-        {/* Wedding Video Section */}
-        <SectionTransition>
-          <div className="mb-16">
-            <div className="card-elegant p-8 md:p-12">
-              <div className="flex items-center justify-center mb-6">
-                <h3 className="text-4xl font-display text-gradient-sage text-center">
-                  🎬 Our Wedding Film
-                </h3>
-              </div>
-              <p className="text-center text-charcoal/70 mb-6 max-w-2xl mx-auto">
-                Watch the highlight reel of our unforgettable day
-              </p>
-              <YouTubePlayer
-                videoId="ZOIRb_ghdh0"
-                title="Austin & Jordyn Wedding Film"
-                chapters={weddingChapters}
-                showChapters={true}
-              />
-            </div>
-          </div>
-        </SectionTransition>
-
         {/* Filter Tabs */}
         <SectionTransition>
           <div className="flex justify-center mb-8">
@@ -137,6 +115,28 @@ export default function GallerySection() {
         {/* Gallery Component */}
         <SectionTransition>
           <GalleryDisplay filter={filter} onMediaClick={handleMediaClick} />
+        </SectionTransition>
+
+        {/* Wedding Video Section */}
+        <SectionTransition>
+          <div className="mt-16 mb-16">
+            <div className="card-elegant p-8 md:p-12">
+              <div className="flex items-center justify-center mb-6">
+                <h3 className="text-4xl font-display text-gradient-sage text-center">
+                  🎬 Our Wedding Film
+                </h3>
+              </div>
+              <p className="text-center text-charcoal/70 mb-6 max-w-2xl mx-auto">
+                Watch the highlight reel of our unforgettable day
+              </p>
+              <YouTubePlayer
+                videoId="ZOIRb_ghdh0"
+                title="Austin & Jordyn Wedding Film"
+                chapters={weddingChapters}
+                showChapters={true}
+              />
+            </div>
+          </div>
         </SectionTransition>
 
         {/* Upload CTA */}
