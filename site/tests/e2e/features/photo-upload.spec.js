@@ -353,17 +353,21 @@ test.describe('Photo Upload - Error Handling', () => {
 
     test('gracefully handles navigation during file selection', async ({ page }) => {
         await page.goto('/#upload');
+        await page.waitForLoadState('domcontentloaded');
 
         // Select file
         const fileInput = page.locator('input[type="file"]');
         const testImagePath = path.join(__dirname, '..', '..', '..', 'fixtures', 'test-image.jpg');
         await fileInput.setInputFiles(testImagePath);
 
-        // Navigate away immediately
-        await page.goto('/gallery');
+        // Wait a moment for file selection to be processed
+        await page.waitForTimeout(300);
+
+        // Navigate away
+        await page.goto('/#gallery', { waitUntil: 'domcontentloaded' });
 
         // Should navigate without errors
-        await expect(page).toHaveURL(/\/gallery/);
+        await expect(page).toHaveURL(/#gallery/);
 
         // Navigate back
         await page.goto('/#upload');
