@@ -4,21 +4,25 @@ module.exports = {
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   
-  // Exclude admin and API routes
-  exclude: ['/admin/*', '/api/*'],
+  // Exclude SPA anchor redirects and admin/API routes
+  exclude: [
+    '/admin/*',
+    '/api/*',
+    '/guestbook',      // Redirects to /#guestbook (SPA anchor)
+    '/upload',          // Redirects to /#upload (SPA anchor)
+    '/gallery',         // Redirects to /#gallery (SPA anchor)
+    '/timeline',        // Redirects to /#timeline (SPA anchor)
+    '/our-story',       // Redirects to /#our-story (SPA anchor)
+    '/venue',           // Redirects to /#venue (SPA anchor)
+    '/index-optimized', // Legacy/test file
+  ],
   
-  // Additional paths to include
+  // Additional paths to include (single-page app - only real standalone routes)
   additionalPaths: async (config) => [
     await config.transform(config, '/'),
-    await config.transform(config, '/gallery'),
-    await config.transform(config, '/upload'),
-    await config.transform(config, '/guestbook'),
-    await config.transform(config, '/venue'),
-    await config.transform(config, '/map'),
-    await config.transform(config, '/timeline'),
-    await config.transform(config, '/our-story'),
     await config.transform(config, '/photobooth'),
     await config.transform(config, '/album'),
+    await config.transform(config, '/map'),
   ],
 
   robotsTxtOptions: {

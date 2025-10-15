@@ -461,7 +461,7 @@ test.describe('Teaser Section Links', () => {
     console.log('✓ Photo Booth link correct');
   });
 
-  test('should navigate to Guest Book page', async ({ page }) => {
+  test('should navigate to Guest Book section', async ({ page }) => {
     await page.evaluate(() => {
       document
         .getElementById('guestbook')
@@ -469,9 +469,9 @@ test.describe('Teaser Section Links', () => {
     });
     await page.waitForTimeout(1500);
 
-    const guestBookLink = page.locator('a:has-text("Open Guest Book")');
-    await expect(guestBookLink).toHaveAttribute('href', '/guestbook');
-    console.log('✓ Guest Book link correct');
+    const guestBookLink = page.locator('a:has-text("Sign the Guest Book")');
+    await expect(guestBookLink).toHaveAttribute('href', '/#guestbook');
+    console.log('✓ Guest Book link correct (anchor-based navigation)');
   });
 
   test('should navigate to Album page', async ({ page }) => {

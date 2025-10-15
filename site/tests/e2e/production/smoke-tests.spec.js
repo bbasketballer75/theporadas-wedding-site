@@ -9,6 +9,7 @@
  */
 
 import { test, expect } from '@playwright/test';
+
 import { filterCriticalErrors } from '../../helpers/error-filters.js';
 
 // Get production URL from environment or use default
@@ -32,8 +33,8 @@ test.describe('Production Smoke Tests - Availability', () => {
         const criticalPages = [
             '/',
             '/gallery',
-            '/guestbook',
-            '/upload',
+            '/#guestbook',
+            '/#upload',
             '/map',
         ];
 
@@ -113,7 +114,7 @@ test.describe('Production Smoke Tests - Firebase Health', () => {
             consoleMessages.push(msg.text());
         });
 
-        await page.goto(`${PRODUCTION_URL}/guestbook`);
+        await page.goto(`${PRODUCTION_URL}/#guestbook`);
         await page.waitForLoadState('domcontentloaded');
 
         // Wait for Firestore to initialize
@@ -152,7 +153,7 @@ test.describe('Production Smoke Tests - Firebase Health', () => {
         await page.waitForLoadState('domcontentloaded');
 
         // Navigate to a page that uses Firebase (guestbook)
-        await page.goto(`${PRODUCTION_URL}/guestbook`);
+        await page.goto(`${PRODUCTION_URL}/#guestbook`);
         await page.waitForLoadState('domcontentloaded');
 
         // Wait for any async operations
@@ -176,7 +177,7 @@ test.describe('Production Smoke Tests - Firebase Health', () => {
             }
         });
 
-        await page.goto(`${PRODUCTION_URL}/guestbook`);
+        await page.goto(`${PRODUCTION_URL}/#guestbook`);
         await page.waitForLoadState('domcontentloaded');
 
         // Look for 400 errors with projectId in the message (CRLF symptom)
@@ -192,7 +193,7 @@ test.describe('Production Smoke Tests - Firebase Health', () => {
 
 test.describe('Production Smoke Tests - Core Functionality', () => {
     test('guestbook page loads and displays form', async ({ page }) => {
-        await page.goto(`${PRODUCTION_URL}/guestbook`);
+        await page.goto(`${PRODUCTION_URL}/#guestbook`);
 
         // Heading should be present
         await expect(page.locator('h1, h2').first()).toBeVisible();
@@ -348,7 +349,7 @@ test.describe('Production Smoke Tests - Console Health', () => {
             uncaughtExceptions.push(error.message);
         });
 
-        await page.goto(`${PRODUCTION_URL}/guestbook`);
+        await page.goto(`${PRODUCTION_URL}/#guestbook`);
         await page.waitForLoadState('domcontentloaded');
 
         // Interact with page
@@ -366,7 +367,7 @@ test.describe('Production Smoke Tests - Console Health', () => {
 
     test('no memory leaks on navigation', async ({ page }) => {
         // Navigate through several pages
-        const pages = ['/', '/gallery', '/guestbook', '/upload', '/map', '/'];
+        const pages = ['/', '/gallery', '/#guestbook', '/#upload', '/map', '/'];
 
         for (const pagePath of pages) {
             await page.goto(`${PRODUCTION_URL}${pagePath}`);
@@ -394,7 +395,7 @@ test.describe('Production Smoke Tests - Console Health', () => {
         await page.waitForLoadState('domcontentloaded');
 
         // Navigate to a complex page (guestbook with Firebase)
-        await page.goto(`${PRODUCTION_URL}/guestbook`);
+        await page.goto(`${PRODUCTION_URL}/#guestbook`);
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(2000);
 

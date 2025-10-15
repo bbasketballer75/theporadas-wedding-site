@@ -11,6 +11,7 @@
  */
 
 const { test, expect } = require('@playwright/test');
+
 const {
     getTestFirestore,
     clearCollection,
@@ -169,8 +170,8 @@ test.describe('Guestbook Integration (Firebase Emulator)', () => {
             message: 'Browser read test',
         });
 
-        // Navigate to guestbook page with emulator connection
-        await page.goto('/guestbook');
+        // Navigate to guestbook anchor with emulator connection
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
 
         // Wait for page to load

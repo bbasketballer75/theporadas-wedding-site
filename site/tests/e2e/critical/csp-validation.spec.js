@@ -4,8 +4,9 @@
  */
 
 const { test, expect } = require('@playwright/test');
-const { filterCriticalErrors } = require('../../helpers/error-filters');
+
 const { dismissAllDevOverlays } = require('../../helpers/dismiss-dev-overlay');
+const { filterCriticalErrors } = require('../../helpers/error-filters');
 
 test.describe('CSP Policy Validation (CRITICAL)', () => {
     test.beforeEach(async ({ page }) => {
@@ -60,7 +61,7 @@ test.describe('CSP Policy Validation (CRITICAL)', () => {
             }
         });
 
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Wait for Firestore initialization
 
@@ -119,7 +120,7 @@ test.describe('CSP Policy Validation (CRITICAL)', () => {
             }
         });
 
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000);
 

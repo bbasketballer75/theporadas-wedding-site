@@ -25,7 +25,7 @@ test.describe('Teaser Section Links', () => {
     await page.waitForTimeout(1500);
 
     const guestBookLink = page.locator('a:has-text("Sign the Guest Book")');
-    await expect(guestBookLink).toHaveAttribute('href', '/guestbook');
+    await expect(guestBookLink).toHaveAttribute('href', '/#guestbook');
     console.log('✓ Guest Book link correct');
   });
 
@@ -47,7 +47,7 @@ test.describe('Teaser Section Links', () => {
     await page.waitForTimeout(1500);
 
     const uploadLink = page.locator('a:has-text("Upload Your Photos")');
-    await expect(uploadLink).toHaveAttribute('href', '/upload');
+    await expect(uploadLink).toHaveAttribute('href', '/#upload');
     console.log('✓ Upload link correct');
   });
 

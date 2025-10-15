@@ -4,8 +4,9 @@
  */
 
 const { test, expect } = require('@playwright/test');
-const { filterCriticalErrors, categorizeErrors } = require('../../helpers/error-filters');
+
 const { dismissAllDevOverlays } = require('../../helpers/dismiss-dev-overlay');
+const { filterCriticalErrors, categorizeErrors } = require('../../helpers/error-filters');
 
 // Shared error collection
 let globalErrors = [];
@@ -110,7 +111,7 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
     });
 
     test('Guestbook page has NO critical console errors', async ({ page }) => {
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Wait for Firestore
 
@@ -168,7 +169,7 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
     });
 
     test('NO CSP-related console errors across entire site', async ({ page }) => {
-        const pages = ['/', '/guestbook', '/gallery', '/map'];
+        const pages = ['/', '/#guestbook', '/gallery', '/map'];
 
         for (const pagePath of pages) {
             await page.goto(pagePath);
@@ -201,7 +202,7 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
     });
 
     test('NO uncaught JavaScript errors across site', async ({ page }) => {
-        const pages = ['/', '/guestbook', '/gallery', '/map'];
+        const pages = ['/', '/#guestbook', '/gallery', '/map'];
 
         for (const pagePath of pages) {
             await page.goto(pagePath);
@@ -226,7 +227,7 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
     });
 
     test('Error threshold: <3 CRITICAL errors per page', async ({ page }) => {
-        const pages = ['/', '/guestbook', '/gallery', '/map'];
+        const pages = ['/', '/#guestbook', '/gallery', '/map'];
         const errorsByPage = {};
 
         for (const pagePath of pages) {
@@ -244,7 +245,7 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
 
         // Check each page meets threshold for CRITICAL errors only
         const pagesOverThreshold = Object.entries(errorsByPage).filter(
-            ([page, counts]) => counts.critical >= 3
+            ([_pageKey, counts]) => counts.critical >= 3
         );
 
         expect(pagesOverThreshold).toHaveLength(0);
@@ -281,7 +282,7 @@ test.describe('Console Error Monitoring (CRITICAL)', () => {
             }
         });
 
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Full Firebase init cycle
 

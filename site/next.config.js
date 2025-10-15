@@ -66,7 +66,7 @@ const nextConfig = {
   // Removed 'output: export' to enable API routes for Canva integration
   // Note: For Firebase hosting, we'll use 'next export' in build script
   images: {
-  unoptimized: false, // Enable optimization for better performance
+    unoptimized: false, // Enable optimization for better performance
     remotePatterns: [
       {
         protocol: 'https',

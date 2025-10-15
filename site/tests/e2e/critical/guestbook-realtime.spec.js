@@ -5,6 +5,7 @@
  */
 
 const { test, expect } = require('@playwright/test');
+
 const { dismissAllDevOverlays } = require('../../helpers/dismiss-dev-overlay');
 
 test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
@@ -30,9 +31,9 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
         const page2 = await context2.newPage();
 
         try {
-            // Both users navigate to guestbook
-            await page1.goto('/guestbook');
-            await page2.goto('/guestbook');
+            // Both users navigate to guestbook anchor on the single-page app
+            await page1.goto('/#guestbook');
+            await page2.goto('/#guestbook');
 
             // Wait for Firestore initialization in both contexts
             await page1.waitForLoadState('domcontentloaded');
@@ -149,7 +150,7 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
             }
         });
 
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Wait for Firestore initialization
 
@@ -181,8 +182,8 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
         const page2 = await context2.newPage();
 
         try {
-            await page1.goto('/guestbook');
-            await page2.goto('/guestbook');
+            await page1.goto('/#guestbook');
+            await page2.goto('/#guestbook');
 
             await page1.waitForLoadState('domcontentloaded');
             await page2.waitForLoadState('domcontentloaded');
@@ -249,8 +250,8 @@ test.describe('Guestbook Realtime Sync (CRITICAL)', () => {
         const page2 = await context2.newPage();
 
         try {
-            await page1.goto('/guestbook');
-            await page2.goto('/guestbook');
+            await page1.goto('/#guestbook');
+            await page2.goto('/#guestbook');
 
             await page1.waitForLoadState('domcontentloaded');
             await page2.waitForLoadState('domcontentloaded');

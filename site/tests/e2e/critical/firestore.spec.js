@@ -31,7 +31,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
             }
         });
 
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
 
         // Wait for Firestore to initialize or for guestbook section to render
@@ -84,7 +84,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
             }
         });
 
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000); // Wait for Listen channels to establish
 
@@ -105,14 +105,14 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
     });
 
     test('Firestore queries return data successfully', async ({ page }) => {
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
 
         // Wait for messages or empty state
         await Promise.race([
             page.waitForSelector('[data-testid="guestbook-message"]', { timeout: 20000 }),
             page.waitForSelector('text=Be the first to sign', { timeout: 20000 }),
-        ]).catch(() => {});
+        ]).catch(() => { });
 
         // Count messages using data-testid for reliability
         const messageCount = await page.locator('[data-testid="guestbook-message"]').count();
@@ -132,7 +132,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
     });
 
     test('Firestore realtime listener is active', async ({ page }) => {
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(5000);
 
@@ -179,7 +179,7 @@ test.describe('Firestore Connectivity (CRITICAL)', () => {
             }
         });
 
-        await page.goto('/guestbook');
+        await page.goto('/#guestbook');
         await page.waitForLoadState('domcontentloaded');
         await page.waitForTimeout(10000);
 

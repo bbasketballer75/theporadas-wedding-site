@@ -1,9 +1,9 @@
+import { Analytics } from '@vercel/analytics/react';
 import { AnimatePresence } from 'framer-motion';
 import { Lora, Playfair_Display } from 'next/font/google';
 import Head from 'next/head';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
-import { Analytics } from '@vercel/analytics/react';
 
 import ErrorBoundary from '../components/ErrorBoundary';
 import StructuredData from '../components/StructuredData';
@@ -66,7 +66,7 @@ export default function App({ Component, pageProps }) {
     <ErrorBoundary>
       <Head>
         <title>Poradas Wedding</title>
-        <meta name="description" content="Celebrate the Poradas family wedding!" />
+        {/* description moved into per-page SEOHead to avoid duplicate meta tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <StructuredData />
       </Head>
