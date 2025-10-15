@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import SectionTransition from '../SectionTransition';
 
 /**
@@ -26,8 +27,7 @@ export default function GuestBookSection() {
     {
       id: 2,
       name: 'The Johnson Family',
-      message:
-        'What an incredible celebration! Thank you for sharing your special day with us.',
+      message: 'What an incredible celebration! Thank you for sharing your special day with us.',
       timestamp: '3 days ago',
     },
     {
@@ -114,9 +114,7 @@ export default function GuestBookSection() {
             </div>
             <div className="bg-gradient-to-br from-blush-100 to-blush-200 rounded-2xl p-6 text-left shadow-elegant hover:-translate-y-1 transition-all duration-300">
               <div className="text-4xl mb-3">🎨</div>
-              <div className="font-semibold text-blush-600 mb-2 text-lg">
-                Auto-Generated Cards
-              </div>
+              <div className="font-semibold text-blush-600 mb-2 text-lg">Auto-Generated Cards</div>
               <div className="text-sm text-charcoal/70">
                 Your message becomes a beautiful wedding-themed card design
               </div>
@@ -136,10 +134,7 @@ export default function GuestBookSection() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name Input */}
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-semibold text-charcoal mb-2"
-                  >
+                  <label htmlFor="name" className="block text-sm font-semibold text-charcoal mb-2">
                     Your Name *
                   </label>
                   <input
@@ -258,9 +253,7 @@ export default function GuestBookSection() {
                     <div className="flex items-start gap-4">
                       {/* Avatar */}
                       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-sage-200 to-blush-200 flex items-center justify-center flex-shrink-0">
-                        <span className="text-2xl">
-                          {message.name.charAt(0).toUpperCase()}
-                        </span>
+                        <span className="text-2xl">{message.name.charAt(0).toUpperCase()}</span>
                       </div>
 
                       {/* Message Content */}
@@ -299,4 +292,3 @@ export default function GuestBookSection() {
     </section>
   );
 }
-

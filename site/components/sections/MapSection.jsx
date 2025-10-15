@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import SectionTransition from '../SectionTransition';
 
 /**
@@ -16,12 +17,60 @@ export default function MapSection() {
 
   // Placeholder visitor pins (will connect to geolocation + Firebase)
   const [visitorPins, setVisitorPins] = useState([
-    { id: 1, name: 'Sarah & Mike', location: 'New York, USA', color: '#FFD700', icon: '🗽', lat: 40.7128, lng: -74.006 },
-    { id: 2, name: 'The Johnsons', location: 'London, UK', color: '#FF69B4', icon: '🇬🇧', lat: 51.5074, lng: -0.1278 },
-    { id: 3, name: 'Emily', location: 'Tokyo, Japan', color: '#87CEEB', icon: '🗼', lat: 35.6762, lng: 139.6503 },
-    { id: 4, name: 'David & Amanda', location: 'Sydney, Australia', color: '#32CD32', icon: '🦘', lat: -33.8688, lng: 151.2093 },
-    { id: 5, name: 'Chris', location: 'Paris, France', color: '#FF4500', icon: '🗼', lat: 48.8566, lng: 2.3522 },
-    { id: 6, name: 'Jessica & Tom', location: 'Toronto, Canada', color: '#DA70D6', icon: '🍁', lat: 43.6532, lng: -79.3832 },
+    {
+      id: 1,
+      name: 'Sarah & Mike',
+      location: 'New York, USA',
+      color: '#FFD700',
+      icon: '🗽',
+      lat: 40.7128,
+      lng: -74.006,
+    },
+    {
+      id: 2,
+      name: 'The Johnsons',
+      location: 'London, UK',
+      color: '#FF69B4',
+      icon: '🇬🇧',
+      lat: 51.5074,
+      lng: -0.1278,
+    },
+    {
+      id: 3,
+      name: 'Emily',
+      location: 'Tokyo, Japan',
+      color: '#87CEEB',
+      icon: '🗼',
+      lat: 35.6762,
+      lng: 139.6503,
+    },
+    {
+      id: 4,
+      name: 'David & Amanda',
+      location: 'Sydney, Australia',
+      color: '#32CD32',
+      icon: '🦘',
+      lat: -33.8688,
+      lng: 151.2093,
+    },
+    {
+      id: 5,
+      name: 'Chris',
+      location: 'Paris, France',
+      color: '#FF4500',
+      icon: '🗼',
+      lat: 48.8566,
+      lng: 2.3522,
+    },
+    {
+      id: 6,
+      name: 'Jessica & Tom',
+      location: 'Toronto, Canada',
+      color: '#DA70D6',
+      icon: '🍁',
+      lat: 43.6532,
+      lng: -79.3832,
+    },
   ]);
 
   const colorOptions = [
@@ -161,10 +210,11 @@ export default function MapSection() {
                 <form onSubmit={handlePinSubmit} className="space-y-4">
                   {/* Name Input */}
                   <div>
-                    <label className="block text-sm font-semibold text-charcoal mb-2">
+                    <label htmlFor="pin-name" className="block text-sm font-semibold text-charcoal mb-2">
                       Your Name *
                     </label>
                     <input
+                      id="pin-name"
                       type="text"
                       value={pinData.name}
                       onChange={(e) => setPinData({ ...pinData, name: e.target.value })}
@@ -176,10 +226,11 @@ export default function MapSection() {
 
                   {/* Location Input */}
                   <div>
-                    <label className="block text-sm font-semibold text-charcoal mb-2">
+                    <label htmlFor="pin-location" className="block text-sm font-semibold text-charcoal mb-2">
                       Location *
                     </label>
                     <input
+                      id="pin-location"
                       type="text"
                       value={pinData.location}
                       onChange={(e) => setPinData({ ...pinData, location: e.target.value })}
@@ -191,10 +242,10 @@ export default function MapSection() {
 
                   {/* Icon Selector */}
                   <div>
-                    <label className="block text-sm font-semibold text-charcoal mb-2">
+                    <label htmlFor="pin-icon" className="block text-sm font-semibold text-charcoal mb-2">
                       Pin Icon
                     </label>
-                    <div className="grid grid-cols-5 gap-2">
+                    <div id="pin-icon" className="grid grid-cols-5 gap-2">
                       {iconOptions.map((icon) => (
                         <button
                           key={icon}
@@ -214,10 +265,10 @@ export default function MapSection() {
 
                   {/* Color Selector */}
                   <div>
-                    <label className="block text-sm font-semibold text-charcoal mb-2">
+                    <label htmlFor="pin-color" className="block text-sm font-semibold text-charcoal mb-2">
                       Pin Color
                     </label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div id="pin-color" className="grid grid-cols-3 gap-2">
                       {colorOptions.map((color) => (
                         <button
                           key={color.value}
@@ -247,7 +298,9 @@ export default function MapSection() {
                     >
                       {pinData.icon}
                     </div>
-                    <p className="text-sm font-semibold text-charcoal mt-2">{pinData.name || '...'}</p>
+                    <p className="text-sm font-semibold text-charcoal mt-2">
+                      {pinData.name || '...'}
+                    </p>
                     <p className="text-xs text-charcoal/60">{pinData.location || '...'}</p>
                   </div>
 

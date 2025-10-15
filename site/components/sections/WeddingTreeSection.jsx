@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import Image from 'next/image';
+import { useState } from 'react';
+
 import SectionTransition from '../SectionTransition';
 
 export default function WeddingTreeSection() {
@@ -10,12 +11,12 @@ export default function WeddingTreeSection() {
   const couple = {
     bride: {
       name: 'Jordyn Porada',
-      image: '/images/tree/jordyn.jpg',
+      image: '/images/couple/495660452_23961794676737340_6440789571967380360_n.jpg',
       role: 'Bride',
     },
     groom: {
       name: 'Austin Porada',
-      image: '/images/tree/austin.jpg',
+      image: '/images/couple/496093297_9839735762736111_2592755804783153377_n.jpg',
       role: 'Groom',
     },
   };
@@ -25,50 +26,56 @@ export default function WeddingTreeSection() {
     {
       id: 'mom-jordyn',
       name: "Jordyn's Mother",
-      fullName: 'Jane Doe',
-      image: '/images/tree/parent-mom-jordyn.jpg',
-      videoUrl: '/videos/parents/mom-jordyn-message.mp4',
-      role: "Mother of the Bride",
+      fullName: 'Heather',
+      image: '/images/parents/heather.webp',
+      videoUrl: '/videos/parent-messages/heather_video_combined.mp4',
+      role: 'Mother of the Bride',
     },
     {
       id: 'dad-jordyn',
       name: "Jordyn's Father",
-      fullName: 'John Doe',
-      image: '/images/tree/parent-dad-jordyn.jpg',
-      videoUrl: '/videos/parents/dad-jordyn-message.mp4',
-      role: "Father of the Bride",
+      fullName: 'Melony',
+      image: '/images/parents/melony.webp',
+      videoUrl: '/videos/parent-messages/melony_video_combined.mp4',
+      role: 'Father of the Bride',
     },
     {
       id: 'mom-austin',
       name: "Austin's Mother",
-      fullName: 'Mary Porada',
-      image: '/images/tree/parent-mom-austin.jpg',
-      videoUrl: '/videos/parents/mom-austin-message.mp4',
-      role: "Mother of the Groom",
+      fullName: 'Christine Porada',
+      image: '/images/parents/christine.webp',
+      videoUrl: '/videos/parent-messages/christine_video_combined.mp4',
+      role: 'Mother of the Groom',
     },
     {
       id: 'dad-austin',
       name: "Austin's Father",
-      fullName: 'Mike Porada',
-      image: '/images/tree/parent-dad-austin.jpg',
-      videoUrl: '/videos/parents/dad-austin-message.mp4',
-      role: "Father of the Groom",
+      fullName: 'Jerame Porada',
+      image: '/images/parents/jerame.webp',
+      videoUrl: '/videos/parent-messages/jerame_video_combined.mp4',
+      role: 'Father of the Groom',
     },
   ];
 
   // Wedding party data
   const weddingParty = {
     bridesmaids: [
-      { name: 'Sarah Johnson', image: '/images/tree/bridesmaid-1.jpg', role: 'Maid of Honor' },
-      { name: 'Emily Davis', image: '/images/tree/bridesmaid-2.jpg', role: 'Bridesmaid' },
-      { name: 'Rachel Smith', image: '/images/tree/bridesmaid-3.jpg', role: 'Bridesmaid' },
-      { name: 'Lisa Brown', image: '/images/tree/bridesmaid-4.jpg', role: 'Bridesmaid' },
+      { name: 'Hannah Porada', image: '/images/wedding-party/bridesmaids/hannah-porada.webp', role: 'Maid of Honor' },
+      { name: 'Brinnah Porada', image: '/images/wedding-party/bridesmaids/brinnah-porada.webp', role: 'Bridesmaid' },
+      { name: 'Caitie Helsel', image: '/images/wedding-party/bridesmaids/caitie-helsel.webp', role: 'Bridesmaid' },
+      { name: 'Emily Aurandt', image: '/images/wedding-party/bridesmaids/emily-aurandt.webp', role: 'Bridesmaid' },
+      { name: 'Lexi Ferg', image: '/images/wedding-party/bridesmaids/lexi-ferg.webp', role: 'Bridesmaid' },
+      { name: 'Maria McCray', image: '/images/wedding-party/bridesmaids/maria-mccray.webp', role: 'Bridesmaid' },
+      { name: 'Mic', image: '/images/wedding-party/bridesmaids/mic.webp', role: 'Bridesmaid' },
     ],
     groomsmen: [
-      { name: 'James Wilson', image: '/images/tree/groomsman-1.jpg', role: 'Best Man' },
-      { name: 'Michael Taylor', image: '/images/tree/groomsman-2.jpg', role: 'Groomsman' },
-      { name: 'David Anderson', image: '/images/tree/groomsman-3.jpg', role: 'Groomsman' },
-      { name: 'Chris Martinez', image: '/images/tree/groomsman-4.jpg', role: 'Groomsman' },
+      { name: 'Ian Porada', image: '/images/wedding-party/groomsmen/ian-porada.webp', role: 'Best Man' },
+      { name: 'Alex Molnar', image: '/images/wedding-party/groomsmen/alex-molnar.webp', role: 'Groomsman' },
+      { name: 'Brosonan McCray', image: '/images/wedding-party/groomsmen/brosonan-mccray.webp', role: 'Groomsman' },
+      { name: 'Ean Pringle', image: '/images/wedding-party/groomsmen/ean-pringle.webp', role: 'Groomsman' },
+      { name: 'Eddie Migut', image: '/images/wedding-party/groomsmen/eddie-migut.webp', role: 'Groomsman' },
+      { name: 'Nate Berkebile', image: '/images/wedding-party/groomsmen/nate-berkebile.webp', role: 'Groomsman' },
+      { name: 'Tyler Sharpe', image: '/images/wedding-party/groomsmen/tyler-sharpe.webp', role: 'Groomsman' },
     ],
   };
 
@@ -126,9 +133,7 @@ export default function WeddingTreeSection() {
         {/* 4a. The Couple */}
         <SectionTransition>
           <div className="mb-20">
-            <h3 className="text-3xl font-display text-center text-gradient-sage mb-12">
-              💑 Us
-            </h3>
+            <h3 className="text-3xl font-display text-center text-gradient-sage mb-12">💑 Us</h3>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
               {/* Groom */}
               <div className="relative group">
@@ -177,7 +182,7 @@ export default function WeddingTreeSection() {
             <p className="text-center text-charcoal/70 mb-12 max-w-2xl mx-auto">
               Click on any parent to watch their special video message
             </p>
-            
+
             {/* Unified Parents Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
               {parents.map((parent) => (
@@ -188,17 +193,16 @@ export default function WeddingTreeSection() {
                 >
                   {/* Photo with Video Play Icon */}
                   <div className="relative w-full aspect-square rounded-2xl overflow-hidden ring-2 ring-gold-200 shadow-xl transform transition-all duration-500 hover:scale-105 hover:ring-4 hover:ring-gold-400 hover:shadow-2xl">
-                    <Image
-                      src={parent.image}
-                      alt={parent.fullName}
-                      fill
-                      className="object-cover"
-                    />
-                    
+                    <Image src={parent.image} alt={parent.fullName} fill className="object-cover" />
+
                     {/* Play Button Overlay */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                       <div className="bg-white/90 backdrop-blur-sm rounded-full p-4 transform scale-75 group-hover:scale-100 transition-transform duration-300">
-                        <svg className="w-8 h-8 text-gold-600" fill="currentColor" viewBox="0 0 20 20">
+                        <svg
+                          className="w-8 h-8 text-gold-600"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
                           <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
                         </svg>
                       </div>
@@ -213,7 +217,9 @@ export default function WeddingTreeSection() {
 
                   {/* Name and Role */}
                   <div className="mt-4 text-center">
-                    <p className="font-semibold text-charcoal text-sm md:text-base">{parent.fullName}</p>
+                    <p className="font-semibold text-charcoal text-sm md:text-base">
+                      {parent.fullName}
+                    </p>
                     <p className="text-gold-600 text-xs md:text-sm">{parent.role}</p>
                   </div>
                 </div>
@@ -228,21 +234,18 @@ export default function WeddingTreeSection() {
             <h3 className="text-3xl font-display text-center text-gradient-sage mb-12">
               👰🤵 Our Wedding Party
             </h3>
-            
+
             <div className="grid md:grid-cols-2 gap-12">
               {/* Bridesmaids */}
               <div>
-                <h4 className="text-2xl font-display text-blush-600 text-center mb-6">Bridesmaids</h4>
+                <h4 className="text-2xl font-display text-blush-600 text-center mb-6">
+                  Bridesmaids
+                </h4>
                 <div className="grid grid-cols-2 gap-4">
                   {weddingParty.bridesmaids.map((person, index) => (
                     <div key={index} className="text-center group">
                       <div className="relative w-full aspect-square rounded-xl overflow-hidden ring-2 ring-blush-200 shadow-lg transform transition-all duration-300 hover:scale-105 hover:ring-blush-400">
-                        <Image
-                          src={person.image}
-                          alt={person.name}
-                          fill
-                          className="object-cover"
-                        />
+                        <Image src={person.image} alt={person.name} fill className="object-cover" />
                       </div>
                       <div className="mt-3">
                         <p className="font-semibold text-charcoal text-sm">{person.name}</p>
@@ -260,12 +263,7 @@ export default function WeddingTreeSection() {
                   {weddingParty.groomsmen.map((person, index) => (
                     <div key={index} className="text-center group">
                       <div className="relative w-full aspect-square rounded-xl overflow-hidden ring-2 ring-sage-200 shadow-lg transform transition-all duration-300 hover:scale-105 hover:ring-sage-400">
-                        <Image
-                          src={person.image}
-                          alt={person.name}
-                          fill
-                          className="object-cover"
-                        />
+                        <Image src={person.image} alt={person.name} fill className="object-cover" />
                       </div>
                       <div className="mt-3">
                         <p className="font-semibold text-charcoal text-sm">{person.name}</p>
@@ -297,9 +295,7 @@ export default function WeddingTreeSection() {
           <div className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
             {/* Video Title */}
             <div className="text-center mb-6">
-              <h3 className="text-3xl font-display text-white mb-2">
-                {activeVideo.fullName}
-              </h3>
+              <h3 className="text-3xl font-display text-white mb-2">{activeVideo.fullName}</h3>
               <p className="text-gold-300 text-lg">{activeVideo.role}</p>
             </div>
 

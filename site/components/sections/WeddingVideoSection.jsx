@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import SectionTransition from '../SectionTransition';
 import YouTubePlayer from '../YouTubePlayer';
 
@@ -12,8 +13,18 @@ export default function WeddingVideoSection() {
   // Wedding video chapters with precise timestamps
   const weddingChapters = [
     { title: 'Our Story Begins', time: 0, description: 'Welcome to our special day', icon: '🎬' },
-    { title: 'Bachelor+ette Weekend', time: 44.64, description: 'Pre-wedding celebrations', icon: '🎉' },
-    { title: '"Who Is It" Gameshow', time: 300.44, description: 'Fun and games with guests', icon: '🎮' },
+    {
+      title: 'Bachelor+ette Weekend',
+      time: 44.64,
+      description: 'Pre-wedding celebrations',
+      icon: '🎉',
+    },
+    {
+      title: '"Who Is It" Gameshow',
+      time: 300.44,
+      description: 'Fun and games with guests',
+      icon: '🎮',
+    },
     {
       title: 'Wedding Party Speeches',
       time: 863.36,
@@ -23,7 +34,12 @@ export default function WeddingVideoSection() {
     { title: 'Our Vows', time: 1211, description: 'We promise forever', icon: '💍' },
     { title: 'The Ceremony', time: 1537.88, description: 'We tie the knot', icon: '💒' },
     { title: 'The Reception', time: 1688.92, description: 'Celebration begins', icon: '🍾' },
-    { title: 'First Dance', time: 1814.88, description: 'Our first dance as husband and wife', icon: '💃' },
+    {
+      title: 'First Dance',
+      time: 1814.88,
+      description: 'Our first dance as husband and wife',
+      icon: '💃',
+    },
     {
       title: 'Behind The Scenes',
       time: 2165.28,
@@ -118,13 +134,18 @@ export default function WeddingVideoSection() {
                   `}
                 >
                   <div className="text-3xl mb-2">{chapter.icon}</div>
-                  <div className={`text-sm font-semibold mb-1 ${activeChapter?.title === chapter.title ? 'text-white' : 'text-charcoal'}`}>
+                  <div
+                    className={`text-sm font-semibold mb-1 ${activeChapter?.title === chapter.title ? 'text-white' : 'text-charcoal'}`}
+                  >
                     {chapter.title}
                   </div>
-                  <div className={`text-xs ${activeChapter?.title === chapter.title ? 'text-white/80' : 'text-charcoal/60'}`}>
-                    {Math.floor(chapter.time / 60)}:{String(Math.floor(chapter.time % 60)).padStart(2, '0')}
+                  <div
+                    className={`text-xs ${activeChapter?.title === chapter.title ? 'text-white/80' : 'text-charcoal/60'}`}
+                  >
+                    {Math.floor(chapter.time / 60)}:
+                    {String(Math.floor(chapter.time % 60)).padStart(2, '0')}
                   </div>
-                  
+
                   {/* Play icon overlay on hover */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/10 rounded-xl">
                     <svg className="w-8 h-8 text-gold-600" fill="currentColor" viewBox="0 0 20 20">

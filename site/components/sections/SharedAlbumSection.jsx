@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import Image from 'next/image';
+import { useState } from 'react';
+
 import SectionTransition from '../SectionTransition';
 
 /**
@@ -131,15 +132,14 @@ export default function SharedAlbumSection() {
           <div className="card-elegant p-8 max-w-3xl mx-auto mb-12">
             <div className="text-center mb-6">
               <div className="text-5xl mb-4">☁️</div>
-              <h3 className="text-2xl font-display text-gradient-sage mb-2">
-                Share Your Memories
-              </h3>
+              <h3 className="text-2xl font-display text-gradient-sage mb-2">Share Your Memories</h3>
               <p className="text-charcoal/70">Upload photos or videos (max 50MB per file)</p>
             </div>
 
             {/* Upload Button */}
             <label
               htmlFor="file-upload"
+              aria-label="Upload photos or videos"
               className="group relative block cursor-pointer overflow-hidden"
             >
               <div
@@ -302,7 +302,12 @@ export default function SharedAlbumSection() {
               aria-label="Previous"
             >
               <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
 
@@ -316,7 +321,12 @@ export default function SharedAlbumSection() {
               aria-label="Next"
             >
               <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
 

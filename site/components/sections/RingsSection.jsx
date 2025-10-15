@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import Image from 'next/image';
+import { useState } from 'react';
+
 import SectionTransition from '../SectionTransition';
 
 export default function RingsSection() {
@@ -7,19 +8,19 @@ export default function RingsSection() {
 
   const ringImages = {
     both: {
-      src: '/images/rings/both-rings.jpg',
+      src: '/images/rings/jordyns_ring1.webp',
       alt: 'Austin and Jordyn wedding rings together',
       title: 'Our Rings Together',
       description: 'Two rings, one love, forever united',
     },
     bride: {
-      src: '/images/rings/bride-ring.jpg',
+      src: '/images/rings/jordyns_ring_2.webp',
       alt: "Jordyn's engagement and wedding rings",
       title: "Jordyn's Rings",
       description: 'A symbol of eternal love and commitment',
     },
     groom: {
-      src: '/images/rings/groom-ring.jpg',
+      src: '/images/rings/austins_ring1.webp',
       alt: "Austin's wedding band",
       title: "Austin's Ring",
       description: 'Strength, unity, and forever',
@@ -85,7 +86,7 @@ export default function RingsSection() {
           <div className="card-elegant p-8 md:p-12 overflow-hidden">
             <div className="relative aspect-[4/3] md:aspect-[16/9] max-w-4xl mx-auto">
               {/* Ring Image with Parallax Effect */}
-              <div 
+              <div
                 className="relative w-full h-full transform transition-all duration-700 ease-out"
                 style={{
                   transform: 'perspective(1000px) rotateX(2deg)',
@@ -99,7 +100,7 @@ export default function RingsSection() {
                   priority
                   quality={95}
                 />
-                
+
                 {/* Shine Effect Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
               </div>
@@ -138,9 +139,7 @@ export default function RingsSection() {
               <div className="text-center p-6 bg-gradient-to-br from-ivory to-sage-50 rounded-2xl">
                 <div className="text-3xl mb-2">♾️</div>
                 <h4 className="font-semibold text-charcoal mb-2">Eternal Promise</h4>
-                <p className="text-sm text-charcoal/70">
-                  Symbols of our unbreakable bond
-                </p>
+                <p className="text-sm text-charcoal/70">Symbols of our unbreakable bond</p>
               </div>
             </div>
           </div>
