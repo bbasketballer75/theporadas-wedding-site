@@ -104,7 +104,6 @@ export function rateLimitAndCache(handler, options = {}) {
     const { rate = {}, cache = {} } = options;
 
     // Import cache middleware dynamically to avoid circular dependency
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { cacheMiddleware } = require('./apiCache');
 
     // Apply rate limit first, then cache

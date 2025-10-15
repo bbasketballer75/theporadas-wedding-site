@@ -231,6 +231,7 @@ export default tseslint.config(
       'scripts/**/*.js',
       'site/scripts/**/*.js',
       'site/tests/**/*.js',
+      'site/lib/**/*.js',
       'site/playwright.config.js',
       'firebase/**',
     ],
