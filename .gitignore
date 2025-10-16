@@ -298,7 +298,17 @@ node_modules
 # LARGE MEDIA FILES
 # ============================================================================
 # Video files too large for GitHub (>100MB limit)
-FINAL WEDDING MEDIA/videos/*.mp4
-FINAL WEDDING MEDIA/parents/parent_videos/*.mp4
+# Use Firebase Storage, Vercel Blob, or CDN for video delivery
+media/wedding/final-media/videos/*.mp4
+media/wedding/final-media/parents/parent_videos/*.mp4
 site/public/videos/*.mp4
-!site/public/videos/*.vtt  # Keep VTT chapter files
+!site/public/videos/*.vtt  # Keep VTT chapter files for video chapters
+
+# Large movie/video formats - use cloud storage
+*.mov
+*.mkv
+
+# Reference: Large media files should be stored via:
+# - Firebase Storage (https://firebase.google.com/docs/storage)
+# - Vercel Blob (https://vercel.com/docs/storage/vercel-blob)
+# - CDN (CloudFront, Cloudflare, etc.)
