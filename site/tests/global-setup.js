@@ -9,10 +9,10 @@ import http from 'http';
 
 // Helper to check if Firebase emulator is running
 async function isFirebaseEmulatorRunning() {
-  return new Promise((resolve) => {
-    const req = http.get('http://localhost:8002', () => {
-      resolve(true);
-    });        req.on('error', () => {
+    return new Promise((resolve) => {
+        const req = http.get('http://localhost:8002', () => {
+            resolve(true);
+        }); req.on('error', () => {
             resolve(false);
         });
 

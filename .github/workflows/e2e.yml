@@ -192,7 +192,7 @@ jobs:
             site/playwright-report/
           retention-days: 30
 
-  # Phase 4: Firebase Emulator Integration Tests (21 tests: guestbook + photo upload + gallery)
+  # Phase 4: Firebase Emulator Integration Tests (110+ tests: guestbook + photo upload + gallery + performance + security)
   test-integration:
     name: Integration Tests (Firebase Emulator)
     runs-on: windows-latest
@@ -246,22 +246,12 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools@latest
 
-      - name: Verify Java installation
-        run: java -version
-
-      - name: Start Firebase Emulators
-        run: |
-          firebase emulators:start --project demo-test &
-          echo "Waiting 15 seconds for emulators to start..."
-          Start-Sleep -Seconds 15
-        shell: pwsh
-
-      - name: Verify Emulators Running
-        run: |
-          curl -f http://localhost:8002 || echo "Firestore emulator not ready"
-          curl -f http://localhost:9199 || echo "Storage emulator not ready"
-        shell: pwsh
-        continue-on-error: true
+      # NOTE: Firebase emulator startup is now automated via Playwright's globalSetup hook
+      # in site/tests/global-setup.js. The following steps are not needed:
+      # - Manual: firebase emulators:start command
+      # - Manual: sleep/polling for emulator ready
+      # - Manual: health check verification
+      # Instead, globalSetup automatically starts the emulator before tests (120 retries × 500ms)
 
       - name: Run Firebase Emulator Integration Tests
         run: |
@@ -269,7 +259,7 @@ jobs:
           npm run test:emulator
         timeout-minutes: 10
 
-      - name: Stop Firebase Emulators
+      - name: Stop Firebase Emulators (Cleanup)
         if: always()
         run: |
           Stop-Process -Name "java" -Force -ErrorAction SilentlyContinue
