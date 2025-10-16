@@ -1,9 +1,11 @@
 {
   "recommendations": [
     // === CORE DEVELOPMENT ===
+    "ms-python.pylance",
+    "ms-python.python",
+    "ms-vscode.vscode-typescript-next",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "ms-vscode.vscode-typescript-next",
 
     // === REACT & NEXT.JS ===
     "dsznajder.es7-react-js-snippets",
