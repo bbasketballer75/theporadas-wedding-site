@@ -12,6 +12,7 @@
  */
 
 const { test, expect } = require('@playwright/test');
+const { initializeApp } = require('firebase/app');
 const {
     getFirestore,
     collection,
@@ -32,10 +33,9 @@ const {
     uploadBytes,
     getDownloadURL
 } = require('firebase/storage');
-const { initializeApp } = require('firebase/app');
+
 const {
-    clearCollection,
-    waitForEmulators,
+    ensureEmulatorsRunning,
     clearAllTestData
 } = require('../helpers/firebase-emulator');
 
@@ -63,7 +63,10 @@ test.describe('Performance Integration (Firebase Emulator)', () => {
         connectFirestoreEmulator(db, 'localhost', 8002);
         connectStorageEmulator(storage, 'localhost', 9199);
 
-        await waitForEmulators();
+        // Skip if emulators not running
+        if (!(await ensureEmulatorsRunning())) {
+            test.skip();
+        }
     });
 
     test.beforeEach(async () => {

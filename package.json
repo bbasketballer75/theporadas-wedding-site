@@ -24,6 +24,9 @@
     "format:fix": "prettier --write \"{site,functions}/**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\" --ignore-unknown",
     "setup:dev": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/setup-dev.ps1",
     "test": "cd site && npm run test:e2e",
+    "test:emulator": "cd site && npm run test:e2e -- --project=integration",
+    "emulator:start": "firebase emulators:start --project demo-test",
+    "emulator:stop": "pwsh -NoProfile -ExecutionPolicy Bypass -Command \"Stop-Process -Name java -Force -ErrorAction SilentlyContinue; Write-Host '✅ Firebase emulator stopped'\"",
     "deploy": "firebase deploy",
     "deploy:hosting": "firebase deploy --only hosting",
     "deploy:functions": "firebase deploy --only functions"

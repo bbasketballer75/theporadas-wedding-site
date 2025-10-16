@@ -1,0 +1,201 @@
+
+> theporadas-site@0.0.1 test:features
+> playwright test --project=features
+
+
+Running 35 tests using 2 workers
+
+Γ£à Guestbook page structure validated
+Γ£à Form fields validated (relationship field: optional)
+  Γ£ô   2 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:9:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ guestbook page loads with correct structure (1.8s)
+  Γ£ô   1 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:25:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ form contains all required fields (1.8s)
+Γä╣∩╕Å  Loading indicator may have loaded too fast to detect
+  Γ£ô   3 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:47:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ loading spinner appears while fetching messages (1.5s)
+Γ£à Empty name validation working
+  Γ£ô   5 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:84:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ prevents submission with empty name (1.8s)
+Γ£à Messages area validated (has messages)
+  Γ£ô   4 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:65:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ messages display area is present (4.3s)
+Γ£à Empty message validation working
+  Γ£ô   6 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:112:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ prevents submission with empty message (1.5s)
+Γ£à Long message handling: accepted
+  Γ£ô   8 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:184:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ handles long messages correctly (8.3s)
+Γ£à Valid form submission accepted
+  Γ£ô   7 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:138:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ accepts valid form submission (10.4s)
+Γ£à Messages display correctly (4 messages found)
+  Γ£ô  10 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:246:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ messages display with correct information (6.3s)
+Γ£à Special characters handled safely
+  Γ£ô   9 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:211:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ handles special characters in message (8.5s)
+Γ£à Message ordering validated (4 messages)
+  Γ£ô  11 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:273:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ messages are ordered correctly (6.4s)
+Γä╣∩╕Å  No message count indicator found (optional feature)
+  Γ£ô  12 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:294:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ message count/stats display correctly (6.1s)
+Γ£à Submit button shows loading state (disabled: true, text changed: true)
+  Γ£ô  13 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:312:5 ΓÇ║ Guestbook - User Experience ΓÇ║ submit button shows loading state during submission (6.1s)
+Γä╣∩╕Å  Relationship field not present (optional)
+  Γ£ô  15 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:374:5 ΓÇ║ Guestbook - User Experience ΓÇ║ relationship field allows custom input (1.4s)
+Γ£à Success message displayed
+  Γ£ô  14 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:345:5 ΓÇ║ Guestbook - User Experience ΓÇ║ success message appears after submission (7.6s)
+Γ£à Upload section rendered and visible
+Γ£à File upload input exists: true
+Γ£à Upload page structure validated
+  Γ£ô  17 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:11:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ upload page loads with correct structure (1.7s)
+Γ£à Guestbook is mobile responsive
+  Γ£ô  16 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:400:5 ΓÇ║ Guestbook - User Experience ΓÇ║ page is responsive on mobile viewport (2.9s)
+File input accepts: image/*,video/*
+Γ£à File input is accessible
+  Γ£ô  18 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:40:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ file input is present and accessible (1.5s)
+Γä╣∩╕Å  Footer not visible (acceptable on SPA)
+  Γ£ô  19 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:57:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ navigation and footer are present (1.5s)
+Γ£à Image file selected successfully
+≡ƒôì Found 0 file input(s)
+ΓÜá∩╕Å File input not found - test may need adjustment
+  Γ£ô  20 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:78:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ can select a valid image file (2.4s)
+  Γ£ô  21 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:101:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ shows guest name prompt for first upload (1.9s)
+Γ£à File cancellation handled gracefully
+  Γ£ô  23 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:172:9 ΓÇ║ Photo Upload - Validation ΓÇ║ handles file selection cancellation (2.1s)
+Γ£à File input state resets on navigation
+  Γ£ô  22 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:148:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ file input clears after navigation (2.9s)
+Γ£à File size limit information present
+Γ£à Upload button present and functional
+  Γ£ô  24 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:192:9 ΓÇ║ Photo Upload - Validation ΓÇ║ upload button is present (1.9s)
+Γ£à Valid file accepted without errors
+  Γ£ô  25 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:211:9 ΓÇ║ Photo Upload - Validation ΓÇ║ displays file size information or limits (2.4s)
+Γ£à Upload page is mobile responsive
+  Γ£ô  26 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:243:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ page is mobile responsive (1.4s)
+Γ£à Success messaging capability present
+  Γ£ô  27 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:263:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ success message area is present (1.1s)
+Γ£à Page metadata present: Celebrating the wedding of Austin & Jordyn Porada - May 10, 2025. View photos, videos, leave messages, and relive our special day!
+  Γ£ô  28 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:281:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ page has appropriate metadata (1.5s)
+Γ£à File input has accessibility labels
+  Γ£ô  29 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:292:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ file input has proper accessibility attributes (1.6s)
+Γ£à Handles rapid file selections without crashing
+  Γ£ô  30 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:316:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ handles multiple rapid file selections (1.9s)
+Γ£à State maintained during window resize
+  Γ£ô  31 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:335:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ maintains state during window resize (2.0s)
+Γä╣∩╕Å Direct gallery-to-upload navigation not found (may use nav menu)
+  Γ£ô  33 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:381:9 ΓÇ║ Photo Upload - Integration ΓÇ║ can navigate to upload page from gallery (800ms)
+≡ƒôï ALL console errors detected: [
+  [32m'Failed to load resource: the server responded with a status of 404 (Not Found)'[39m,
+  [32m'Failed to load resource: the server responded with a status of 404 (Not Found)'[39m
+]
+Γ£à No critical console errors
+  Γ£ô  34 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:398:9 ΓÇ║ Photo Upload - Integration ΓÇ║ page loads without console errors (1.1s)
+Γ£à Upload form positioned correctly below navigation
+  Γ£ô  35 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:432:9 ΓÇ║ Photo Upload - Integration ΓÇ║ upload component integrates with page layout (1.5s)
+  Γ£ÿ  32 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection (16.9s)
+  Γ£ÿ  36 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection (retry #1) (17.6s)
+  Γ£ÿ  37 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection (retry #2) (16.8s)
+
+
+  1) [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection 
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/gallery/[39m
+    Received string:  [31m"http://localhost:3000/#gallery"[39m
+    Timeout: 15000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 15000ms[22m
+    [2m    18 ├ù unexpected value "http://localhost:3000/#gallery"[22m
+
+
+      368 |
+      369 |         // Should navigate without errors
+    > 370 |         await expect(page).toHaveURL(/\/gallery/);
+          |                            ^
+      371 |
+      372 |         // Navigate back
+      373 |         await page.goto('/#upload');
+        at F:\wedding-website\site\tests\e2e\features\photo-upload.spec.js:370:28
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    attachment #2: video (video/webm) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features\video.webm
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features\error-context.md
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/gallery/[39m
+    Received string:  [31m"http://localhost:3000/#gallery"[39m
+    Timeout: 15000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 15000ms[22m
+    [2m    18 ├ù unexpected value "http://localhost:3000/#gallery"[22m
+
+
+      368 |
+      369 |         // Should navigate without errors
+    > 370 |         await expect(page).toHaveURL(/\/gallery/);
+          |                            ^
+      371 |
+      372 |         // Navigate back
+      373 |         await page.goto('/#upload');
+        at F:\wedding-website\site\tests\e2e\features\photo-upload.spec.js:370:28
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features-retry1\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    attachment #2: video (video/webm) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features-retry1\video.webm
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features-retry1\error-context.md
+
+    attachment #4: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Retry #2 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveURL[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/\/gallery/[39m
+    Received string:  [31m"http://localhost:3000/#gallery"[39m
+    Timeout: 15000ms
+
+    Call log:
+    [2m  - Expect "toHaveURL" with timeout 15000ms[22m
+    [2m    18 ├ù unexpected value "http://localhost:3000/#gallery"[22m
+
+
+      368 |
+      369 |         // Should navigate without errors
+    > 370 |         await expect(page).toHaveURL(/\/gallery/);
+          |                            ^
+      371 |
+      372 |         // Navigate back
+      373 |         await page.goto('/#upload');
+        at F:\wedding-website\site\tests\e2e\features\photo-upload.spec.js:370:28
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features-retry2\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    attachment #2: video (video/webm) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features-retry2\video.webm
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-features-retry2\error-context.md
+
+  1 failed
+    [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection 
+  34 passed (1.9m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

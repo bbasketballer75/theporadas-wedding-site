@@ -1,0 +1,58 @@
+
+> theporadas-site@0.0.1 test:integration
+> playwright test tests/integration
+
+
+Running 34 tests using 2 workers
+
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   1 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:47:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Display all photos in gallery
+  -   2 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:197:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by date range
+  -   3 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:78:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by uploader
+  -   4 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:238:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Handle empty gallery gracefully
+  -   5 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:114:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Sort photos by upload date (newest first)
+  -   6 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:250:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Search photos by caption
+  -   7 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:150:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Paginate gallery results (limit and startAfter)
+  -   8 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:288:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Get photo count for gallery stats
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   9 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:47:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Direct Firestore write creates document successfully
+  -  10 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:168:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Browser page can read from emulator Firestore
+  -  11 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:64:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Realtime listener receives updates immediately
+  -  12 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:190:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Stress test: 50 rapid writes
+  -  13 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:112:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Multiple messages sync in correct order
+  -  14 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:216:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Listener persists across rapid updates
+  -  15 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:146:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Concurrent writes from multiple sources
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -  17 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:82:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Gallery performance with 1000+ photos
+  -  16 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:246:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Concurrent uploads performance (10 simultaneous)
+  -  18 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:188:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Guestbook performance with 500+ messages
+  -  19 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:291:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Query performance with complex filters
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -  21 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:82:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload small image file to Storage emulator
+  -  22 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:114:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Store photo metadata in Firestore after upload
+  -  23 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:150:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload multiple files and verify all stored
+  -  20 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:190:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Query photos by upload time
+  -  24 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:231:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Handle invalid file upload gracefully
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -  25 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:80:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Test collections allow read/write in emulator
+  -  27 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:111:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: wedding_photos collection allows read/write in test environment
+  -  28 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:143:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: guestbook_messages collection enforces rules
+  -  29 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:167:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: test-uploads path allows read/write in emulator
+  -  30 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:182:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Validate required fields in wedding_photos
+  -  26 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:201:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Query performance with security rules
+  -  31 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:233:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: Multiple file operations with security rules
+  -  32 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:259:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Batch operations with security rules
+  -  33 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:287:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Real-time listener with security rules
+  -  34 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:319:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: File size validation (emulator allows all sizes)
+
+  34 skipped
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

@@ -3,8 +3,8 @@
  * Utilities for integration testing with Firebase emulators
  */
 
-const { getFirestore, connectFirestoreEmulator, collection, addDoc, serverTimestamp, getDocs, query, orderBy, onSnapshot, deleteDoc, doc, writeBatch } = require('firebase/firestore');
 const { initializeApp, getApps } = require('firebase/app');
+const { getFirestore, connectFirestoreEmulator, collection, addDoc, serverTimestamp, getDocs, query, orderBy, onSnapshot, doc, writeBatch } = require('firebase/firestore');
 
 // Emulator configuration
 const EMULATOR_CONFIG = {
@@ -222,16 +222,16 @@ async function waitForMessageCount(expectedCount, timeout = 5000) {
 }
 
 /**
- * Check if Firebase emulators are running
- * @returns {Promise<boolean>} True if emulators are running
+ * Check if Firebase emulator is running
+ * @returns {Promise<boolean>} True if emulator is running
  */
 async function checkEmulatorsRunning() {
     try {
         const response = await fetch(
             `http://${EMULATOR_CONFIG.firestore.host}:${EMULATOR_CONFIG.firestore.port}`
         );
-        return response.ok;
-    } catch (error) {
+        return response.ok || response.status === 404; // 404 is OK for emulator health check
+    } catch {
         return false;
     }
 }
@@ -272,14 +272,35 @@ async function clearAllTestData() {
             const count = await clearCollection(collectionName);
             results[collectionName] = count;
             totalDeleted += count;
-        } catch (error) {
-            console.error(`❌ Error clearing ${collectionName}:`, error.message);
-            results[collectionName] = { error: error.message };
+        } catch {
+            console.error(`❌ Error clearing ${collectionName}`);
+            results[collectionName] = { error: 'Failed to clear' };
         }
     }
 
     console.log(`✅ Cleanup complete: ${totalDeleted} total documents deleted`);
     return results;
+}
+
+/**
+ * Check if emulators are running (for use in test setup)
+ * @returns {Promise<boolean>} True if emulators are running, false otherwise
+ */
+async function ensureEmulatorsRunning() {
+    if (!(await checkEmulatorsRunning())) {
+        console.log('⏳ Firebase emulators not running. Waiting...');
+
+        // Wait up to 30 seconds for emulators to start
+        try {
+            await waitForEmulators(30000);
+            console.log('✅ Firebase emulators are now running');
+            return true;
+        } catch {
+            console.log('⏭️  Firebase emulators not running - tests will be skipped');
+            return false;
+        }
+    }
+    return true;
 }
 
 module.exports = {
@@ -294,4 +315,5 @@ module.exports = {
     waitForMessageCount,
     checkEmulatorsRunning,
     waitForEmulators,
+    ensureEmulatorsRunning,
 };

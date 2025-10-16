@@ -11,23 +11,27 @@
  */
 
 const { test, expect } = require('@playwright/test');
+const { initializeApp, getApps } = require('firebase/app');
+const { collection, addDoc, getDocs, query, where } = require('firebase/firestore');
+const { getStorage, ref, uploadBytes, getDownloadURL, deleteObject, listAll } = require('firebase/storage');
+
 const {
     getTestFirestore,
     clearCollection,
     clearAllTestData,
-    waitForEmulators,
+    ensureEmulatorsRunning,
 } = require('../helpers/firebase-emulator');
-const { getStorage, ref, uploadBytes, getDownloadURL, deleteObject, listAll } = require('firebase/storage');
-const { collection, addDoc, getDocs, query, where } = require('firebase/firestore');
-const { initializeApp, getApps } = require('firebase/app');
+
 
 test.describe('Photo Upload Integration (Firebase Emulator)', () => {
     let storage;
     let db;
 
     test.beforeAll(async () => {
-        // Ensure emulators are running
-        await waitForEmulators();
+        // Skip if emulators not running
+        if (!(await ensureEmulatorsRunning())) {
+            test.skip();
+        }
 
         // Initialize storage
         const existingApps = getApps();
@@ -70,7 +74,7 @@ test.describe('Photo Upload Integration (Firebase Emulator)', () => {
                 await deleteObject(itemRef);
             }
             console.log('✅ Cleaned up test uploads from Storage');
-        } catch (error) {
+        } catch {
             // Folder doesn't exist, that's fine
         }
 

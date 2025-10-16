@@ -1,0 +1,431 @@
+
+> theporadas-site@0.0.1 test
+> playwright test
+
+
+Running 132 tests using 2 workers
+
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à NO critical console errors on homepage (3 total, 3 filtered)
+
+ΓÜá∩╕Å  Collected 3 total errors (0 critical):
+
+Γä╣∩╕Å  Collected 2 console warnings during test
+  Γ£ô    2 [critical-dev] ΓÇ║ tests\e2e\critical\console-monitoring.spec.js:93:5 ΓÇ║ Console Error Monitoring (CRITICAL) ΓÇ║ Homepage has NO critical console errors (6.2s)
+Γ£à All dev overlays dismissed
+Γ£à NO critical console errors on guestbook page (3 total, 3 filtered)
+
+ΓÜá∩╕Å  Collected 3 total errors (0 critical):
+
+Γä╣∩╕Å  Collected 27 console warnings during test
+  Γ£ô    1 [critical-dev] ΓÇ║ tests\e2e\critical\console-monitoring.spec.js:113:5 ΓÇ║ Console Error Monitoring (CRITICAL) ΓÇ║ Guestbook page has NO critical console errors (11.5s)
+Γ£à NO critical console errors on gallery page (4 total, 4 filtered)
+
+ΓÜá∩╕Å  Collected 4 total errors (0 critical):
+
+Γä╣∩╕Å  Collected 3 console warnings during test
+  Γ£ô    3 [critical-dev] ΓÇ║ tests\e2e\critical\console-monitoring.spec.js:135:5 ΓÇ║ Console Error Monitoring (CRITICAL) ΓÇ║ Gallery page has NO critical console errors (5.9s)
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à NO critical console errors on map page (2 total, 2 filtered)
+
+ΓÜá∩╕Å  Collected 2 total errors (0 critical):
+
+Γä╣∩╕Å  Collected 27 console warnings during test
+  Γ£ô    4 [critical-dev] ΓÇ║ tests\e2e\critical\console-monitoring.spec.js:153:5 ΓÇ║ Console Error Monitoring (CRITICAL) ΓÇ║ Map page has NO critical console errors (6.1s)
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à NO uncaught JavaScript errors across site
+
+ΓÜá∩╕Å  Collected 11 total errors (0 critical):
+
+Γä╣∩╕Å  Collected 54 console warnings during test
+  Γ£ô    6 [critical-dev] ΓÇ║ tests\e2e\critical\console-monitoring.spec.js:204:5 ΓÇ║ Console Error Monitoring (CRITICAL) ΓÇ║ NO uncaught JavaScript errors across site (13.9s)
+Γ£à All dev overlays dismissed
+Γ£à NO critical CSP errors detected across entire site (0 acceptable CSP messages filtered)
+
+ΓÜá∩╕Å  Collected 9 total errors (0 critical):
+
+Γä╣∩╕Å  Collected 34 console warnings during test
+  Γ£ô    5 [critical-dev] ΓÇ║ tests\e2e\critical\console-monitoring.spec.js:171:5 ΓÇ║ Console Error Monitoring (CRITICAL) ΓÇ║ NO CSP-related console errors across entire site (22.1s)
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à NO critical Firebase initialization errors (0 total, 0 expected warnings filtered)
+
+ΓÜá∩╕Å  Collected 3 total errors (0 critical):
+
+Γä╣∩╕Å  Collected 4 console warnings during test
+  Γ£ô    8 [critical-dev] ΓÇ║ tests\e2e\critical\console-monitoring.spec.js:272:5 ΓÇ║ Console Error Monitoring (CRITICAL) ΓÇ║ Firebase initialization errors are caught and logged (10.9s)
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à NO critical CSP violations on homepage (0 total, 0 acceptable)
+  Γ£ô    9 [critical-dev] ΓÇ║ tests\e2e\critical\csp-validation.spec.js:18:5 ΓÇ║ CSP Policy Validation (CRITICAL) ΓÇ║ NO CRITICAL CSP violations on homepage (5.9s)
+Γ£à All dev overlays dismissed
+
+Error counts by page:
+   Γ£à /: 0 critical (3 total, 3 filtered)
+   Γ£à /#guestbook: 0 critical (0 total, 0 filtered)
+   Γ£à /gallery: 0 critical (4 total, 4 filtered)
+   Γ£à /map: 0 critical (4 total, 4 filtered)
+
+Γ£à All pages meet critical error threshold (<3 critical errors)
+
+ΓÜá∩╕Å  Collected 4 total errors (0 critical):
+
+Γä╣∩╕Å  Collected 56 console warnings during test
+  Γ£ô    7 [critical-dev] ΓÇ║ tests\e2e\critical\console-monitoring.spec.js:229:5 ΓÇ║ Console Error Monitoring (CRITICAL) ΓÇ║ Error threshold: <3 CRITICAL errors per page (21.9s)
+Γ£à All dev overlays dismissed
+Γ£à NO critical CSP violations on gallery page (0 total, 0 acceptable)
+  Γ£ô   11 [critical-dev] ΓÇ║ tests\e2e\critical\csp-validation.spec.js:82:5 ΓÇ║ CSP Policy Validation (CRITICAL) ΓÇ║ NO CRITICAL CSP violations on gallery page (5.9s)
+Γ£à All dev overlays dismissed
+Γ£à NO critical CSP violations on guestbook page (0 total, 0 acceptable)
+  Γ£ô   10 [critical-dev] ΓÇ║ tests\e2e\critical\csp-validation.spec.js:54:5 ΓÇ║ CSP Policy Validation (CRITICAL) ΓÇ║ NO CRITICAL CSP violations on guestbook page (10.9s)
+Γ£à CSP meta tag found
+Γ£à CSP includes all required Firebase domains
+ΓÜá∩╕Å  Dismissal interrupted (test completed early)
+  Γ£ô   13 [critical-dev] ΓÇ║ tests\e2e\critical\csp-validation.spec.js:146:5 ΓÇ║ CSP Policy Validation (CRITICAL) ΓÇ║ CSP meta tag exists in document (1.5s)
+Γ£à All dev overlays dismissed
+Γä╣∩╕Å  4 resources failed (non-CSP reasons)
+  Γ£ô   14 [critical-dev] ΓÇ║ tests\e2e\critical\csp-validation.spec.js:176:5 ΓÇ║ CSP Policy Validation (CRITICAL) ΓÇ║ All third-party resources load without CSP blocking (5.9s)
+Γ£à Firebase base domains allowed by CSP
+Γ£à CSP includes all required domains
+  Γ£ô   12 [critical-dev] ΓÇ║ tests\e2e\critical\csp-validation.spec.js:109:5 ΓÇ║ CSP Policy Validation (CRITICAL) ΓÇ║ Firebase base domains allowed by CSP (11.1s)
+ΓÜá∩╕Å  Dismissal interrupted (test completed early)
+  Γ£ô   15 [critical-dev] ΓÇ║ tests\e2e\critical\csp-validation.spec.js:207:5 ΓÇ║ CSP Policy Validation (CRITICAL) ΓÇ║ CSP allows required CDNs and services (1.4s)
+Γ£à All dev overlays dismissed
+Γ£à Found 3 Firebase resource requests
+ΓÜá∩╕Å  Dismissal interrupted (test completed early)
+  Γ£ô   17 [critical-dev] ΓÇ║ tests\e2e\critical\firebase.spec.js:46:5 ΓÇ║ Firebase Initialization (CRITICAL) ΓÇ║ Firebase config is properly initialized (1.6s)
+Γ£à All dev overlays dismissed
+Γ£à Firebase SDK loaded without CSP violations
+  Γ£ô   16 [critical-dev] ΓÇ║ tests\e2e\critical\firebase.spec.js:16:5 ΓÇ║ Firebase Initialization (CRITICAL) ΓÇ║ Firebase SDK loads without CSP violations (6.0s)
+Γ£à All dev overlays dismissed
+Γ£à All Firebase requests succeeded
+  Γ£ô   18 [critical-dev] ΓÇ║ tests\e2e\critical\firebase.spec.js:82:5 ΓÇ║ Firebase Initialization (CRITICAL) ΓÇ║ Firebase domains not blocked by CSP (6.0s)
+Γ£à No transport errors detected
+ΓÜá∩╕Å  Dismissal interrupted (test completed early)
+  Γ£ô   20 [critical-dev] ΓÇ║ tests\e2e\critical\firestore.spec.js:17:5 ΓÇ║ Firestore Connectivity (CRITICAL) ΓÇ║ Firestore connects successfully (NOT offline mode) (1.5s)
+Γ£à All dev overlays dismissed
+Γ£à webConfig request attempted: https://firebase.googleapis.com/v1alpha/projects/-/apps/1:1090064583753:web:8d485f595e8fca7984c398/webConfig
+Γ£à webConfig fetch successful (status 200)
+  Γ£ô   19 [critical-dev] ΓÇ║ tests\e2e\critical\firebase.spec.js:113:5 ΓÇ║ Firebase Initialization (CRITICAL) ΓÇ║ Firebase webConfig endpoint accessible (6.0s)
+Γ£à Guestbook loaded with 4 messages
+ΓÜá∩╕Å  Dismissal interrupted (test completed early)
+  Γ£ô   22 [critical-dev] ΓÇ║ tests\e2e\critical\firestore.spec.js:107:5 ΓÇ║ Firestore Connectivity (CRITICAL) ΓÇ║ Firestore queries return data successfully (1.5s)
+Γ£à All dev overlays dismissed
+Initial message count: 4
+Γ£à Realtime listener infrastructure operational
+  Γ£ô   23 [critical-dev] ΓÇ║ tests\e2e\critical\firestore.spec.js:134:5 ΓÇ║ Firestore Connectivity (CRITICAL) ΓÇ║ Firestore realtime listener is active (6.3s)
+Γ£à No Firestore Listen channel 400 errors
+  Γ£ô   21 [critical-dev] ΓÇ║ tests\e2e\critical\firestore.spec.js:58:5 ΓÇ║ Firestore Connectivity (CRITICAL) ΓÇ║ Firestore Listen channel does NOT return 400 errors (11.0s)
+  -   25 [critical-dev] ΓÇ║ tests\e2e\critical\guestbook-realtime.spec.js:18:10 ΓÇ║ Guestbook Realtime Sync (CRITICAL) ΓÇ║ Message submitted in one context appears in another WITHOUT refresh
+Γ£à All dev overlays dismissed
+Γ£à All dev overlays dismissed
+Γ£à NO CSP violations for Firestore domains
+  Γ£ô   24 [critical-dev] ΓÇ║ tests\e2e\critical\firestore.spec.js:167:5 ΓÇ║ Firestore Connectivity (CRITICAL) ΓÇ║ NO CSP violations for Firestore domains (11.3s)
+  -   27 [critical-dev] ΓÇ║ tests\e2e\critical\guestbook-realtime.spec.js:173:10 ΓÇ║ Guestbook Realtime Sync (CRITICAL) ΓÇ║ Realtime listener sync latency is <5 seconds
+  -   28 [critical-dev] ΓÇ║ tests\e2e\critical\guestbook-realtime.spec.js:241:10 ΓÇ║ Guestbook Realtime Sync (CRITICAL) ΓÇ║ Multiple messages sync correctly in order
+Γ£à Firestore listener is ONLINE
+  Γ£ô   26 [critical-dev] ΓÇ║ tests\e2e\critical\guestbook-realtime.spec.js:136:5 ΓÇ║ Guestbook Realtime Sync (CRITICAL) ΓÇ║ Firestore listener detects offline mode immediately (11.7s)
+Γ£à Guestbook page structure validated
+  Γ£ô   29 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:9:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ guestbook page loads with correct structure (1.5s)
+Γä╣∩╕Å  Loading indicator may have loaded too fast to detect
+  Γ£ô   30 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:47:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ loading spinner appears while fetching messages (1.5s)
+Γ£à Form fields validated (relationship field: optional)
+  Γ£ô   31 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:25:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ form contains all required fields (1.8s)
+Γ£à Empty name validation working
+  Γ£ô   33 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:84:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ prevents submission with empty name (1.6s)
+Γ£à Empty message validation working
+  Γ£ô   34 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:112:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ prevents submission with empty message (1.5s)
+Γ£à Messages area validated (has messages)
+  Γ£ô   32 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:65:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ messages display area is present (4.1s)
+Γ£à Long message handling: accepted
+  Γ£ô   36 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:184:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ handles long messages correctly (6.1s)
+Γ£à Valid form submission accepted
+  Γ£ô   35 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:138:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ accepts valid form submission (9.5s)
+Γ£à Special characters handled safely
+Γ£à Messages display correctly (4 messages found)
+  Γ£ô   37 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:211:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ handles special characters in message (8.7s)
+  Γ£ô   38 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:246:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ messages display with correct information (6.2s)
+Γ£à Message ordering validated (4 messages)
+  Γ£ô   39 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:273:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ messages are ordered correctly (6.0s)
+Γä╣∩╕Å  No message count indicator found (optional feature)
+  Γ£ô   40 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:294:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ message count/stats display correctly (6.1s)
+Γ£à Success message displayed
+Γ£à Submit button shows loading state (disabled: true, text changed: true)
+  Γ£ô   42 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:345:5 ΓÇ║ Guestbook - User Experience ΓÇ║ success message appears after submission (7.6s)
+  Γ£ô   41 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:312:5 ΓÇ║ Guestbook - User Experience ΓÇ║ submit button shows loading state during submission (8.2s)
+Γä╣∩╕Å  Relationship field not present (optional)
+  Γ£ô   43 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:374:5 ΓÇ║ Guestbook - User Experience ΓÇ║ relationship field allows custom input (779ms)
+Γ£à Upload section rendered and visible
+Γ£à File upload input exists: true
+Γ£à Upload page structure validated
+  Γ£ô   45 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:11:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ upload page loads with correct structure (2.0s)
+Γ£à Guestbook is mobile responsive
+  Γ£ô   44 [features] ΓÇ║ tests\e2e\features\guestbook.spec.js:400:5 ΓÇ║ Guestbook - User Experience ΓÇ║ page is responsive on mobile viewport (3.1s)
+File input accepts: image/*,video/*
+Γ£à File input is accessible
+Γä╣∩╕Å  Footer not visible (acceptable on SPA)
+  Γ£ô   46 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:40:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ file input is present and accessible (1.5s)
+  Γ£ô   47 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:57:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ navigation and footer are present (1.5s)
+Γ£à Image file selected successfully
+≡ƒôì Found 1 file input(s)
+≡ƒôì File set in input
+≡ƒôì Found 1 upload button(s)
+≡ƒôì Attempting to click upload button
+  Γ£ô   48 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:78:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ can select a valid image file (2.1s)
+Γ£à File input state resets on navigation
+  Γ£ô   50 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:148:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ file input clears after navigation (2.6s)
+Γ£à File cancellation handled gracefully
+  Γ£ô   51 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:172:9 ΓÇ║ Photo Upload - Validation ΓÇ║ handles file selection cancellation (1.7s)
+ΓÜá∩╕Å Button click timeout: locator.click: Timeout 5000ms exceeded.
+Call log:
+[2m  - waiting for locator('button[type="submit"]').first()[22m
+[2m    - locator resolved to <button disabled type="submit" class="jsx-daa7beaa755bf8cb w-full btn-primary py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">Sign Guest Book ΓåÆ</button>[22m
+[2m  - attempting click action[22m
+[2m    2 ├ù waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying click action[22m
+[2m    - waiting 20ms[22m
+[2m    2 ├ù waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m    - retrying click action[22m
+[2m      - waiting 100ms[22m
+[2m    - waiting for element to be visible, enabled and stable[22m
+[2m    - element is not stable[22m
+[2m  7 ├ù retrying click action[22m
+[2m      - waiting 500ms[22m
+[2m      - waiting for element to be visible, enabled and stable[22m
+[2m      - element is not enabled[22m
+[2m  - retrying click action[22m
+[2m    - waiting 500ms[22m
+
+Γ£à Guest name prompt shown
+Γ£à Upload button present and functional
+  Γ£ô   49 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:101:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ shows guest name prompt for first upload (7.4s)
+  Γ£ô   52 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:192:9 ΓÇ║ Photo Upload - Validation ΓÇ║ upload button is present (1.8s)
+Γ£à File size limit information present
+Γ£à Upload page is mobile responsive
+Γ£à Valid file accepted without errors
+  Γ£ô   54 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:243:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ page is mobile responsive (1.3s)
+  Γ£ô   53 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:211:9 ΓÇ║ Photo Upload - Validation ΓÇ║ displays file size information or limits (2.2s)
+Γ£à Success messaging capability present
+  Γ£ô   55 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:263:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ success message area is present (1.1s)
+Γ£à Page metadata present: Celebrating the wedding of Austin & Jordyn Porada - May 10, 2025. View photos, videos, leave messages, and relive our special day!
+  Γ£ô   56 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:281:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ page has appropriate metadata (1.4s)
+Γ£à File input has accessibility labels
+  Γ£ô   57 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:292:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ file input has proper accessibility attributes (1.4s)
+Γ£à Handles rapid file selections without crashing
+  Γ£ô   58 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:316:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ handles multiple rapid file selections (1.8s)
+Γ£à State maintained during window resize
+  Γ£ô   59 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:335:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ maintains state during window resize (1.8s)
+Γä╣∩╕Å Direct gallery-to-upload navigation not found (may use nav menu)
+  Γ£ô   61 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:377:9 ΓÇ║ Photo Upload - Integration ΓÇ║ can navigate to upload page from gallery (840ms)
+Γ£à Navigation handled gracefully
+≡ƒôï ALL console errors detected: [
+  [32m'Failed to load resource: the server responded with a status of 404 (Not Found)'[39m,
+  [32m'Failed to load resource: the server responded with a status of 404 (Not Found)'[39m
+]
+Γ£à No critical console errors
+  Γ£ô   60 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection (3.1s)
+  Γ£ô   62 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:394:9 ΓÇ║ Photo Upload - Integration ΓÇ║ page loads without console errors (1.8s)
+Γ£à Upload form positioned correctly below navigation
+  Γ£ô   63 [features] ΓÇ║ tests\e2e\features\photo-upload.spec.js:428:9 ΓÇ║ Photo Upload - Integration ΓÇ║ upload component integrates with page layout (1.5s)
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   64 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:47:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Display all photos in gallery
+  -   65 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:78:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by uploader
+  -   66 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:114:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Sort photos by upload date (newest first)
+  -   67 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:150:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Paginate gallery results (limit and startAfter)
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   68 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:47:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Direct Firestore write creates document successfully
+  -   69 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:64:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Realtime listener receives updates immediately
+  -   70 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:112:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Multiple messages sync in correct order
+  -   71 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:146:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Concurrent writes from multiple sources
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   72 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:168:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Browser page can read from emulator Firestore
+  -   73 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:190:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Stress test: 50 rapid writes
+  -   74 [integration] ΓÇ║ tests\integration\guestbook-emulator.spec.js:216:5 ΓÇ║ Guestbook Integration (Firebase Emulator) ΓÇ║ Listener persists across rapid updates
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   75 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:82:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Gallery performance with 1000+ photos
+  -   76 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:188:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Guestbook performance with 500+ messages
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   77 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:246:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Concurrent uploads performance (10 simultaneous)
+  -   78 [integration] ΓÇ║ tests\integration\performance-emulator.spec.js:291:5 ΓÇ║ Performance Integration (Firebase Emulator) ΓÇ║ Query performance with complex filters
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   79 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:82:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload small image file to Storage emulator
+  -   80 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:114:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Store photo metadata in Firestore after upload
+  -   81 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:150:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Upload multiple files and verify all stored
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   82 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:190:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Query photos by upload time
+  -   83 [integration] ΓÇ║ tests\integration\photo-upload-emulator.spec.js:231:5 ΓÇ║ Photo Upload Integration (Firebase Emulator) ΓÇ║ Handle invalid file upload gracefully
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   84 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:80:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Test collections allow read/write in emulator
+  -   85 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:111:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: wedding_photos collection allows read/write in test environment
+  -   86 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:143:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: guestbook_messages collection enforces rules
+  -   87 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:167:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: test-uploads path allows read/write in emulator
+  -   88 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:182:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Validate required fields in wedding_photos
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   89 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:201:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Query performance with security rules
+  -   90 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:233:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: Multiple file operations with security rules
+  -   91 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:259:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Batch operations with security rules
+  -   92 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:287:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Firestore: Real-time listener with security rules
+  -   93 [integration] ΓÇ║ tests\integration\security-emulator.spec.js:319:5 ΓÇ║ Security Integration (Firebase Emulator) ΓÇ║ Storage: File size validation (emulator allows all sizes)
+ΓÅ¡∩╕Å  Firebase emulators not running - tests will be skipped
+  -   94 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:197:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Filter photos by date range
+  -   95 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:238:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Handle empty gallery gracefully
+  -   96 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:250:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Search photos by caption
+  -   97 [integration] ΓÇ║ tests\integration\gallery-emulator.spec.js:288:5 ΓÇ║ Photo Gallery Integration (Firebase Emulator) ΓÇ║ Get photo count for gallery stats
+Γ£à Guestbook page structure validated
+  Γ£ô   98 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:9:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ guestbook page loads with correct structure (1.8s)
+Γ£à Form fields validated (relationship field: optional)
+Γä╣∩╕Å  Loading indicator may have loaded too fast to detect
+  Γ£ô   99 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:25:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ form contains all required fields (1.9s)
+  Γ£ô  100 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:47:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ loading spinner appears while fetching messages (2.2s)
+Γ£à Empty name validation working
+  Γ£ô  102 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:84:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ prevents submission with empty name (1.9s)
+Γ£à Messages area validated (has messages)
+  Γ£ô  101 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:65:5 ΓÇ║ Guestbook Page - Structure & Loading ΓÇ║ messages display area is present (4.3s)
+Γ£à Empty message validation working
+  Γ£ô  103 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:112:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ prevents submission with empty message (1.9s)
+Γ£à Long message handling: accepted
+  Γ£ô  105 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:184:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ handles long messages correctly (7.1s)
+Γ£à Valid form submission accepted
+  Γ£ô  104 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:138:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ accepts valid form submission (11.5s)
+Γ£à Special characters handled safely
+  Γ£ô  106 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:211:5 ΓÇ║ Guestbook Form - Validation ΓÇ║ handles special characters in message (8.0s)
+Γ£à Messages display correctly (4 messages found)
+  Γ£ô  107 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:246:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ messages display with correct information (6.3s)
+Γ£à Message ordering validated (4 messages)
+  Γ£ô  108 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:273:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ messages are ordered correctly (6.2s)
+Γä╣∩╕Å  No message count indicator found (optional feature)
+  Γ£ô  109 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:294:5 ΓÇ║ Guestbook Messages - Display ΓÇ║ message count/stats display correctly (6.3s)
+Γ£à Submit button shows loading state (disabled: true, text changed: true)
+  Γ£ô  110 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:312:5 ΓÇ║ Guestbook - User Experience ΓÇ║ submit button shows loading state during submission (6.9s)
+Γä╣∩╕Å  Relationship field not present (optional)
+Γ£à Success message displayed
+  Γ£ô  112 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:374:5 ΓÇ║ Guestbook - User Experience ΓÇ║ relationship field allows custom input (2.1s)
+  Γ£ô  111 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:345:5 ΓÇ║ Guestbook - User Experience ΓÇ║ success message appears after submission (7.1s)
+Γ£à Upload section rendered and visible
+Γ£à File upload input exists: true
+Γ£à Upload page structure validated
+  Γ£ô  114 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:11:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ upload page loads with correct structure (2.2s)
+Γ£à Guestbook is mobile responsive
+  Γ£ô  113 [mobile] ΓÇ║ tests\e2e\features\guestbook.spec.js:400:5 ΓÇ║ Guestbook - User Experience ΓÇ║ page is responsive on mobile viewport (3.3s)
+File input accepts: image/*,video/*
+Γ£à File input is accessible
+  Γ£ô  115 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:40:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ file input is present and accessible (1.9s)
+Γä╣∩╕Å  Footer not visible (acceptable on SPA)
+  Γ£ô  116 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:57:9 ΓÇ║ Photo Upload - Page Structure ΓÇ║ navigation and footer are present (1.9s)
+Γ£à Image file selected successfully
+≡ƒôì Found 0 file input(s)
+ΓÜá∩╕Å File input not found - test may need adjustment
+  Γ£ô  117 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:78:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ can select a valid image file (2.9s)
+  Γ£ô  118 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:101:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ shows guest name prompt for first upload (2.8s)
+Γ£à File cancellation handled gracefully
+Γ£à File input state resets on navigation
+  Γ£ô  120 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:172:9 ΓÇ║ Photo Upload - Validation ΓÇ║ handles file selection cancellation (2.4s)
+  Γ£ô  119 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:148:9 ΓÇ║ Photo Upload - File Selection ΓÇ║ file input clears after navigation (3.2s)
+Γ£à File size limit information present
+Γ£à Upload button present and functional
+Γ£à Valid file accepted without errors
+  Γ£ô  121 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:192:9 ΓÇ║ Photo Upload - Validation ΓÇ║ upload button is present (2.8s)
+  Γ£ô  122 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:211:9 ΓÇ║ Photo Upload - Validation ΓÇ║ displays file size information or limits (2.9s)
+Γ£à Success messaging capability present
+  Γ£ô  124 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:263:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ success message area is present (1.2s)
+Γ£à Upload page is mobile responsive
+  Γ£ô  123 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:243:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ page is mobile responsive (2.0s)
+Γ£à Page metadata present: Celebrating the wedding of Austin & Jordyn Porada - May 10, 2025. View photos, videos, leave messages, and relive our special day!
+  Γ£ô  125 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:281:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ page has appropriate metadata (1.3s)
+Γ£à File input has accessibility labels
+  Γ£ô  126 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:292:9 ΓÇ║ Photo Upload - User Experience ΓÇ║ file input has proper accessibility attributes (2.0s)
+Γ£à Handles rapid file selections without crashing
+  Γ£ô  127 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:316:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ handles multiple rapid file selections (2.3s)
+Γ£à State maintained during window resize
+  Γ£ô  128 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:335:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ maintains state during window resize (3.2s)
+Γä╣∩╕Å Direct gallery-to-upload navigation not found (may use nav menu)
+  Γ£ÿ  129 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection (2.8s)
+  Γ£ô  130 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:377:9 ΓÇ║ Photo Upload - Integration ΓÇ║ can navigate to upload page from gallery (1.2s)
+≡ƒôï ALL console errors detected: [
+  [32m'Failed to load resource: the server responded with a status of 404 (Not Found)'[39m,
+  [32m'Failed to load resource: the server responded with a status of 404 (Not Found)'[39m
+]
+Γ£à No critical console errors
+  Γ£ô  131 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:394:9 ΓÇ║ Photo Upload - Integration ΓÇ║ page loads without console errors (976ms)
+Γ£à Upload form positioned correctly below navigation
+  Γ£ô  132 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:428:9 ΓÇ║ Photo Upload - Integration ΓÇ║ upload component integrates with page layout (2.4s)
+  Γ£ÿ  133 [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection (retry #1) (4.0s)
+
+
+  1) [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection 
+
+    Error: page.goto: Navigation to "http://localhost:3000/#upload" is interrupted by another navigation to "http://localhost:3000/#gallery"
+    Call log:
+    [2m  - navigating to "http://localhost:3000/#upload", waiting until "load"[22m
+
+
+      367 |
+      368 |         // Navigate back
+    > 369 |         await page.goto('/#upload');
+          |                    ^
+      370 |         await expect(page.locator('text=Share Your Memories')).toBeVisible();
+      371 |
+      372 |         console.log('Γ£à Navigation handled gracefully');
+        at F:\wedding-website\site\tests\e2e\features\photo-upload.spec.js:369:20
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-mobile\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    attachment #2: video (video/webm) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-mobile\video.webm
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-mobile\error-context.md
+
+    Retry #1 ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: page.goto: Navigation to "http://localhost:3000/#upload" is interrupted by another navigation to "http://localhost:3000/#gallery"
+    Call log:
+    [2m  - navigating to "http://localhost:3000/#upload", waiting until "load"[22m
+
+
+      367 |
+      368 |         // Navigate back
+    > 369 |         await page.goto('/#upload');
+          |                    ^
+      370 |         await expect(page.locator('text=Share Your Memories')).toBeVisible();
+      371 |
+      372 |         console.log('Γ£à Navigation handled gracefully');
+        at F:\wedding-website\site\tests\e2e\features\photo-upload.spec.js:369:20
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-mobile-retry1\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    attachment #2: video (video/webm) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-mobile-retry1\video.webm
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-mobile-retry1\error-context.md
+
+    attachment #4: trace (application/zip) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-mobile-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\features-photo-upload-Phot-8ad2b-ation-during-file-selection-mobile-retry1\trace.zip
+
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+  1 failed
+    [mobile] ΓÇ║ tests\e2e\features\photo-upload.spec.js:354:9 ΓÇ║ Photo Upload - Error Handling ΓÇ║ gracefully handles navigation during file selection 
+  37 skipped
+  94 passed (3.9m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

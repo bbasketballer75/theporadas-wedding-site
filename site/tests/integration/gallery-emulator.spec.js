@@ -10,20 +10,24 @@
  */
 
 const { test, expect } = require('@playwright/test');
+const { collection, addDoc, getDocs, query, where, orderBy, limit, startAfter } = require('firebase/firestore');
+
 const {
     getTestFirestore,
     clearCollection,
     clearAllTestData,
-    waitForEmulators,
+    ensureEmulatorsRunning,
 } = require('../helpers/firebase-emulator');
-const { collection, addDoc, getDocs, query, where, orderBy, limit, startAfter } = require('firebase/firestore');
 
 test.describe('Photo Gallery Integration (Firebase Emulator)', () => {
     let db;
 
     test.beforeAll(async () => {
-        // Ensure emulators are running
-        await waitForEmulators();
+        // Skip if emulators not running
+        if (!(await ensureEmulatorsRunning())) {
+            test.skip();
+        }
+
         db = getTestFirestore();
 
         // Clear test data

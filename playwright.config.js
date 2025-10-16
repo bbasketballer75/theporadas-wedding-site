@@ -3,7 +3,60 @@
  * E2E testing setup for theporadas_site
  */
 
+import { spawn } from 'child_process';
+import http from 'http';
+
 import { defineConfig, devices } from '@playwright/test';
+
+// Helper to check if Firebase emulator is running
+async function isFirebaseEmulatorRunning() {
+  try {
+    await new Promise((resolve, reject) => {
+      const req = http.get('http://localhost:8002', (res) => {
+        resolve(res.statusCode);
+      });
+      req.on('error', reject);
+      req.setTimeout(1000);
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// Helper to start Firebase emulator
+async function startFirebaseEmulator() {
+  if (await isFirebaseEmulatorRunning()) {
+    console.log('✅ Firebase emulator already running');
+    return;
+  }
+
+  console.log('🚀 Starting Firebase emulator...');
+
+  // Use powershell to start emulator in background
+  const emulatorProcess = spawn('firebase', ['emulators:start', '--project', 'demo-test'], {
+    detached: true,
+    stdio: 'ignore',
+    shell: true,
+  });
+
+  emulatorProcess.unref(); // Allow Node process to exit without waiting
+
+  // Wait for emulator to be ready
+  let ready = false;
+  let attempts = 0;
+  while (attempts < 60 && !ready) {
+    await new Promise((r) => setTimeout(r, 500));
+    ready = await isFirebaseEmulatorRunning();
+    attempts++;
+  }
+
+  if (!ready) {
+    throw new Error('Firebase emulator failed to start');
+  }
+
+  console.log('✅ Firebase emulator is ready');
+}
 
 export default defineConfig({
   // Test directory
@@ -23,6 +76,13 @@ export default defineConfig({
 
   // Reporter
   reporter: [['html', { outputFolder: 'playwright-report' }], ['list']],
+
+  // Global setup to start Firebase emulator
+  globalSetup: async () => {
+    if (process.env.SKIP_FIREBASE_EMULATOR !== 'true') {
+      await startFirebaseEmulator();
+    }
+  },
 
   // Shared settings for all projects
   use: {

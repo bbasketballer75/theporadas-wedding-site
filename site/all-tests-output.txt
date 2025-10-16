@@ -1,0 +1,65 @@
+
+> theporadas-site@0.0.1 test
+> playwright test
+
+First argument must use the object destructuring pattern: !(await skipIfNoEmulators(testContext
+
+   at ..\integration\gallery-emulator.spec.js:24
+
+  22 |     let db;
+  23 |
+> 24 |     test.beforeAll(async (testContext) => {
+     |          ^
+  25 |         // Skip tests if emulators not running
+  26 |         if (!(await skipIfNoEmulators(testContext))) {
+  27 |             return;
+First argument must use the object destructuring pattern: !(await skipIfNoEmulators(testContext
+
+   at ..\integration\guestbook-emulator.spec.js:26
+
+  24 |
+  25 | test.describe('Guestbook Integration (Firebase Emulator)', () => {
+> 26 |     test.beforeAll(async (testContext) => {
+     |          ^
+  27 |         // Skip tests if emulators not running
+  28 |         if (!(await skipIfNoEmulators(testContext))) {
+  29 |             return;
+First argument must use the object destructuring pattern: firebaseConfig
+
+   at ..\integration\performance-emulator.spec.js:53
+
+  51 |
+  52 | test.describe('Performance Integration (Firebase Emulator)', () => {
+> 53 |     test.beforeAll(async (testContext) => {
+     |          ^
+  54 |         // Initialize Firebase with emulator
+  55 |         app = initializeApp(firebaseConfig, 'performance-test-app');
+  56 |         db = getFirestore(app);
+First argument must use the object destructuring pattern: !(await skipIfNoEmulators(testContext
+
+   at ..\integration\photo-upload-emulator.spec.js:28
+
+  26 |     let db;
+  27 |
+> 28 |     test.beforeAll(async (testContext) => {
+     |          ^
+  29 |         // Skip tests if emulators not running
+  30 |         if (!(await skipIfNoEmulators(testContext))) {
+  31 |             return;
+First argument must use the object destructuring pattern: firebaseConfig
+
+   at ..\integration\security-emulator.spec.js:51
+
+  49 |
+  50 | test.describe('Security Integration (Firebase Emulator)', () => {
+> 51 |     test.beforeAll(async (testContext) => {
+     |          ^
+  52 |         // Initialize Firebase with emulator
+  53 |         app = initializeApp(firebaseConfig, 'security-test-app');
+  54 |         db = getFirestore(app);
+
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

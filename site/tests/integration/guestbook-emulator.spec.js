@@ -19,13 +19,15 @@ const {
     addTestMessage,
     getAllMessages,
     waitForMessageCount,
-    waitForEmulators,
+    ensureEmulatorsRunning,
 } = require('../helpers/firebase-emulator');
 
 test.describe('Guestbook Integration (Firebase Emulator)', () => {
     test.beforeAll(async () => {
-        // Ensure emulators are running
-        await waitForEmulators();
+        // Skip if emulators not running
+        if (!(await ensureEmulatorsRunning())) {
+            test.skip();
+        }
         // Clear all test data before starting test suite
         await clearAllTestData();
     });

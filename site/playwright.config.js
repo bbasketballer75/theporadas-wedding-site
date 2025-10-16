@@ -22,6 +22,9 @@ const baseURL = process.env.BASE_URL || 'http://localhost:3000';
 module.exports = defineConfig({
   testDir: './tests/e2e',
 
+  // Global setup to start Firebase emulator
+  globalSetup: process.env.SKIP_FIREBASE_EMULATOR !== 'true' ? require.resolve('./tests/global-setup.js') : undefined,
+
   // Timeouts: Development allows longer for debugging
   timeout: isDevelopment ? 60000 : 30000,
   expect: {
